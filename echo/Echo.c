@@ -6,11 +6,11 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:31:50 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/10/31 18:52:02 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/10/31 21:38:37 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include ../srcs/minishell.h
+// #include ../srcs/minishell.h
 
 int     check_n(int end, char* str)
 {
@@ -51,69 +51,83 @@ int     lenght_n(int end, char* str)
 }
 
 /* if there is only words in the string */
-char    *no_str(int i, char* str, char* cache)
+void    no_str(t_struct_m *Echo, char* str)
 {
-    int     y   =   i;
-    int     len   =   0;
+    int     y   =   Echo->i;
+    int     len =   0;
     char*   tmp =   NULL;
 
-    while (str[i] != '\"' || str[i] != '\'' || str[i])
+    while (str[Echo->i] != '\"' || str[Echo->i] != '\'' || str[Echo->i])
     {
-        len++
-        i++;
+        len++;
+        Echo->i++;
     }
-    i = y;
+    Echo->i = y;
     tmp = (char *)malloc((len + 1) * sizeof(char));
     y = 0;
-    while (str[i] != '\"' || str[i] != '\'')
+    while (str[Echo->i] != '\"' || str[Echo->i] != '\'')
     {
-        tmp[y] = str[i];
+        tmp[y] = str[Echo->i];
         y++;
-        i++
+        Echo->i++;
     }
-    cache = ft_strjoin(cache, tmp);
+    Echo->cache = ft_strjoin(Echo->cache, tmp);
     free(tmp);
-    return (cache);
 }
 
-int     no_str_i(int i, char* str)
+char*   see_dollar(char* str, t_struct_m *Echo, char c)
 {
-    while (str[i] || str[i] != '\'' || str[i] != '\"')
+    int     len = 0;
+    int     y = Echo->i;
+    int     a = 0;
+    char*   tmp = NULL;
+    Echo->i++;/*adds one to have furder from the $ sign */
+    while (str[Echo->i] != c || str[Echo->i])/*if ast this function, then you knwo the end of the $ command */
     {
-        i++;
+        len++;
+        Echo->i++;
     }
-    return (i);
-}
-
-char*   see_dollar(char* str, int i)
-{
-    i++;
-    while (str[i] != '')
+    tmp = (char *)malloc((len + 1) * sizeof(char));
+    while (len >= 0)
+    {
+        tmp[a] = str[y];
+        y++;
+        a++;
+    }
+    tmp = check_variable(tmp);
+    return (tmp);
+    /* check the command */
+    /* if command is failed then return the tmp
+    if success, return what the command needs to do*/
 }
 
 /* if we find a " check for commands*/
 
-char*   str_double(int i, char* str, char cache)
+char*   str_double(t_struct_m *Echo)
 {
-    int     y   =   i;
-    size_t    len   =   0;
-    char*   tmp =  NULL;
+    int         y   =   Echo->i;
+    size_t      len   =   0;
+    char*       tmp =  NULL;
 
-    i++;
-    while (str[i] != "\"")
-        i++;
-    i = y;
-    while (str[i] != "\"")
+    Echo->i++;
+    while (str[Echo->i] != '\"')
     {
-        if (str[i] != '$')
+        if (str[Echo->i] == '\0')
+            while (1);
+        Echo->i++;
+    }
+    Echo->i = y;
+    while (str[Echo->i] != '\"')
+    {
+        while (str[Echo->i] != '$' || str[Echo->i] != '\"')
         {
-            ft_strjoin(cache, &str[i]);
-            i++;
+            Echo->cache = ft_strjoin(Echo->cache, &str[i]);/*save everything until $*/
+            Echo->i++;
         }
-        else if
+        if (str[Echo->i] == '$' || str[Echo->i] != '\"')
         {
-            tmp = see_dollar(str, i);
-            cache = ft_strjoin(cache, tmp);
+            tmp = see_dollar(Echo, '\"');/*make sure to add the i so it can be used after */
+            Echo->cache = ft_strjoin(Echo->cache, tmp);
             free(tmp);
         }
     }
@@ -134,29 +148,20 @@ void    echo_main(char* str)
     Echo = ft_calloc(1, sizeof(t_struct_m));
     char*   str = "hello";
 
-    end = check_n(end, str);
-    if (end == 1)
-        i = lenght_n(str); /*now it knows when -n has ended */
-    while (str[i])
+    Echo->end = check_n(Echo->end, str);
+    if (Echo->end == 1)
+        Echo->i = lenght_n(Echo->end, str); /*now it knows when -n has ended */
+    while (str[Echo->i])
     {
-        while (str[i] == ' ')
-            i++;
+        while (str[Echo->i] == ' ')
+            Echo->i++;
         /*check for double " " does the same as in single, but it inputs the commands*/
-        if (str[i] != '\"' || str[i] != '\'')
-        {
-            cache = no_str(i, str, cache);
-            i = no_str_i(i, str);
-        }
-        else if (tr[i] == '\"')
-        {
-            cache = str_double(i, str, cache);
-            i = str_double_i(i, str);
-        }
+        if (str[Echo->i] != '\"' || str[Echo->i] != '\'')
+            no_str(Echo, str);
+        else if (str[Echo->i] == '\"')
+            Echo->cache = str_double(Echo);
         else if (str[i] == '\'')
-        {
-            cache = str_single(i, str, cache);
-            i = str_single_i(i, str);
-        }
+            Echo->cache = str_single(Echo);
     }
 }
 
