@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/10/31 22:05:48 by nhariman      ########   odam.nl          #
+#    Updated: 2020/10/31 22:21:11 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ srcs/libft/libft.a:
 	@$(COMPILE) -c $(FLAGS) -o $@ -c $<
 
 clean:
+	@$(RM) $(OECHO) $(OMINISHELL)
 	@cd srcs/libft && $(MAKE) clean
 
 fclean: clean
@@ -46,3 +47,6 @@ fclean: clean
 	@cd srcs/libft && $(MAKE) fclean
 
 re: fclean all
+
+test: re
+    ./minishell
