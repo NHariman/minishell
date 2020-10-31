@@ -13,7 +13,7 @@ GITHUB STRUCTURE:
 	git branch -d [name_of_your_new_branch]
 
 COMMIT MESSAGE STRUCTURE:
-"UPDATED/ADDED/DELETED [file_name] (for big changes) | UPDATED/ADDED/DELETED [function_name] in [file_name] (small changes in functions) | ADDITIONAL EXPLANATION IF NECESSARY"
+"UPD/ADD/DEL [file_name] (for big changes) | UPD/ADD/DEL [function_name] in [file_name] (small changes in functions) | ADDITIONAL EXPLANATION IF NECESSARY"
 ie.
 "UPDATED cd_function.c | ADDED pwd_function() in cd_function.c | help"
 or if no new file was added:

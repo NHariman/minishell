@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:31:50 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/10/31 18:44:55 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/10/31 18:52:02 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ int     no_str_i(int i, char* str)
 
 char*   see_dollar(char* str, int i)
 {
-
+    i++;
+    while (str[i] != '')
 }
 
 /* if we find a " check for commands*/
