@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:31:50 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/10/31 21:24:12 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/10/31 21:38:37 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int     lenght_n(int end, char* str)
 void    no_str(t_struct_m *Echo, char* str)
 {
     int     y   =   Echo->i;
-    int     len   =   0;
+    int     len =   0;
     char*   tmp =   NULL;
 
     while (str[Echo->i] != '\"' || str[Echo->i] != '\'' || str[Echo->i])
