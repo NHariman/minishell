@@ -1,5 +1,24 @@
 *BASIC FUNCTIONALITIES
 
+GITHUB STRUCTURE:
+**DO NOT WORK ON THE MASTER BRANCH**
+- clone master
+- perform: git pull
+- create a local branch and switch there:
+	git checkout -b [name_of_your_new_branch]
+- work on the function or files you want there.
+- when ready to push the branch on github:
+	git push origin [name_of_your_new_branch]
+- delete local branch:
+	git branch -d [name_of_your_new_branch]
+
+COMMIT MESSAGE STRUCTURE:
+"UPDATED/ADDED/DELETED [file_name] (for big changes) | UPDATED/ADDED/DELETED [function_name] in [file_name] (small changes in functions) | ADDITIONAL EXPLANATION IF NECESSARY"
+ie.
+"UPDATED cd_function.c | ADDED pwd_function() in cd_function.c | help"
+or if no new file was added:
+"ADDED pwd_function() in cd_function.c | lol"
+
 LEGEND:
 [ ] not done yet
 [*] potential start
