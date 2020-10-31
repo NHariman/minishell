@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/10/31 22:21:11 by nhariman      ########   odam.nl          #
+#    Updated: 2020/10/31 22:20:50 by ybakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FLAGS = -Wall -Werror -Wextra
 
 MINISHELL =		main.c \
 				srcs/main/get_next_line.c \
-				srcs/main/gen_parsers.c
+				# srcs/main/gen_parsers.c
 
 ECHO =			srcs/echo/echo.c
 
@@ -49,4 +49,4 @@ fclean: clean
 re: fclean all
 
 test: re
-    ./minishell
+	./minishell
