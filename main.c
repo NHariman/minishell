@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/10/31 15:20:08 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/10/31 15:35:45 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,3 +21,5 @@ int		main(int argc, char **argv)
 	tmp2 = argc;
 	return (0);
 }
+
+//hallo, even een test
