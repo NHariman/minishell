@@ -6,11 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:43:46 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/10/31 21:50:39 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/10/31 22:13:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 /*
 ** receives the string past the echo, need to trim away pipe functions.
