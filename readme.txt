@@ -12,6 +12,8 @@ GITHUB STRUCTURE:
 - work on the function or files you want there.
 - when ready to push the branch on github:
 	git push origin [name_of_your_new_branch]
+- push branch upstream:
+	git push --set-upstream origin [name_of_your_new_branch]
 - delete local branch:
 	git branch -d [name_of_your_new_branch]
 
