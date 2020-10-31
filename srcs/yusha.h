@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/10/31 18:41:33 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/10/31 21:25:18 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 typedef struct	s_struct_m
 {
-	char*   str = "hello"
     char*   cache = ft_strdup("");
     int     i       = 0;
     int     path    = 0;
@@ -23,3 +22,5 @@ typedef struct	s_struct_m
     int     end     = 0;
     int     len     = 0;
 }				t_struct_m;
+
+void        echo_main(char* str);
