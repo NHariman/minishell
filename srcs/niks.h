@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   niks.h                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/31 16:18:06 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/10/31 17:52:04 by nhariman      ########   odam.nl         */
+/*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/10/31 17:52:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef NIKS_H
+# define NIKS_H
 
-# define _GNU_SOURCE
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <sys/stat.h>
-# include <unistd.h>
-# include <signal.h>
-# include <dirent.h>
-# include <string.h>
-# include <errno.h>
-
-//# include "yusha.h"
-# include "niks.h"
-# include "libft/libft.h"
+typedef struct	s_gnl
+{
+	int				bytes_read;
+	int				fd;
+	char			*line_read;
+}				t_gnl;
+int				get_next_line(int fd, char **line);
 
 #endif
