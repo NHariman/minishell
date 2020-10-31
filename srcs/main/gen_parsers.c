@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   gen_parsers.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/31 16:18:06 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/10/31 22:13:29 by nhariman      ########   odam.nl         */
+/*   Created: 2020/10/31 21:43:46 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/10/31 22:13:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../minishell.h"
 
-# define _GNU_SOURCE
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <sys/stat.h>
-# include <unistd.h>
-# include <signal.h>
-# include <dirent.h>
-# include <string.h>
-# include <errno.h>
-
-//# include "yusha.h"
-# include "niks.h"
-# include "libft/libft.h"
-
-#endif
+/*
+** receives the string past the echo, need to trim away pipe functions.
+*/
+int		ft_echo_parser(char *line)
+{
+	ft_printf("%s\n", line);
+	return (0);
+}

@@ -39,6 +39,7 @@ srcs/libft/libft.a:
 	@$(COMPILE) -c $(FLAGS) -o $@ -c $<
 
 clean:
+	@$(RM) $(OECHO) $(OMINISHELL)
 	@cd srcs/libft && $(MAKE) clean
 
 fclean: clean
