@@ -16,7 +16,7 @@ FLAGS = -Wall -Werror -Wextra
 
 MINISHELL =		main.c \
 				srcs/main/get_next_line.c \
-				# srcs/main/gen_parsers.c
+				srcs/main/gen_parsers.c
 
 ECHO =			srcs/echo/echo.c
 
