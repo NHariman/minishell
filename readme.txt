@@ -1,5 +1,8 @@
 *BASIC FUNCTIONALITIES
 
+NOTES:
+https://docs.google.com/document/d/1H8TiHwfJptrdCy-RdIu3_aoPhB-hIX7XxyJZO8Ek-YI/edit#heading=h.b8fwrocy3a4i
+
 GITHUB STRUCTURE:
 **DO NOT WORK ON THE MASTER BRANCH**
 - clone master
