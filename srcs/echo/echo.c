@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/05 18:12:53 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/05 21:17:28 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,6 +266,7 @@ char       *echo_main(char  *str)
 	echo->str = ft_strdup(str);
 	if (echo->str[0] == '\n')
 		return (echo->str);
+	ft_tripple_trim(echo);
 	echo->i = check_flag_n(str);/*now it knows when -n has ended */
 	echo->i = skip_character(echo->str, echo->i, ' ');
 	while (echo->str[echo->i] != '\n' && echo->str[echo->i] != '\0')
