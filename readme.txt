@@ -18,6 +18,9 @@ GITHUB STRUCTURE:
 	git pull origin main
 - delete local branch:
 	git branch -d [name_of_your_new_branch]
+- create a pull request to put your code on main branch
+	go to: https://github.com/NHariman/minishell/pull/new/{your branch name}
+	write your pull request
 
 COMMIT MESSAGE STRUCTURE:
 "UPD/ADD/DEL [file_name] (for big changes) | UPD/ADD/DEL [function_name] in [file_name] (small changes in functions) | ADDITIONAL EXPLANATION IF NECESSARY"
