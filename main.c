@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/10/31 22:24:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/05 13:04:00 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	minishell_parser(char *line)
 	if (line[i] == 'E' || line[i] == 'e')
 		line = ft_wordlow(line + i);
 	if (!ft_strncmp(line + i, "echo ", ft_strlen("echo ")))
-		echo_main(line + i + ft_strlen("echo "));
+		ft_echo_parser(line + i + ft_strlen("echo "));
 	else
 		ft_printf("> %s\n", line);
 }
