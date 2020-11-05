@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/05 16:03:16 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/05 17:59:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static void	minishell_parser(char *line)
 		line = ft_wordlow(line + i);
 	if (!ft_strncmp(line + i, "echo ", ft_strlen("echo ")))
 		ft_echo_parser(line + i + ft_strlen("echo "));
-	else if (!ft_strncmp(line + i, "cd", ft_strlen("cd")))
-		ft_cd();
+	else if (!ft_strncmp(line + i, "cd ", ft_strlen("cd ")))
+		ft_cd(line + i + ft_strlen("cd "));
 	else if (!ft_strncmp(line + i, "pwd", ft_strlen("pwd")))
 		ft_pwd();
 	else
