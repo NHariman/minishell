@@ -6,12 +6,12 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/05 15:59:44 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/05 18:12:53 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-// ft_printf("ERROR START\n");
-// ft_printf("ERROR END\n");
+// ft_printf("----ERROR START---\n");
+// ft_printf("----ERROR END---\n");
 
 #include "../minishell.h"
 #include <stdio.h>
@@ -89,7 +89,10 @@ void		check_empty_beg(t_struct_m *echo)
 
 	i = echo->i;
 	if (echo->beg == -1)
+	{
 		echo->beg = 0;
+		return ;
+	}
 	i--;
 	if (echo->str[i] == ' ')
 		echo->beg = 1;
@@ -147,6 +150,111 @@ void	echo_no_str(t_struct_m *echo)
 	}
 }
 
+int		echo_check(t_struct_m *echo, char c)
+{
+	int y;
+
+	echo->i++;
+	y = echo->i;
+	while (echo->str[y] && echo->str[y] != '\n')
+	{
+		if (echo->str[y] == c)
+		{
+			y++;
+			if (echo->str[y] == ' ')//so we know there is an empty space after single
+				echo->end = 1;
+			return (1);
+		}
+		y++;
+	}
+	echo->error = -1;
+	return (-1);
+}
+
+void	echo_str_single(t_struct_m *echo)
+{
+	int		z = 0;
+	int		y   =	echo->i;
+	int     len =   0;
+	char*   tmp = 	NULL;
+
+	if (echo_check(echo, '\'') == -1)
+		return ;
+	echo->start = echo->i;
+	while (echo->str[echo->i] != '\'')
+		echo->i++;
+	len = echo->i - y;
+	len--;
+	tmp = (char *)malloc((len) * sizeof(char));
+	if (tmp == NULL)
+		echo->error = -1;
+	else
+	{
+		tmp = ft_fillstr(tmp, '0', len);
+		while (len > 0)
+		{
+			tmp[z] = echo->str[echo->start];
+			z++;
+			echo->start++;
+			len--;
+		}
+		echo->cache = ft_strjoin(echo->cache, tmp);
+		if (echo->beg == 1)
+		{
+			echo->cache = ft_strjoin(" ", echo->cache);
+			echo->beg = 0;
+		}
+		if (echo->end == 1)
+		{
+			echo->cache = ft_strjoin(echo->cache, " ");
+			echo->end = 0;
+		}
+		free(tmp);
+	}
+}
+
+void	echo_str_double(t_struct_m *echo)
+{
+	int		z = 0;
+	int		y   =	echo->i;
+	int     len =   0;
+	char*   tmp = 	NULL;
+
+	if (echo_check(echo, '\"') == -1)
+		return ;
+	echo->start = echo->i;
+	while (echo->str[echo->i] != '\"')
+		echo->i++;
+	len = echo->i - y;
+	len--;
+	tmp = (char *)malloc((len) * sizeof(char));
+	if (tmp == NULL)
+		echo->error = -1;
+	else
+	{
+		tmp = ft_fillstr(tmp, '0', len);
+		while (len > 0)
+		{
+			tmp[z] = echo->str[echo->start];
+			z++;
+			echo->start++;
+			len--;
+		}
+		echo->cache = ft_strjoin(echo->cache, tmp);
+		if (echo->beg == 1)
+		{
+			echo->cache = ft_strjoin(" ", echo->cache);
+			echo->beg = 0;
+		}
+		if (echo->end == 1)
+		{
+			echo->cache = ft_strjoin(echo->cache, " ");
+			echo->end = 0;
+		}
+		free(tmp);
+	}
+}
+
 char       *echo_main(char  *str)
 {
 	t_struct_m *echo;
@@ -164,19 +272,25 @@ char       *echo_main(char  *str)
 	{
 		check_empty_beg(echo);//at the start it will be
 		echo->i = skip_character(echo->str, echo->i, ' ');
-		if (echo->str[echo->i] != '\"' || echo->str[echo->i] != '\'')
+		if (echo->str[echo->i] == '\'')
+		{
+			echo_str_single(echo);
+			echo->i++;
+		}
+		else if (echo->str[echo->i] == '\"')
+		{
+			echo_str_double(echo);
+			echo->i++;
+		}
+		else
 			echo_no_str(echo);
-		// else if (echo->str[echo->i] == '\'')
-		// 	echo_str_single(echo);
-		// else if (echo->str[echo->i] != '\"')
-		// 	echo_str_double(echo);
 		if (echo->error == -1)
 			return (ft_strdup(""));
 		//get in, if double or if single isn't a pair, then return a empty cache,
 		//and put error on and return the cache immidiently
 	}
+	printf("cache end = [%s]\n", echo->cache);
 	if (echo->n != -1)
 		echo->cache = ft_strjoin(echo->cache, "\n");
-	printf("cache end = %s\n", echo->cache);
 	return (echo->cache);
 }
