@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:43:46 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/05 14:39:02 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/05 16:21:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ int				ft_echo_parser(char *line)
 	ft_set_qts(&qts);
 	while (line[i] != '\0')
 	{
-		if (ft_strchr(">|<", line[i]) && qts.dq != 0 && qts.sq != 0 &&
-		qts.dq % 2 == 0 && qts.sq % 2 == 0)
+		if ((ft_strchr(">|<", line[i]) && qts.dq != 0 && qts.sq != 0 &&
+		qts.dq % 2 == 0 && qts.sq % 2 == 0) ||
+		((ft_strchr(">|<", line[i]) && !qts.dq && !qts.sq)))
 			break ;
 		else if (line[i] == '\'')
 			qts.sq++;
@@ -50,6 +51,7 @@ int				ft_echo_parser(char *line)
 		return (ft_printf("Error\nUneven amount of quotes. Echo failed.\n"));
 	echo_str = ft_strchr(">|<", line[i]) ?
 				ft_substr(line, 0, i) : ft_substr(line, 0, i - 1);
+	ft_printf("echo string: %s\n", echo_str);
 	echo_main(echo_str);
 	return (0);
 }
