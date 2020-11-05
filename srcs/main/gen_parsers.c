@@ -51,7 +51,6 @@ int				ft_echo_parser(char *line)
 		return (ft_printf("Error\nUneven amount of quotes. Echo failed.\n"));
 	echo_str = ft_strchr(">|<", line[i]) ?
 				ft_substr(line, 0, i) : ft_substr(line, 0, i - 1);
-	ft_printf("echo string: %s\n", echo_str);
 	echo_main(echo_str);
 	return (0);
 }
