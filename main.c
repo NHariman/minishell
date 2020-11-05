@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/10/31 22:24:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/05 16:03:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,16 @@ static void	minishell_parser(char *line)
 	i = 0;
 	while (line[i] == ' ')
 		i++;
-	if (line[i] == 'E' || line[i] == 'e')
+	if (ft_strchr("eEpP", line[i]))
 		line = ft_wordlow(line + i);
 	if (!ft_strncmp(line + i, "echo ", ft_strlen("echo ")))
-		echo_main(line + i + ft_strlen("echo "));
+		ft_echo_parser(line + i + ft_strlen("echo "));
+	else if (!ft_strncmp(line + i, "cd", ft_strlen("cd")))
+		ft_cd();
+	else if (!ft_strncmp(line + i, "pwd", ft_strlen("pwd")))
+		ft_pwd();
 	else
-		ft_printf("> %s\n", line);
+		ft_printf("%s: command not found\n", line);
 }
 
 int		main(void)
