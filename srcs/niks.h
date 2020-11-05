@@ -6,12 +6,15 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/05 18:36:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/05 21:58:11 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NIKS_H
 # define NIKS_H
+
+# define SQ 1
+# define DQ 2
 
 typedef struct	s_gnl
 {
