@@ -32,18 +32,14 @@ void   ft_tripple_trim(t_struct_m *echo)
 		{
 			echo->t_split = i;//here we see the $ sign, so here the split has to end
 			ft_split_begin(echo);
-			printf("str = [%s]\n", echo->t_cache);
 			ft_printf("----ERROR END---\n");
 			echo->t_tmp = ft_variable(echo);
-			printf("str = [%s]\n", echo->t_tmp);
 			echo->t_cache = ft_strjoin(echo->t_cache, echo->t_tmp);
 			free(echo->t_tmp);
-			printf("str = [%s]\n", echo->t_cache);
 			ft_split_end(echo);
-			printf("str = [%s]\n", echo->t_tmp);
-			// echo->str = ft_strjoin(echo->t_cache, echo->t_tmp);
-			// free(echo->t_cache);
-			// free(echo->t_tmp);
+			echo->str = ft_strjoin(echo->t_cache, echo->t_tmp);
+			free(echo->t_tmp);
+			
 			// i = echo->t_split;
 		}
 		i++;
@@ -77,7 +73,7 @@ void   ft_split_end(t_struct_m *echo)
 
 	i = 0;
 	len = ft_strlen(echo->str);
-	echo->t_tmp = (char *)malloc((len - echo->t_split) * sizeof(char));
+	echo->t_tmp = (char *)malloc((len - echo->t_split + 1) * sizeof(char));
 	if (!echo->t_tmp)
 		return ;
 	ft_fillstr(echo->t_tmp, '0', len - echo->t_split);
@@ -87,6 +83,7 @@ void   ft_split_end(t_struct_m *echo)
 		echo->t_split++;
 		i++;
 	}
+	echo->t_tmp[i] = '\0';
 }
 
 char*	ft_variable(t_struct_m *echo)
@@ -94,6 +91,7 @@ char*	ft_variable(t_struct_m *echo)
 	// ft_search_variable(echo);
 
 	//for now its path
+	//gebruik pwd function
 	char	cwd[1024];
 	char	*cwd_res;
 	char	*ret;
@@ -106,7 +104,7 @@ char*	ft_variable(t_struct_m *echo)
 		return (NULL);
 	}
 	ret = ft_strdup(cwd);
-	i = strlen(ft_strdup("PATH"));
+	i = strlen(ft_strdup("$PATH"));
 	echo->t_split = echo->t_split + i;//now its at the end of the variable
 	return (ret);
 }
