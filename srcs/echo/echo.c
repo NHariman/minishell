@@ -255,7 +255,7 @@ void	echo_str_double(t_struct_m *echo)
 	}
 }
 
-char       *echo_main(char  *str)
+char       *echo_main(char  *str, t_struct_m *echo)
 {
 	t_struct_m *echo;
 
@@ -266,7 +266,7 @@ char       *echo_main(char  *str)
 	echo->str = ft_strdup(str);
 	if (echo->str[0] == '\n')
 		return (echo->str);
-	ft_tripple_trim(echo);//get the variables
+	// ft_tripple_trim(echo);//get the variables
 	echo->i = check_flag_n(str);/*now it knows when -n has ended */
 	echo->i = skip_character(echo->str, echo->i, ' ');
 	while (echo->str[echo->i] != '\n' && echo->str[echo->i] != '\0')
