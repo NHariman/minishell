@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/06 23:26:38 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/07 00:23:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	minishell_parser(char *line, char **envp)
 	{
 		if (ft_isalpha(line[i]))
 			ft_wordparser(line, &i, shell);
-		else if (line[i] == '$')
+		if (line[i] == '$')
 			ft_printf("show env variable followed by: command not found lol.\n");
 		else if (line[i] == '>')
 			ft_printf("pipe function here, should handle > and >>, takes the shell struct\n");

@@ -47,9 +47,10 @@ int					ft_echo_parser(char *line, int *i, t_shell *shell)
 	if (ft_strchr(">|;\'\"<", line[*i]) && *i == start)
 		echo_str = ft_strdup("");
 	else if (ft_strchr(">|;\'\"<", line[*i]))
-		echo_str = ft_substr(line, start, *i - 1 - start);
+		echo_str = ft_substr(line, start, *i - start);
 	else
 		echo_str = ft_substr(line, start, *i - start);
+	ft_printf("%s\n", line + *i);
 	*i = *i + ft_strlen(echo_str);
 	shell->echo = ft_strdup(echo_main(echo_str, echo));
 	free_echo_struct(echo);
