@@ -29,6 +29,7 @@ typedef struct	s_struct_m
 	int			t_split;
 	char*		t_cache;
 	char*		t_tmp;
+	char*		t_tmp_str;
 }				t_struct_m;
 
 char       *echo_main(char  *str, t_struct_m *echo);
