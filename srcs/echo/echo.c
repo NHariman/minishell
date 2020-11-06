@@ -255,13 +255,14 @@ void	echo_str_double(t_struct_m *echo)
 
 char       *echo_main(char  *str, t_struct_m *echo)
 {
+	str = ft_echo_empty_line(str);
 	set_value(echo);
 	echo->str = ft_strdup(str);
 	free(str);
 	if (echo->str[0] == '\n')
 		return (echo->str);
 	ft_tripple_trim(echo);//get the variables
-	echo->i = check_flag_n(str);/*now it knows when -n has ended */
+	echo->i = check_flag_n(echo->str);/*now it knows when -n has ended */
 	echo->i = skip_character(echo->str, echo->i, ' ');
 	while (echo->str[echo->i] != '\n' && echo->str[echo->i] != '\0')
 	{
@@ -286,9 +287,9 @@ char       *echo_main(char  *str, t_struct_m *echo)
 			//error
 			return (echo->str);
 		}
-		//get in, if double or if single isn't a pair, then return a empty cache,
-		//and put error on and return the cache immidiently
 	}
+	//get in, if double or if single isn't a pair, then return a empty cache,
+	//and put error on and return the cache immidiently
 	printf("cache end = [%s]\n", echo->cache);
 	if (echo->n != -1)
 		echo->cache = gnl_strjoin(echo->cache, "\n");

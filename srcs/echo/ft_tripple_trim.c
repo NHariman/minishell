@@ -18,35 +18,55 @@
 
 void   ft_tripple_trim(t_struct_m *echo)
 {
-	int i;
-
-	i = 0;
 	echo->t_begin = 0;
 	echo->t_split = 0;
-	echo->t_cache = ft_strdup("");
-	echo->t_tmp = ft_strdup("");
-	echo->t_tmp_str = ft_strdup(echo->str);
-	while (echo->str[i] && echo->str[i] != '\n')
+	while (echo->str[echo->t_split] && echo->str[echo->t_split] != '\n')
 	{
-		if (echo->str[i] == '$')
+		if (echo->str[echo->t_split] == '$')
 		{
-			echo->t_split = i;//here we see the $ sign, so here the split has to end
 			ft_split_begin(echo);
-			ft_printf("----ERROR END---\n");
-			echo->t_tmp = ft_variable(echo);
+			ft_variable(echo);
 			echo->t_cache = ft_strjoin(echo->t_cache, echo->t_tmp);
 			free(echo->t_tmp);
 			ft_split_end(echo);
+			free(echo->str);
 			echo->str = ft_strjoin(echo->t_cache, echo->t_tmp);
 			free(echo->t_tmp);
-			
-			// i = echo->t_split;
+			free(echo->t_cache);
+			echo->t_split = 0;
 		}
-		i++;
+		else
+		{
+			echo->t_split++;
+		}
 	}
-	free(echo->t_cache);
-	free(echo->t_tmp);
-	free(echo->t_tmp_str);
+	//remove the empty lines at the end of the string
+}
+
+void	ft_variable(t_struct_m *echo)
+{
+	int 	len;
+	int		start;
+	char*	str;
+	int		error = -1;
+
+	len = 0;
+	start = echo->t_split;
+	while (echo->str[echo->t_split] && echo->str[echo->t_split]
+			!= '\n' && echo->str[echo->t_split] != ' ')
+	{
+		len++;
+		echo->t_split++;	
+	}
+	str = ft_substr(echo->str, start, len);
+	ft_printf("str = [%s]\n", str);
+	ft_search_variable(echo, str, start);
+	free(str);
+	if (error == -1)
+	{
+		free(echo->t_tmp);
+		echo->t_tmp = ft_strdup("");
+	}
 }
 
 void   ft_split_begin(t_struct_m *echo)
@@ -70,41 +90,20 @@ void   ft_split_end(t_struct_m *echo)
 {
 	int	i;
 	int	len;
+	int	split;
 
 	i = 0;
+	split = echo->t_split;
 	len = ft_strlen(echo->str);
-	echo->t_tmp = (char *)malloc((len - echo->t_split + 1) * sizeof(char));
+	echo->t_tmp = (char *)malloc((len - split + 1) * sizeof(char));
 	if (!echo->t_tmp)
 		return ;
-	ft_fillstr(echo->t_tmp, '0', len - echo->t_split);
+	ft_fillstr(echo->t_tmp, '0', len - split);
 	while (echo->t_tmp[i])
 	{
-		echo->t_tmp[i] = echo->str[echo->t_split];
-		echo->t_split++;
+		echo->t_tmp[i] = echo->str[split];
+		split++;
 		i++;
 	}
 	echo->t_tmp[i] = '\0';
-}
-
-char*	ft_variable(t_struct_m *echo)
-{
-	// ft_search_variable(echo);
-
-	//for now its path
-	//gebruik pwd function
-	char	cwd[1024];
-	char	*cwd_res;
-	char	*ret;
-	int 	i;
-
-	cwd_res = getcwd(cwd, sizeof(cwd));
-	if (cwd_res == NULL)
-	{
-		perror("getcwd() error");
-		return (NULL);
-	}
-	ret = ft_strdup(cwd);
-	i = strlen(ft_strdup("$PATH"));
-	echo->t_split = echo->t_split + i;//now its at the end of the variable
-	return (ret);
 }
