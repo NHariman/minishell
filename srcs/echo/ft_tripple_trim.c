@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+// ft_printf("----ERROR START---\n");
+// ft_printf("----ERROR END---\n");
+
 #include "../minishell.h"
 #include <stdio.h>
 
