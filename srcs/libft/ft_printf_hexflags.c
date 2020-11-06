@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 18:38:45 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/14 00:44:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/06 13:44:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ static void			ft_hexpadlen(unsigned long n, long *padlen, t_flag *flags)
 	}
 	if (flags->dot && flags->pre <= 0 && n == 0)
 		*padlen = flags->pad;
-	else if (flags->dot && n < 0)
+	else if (flags->dot)
 	{
 		if (flags->pre < ft_hexlen(-n))
 			*padlen = flags->pad - ft_hexlen(n);
 		else
 			*padlen = flags->pad - ft_hexlen(n) - (flags->pre - ft_hexlen(-n));
 	}
-	else if (flags->dot && n >= 0)
+	else if (flags->dot)
 	{
 		if (flags->pre < ft_hexlen(n))
 			*padlen = flags->pad - ft_hexlen(n);
