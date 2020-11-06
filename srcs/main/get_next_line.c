@@ -6,14 +6,14 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 17:14:10 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/06 13:43:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/06 15:01:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-static char				*gnl_strjoin(char *s1, char *s2)
+char				*gnl_strjoin(char *s1, char *s2)
 {
 	char		*strduo;
 	size_t		i;
