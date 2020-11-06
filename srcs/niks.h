@@ -6,12 +6,15 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/05 18:36:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/06 03:55:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NIKS_H
 # define NIKS_H
+
+# define SQ 1
+# define DQ 2
 
 typedef struct	s_gnl
 {
@@ -32,7 +35,8 @@ typedef struct	s_echo
 }				t_echo;
 int				get_next_line(int fd, char **line);
 int				ft_echo_parser(char *line);
-int				ft_cd(char *str);
+void			ft_cd(char *str);
 char			*ft_pwd(void);
+char			*ft_rm_endline(char *str);
 
 #endif
