@@ -60,8 +60,6 @@ int		check_flag_n(char *str)
 void        set_value(t_struct_m *echo)
 {
 	echo->cache 	= ft_strdup("");
-	// echo->tmp		= NULL;
-	echo->str		= NULL;
 	echo->i       	= 0;
 	echo->path    	= 0;
 	echo->single  	= 0;
@@ -138,14 +136,14 @@ void	echo_no_str(t_struct_m *echo)
 			y++;
 			len--;
 		}
-		echo->cache = ft_strjoin(echo->cache, tmp);
+		echo->cache = gnl_strjoin(echo->cache, tmp);
 		if (echo->beg == 1)
 		{
-			echo->cache = ft_strjoin(" ", echo->cache);
+			echo->cache = gnl_strjoin(" ", echo->cache);
 			echo->beg = 0;
 		}
 		if (echo->str[echo->i + 1] == ' ')
-			echo->cache = ft_strjoin(echo->cache, " ");
+			echo->cache = gnl_strjoin(echo->cache, " ");
 		free(tmp);
 	}
 }
@@ -198,15 +196,15 @@ void	echo_str_single(t_struct_m *echo)
 			echo->start++;
 			len--;
 		}
-		echo->cache = ft_strjoin(echo->cache, tmp);
+		echo->cache = gnl_strjoin(echo->cache, tmp);
 		if (echo->beg == 1)
 		{
-			echo->cache = ft_strjoin(" ", echo->cache);
+			echo->cache = gnl_strjoin(" ", echo->cache);
 			echo->beg = 0;
 		}
 		if (echo->end == 1)
 		{
-			echo->cache = ft_strjoin(echo->cache, " ");
+			echo->cache = gnl_strjoin(echo->cache, " ");
 			echo->end = 0;
 		}
 		free(tmp);
@@ -240,15 +238,15 @@ void	echo_str_double(t_struct_m *echo)
 			echo->start++;
 			len--;
 		}
-		echo->cache = ft_strjoin(echo->cache, tmp);
+		echo->cache = gnl_strjoin(echo->cache, tmp);
 		if (echo->beg == 1)
 		{
-			echo->cache = ft_strjoin(" ", echo->cache);
+			echo->cache = gnl_strjoin(" ", echo->cache);
 			echo->beg = 0;
 		}
 		if (echo->end == 1)
 		{
-			echo->cache = ft_strjoin(echo->cache, " ");
+			echo->cache = gnl_strjoin(echo->cache, " ");
 			echo->end = 0;
 		}
 		free(tmp);
@@ -257,16 +255,12 @@ void	echo_str_double(t_struct_m *echo)
 
 char       *echo_main(char  *str, t_struct_m *echo)
 {
-	t_struct_m *echo;
-
-	echo = ft_calloc(1, sizeof(t_struct_m));
-	if (echo == NULL)
-		return (NULL);
 	set_value(echo);
 	echo->str = ft_strdup(str);
+	free(str);
 	if (echo->str[0] == '\n')
 		return (echo->str);
-	// ft_tripple_trim(echo);//get the variables
+	ft_tripple_trim(echo);//get the variables
 	echo->i = check_flag_n(str);/*now it knows when -n has ended */
 	echo->i = skip_character(echo->str, echo->i, ' ');
 	while (echo->str[echo->i] != '\n' && echo->str[echo->i] != '\0')
@@ -286,12 +280,17 @@ char       *echo_main(char  *str, t_struct_m *echo)
 		else
 			echo_no_str(echo);
 		if (echo->error == -1)
-			return (ft_strdup(""));
+		{
+			free(echo->str);
+			echo->str = ft_strdup("");
+			//error
+			return (echo->str);
+		}
 		//get in, if double or if single isn't a pair, then return a empty cache,
 		//and put error on and return the cache immidiently
 	}
 	printf("cache end = [%s]\n", echo->cache);
 	if (echo->n != -1)
-		echo->cache = ft_strjoin(echo->cache, "\n");
+		echo->cache = gnl_strjoin(echo->cache, "\n");
 	return (echo->cache);
 }
