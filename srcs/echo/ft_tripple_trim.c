@@ -13,9 +13,8 @@
 #include "../minishell.h"
 #include <stdio.h>
 
-char*   ft_tripple_trim(t_struct_m *echo)
+void   ft_tripple_trim(t_struct_m *echo)
 {
-	char* str;
 	int i;
 
 	i = 0;
@@ -27,13 +26,13 @@ char*   ft_tripple_trim(t_struct_m *echo)
 	{
 		if (echo->str[i] == '$')
 		{
-			echo->ft_split = i;
+			echo->t_split = i;
 			ft_split_begin(echo);
 			echo->t_tmp = ft_variable(echo);
 			echo->t_cache = ft_strjoin(echo->t_cache, echo->t_tmp);
-			free(tmp);
+			free(echo->t_tmp);
 			ft_split_end(echo);
-			echo->str = ft_strjoin(echo->t_cache, echo->t_tmp)
+			echo->str = ft_strjoin(echo->t_cache, echo->t_tmp);
 			free(echo->t_cache);
 			free(echo->t_tmp);
 		}
@@ -58,7 +57,7 @@ void   ft_split_begin(t_struct_m *echo)
 	}
 }
 
-char*	ft_variable(echo)
+char*	ft_variable(t_struct_m *echo)
 {
 	// ft_search_variable(echo);
 	//for now its path
@@ -86,13 +85,13 @@ void   ft_split_end(t_struct_m *echo)
 
 	i = 0;
 	len = ft_strlen(echo->str);
-	echo->tmp = (char *)malloc((len - echo->t_split + 1) * sizeof(char));
-	if (!echo->tmp)
+	echo->t_tmp = (char *)malloc((len - echo->t_split + 1) * sizeof(char));
+	if (!echo->t_tmp)
 		return ;
-	ft_fillstr(echo->tmp, '0', len - echo->t_split);
-	while (echo->tmp[i])
+	ft_fillstr(echo->t_tmp, '0', len - echo->t_split);
+	while (echo->t_tmp[i])
 	{
-		echo->tmp[[i]] = echo->str[echo->t_split];
+		echo->t_tmp[i] = echo->str[echo->t_split];
 		echo->t_split++;
 		i++;
 	}

@@ -42,10 +42,10 @@ int			skip_character(char *str, int i, char c);
 int			echo_check(t_struct_m *echo, char c);
 
 //tripple trim
-char*   	ft_tripple_trim(t_struct_m *echo);
+void   	ft_tripple_trim(t_struct_m *echo);
 void   		ft_split_begin(t_struct_m *echo);
-char*   	ft_split_middle(t_struct_m *echo);
-void   	ft_split_end(t_struct_m *echo);
+char*   	ft_variable(t_struct_m *echo);
+void   		ft_split_end(t_struct_m *echo);
 
 //single use functions
 int			ft_strncmp_echo(int i, char *s1, char *s2, int n);
