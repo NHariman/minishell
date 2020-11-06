@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/06 03:55:24 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/06 13:59:15 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ int		main(void)
 
 	fd = 0;
 	i = 1;
-	while (i == 1)
+	while (i > 0)
 	{
 		ft_printf("minishell> ");
 		i = get_next_line(fd, &line);
 		if (!ft_strncmp(line, "exit\n", ft_strlen("exit\n")))
 			exit(0);
 		minishell_parser(line); //function that processes the line argument.
-		//free(line);
+		free(line);
 	}
 	return (0);
 }
