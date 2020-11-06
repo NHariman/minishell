@@ -63,7 +63,11 @@ int				ft_echo_parser(char *line)
 	int		i;
 	t_echo	qts;
 	char	*echo_str;
+	t_struct_m *echo;
 
+	echo = ft_calloc(1, sizeof(t_struct_m));
+	if (echo == NULL)
+		return (0);
 	i = 0;
 	ft_set_qts(&qts);
 	ft_echo_line(line, &qts, &i);
@@ -76,7 +80,9 @@ int				ft_echo_parser(char *line)
 		echo_str = ft_substr(line, 0, i - 1);
 	else
 		echo_str = ft_substr(line, 0, i);
-	echo_main(echo_str);
-	//free (echo);
+	echo_main(echo_str, echo);
+	free(echo->cache);
+	free(echo->str);
+	free (echo);
 	return (0);
 }

@@ -31,7 +31,7 @@ typedef struct	s_struct_m
 	char*		t_tmp;
 }				t_struct_m;
 
-char		*echo_main(char	*str);
+char       *echo_main(char  *str, t_struct_m *echo);
 int			check_flag_n(char *str);
 void		echo_no_str(t_struct_m *echo);
 void		echo_str_single(t_struct_m *echo);
