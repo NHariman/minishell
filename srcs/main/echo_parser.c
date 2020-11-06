@@ -77,5 +77,6 @@ int				ft_echo_parser(char *line)
 	else
 		echo_str = ft_substr(line, 0, i);
 	echo_main(echo_str);
+	//free (echo);
 	return (0);
 }

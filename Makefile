@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 COMPILE = gcc
+# COMPILE = clang
 
 FLAGS = -Wall -Werror -Wextra
 
@@ -21,7 +22,8 @@ MINISHELL =		main.c \
 				srcs/cd/ft_cd.c \
 				srcs/pwd/ft_pwd.c
 
-ECHO =			srcs/echo/echo.c
+ECHO =			srcs/echo/echo.c\
+				srcs/echo/ft_tripple_trim.c
 
 OMINISHELL = 	$(MINISHELL:.c=.o)
 

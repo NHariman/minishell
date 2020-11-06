@@ -54,3 +54,6 @@ dkms.conf
 .gitignore
 Makefile
 minishell.h
+minishell
+Makefile
+Makefile
