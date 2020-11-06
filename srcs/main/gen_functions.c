@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_pwd.c                                           :+:    :+:            */
+/*   gen_functions.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/05 14:38:58 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/06 03:57:19 by nhariman      ########   odam.nl         */
+/*   Created: 2020/11/06 03:52:14 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/11/06 03:55:18 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char		*ft_pwd(void)
+char	*ft_rm_endline(char *str)
 {
-	char	cwd[1024];
-	char	*cwd_res;
-	char	*ret;
+	int		len;
+	char	*new;
 
-	cwd_res = getcwd(cwd, sizeof(cwd));
-	errno = 0;
-	if (cwd_res == NULL)
-	{
-		ft_printf("Error\n%s\n", strerror(errno));
-		return (NULL);
-	}
-	ret = ft_strdup(cwd);
-	return (ret);
+	len = ft_strlen(str);
+	new = ft_substr(str, 0, len - 1);
+	return (new);
 }
