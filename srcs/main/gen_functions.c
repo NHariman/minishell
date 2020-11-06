@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 03:52:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/06 16:35:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/06 20:27:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,14 @@ char	*ft_rm_endline(char *str)
 	new = ft_substr(str, 0, len - 1);
 	free(str);
 	return (new);
+}
+
+char	*ft_find_arg(char *str, int *i)
+{
+	char	*word;
+
+	while (str[*i] != '\n' && ft_isalpha(str[*i]))
+		*i = *i + 1;
+	word = ft_substr(str, 0, *i);
+	return (word);
 }
