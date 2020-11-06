@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/11/05 14:54:50 by nhariman      ########   odam.nl          #
+#    Updated: 2020/11/06 03:52:00 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ FLAGS = -Wall -Werror -Wextra
 
 MINISHELL =		main.c \
 				srcs/main/get_next_line.c \
-				srcs/main/gen_parsers.c \
+				srcs/main/echo_parser.c \
+				srcs/main/gen_functions.c \
 				srcs/cd/ft_cd.c \
 				srcs/pwd/ft_pwd.c
 

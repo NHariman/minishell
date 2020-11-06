@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:43:46 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/05 22:43:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/06 01:47:08 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@ static void		ft_set_qts(t_echo *qts)
 	qts->sq = 0;
 }
 
-static	int		ft_q_check(char *line, int *i, int type)
+static	int		ft_q_check(char *line, int *i, int type, t_echo *qts)
 {
+	ft_set_qts(qts);
 	*i = *i + 1;
 	while (line[*i] != '\0' && line[*i] != '\n')
 	{
 		if ((line[*i] == '\'' && type == SQ) ||
 		(line[*i] == '\"' && type == DQ))
 		{
-			*i = *i + 1;
+			ft_printf("test\n");
 			return (0);
 		}
 		*i = *i + 1;
 	}
-	//ft_printf("line i: %c\n", line[*i]);
 	return (1);
 }
 
@@ -51,12 +51,10 @@ static	void	ft_echo_line(char *line, t_echo *qts, int *i)
 		if (ft_strchr(">|;<", line[*i]))
 			return ;
 		else if (line[*i] == '\'')
-			qts->sq = ft_q_check(line + *i, i, SQ);
+			qts->sq = ft_q_check(line, i, SQ, qts);
 		else if (line[*i] == '\"')
-			qts->dq = ft_q_check(line + *i, i, DQ);
-		else
-			*i = *i + 1;
-		ft_printf("line i: %c\n", line[*i]);
+			qts->dq = ft_q_check(line, i, DQ, qts);
+		*i = *i + 1;
 	}
 }
 
@@ -72,9 +70,12 @@ int				ft_echo_parser(char *line)
 	ft_printf("dq: %i\nsq: %i\n", qts.dq, qts.sq);
 	if (qts.dq % 2 != 0 || qts.sq % 2 != 0)
 		return (ft_printf("Error\nHanging quotes. Echo failed.\n"));
-	echo_str = ft_strchr(">|;\'\"<", line[i]) ?
-				ft_substr(line, 0, i - 1) : ft_substr(line, 0, i);
-	ft_printf("echo_str: %s\n", echo_str);
+	if (ft_strchr(">|;\'\"<", line[i]) && i == 0)
+		echo_str = ft_strdup("");
+	else if (ft_strchr(">|;\'\"<", line[i]) && i > 0)
+		echo_str = ft_substr(line, 0, i - 1);
+	else
+		echo_str = ft_substr(line, 0, i);
 	echo_main(echo_str);
 	return (0);
 }
