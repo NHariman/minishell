@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 17:14:10 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/10/31 18:31:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/06 13:43:15 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int						get_next_line(int fd, char **line)
 	t_gnl			gnl;
 	int				ret;
 
+	ret = 0;
 	if (fd < 0 || line == NULL)
 		return (-1);
 	gnl.line_read = NULL;
@@ -107,5 +108,5 @@ int						get_next_line(int fd, char **line)
 		return (-1);
 	ret = fill_line(gnl, line);
 	free(gnl.line_read);
-	return (1);
+	return (ret);
 }
