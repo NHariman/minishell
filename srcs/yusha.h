@@ -6,9 +6,31 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/07 16:35:38 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/07 19:24:14 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+typedef struct	s_struct_m
+{
+	char*		str;
+	char*		cache;
+	char*		tmp;
+	int			n;
+	int			i;
+}				t_struct_m;
+
+typedef struct	s_struct_t
+{
+	int			begin;
+	int			end;
+	int			single;
+	int			doubble;
+	char*		s_str;
+	char*		s_tmp;
+	char*		s_cache;
+	char*		s_begin;
+	char*		s_end;
+}				t_struct_t;
 
 typedef struct	s_struct_e
 {
@@ -16,69 +38,43 @@ typedef struct	s_struct_e
 	int			end;
 	int			single;
 	int			doubble;
-	char*		str;
+	char*		s_str;
+	char*		s_tmp;
+	char*		s_cache;
 	char*		s_begin;
 	char*		s_end;
-	char*		s_cache;
 }				t_struct_e;
 
-typedef struct	s_struct_m
-{
-	char		*cache;
-	char		*str;
-	int			i;
-	int			path;
-	int			single;
-	int			doubble;
-	int			beg;
-	int			end;
-	int			len;
-	int			stat;
-	int			n;
-	int			error;
-	int			start;
-	int			t_begin;
-	int			t_split;
-	char*		t_cache;
-	char*		t_tmp;
-}				t_struct_m;
-
-typedef struct	s_struct_em
+typedef struct	s_struct_q
 {
 	int			begin;
 	int			end;
 	int			single;
 	int			doubble;
-	char*		str;
+	char*		s_str;
+	char*		s_tmp;
+	char*		s_cache;
 	char*		s_begin;
 	char*		s_end;
-	char*		s_cache;
-}				t_struct_em;
+}				t_struct_q;
 
+//echo main
 char		*echo_main(char *str, t_struct_m *echo);
-int			check_flag_n(char *str);
-void		echo_no_str(t_struct_m *echo);
-void		echo_str_single(t_struct_m *echo);
-void		echo_str_double(t_struct_m *echo);
 int			skip_character(char *str, int i, char c);
+void		check_flag_n(t_struct_m *echo);
+void        set_value_echo(t_struct_m *echo);
 
-//multiple uses
-int			echo_check(t_struct_m *echo, char c);
+//struct clean
+void        set_value_echo(t_struct_m *echo);
+void        set_value_trim(t_struct_t *trim);
+void		set_value_empty(t_struct_e *empty);
+void		set_value_han(t_struct_q *han);
 
-//tripple trim
-void   		ft_tripple_trim(t_struct_m *echo);
-void   		ft_split_begin(t_struct_em *trim, char *str);
-void   		ft_split_end(t_struct_em *trim, char *str);
-int			ft_stop_split(t_struct_em *trim, char *str);
-void		ft_variable(t_struct_em *trim, char *str);
+//variables
+void    	ft_add_variables(t_struct_m *echo);
 
-//variable
-int    ft_search_variable(t_struct_em *trim, char *str);
+//empty lines
+void		ft_empty_lines(t_struct_m *echo);
 
-//empty line
-char*			ft_echo_empty_line(char* str);
-
-//single use functions
-int			ft_strncmp_echo(int i, char *s1, char *s2, int n);
-void		check_empty_beg(t_struct_m *echo);
-char*		ft_fillstr(char *str1, char	c, int len);
+//handle quotes
+void        ft_handle_quotes(t_struct_m *echo);
