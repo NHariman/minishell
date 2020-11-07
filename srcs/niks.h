@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/06 22:17:56 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/07 20:00:17 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,16 @@ typedef struct	s_shell
 	char		*echo;
 	char		*pwd;
 	char		**env;
-	char		*export;
+	char		*pipe;
+	char		**exprt;
 
 }				t_shell;
+
+typedef struct	s_args
+{
+	char		*cmd;
+	char		*str;
+}				t_args;
 
 int				get_next_line(int fd, char **line);
 int				ft_echo_parser(char *line, int *i, t_shell *shell);
@@ -52,5 +59,7 @@ char			*gnl_strjoin(char *s1, char *s2);
 char			*ft_find_arg(char *str, int *i);
 void			ft_set_qts(t_qts *qts);
 void			ft_qt_line(char *line, t_qts *qts, int *i);
+void			ft_wordlow(char *line, int start);
+void			minishell_parser(char *line, char **envp);
 
 #endif
