@@ -50,8 +50,6 @@ int					ft_echo_parser(char *line, int *i, t_shell *shell)
 		echo_str = ft_substr(line, start, *i - start);
 	else
 		echo_str = ft_substr(line, start, *i - start);
-	ft_printf("%s\n", line + *i);
-	*i = *i + ft_strlen(echo_str);
 	shell->echo = ft_strdup(echo_main(echo_str, echo));
 	free_echo_struct(echo);
 	return (0);
