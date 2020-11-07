@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/05 21:17:28 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/07 16:42:58 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,13 +255,18 @@ void	echo_str_double(t_struct_m *echo)
 
 char       *echo_main(char  *str, t_struct_m *echo)
 {
-	str = ft_echo_empty_line(str);
 	set_value(echo);
 	echo->str = ft_strdup(str);
 	free(str);
 	if (echo->str[0] == '\n')
 		return (echo->str);
 	ft_tripple_trim(echo);//get the variables
+	printf("trim = [%s]\n", echo->str);
+	echo->cache = ft_strdup(ft_echo_empty_line(echo->str));
+	free(echo->str);
+	echo->str = ft_strdup(echo->cache);
+	free(echo->cache);
+	printf("empty = [%s]\n", echo->str);
 	echo->i = check_flag_n(echo->str);/*now it knows when -n has ended */
 	echo->i = skip_character(echo->str, echo->i, ' ');
 	while (echo->str[echo->i] != '\n' && echo->str[echo->i] != '\0')
@@ -291,6 +296,8 @@ char       *echo_main(char  *str, t_struct_m *echo)
 	//get in, if double or if single isn't a pair, then return a empty cache,
 	//and put error on and return the cache immidiently
 	printf("cache end = [%s]\n", echo->cache);
+	// echo->cache = ft_echo_empty_line(echo->cache);//leak
+	// printf("cache end = [%s]\n", echo->cache);
 	if (echo->n != -1)
 		echo->cache = gnl_strjoin(echo->cache, "\n");
 	return (echo->cache);

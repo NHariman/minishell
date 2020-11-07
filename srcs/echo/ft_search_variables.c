@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 20:56:01 by anonymous     #+#    #+#                 */
-/*   Updated: 2020/11/07 12:48:58 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/07 16:31:10 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,22 @@
 #include "../minishell.h"
 #include <stdio.h>
 
-void    ft_search_variable(t_struct_m *echo, char *str, int start)
-{
-	// \ before $, then is shouldn't be removed
-	int		b;
+//check if the variable is correct and what input needs to be taken out
+//else if its false, return nothing
 
-	b = start;
-	b--;
-	if (echo->str[b] == '\\')
+int    ft_search_variable(t_struct_em *trim, char *str)
+{
+	//check if the variable is there, if not, then return an empty string
+	int i;
+
+	i = 0;
+	if (ft_strncmp("$PATH", str, 4) == 0)
 	{
-		echo->t_tmp = ft_strdup(str);
-		free(str);
-		return ;
+		trim->s_end = ft_pwd();
+		i = ft_strlen(trim->s_end);
+		trim->begin = trim->begin + i;
+		return (0);
 	}
-	echo->t_tmp = ft_pwd();
+	trim->s_end = ft_strdup("");
+	return (1);
 }
