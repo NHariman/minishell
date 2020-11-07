@@ -17,6 +17,7 @@ typedef struct	s_struct_m
 	char*		tmp;
 	int			n;
 	int			i;
+	int			s;
 }				t_struct_m;
 
 typedef struct	s_struct_t
@@ -61,7 +62,7 @@ typedef struct	s_struct_q
 //echo main
 char		*echo_main(char *str, t_struct_m *echo);
 int			skip_character(char *str, int i, char c);
-void		check_flag_n(t_struct_m *echo);
+int		check_flag_n(t_struct_m *echo);
 void        set_value_echo(t_struct_m *echo);
 
 //struct clean
