@@ -6,9 +6,21 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/05 22:31:34 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/07 12:51:46 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+typedef struct	s_struct_e
+{
+	int			begin;
+	int			end;
+	int			single;
+	int			doubble;
+	char*		str;
+	char*		s_begin;
+	char*		s_end;
+	char*		s_cache;
+}				t_struct_e;
 
 typedef struct	s_struct_m
 {
@@ -31,7 +43,7 @@ typedef struct	s_struct_m
 	char*		t_tmp;
 }				t_struct_m;
 
-char       *echo_main(char  *str, t_struct_m *echo);
+char		*echo_main(char *str, t_struct_m *echo);
 int			check_flag_n(char *str);
 void		echo_no_str(t_struct_m *echo);
 void		echo_str_single(t_struct_m *echo);
@@ -48,7 +60,10 @@ void   		ft_variable(t_struct_m *echo);
 void   		ft_split_end(t_struct_m *echo);
 
 //variable
-void    	ft_search_variable(t_struct_m *echo, char str, int start);
+void    	ft_search_variable(t_struct_m *echo, char *str, int start);
+
+//empty line
+char*			ft_echo_empty_line(char* str);
 
 //single use functions
 int			ft_strncmp_echo(int i, char *s1, char *s2, int n);

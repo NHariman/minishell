@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/11/06 03:52:00 by nhariman      ########   odam.nl          #
+#    Updated: 2020/11/07 12:49:23 by ybakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ MINISHELL =		main.c \
 
 ECHO =			srcs/echo/echo.c\
 				srcs/echo/ft_tripple_trim.c\
-				srcs/echo/ft_search_variables.c 
+				srcs/echo/ft_search_variables.c\
+				srcs/echo/ft_echo_empty_line.c
 
 OMINISHELL = 	$(MINISHELL:.c=.o)
 

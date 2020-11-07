@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 20:56:01 by anonymous     #+#    #+#                 */
-/*   Updated: 2020/11/06 20:56:01 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/07 12:48:58 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "../minishell.h"
 #include <stdio.h>
 
-void    ft_search_variable(t_struct_m *echo, char str, int start)
+void    ft_search_variable(t_struct_m *echo, char *str, int start)
 {
 	// \ before $, then is shouldn't be removed
 	int		b;

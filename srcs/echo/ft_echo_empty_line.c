@@ -6,14 +6,9 @@
 /*   By: anonymous <anonymous@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 21:09:41 by anonymous     #+#    #+#                 */
-/*   Updated: 2020/11/06 21:09:41 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/07 12:58:22 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-// get the empty lines out and make, if there is more than 1 empty line into a single empty line
-	//unless its in a single or double quote
-	//only 1 single or double can be one, so be warned for that
-	//as soon as you see a double or single, loop throug it until you see the next one
 
 // ft_printf("----ERROR START---\n");
 // ft_printf("----ERROR END---\n");
@@ -21,56 +16,91 @@
 #include "../minishell.h"
 #include <stdio.h>
 
-typedef struct	s_struct_e
+static void			set_empty(t_struct_e empty)
 {
-    int         begin;
-    int         end;
-    int         single;
-    int         doubble;
-    char*       str;
-	
-}				t_struct_e;
-
-void        set_empty(void)
-{
-    int     begin = 0;
-    int     end = 0;
-    int     single = 0;
-    int     doubble = 0;
+	empty.begin = 0;
+	empty.end = 0;
+	empty.single = 0;
+	empty.doubble = 0;
 }
 
-static void     ft_empty_line_loop_cut(t_struct_m empty, char *str)
+static void		ft_cut_begin(t_struct_e empty, char *str)
 {
-    empty->end = empty->begin;
-    while (str[empty->end] == ' ')
-    {
-        empty->end++;
-    }
-    if (empty->begin < empty->end)
-    {
-        
-    }
+	int		i;
+
+	i = 0;
+	empty.s_begin = (char *)malloc((empty.begin + 1) * sizeof(char));
+	while (i <= empty.begin)
+	{
+		empty.s_begin[i] = str[i];
+		i++;
+	}
+	empty.s_begin[i] = '\0';
 }
 
-char*           ft_echo_empty_line(char* str)
+static void		ft_cut_end(t_struct_e empty, char *str)
 {
-    t_struct_e *empty;
+	int		i;
 
-    set_empty(); 
-    while (str[empty->begin] && str[empty->begin] != '\n')
-    {
-        if (str[empty->begin] == '\"' && empty->single == 0 && empty->doubble == 0)
-            empty->doubble = 1;
-        else if (str[empty->begin] == '\'' && empty->single == 0 && empty->doubble == 0)
-            empty->doubble = 1;
-        else if (str[empty->begin] == '\"' && empty->doubble == 1)
-            empty->doubble = 0;
-        else if (str[empty->begin] == '\'' && empty->single == 1)
-            empty->doubble = 0;
-        else if (str[empty->begin] == ' ' && empty->single == 0 && empty->doubble == 0)
-        {
-            ft_empty_line_loop_cut(empty, str);
-        }
-    }
-    return (str);
+	i = ft_strlen(str);
+	empty.s_begin = (char *)malloc((empty.end - i + 1) * sizeof(char));
+	i = 0;
+	while (str[empty.end])
+	{
+		empty.s_end[i] = str[i];
+		i++;
+		empty.end++;
+	}
+	empty.s_end[i] = '\0';
+}
+
+static void		ft_empty_line_loop_cut(t_struct_e empty, char *str)
+{
+	empty.end = empty.begin;
+	while (str[empty.end] == ' ')
+	{
+		empty.end++;
+	}
+	if (empty.begin - empty.end == 1)
+	{
+		return ;
+	}
+	else if (empty.begin < empty.end)
+	{
+		ft_cut_begin(empty, str);
+		ft_cut_end(empty, str);
+		empty.s_cache = ft_strjoin(empty.s_begin, empty.s_end);
+		free(empty.s_begin);
+		free(empty.s_end);
+	}
+}
+
+char*			ft_echo_empty_line(char* str)
+{
+	t_struct_e *empty;
+
+	empty = NULL;
+	ft_printf("----ERROR START---\n");
+	set_empty(*empty);
+	ft_printf("----ERROR END---\n");\
+	while (str[empty->begin] && str[empty->begin] != '\n')
+	{
+		if (str[empty->begin] == '\"' && empty->single == 0 && empty->doubble == 0)
+			empty->doubble = 1;
+		else if (str[empty->begin] == '\'' && empty->single == 0 && empty->doubble == 0)
+			empty->doubble = 1;
+		else if (str[empty->begin] == '\"' && empty->doubble == 1)
+			empty->doubble = 0;
+		else if (str[empty->begin] == '\'' && empty->single == 1)
+			empty->doubble = 0;
+		else if (str[empty->begin] == ' ' && empty->single == 0 && empty->doubble == 0)
+		{
+			ft_empty_line_loop_cut(*empty, str);
+			free(str);
+			str = ft_strdup(empty->s_cache);
+			free(empty->s_cache);
+		}
+		empty->begin++;
+	}
+	return (str);
 }
