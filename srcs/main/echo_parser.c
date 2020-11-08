@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   echo_parser.c                                      :+:    :+:            */
+/*   gen_parsers.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/06 23:38:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/07 16:02:34 by nhariman      ########   odam.nl         */
+/*   Created: 2020/10/31 21:43:46 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/11/06 01:47:08 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,49 +21,68 @@
 ** test string, bad: echo "test >" '<       "test | " < test
 */
 
-static void			free_echo_struct(t_struct_m *echo)
+static void		ft_set_qts(t_echo *qts)
 {
-	free(echo->cache);
-	free(echo->str);
-	free(echo);
+	qts->dq = 0;
+	qts->sq = 0;
 }
 
-static char			*ft_create_str(char *line, int i, int start)
+static	int		ft_q_check(char *line, int *i, int type, t_echo *qts)
 {
-	char *str;
-	char *tmp;
-
-	if (ft_strchr(">|;\'\"<", line[i]) && i == start)
-		str = ft_strdup("\n");
-	else if (ft_strchr(">|;\'\"<", line[i]))
-		str = ft_substr(line, start, i - start);
-	else
-		str = ft_substr(line, start, i - start);
-	tmp = ft_strtrim(str, " \n");
-	str = tmp;
-	tmp = gnl_strjoin(str, "\n");
-	str = tmp;
-	return (str);
+	ft_set_qts(qts);
+	*i = *i + 1;
+	while (line[*i] != '\0' && line[*i] != '\n')
+	{
+		if ((line[*i] == '\'' && type == SQ) ||
+		(line[*i] == '\"' && type == DQ))
+		{
+			ft_printf("test\n");
+			return (0);
+		}
+		*i = *i + 1;
+	}
+	return (1);
 }
 
-int					ft_echo_parser(char *line, int *i, t_shell *shell)
+static	void	ft_echo_line(char *line, t_echo *qts, int *i)
 {
-	int			start;
-	t_qts		qts;
-	char		*echo_str;
-	t_struct_m	*echo;
+	while (line[*i] != '\0' && line[*i] != '\n')
+	{
+		if (ft_strchr(">|;<", line[*i]))
+			return ;
+		else if (line[*i] == '\'')
+			qts->sq = ft_q_check(line, i, SQ, qts);
+		else if (line[*i] == '\"')
+			qts->dq = ft_q_check(line, i, DQ, qts);
+		*i = *i + 1;
+	}
+}
 
-	start = *i + ft_strlen("echo ");
-	*i = *i + ft_strlen("echo ");
+int				ft_echo_parser(char *line)
+{
+	int		i;
+	t_echo	qts;
+	char	*echo_str;
+	t_struct_m *echo;
+
 	echo = ft_calloc(1, sizeof(t_struct_m));
 	if (echo == NULL)
 		return (0);
+	i = 0;
 	ft_set_qts(&qts);
-	ft_qt_line(line, &qts, i);
+	ft_echo_line(line, &qts, &i);
+	ft_printf("dq: %i\nsq: %i\n", qts.dq, qts.sq);
 	if (qts.dq % 2 != 0 || qts.sq % 2 != 0)
 		return (ft_printf("Error\nHanging quotes. Echo failed.\n"));
-	echo_str = ft_create_str(line, *i, start);
-	shell->echo = ft_strdup(echo_main(echo_str, echo));
-	free_echo_struct(echo);
+	if (ft_strchr(">|;\'\"<", line[i]) && i == 0)
+		echo_str = ft_strdup("");
+	else if (ft_strchr(">|;\'\"<", line[i]) && i > 0)
+		echo_str = ft_substr(line, 0, i - 1);
+	else
+		echo_str = ft_substr(line, 0, i);
+	echo_main(echo_str, echo);
+	free(echo->cache);
+	free(echo->str);
+	free (echo);
 	return (0);
 }
