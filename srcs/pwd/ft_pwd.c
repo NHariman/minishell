@@ -6,11 +6,16 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:58 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/06 03:57:19 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/07 00:16:00 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+/*
+** TODO: pwd parser to check if pwd needs to be updated and saved
+** to the shell struct for either piping or echoing.
+*/
 
 char		*ft_pwd(void)
 {
