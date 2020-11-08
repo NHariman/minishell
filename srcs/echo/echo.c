@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/08 16:59:20 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/08 22:22:24 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		skip_character(char *str, int i, char c)
 	return (i);
 }
 
-char       *echo_main(char  *str, t_struct_m *echo)
+char       *echo_main(char  *str, t_struct_m *echo, t_shell *shell)
 {
 	set_value_echo(echo);
 	echo->str = ft_strdup(str);
@@ -33,7 +33,7 @@ char       *echo_main(char  *str, t_struct_m *echo)
 	if (echo->str[0] == '\n')
 		return (echo->str);
 	ft_printf("input == [%s]\n", echo->str);
-	ft_add_variables(echo);
+	ft_add_variables(echo, shell);
 	ft_printf("varia == [%s]\n", echo->str);
 	ft_empty_lines(echo);
 	ft_printf("empty == [%s]\n", echo->str);
