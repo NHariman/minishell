@@ -6,17 +6,12 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/07 17:00:28 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/08 17:15:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "srcs/minishell.h"
 #include <stdio.h>
-
-/*
-** TODO:
-** open stdin and read from it. (GNL)
-*/
 
 int		main(int argc, char *argv[], char *envp[])
 {
