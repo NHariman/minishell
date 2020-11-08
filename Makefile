@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/11/08 16:39:47 by ybakker       ########   odam.nl          #
+#    Updated: 2020/11/08 18:07:22 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ MINISHELL =		main.c \
 				srcs/main/get_next_line.c \
 				srcs/main/echo_parser.c \
 				srcs/main/gen_functions.c \
+				srcs/main/quotation_handler.c \
+				srcs/main/main_parser.c \
 				srcs/cd/ft_cd.c \
 				srcs/pwd/ft_pwd.c
 
