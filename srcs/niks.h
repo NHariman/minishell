@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/08 16:51:26 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/08 19:48:58 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct	s_check
 typedef struct	s_shell
 {
 	t_check		*check;
+	int			exit;
 	char		*echo;
 	char		*pwd;
 	char		**env;
@@ -77,9 +78,10 @@ typedef struct	s_shell
 
 int				get_next_line(int fd, char **line);
 int				ft_echo_parser(char *line, int *i, t_shell *shell);
-void			ft_cd(char *str);
+void			ft_cd(char *str, int *i);
 char			*ft_pwd(void);
 char			*ft_rm_endline(char *str);
+int				exit_minishell(void);
 char			*gnl_strjoin(char *s1, char *s2);
 char			*ft_find_arg(char *str, int *i);
 void			ft_set_qts(t_qts *qts);
