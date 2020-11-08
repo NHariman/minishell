@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/11/07 19:29:49 by ybakker       ########   odam.nl          #
+#    Updated: 2020/11/08 16:39:47 by ybakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,10 @@ ECHO =			srcs/echo/echo.c\
 				srcs/echo/ft_add_enviorment.c\
 				srcs/echo/ft_clean_echo.c\
 				srcs/echo/ft_empty_lines.c\
-				srcs/echo/ft_handle_quotes.c 
+				srcs/echo/ft_handle_quotes.c\
+				srcs/echo/check_nflag.c\
+				srcs/echo/echo_no_str.c\
+				srcs/echo/check_quote_str.c
 
 OMINISHELL = 	$(MINISHELL:.c=.o)
 

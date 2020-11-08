@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:36:24 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/07 19:14:15 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/08 13:57:43 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ void		set_value_empty(t_struct_e *empty)
 
 void		set_value_han(t_struct_q *han)
 {
-	han->begin = 0;
-	han->end = 0;
+	han->begin = -1;
+	han->end = -0;
 	han->single = 0;
 	han->doubble = 0;
+	han->i = 0;
+	han->error = 0;
+	han->len = 0;
+	han->s_store = ft_strdup("");
 }

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/07 19:24:14 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/08 16:40:26 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,16 @@ typedef struct	s_struct_q
 	int			end;
 	int			single;
 	int			doubble;
+	int			i;
+	int			error;
+	int			len;
+	int			y;
 	char*		s_str;
 	char*		s_tmp;
 	char*		s_cache;
 	char*		s_begin;
 	char*		s_end;
+	char*		s_store;
 }				t_struct_q;
 
 //echo main
@@ -79,3 +84,10 @@ void		ft_empty_lines(t_struct_m *echo);
 
 //handle quotes
 void        ft_handle_quotes(t_struct_m *echo);
+void		echo_no_str(t_struct_q *han);
+void		ft_check_back_no(char *str, int i, t_struct_q *han);
+void		ft_check_end_no(char *str, int i, t_struct_q *han);
+void		echo_double_str(t_struct_q *han);
+void		echo_single_str(t_struct_q *han);
+void		ft_check_end_double(char *str, int i, t_struct_q *han);
+void		ft_check_back_double(char *str, int i, t_struct_q *han);
