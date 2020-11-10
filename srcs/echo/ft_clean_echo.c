@@ -19,12 +19,15 @@ void        set_value_echo(t_struct_m *echo)
     echo->i = 0;
 }
 
-void		set_value_trim(t_struct_t *trim)
+void		set_value_trim(t_struct_tr *trim)
 {
 	trim->begin = 0;
 	trim->end = 0;
 	trim->single = 0;
 	trim->doubble = 0;
+	trim->quote = 0;
+	trim->empty = 0;
+	trim->error = 0;
 }
 
 void		set_value_empty(t_struct_e *empty)
