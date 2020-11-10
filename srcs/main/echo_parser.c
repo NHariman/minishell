@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 23:38:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/07 16:02:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/08 22:05:39 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int					ft_echo_parser(char *line, int *i, t_shell *shell)
 	if (qts.dq % 2 != 0 || qts.sq % 2 != 0)
 		return (ft_printf("Error\nHanging quotes. Echo failed.\n"));
 	echo_str = ft_create_str(line, *i, start);
-	shell->echo = ft_strdup(echo_main(echo_str, echo));
+	shell->echo = ft_strdup(echo_main(echo_str, echo, shell));
 	free_echo_struct(echo);
 	return (0);
 }
