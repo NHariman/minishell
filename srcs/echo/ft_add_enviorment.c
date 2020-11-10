@@ -13,37 +13,28 @@
 #include "../minishell.h"
 #include <stdio.h>
 
-static void   ft_split_begin(t_struct_tr *trim)
+void    ft_add_variables(t_struct_m *echo, t_shell *shell)
 {
-	printf("c == [%c] i == [%i]\n", trim->s_str, trim->begin);
-	
-}
+	t_struct_tr trim;
 
-static void   ft_split_end(t_struct_tr *trim)
-{
-	printf("c == [%c] i == [%i]\n", trim->s_str, trim->begin);
-}
-
-int		ft_split_variable(t_struct_tr *trim)
-{
-	printf("c == [%c] i == [%i]\n", trim->s_str, trim->begin);
-	int		i;
-
-	i = trim.begin;
-	i--;
-	if (trim->s_str[trim->begin] == '\\')
+	set_value_trim(&trim);
+	trim.s_str = ft_strdup(echo->str);
+	free(echo->str);
+	while (trim.s_str[trim.begin] && trim.s_str[trim.begin] != '\n')
 	{
-		ft_split_begin(trim);
-		ft_split_end(trim);
-		free(trim->s_str);
-		trim->s_str = ft_strjoin(trim->s_begin, trim->s_end);
-		free(trim->s_begin);
-		free(trim->s_end);
-		printf("c == [%c] i == [%i]\n", trim->s_str, trim->begin);
-		return (1);
+		if (trim.s_str[trim.begin] == '$')
+		{
+			if (trim.s_str[trim.begin - 1] == ' ')
+				trim.empty = 1;
+			ft_split_variable(&trim, shell);
+			
+		}
+		trim.begin++;
 	}
-	return (0);
+	echo->str = ft_strdup(trim.s_str);
+	free(trim.s_str);
 }
+
 
 /*
 ----variablles---
@@ -64,21 +55,3 @@ if even 00112233 with \/ after itadd variable
 if they're even the the quoatation after it isn't stopped, hwoever, the amount is divided by 2 and thats the amount
 if its uneven, 'no logic yet"
 */
-void    ft_add_variables(t_struct_m *echo, t_shell *shell)
-{
-	t_struct_tr trim;
-
-	set_value_trim(&trim);
-	trim.s_str = ft_strdup(echo->str);
-	free(echo->str);
-	while (trim.s_str[trim.begin] && trim.s_str[trim.begin] != '\n')
-	{
-		if (trim.s_str[trim.begin] == '$')
-		{
-			
-		}
-		trim.begin++;
-	}
-	echo->str = ft_strdup(trim.s_str);
-	free(trim.s_str);
-}

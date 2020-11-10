@@ -35,8 +35,6 @@ char       *echo_main(char  *str, t_struct_m *echo, t_shell *shell)
 	ft_printf("input == [%s]\n", echo->str);
 	ft_add_variables(echo, shell);
 	ft_printf("varia == [%s]\n", echo->str);
-	ft_empty_lines(echo);
-	ft_printf("empty == [%s]\n", echo->str);
 	echo->i = check_flag_n(echo);
 	printf("-n == [%i]\n", echo->n);
 	ft_handle_quotes(echo);

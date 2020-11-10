@@ -26,11 +26,16 @@ typedef struct	s_struct_tr
 	int			end;
 	int			single;
 	int			doubble;
+	int			quote;
+	int			empty;
+	int			error;
 	char*		s_str;
 	char*		s_tmp;
 	char*		s_cache;
 	char*		s_begin;
 	char*		s_end;
+	char*		s_variable;
+	char*		e_check;
 }				t_struct_tr;
 
 typedef struct	s_struct_e
@@ -64,6 +69,34 @@ typedef struct	s_struct_q
 	char*		s_store;
 }				t_struct_q;
 
+typedef struct	s_check
+{
+	int			echo;
+	int			env;
+	int			exec;
+	int			envvar;
+	int			exp;
+	int			err;
+	int			cd;
+	int			pipe;
+	int			pwd;
+	int			redir;
+	int			semicol;
+	int			endstr;
+}				t_check;
+
+typedef struct	s_shell
+{
+	t_check		*check;
+	char		*echo;
+	char		*pwd;
+	char		**env;
+	char		*pipe;
+	char		**exprt;
+
+}				t_shell;
+
+
 //echo main
 char       *echo_main(char  *str, t_struct_m *echo, t_shell *shell);
 int			skip_character(char *str, int i, char c);
@@ -72,13 +105,14 @@ void        set_value_echo(t_struct_m *echo);
 
 //struct clean
 void        set_value_echo(t_struct_m *echo);
-void        set_value_trim(t_struct_t *trim);
+void        set_value_trim(t_struct_tr *trim);
 void		set_value_empty(t_struct_e *empty);
 void		set_value_han(t_struct_q *han);
 
 //variables
-void    	ft_add_variables(t_struct_m *echo);
-
+void    	ft_add_variables(t_struct_m *echo, t_shell *shell);
+void		ft_get_variable(t_struct_tr *trim, t_shell *shell);
+void		ft_split_variable(t_struct_tr *trim, t_shell *shell);
 //empty lines
 void		ft_empty_lines(t_struct_m *echo);
 
