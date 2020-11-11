@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 19:06:28 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/08 16:37:50 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/11 11:15:31 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void		ft_handle_quotes(t_struct_m *echo)
 			echo_double_str(&han);
 		else if (han.s_str[han.i] == '\'')
 			echo_single_str(&han);
-		else
-			echo_no_str(&han);
+		// else
+		// 	echo_no_str(&han);
 	}
 	echo->str = ft_strdup(han.s_store);
 	free(han.s_str);

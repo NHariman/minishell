@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/11/11 10:00:03 by anonymous     ########   odam.nl          #
+#    Updated: 2020/11/11 13:46:51 by anonymous     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ ECHO =			srcs/echo/echo.c\
 				srcs/echo/ft_empty_lines.c\
 				srcs/echo/ft_get_variable.c\
 				srcs/echo/ft_handle_quotes.c\
-				srcs/echo/ft_split_variable.c
 
 OMINISHELL = 	$(MINISHELL:.c=.o)
 

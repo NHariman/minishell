@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/11 09:50:41 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/11 11:29:08 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ char       *echo_main(char  *str, t_struct_m *echo, t_shell *shell);
 int			skip_character(char *str, int i, char c);
 int			check_flag_n(t_struct_m *echo);
 void        set_value_echo(t_struct_m *echo);
+void		ft_trim_backslash(t_struct_m *echo);
 
 //struct clean
 void        set_value_echo(t_struct_m *echo);
@@ -118,7 +119,7 @@ void		ft_empty_lines(t_struct_m *echo);
 
 //handle quotes
 void        ft_handle_quotes(t_struct_m *echo);
-void		echo_no_str(t_struct_q *han);
+// void		echo_no_str(t_struct_q *han);
 void		ft_check_back_no(char *str, int i, t_struct_q *han);
 void		ft_check_end_no(char *str, int i, t_struct_q *han);
 void		echo_double_str(t_struct_q *han);

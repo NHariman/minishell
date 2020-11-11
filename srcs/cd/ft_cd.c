@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/08 19:49:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/11 10:07:48 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*ft_get_prevdir(void)
 	return (newdir);
 }
 
-void		ft_cd(char *str, int *i)
+void		ft_cd(char *str)
 {
 	char	*newdir;
 	int		i;
