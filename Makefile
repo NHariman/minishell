@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/11/11 13:46:51 by anonymous     ########   odam.nl          #
+#    Updated: 2020/11/11 19:32:50 by anonymous     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ MINISHELL =		main.c \
 ECHO =			srcs/echo/echo.c\
 				srcs/echo/check_nflag.c\
 				srcs/echo/check_quote_str.c\
+				srcs/echo/cut_c_out.c\
 				srcs/echo/echo_no_str.c\
 				srcs/echo/ft_add_enviorment.c\
 				srcs/echo/ft_clean_echo.c\

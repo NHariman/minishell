@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/11 14:02:34 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/11 19:50:46 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void		ft_empty_lines(t_struct_m *echo);
 
 //handle quotes
 void        ft_handle_quotes(t_struct_m *echo);
+
 // void		echo_no_str(t_struct_q *han);
 void		ft_check_back_no(char *str, int i, t_struct_q *han);
 void		ft_check_end_no(char *str, int i, t_struct_q *han);
@@ -127,3 +128,6 @@ void		echo_double_str(t_struct_q *han);
 void		echo_single_str(t_struct_q *han);
 void		ft_check_end_double(char *str, int i, t_struct_q *han);
 void		ft_check_back_double(char *str, int i, t_struct_q *han);
+
+//functions
+void		ft_trim_character(t_struct_m *echo, t_struct_q *han);

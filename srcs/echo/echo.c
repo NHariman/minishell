@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/11 14:11:51 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/11 20:01:49 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,30 @@ static void		ft_handle_quote(t_struct_m *echo, t_shell *shell)
 	han.s_str = ft_strdup(echo->str);
 	han.i = echo->i;
 	free(echo->str);
-	ft_printf("double begin i == [%i]\n", echo->i);
 	if (han.s_str[echo->i] == '\"')
 	{
-		while (han.s_str[echo->i] == '\"')
+		
+		ft_trim_character(echo, &han);//remove the backslash
+		echo->i--;
+		ft_printf("when double check i == [%i]] c == [%c] str == [%s]\n", echo->i, han.s_str[echo->i], han.s_str);
+		while (han.s_str[echo->i] != '\"')
 		{
 			if (han.s_str[echo->i] == '\\' && (han.s_str[echo->i + 1] == '\'' || han.s_str[echo->i + 1] == '\"' || han.s_str[echo->i] == '$'))
 			{
-				ft_trim_backslash(echo);//remove the backslash
-				echo->i++;//after the symboleafter
+				ft_trim_character(echo, &han);//remove the backslash
+				// echo->i++;//after the symboleafter
 			}
 			else if (han.s_str[echo->i] == '\\' && han.s_str[echo->i + 1] == '\\')//single, meaning there is a backslash, so error check
-				ft_trim_backslash(echo);//removes the backslash
+				ft_trim_character(echo, &han);//removes the backslash
 			else if (han.s_str[echo->i] == '$')
 				ft_add_variables_double(echo, shell);//checks and takes it
-			else
-				echo->i++;						
+			echo->i++;					
 		}
+		ft_printf("after double is double i == [%i]] c == [%c] str == [%s]\n", echo->i, han.s_str[echo->i], han.s_str);
+		ft_trim_character(echo, &han);//remove the backslash
+		ft_printf("after double check c == [%c] str == [%s]\n", han.s_str[echo->i], han.s_str);
 		// echo->i = han.i;
-		echo_double_str(&han);
+		// echo_double_str(&han);
 	}
 	else if (han.s_str[han.i] == '\'')
 	{
@@ -72,6 +77,7 @@ void		ft_trim_backslash(t_struct_m *echo)
 	i = 0;
 	len = 0;
 	echo->i--;//one character back
+	ft_printf("in backslash i == [%i]\n", echo->i);
 	if (echo->i < 0)
 		echo->cache = ft_strdup("");
 	else
@@ -102,6 +108,7 @@ void		ft_trim_backslash(t_struct_m *echo)
 	}
 	echo->tmp[len] = '\0';
 	echo->str = ft_strjoin(echo->cache, echo->tmp);
+	ft_printf("tmp == [%s]\n", echo->tmp);
 	free(echo->cache);
 	free(echo->tmp);
 }
