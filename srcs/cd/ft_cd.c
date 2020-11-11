@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/06 03:58:52 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/08 19:49:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*ft_get_prevdir(void)
 	return (newdir);
 }
 
-void		ft_cd(char *str)
+void		ft_cd(char *str, int *i)
 {
 	char	*newdir;
 	int		i;
@@ -58,7 +58,7 @@ void		ft_cd(char *str)
 	!ft_strncmp(str + i, "..\n", ft_strlen("..\n")))
 		newdir = ft_get_prevdir();
 	else
-		newdir = ft_strtrim(str, " \n");
+		newdir = ft_strtrim(str, "\"\' \n");
 	check = chdir(newdir);
 	if (check == -1)
 		ft_printf("minishell: cd: %s: %s\n",

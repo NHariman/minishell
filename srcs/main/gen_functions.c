@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 03:52:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/08 15:53:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/08 19:19:23 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@ char	*ft_rm_endline(char *str)
 
 	len = ft_strlen(str);
 	new = ft_substr(str, 0, len - 1);
-	free(str);
 	return (new);
+}
+
+int		exit_minishell(void)
+{
+	ft_printf("exit\n");
+	exit(0);
 }
 
 void	ft_wordlow(char *line, int start)
