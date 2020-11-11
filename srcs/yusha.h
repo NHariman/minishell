@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/08 22:23:08 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/11 09:50:41 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct	s_check
 typedef struct	s_shell
 {
 	t_check		*check;
+	int			exit;
 	char		*echo;
 	char		*pwd;
 	char		**env;
@@ -95,7 +96,6 @@ typedef struct	s_shell
 	char		**exprt;
 
 }				t_shell;
-
 
 //echo main
 char       *echo_main(char  *str, t_struct_m *echo, t_shell *shell);
