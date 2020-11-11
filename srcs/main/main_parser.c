@@ -6,45 +6,95 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/08 22:45:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/11 00:14:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// static char	*get_cmd(char *str)
-// {
-// 	int i;
+/*
+** " " preserves literal value of all characters within the quotes
+** with the exception of $, ` and \.
+** ` and $ retain special meaning
+** \ only retains meaning if followed by ` $ " \.
+** ^ backslacshes that are followed by one of these characters are removed.
+** backslash preceeding characters without a special meaning are left
+** unmodified.
+*/
 
-// 	i = 0;
-// 	if (ft_strchr("\'\"", str[i]))
+// static char	*get_cmd(char *str, int i)
+// {
+// 	int start;
+
+// 	start = i;
+// 	if (str[i] == '\'')
 // 	{
-// 		while(str[i] == '')
+// 		i++;
+// 		while (str[i] != '\'')
+// 			i++;
 // 	}
+// 	if (str[i] == '\"')
+// 	{
+// 		i++;
+// 		while (str[i] != '\"' && str[i - 1] != '\\')
+// 		{
+			
+// 			i++;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		// if \ then ensure that whatever comes after it is printed
+// 		// if it finds a $ expand that, if it exist it's the first argument.
+// 		// if it doesn't exist, look for the next word
+// 	}
+	
+// }
+
+// static void	ft_wordparser(char *line, int *i, t_shell *shell)
+// {
+// 	char	*cmd;
+
+// 	cmd = NULL;
+// 	if (line[*i] == '\n' || line[*i] == '\0')
+// 		return ;
+// 	cmd = get_cmd(line, *i);
+// 	if (!ft_strncmp(cmd, "export ", ft_strlen("export ")) ||
+// 		!ft_strncmp(cmd, "export\n", ft_strlen("export\n")))
+// 		ft_printf("export function here\n");
+// 	if (ft_strchr("eEpP", line[*i]))
+// 		ft_wordlow(line, *i);
+// 	if (!ft_strncmp(cmd, "echo ", ft_strlen("echo ")))
+// 		ft_echo_parser(line, i, shell);
+// 	if (!ft_strncmp(cmd, "cd ", ft_strlen("cd ")) ||
+// 		!ft_strncmp(cmd, "cd\n", ft_strlen("cd\n")))
+// 		ft_cd(line, i);
+// 	if (!ft_strncmp(cmd, "pwd ", ft_strlen("pwd ")) ||
+// 		!ft_strncmp(cmd, "pwd\n", ft_strlen("pwd\n")))
+// 	{
+// 		*i = *i + 4;
+// 		ft_printf("%s\n", ft_pwd());
+// 	}
+// 	else
+// 		ft_printf("minishell: %s: command not found\n",
+// 			ft_find_arg(line, i));
 // }
 
 static void	ft_wordparser(char *line, int *i, t_shell *shell)
 {
-	char	*cmd;
-
-	cmd = NULL;
-	if (line[*i] == '\n' || line[*i] == '\0')
-		return ;
-	cmd = get_cmd(line + *i);
-	if (!ft_strncmp(cmd, "export ", ft_strlen("export ")) ||
-		!ft_strncmp(cmd, "export\n", ft_strlen("export\n")))
+	if (!ft_strncmp(line + *i, "export ", ft_strlen("export ")) ||
+		!ft_strncmp(line + *i, "export\n", ft_strlen("export\n")))
 		ft_printf("export function here\n");
 	if (ft_strchr("eEpP", line[*i]))
 		ft_wordlow(line, *i);
-	if (!ft_strncmp(cmd, "echo ", ft_strlen("echo ")))
+	if (!ft_strncmp(line + *i, "echo ", ft_strlen("echo ")))
 		ft_echo_parser(line, i, shell);
-	if (!ft_strncmp(cmd, "cd ", ft_strlen("cd ")) ||
-		!ft_strncmp(cmd, "cd\n", ft_strlen("cd\n")))
-		ft_cd(line, i);
-	if (!ft_strncmp(cmd, "pwd ", ft_strlen("pwd ")) ||
-		!ft_strncmp(cmd, "pwd\n", ft_strlen("pwd\n")))
+	else if (!ft_strncmp(line + *i, "cd ", ft_strlen("cd ")))
+		ft_cd(line + *i + ft_strlen("cd "));
+	else if (!ft_strncmp(line + *i, "pwd ", ft_strlen("pwd ")) ||
+		!ft_strncmp(line + *i, "pwd\n", ft_strlen("pwd\n")))
 	{
-		*i = *i + 4;
+		*i = *i + ft_strlen("pwd ");
 		ft_printf("%s\n", ft_pwd());
 	}
 	else
