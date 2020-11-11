@@ -22,33 +22,30 @@ void		ft_trim_character(t_struct_m *echo, t_struct_q *han)
 	int		i;
 	int		len;
 
-	i = 0;
+    ft_printf("character trim in == [%c] i == [%i]\n", han->s_str[echo->i], echo->i);
+	i = echo->i - 1;
 	len = 0;
-	echo->i--;//one character back
-	if (echo->i <= 0)
-    {
+	if (i == -1)
 		echo->cache = ft_strdup("");
-        echo->i = 0;
-    }
 	else
 	{
-		echo->cache = (char *)malloc((echo->i + 1) * sizeof(char));
-		while (i <= echo->i)
+		echo->cache = (char *)malloc((i + 1) * sizeof(char));
+		while (len <= echo->i)
 		{
-			echo->cache[i] = han->s_str[i];
-			i++;
+			echo->cache[len] = han->s_str[len];
+			len++;
 		}
 		echo->cache[i] = '\0';
-	}
-	echo->i++;//after character now
-	i = echo->i;
+    }
+	i = echo->i + 1;//after character now
     ft_printf("cgaracter == [%c]\n", han->s_str[i]);
+    len = 0;
 	while(han->s_str[i] && han->s_str[i] != '\n')
 	{
 		i++;
 		len++;
 	}
-	i = echo->i;
+	i = echo->i + 1;
 	echo->tmp = (char *)malloc((len + 1) * sizeof(char));
 	len = 0;
 	while (han->s_str[i])
