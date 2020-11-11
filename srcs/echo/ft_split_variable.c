@@ -55,9 +55,6 @@ void		ft_split_variable(t_struct_tr *trim, t_shell *shell)
 	ft_split_begin(trim);
 	ft_get_variable(trim, shell);
 	ft_split_end(trim);
-    ft_printf("begin == [%s]\n", trim->s_begin);
-    ft_printf("variable == [%s]\n", trim->s_variable);
-	ft_printf("end == [%s]\n", trim->s_end);
     trim->s_cache = ft_strjoin(trim->s_begin, trim->s_variable);
     free(trim->s_begin);
     free(trim->s_variable);
