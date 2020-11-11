@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/11 11:29:08 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/11 14:02:34 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void		set_value_han(t_struct_q *han);
 void    	ft_add_variables(t_struct_m *echo, t_shell *shell);
 void		ft_get_variable(t_struct_tr *trim, t_shell *shell);
 void		ft_split_variable(t_struct_tr *trim, t_shell *shell);
+void    	ft_add_variables_double(t_struct_m *echo, t_shell *shell);
 //empty lines
 void		ft_empty_lines(t_struct_m *echo);
 

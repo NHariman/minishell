@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/11 13:50:56 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/11 14:02:11 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,22 @@ void    ft_add_variables(t_struct_m *echo, t_shell *shell)
 	trim.s_str = ft_strdup(echo->str);
 	trim.begin = echo->i;//$
 	free(echo->str);
+	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
+		trim.empty = 1;
+	ft_split_variable(&trim, shell);
+	echo->str = ft_strdup(trim.s_str);
+	free(trim.s_str);
+}
+
+void    ft_add_variables_double(t_struct_m *echo, t_shell *shell)
+{
+	t_struct_tr trim;
+
+	set_value_trim(&trim);
+	trim.s_str = ft_strdup(echo->str);
+	trim.begin = echo->i;//$
+	free(echo->str);
+	ft_printf("variable begin i == [%i]\n", trim.begin);
 	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
 		trim.empty = 1;
 	ft_split_variable(&trim, shell);

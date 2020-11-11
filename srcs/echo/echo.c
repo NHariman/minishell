@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/11 13:42:33 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/11 14:11:51 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void		ft_handle_quote(t_struct_m *echo, t_shell *shell)
 	han.s_str = ft_strdup(echo->str);
 	han.i = echo->i;
 	free(echo->str);
-	if (han.s_str[han.i] == '\"')
+	ft_printf("double begin i == [%i]\n", echo->i);
+	if (han.s_str[echo->i] == '\"')
 	{
 		while (han.s_str[echo->i] == '\"')
 		{
@@ -45,28 +46,15 @@ static void		ft_handle_quote(t_struct_m *echo, t_shell *shell)
 			else if (han.s_str[echo->i] == '\\' && han.s_str[echo->i + 1] == '\\')//single, meaning there is a backslash, so error check
 				ft_trim_backslash(echo);//removes the backslash
 			else if (han.s_str[echo->i] == '$')
-				ft_add_variables(echo, shell);//checks and takes it
-			echo->i++;
+				ft_add_variables_double(echo, shell);//checks and takes it
+			else
+				echo->i++;						
 		}
-		echo->i = han.i;
+		// echo->i = han.i;
 		echo_double_str(&han);
 	}
 	else if (han.s_str[han.i] == '\'')
 	{
-		while (han.s_str[echo->i] == '\"')
-		{
-			if (han.s_str[echo->i] == '\\' && (han.s_str[echo->i + 1] == '\'' || han.s_str[echo->i + 1] == '\"' || han.s_str[echo->i] == '$'))
-			{
-				ft_trim_backslash(echo);//remove the backslash
-				echo->i++;//after the symboleafter
-			}
-			else if (han.s_str[echo->i] == '\\' && han.s_str[echo->i + 1] == '\\')//single, meaning there is a backslash, so error check
-				ft_trim_backslash(echo);//removes the backslash
-			else if (han.s_str[echo->i] == '$')
-				ft_add_variables(echo, shell);//checks and takes it
-			echo->i++;
-		}
-		echo->i = han.i;
 		echo_single_str(&han);
 	}
 	echo->str = ft_strdup(han.s_store);
