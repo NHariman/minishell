@@ -6,11 +6,79 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/08 16:21:09 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/11 00:14:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+/*
+** " " preserves literal value of all characters within the quotes
+** with the exception of $, ` and \.
+** ` and $ retain special meaning
+** \ only retains meaning if followed by ` $ " \.
+** ^ backslacshes that are followed by one of these characters are removed.
+** backslash preceeding characters without a special meaning are left
+** unmodified.
+*/
+
+// static char	*get_cmd(char *str, int i)
+// {
+// 	int start;
+
+// 	start = i;
+// 	if (str[i] == '\'')
+// 	{
+// 		i++;
+// 		while (str[i] != '\'')
+// 			i++;
+// 	}
+// 	if (str[i] == '\"')
+// 	{
+// 		i++;
+// 		while (str[i] != '\"' && str[i - 1] != '\\')
+// 		{
+			
+// 			i++;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		// if \ then ensure that whatever comes after it is printed
+// 		// if it finds a $ expand that, if it exist it's the first argument.
+// 		// if it doesn't exist, look for the next word
+// 	}
+	
+// }
+
+// static void	ft_wordparser(char *line, int *i, t_shell *shell)
+// {
+// 	char	*cmd;
+
+// 	cmd = NULL;
+// 	if (line[*i] == '\n' || line[*i] == '\0')
+// 		return ;
+// 	cmd = get_cmd(line, *i);
+// 	if (!ft_strncmp(cmd, "export ", ft_strlen("export ")) ||
+// 		!ft_strncmp(cmd, "export\n", ft_strlen("export\n")))
+// 		ft_printf("export function here\n");
+// 	if (ft_strchr("eEpP", line[*i]))
+// 		ft_wordlow(line, *i);
+// 	if (!ft_strncmp(cmd, "echo ", ft_strlen("echo ")))
+// 		ft_echo_parser(line, i, shell);
+// 	if (!ft_strncmp(cmd, "cd ", ft_strlen("cd ")) ||
+// 		!ft_strncmp(cmd, "cd\n", ft_strlen("cd\n")))
+// 		ft_cd(line, i);
+// 	if (!ft_strncmp(cmd, "pwd ", ft_strlen("pwd ")) ||
+// 		!ft_strncmp(cmd, "pwd\n", ft_strlen("pwd\n")))
+// 	{
+// 		*i = *i + 4;
+// 		ft_printf("%s\n", ft_pwd());
+// 	}
+// 	else
+// 		ft_printf("minishell: %s: command not found\n",
+// 			ft_find_arg(line, i));
+// }
 
 static void	ft_wordparser(char *line, int *i, t_shell *shell)
 {
@@ -55,20 +123,23 @@ static void	function_dispatcher(char *line, t_shell *shell)
 	{
 		while (line[i] == ' ')
 			i++;
+		if (!ft_strncmp(line + i, "exit\n", ft_strlen("exit\n")) ||
+			!ft_strncmp(line + i, "exit ", ft_strlen("exit ")))
+			exit_minishell();
 		if (!ft_strchr("$><;| \n\0", line[i]))
 			ft_wordparser(line, &i, shell);
 		if (line[i] == '$')
 			ft_printf("show env variable followed by: command not found lol.\n");
-		else if (line[i] == '.')
+		if (line[i] == '.')
 			ft_printf("filename argument execute, execv()\n");
-		else if (line[i] == '>')
+		if (line[i] == '>')
 			ft_printf("pipe function here, should handle > and >>, takes the shell struct\n");
-		else if (line[i] == '<')
+		if (line[i] == '<')
 			ft_printf("pipe function here, should handle <, takes the shell struct\n");
-		else if (line[i] == '|')
+		if (line[i] == '|')
 			ft_printf("pipe function here, |, takes the shell struct\n");
-		else if (line[i] == ';' || line[i] == '\n' || line[i] == '\0')
-			ft_printf("whatever it received will be executed or printed etc.\n", line + i);
+		if (line[i] == ';' || line[i] == '\n' || line[i] == '\0')
+			ft_printf("whatever it received will be executed or printed etc.\n");
 		i++;
 	}
 }
@@ -83,7 +154,7 @@ void		minishell_parser(char *line, char **envp)
 	ft_set_qts(&qts);
 	ft_qt_start(line, &qts);
 	if (qts.dq % 2 != 0 || qts.sq % 2 != 0)
-		ft_printf("Error\nHanging quotes. Echo failed.\n");
+		ft_printf("Error\nHanging quotes. Parsing failed.\n");
 	else
 		function_dispatcher(line, shell);
 	//free(shell);
