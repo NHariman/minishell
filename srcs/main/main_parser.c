@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/11 00:14:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/12 20:33:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 ** unmodified.
 */
 
+
+
 // static char	*get_cmd(char *str, int i)
 // {
 // 	int start;
@@ -36,11 +38,9 @@
 // 	if (str[i] == '\"')
 // 	{
 // 		i++;
-// 		while (str[i] != '\"' && str[i - 1] != '\\')
-// 		{
-			
+// 		while (str[i] != '\"')
 // 			i++;
-// 		}
+// 		if (str[i] == '\"' && ft_backslash_check(str, i) % 2 == 0)
 // 	}
 // 	else
 // 	{
@@ -58,7 +58,7 @@
 // 	cmd = NULL;
 // 	if (line[*i] == '\n' || line[*i] == '\0')
 // 		return ;
-// 	cmd = get_cmd(line, *i);
+// 	cmd = get_cmd(line, *i, shell);
 // 	if (!ft_strncmp(cmd, "export ", ft_strlen("export ")) ||
 // 		!ft_strncmp(cmd, "export\n", ft_strlen("export\n")))
 // 		ft_printf("export function here\n");
@@ -129,11 +129,11 @@ static void	function_dispatcher(char *line, t_shell *shell)
 		if (!ft_strchr("$><;| \n\0", line[i]))
 			ft_wordparser(line, &i, shell);
 		if (line[i] == '$')
-			ft_printf("show env variable followed by: command not found lol.\n");
+			ft_printf("env: %s\n", ft_find_variable(line, &i, shell));
 		if (line[i] == '.')
 			ft_printf("filename argument execute, execv()\n");
 		if (line[i] == '>')
-			ft_printf("pipe function here, should handle > and >>, takes the shell struct\n");
+			ft_printf("pipe function here, should handle > and >>, takes the shell struct and line starting from first >\n");
 		if (line[i] == '<')
 			ft_printf("pipe function here, should handle <, takes the shell struct\n");
 		if (line[i] == '|')

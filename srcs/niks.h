@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/11 00:15:22 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/12 20:36:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct	s_shell
 
 int				get_next_line(int fd, char **line);
 int				ft_echo_parser(char *line, int *i, t_shell *shell);
-//void			ft_cd(char *str, int *i);
+//void			ft_cd(char *str, int *i, t_shell *shell);
 void			ft_cd(char *str);
 char			*ft_pwd(void);
 char			*ft_rm_endline(char *str);
@@ -90,5 +90,7 @@ void			ft_qt_line(char *line, t_qts *qts, int *i);
 void			ft_qt_start(char *line, t_qts *qts);
 void			ft_wordlow(char *line, int start);
 void			minishell_parser(char *line, char **envp);
+int				ft_backslash_check(char *line, int i);
+char			*ft_find_variable(char *str, int *i, t_shell *shell);
 
 #endif
