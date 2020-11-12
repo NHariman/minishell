@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/11 19:50:46 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/12 12:08:35 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,3 +131,4 @@ void		ft_check_back_double(char *str, int i, t_struct_q *han);
 
 //functions
 void		ft_trim_character(t_struct_m *echo, t_struct_q *han);
+void		ft_trim_single_c(t_struct_m *echo);
