@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 20:28:01 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/12 13:17:26 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/12 14:26:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int			ft_qt_check(char *line, int *i, int type, t_qts *qts)
 			if (type == DQ)
 			{
 				backslash = ft_backslash_check(line, *i);
-				if (backslash % 2 > 0)
+				if (backslash % 2 == 0)
 					return (0);
 			}
 			else
@@ -82,7 +82,7 @@ void				ft_qt_start(char *line, t_qts *qts)
 	while (line[i] != '\0')
 	{
 		if ((line[i] == '\'' && line[i - 1] != '\\') ||
-		(line[i] == '\'' && line[i - 1] == '\\' && line[i - 2] == '\\'))
+		(line[i] == '\'' && ft_backslash_check(line, i) % 2 == 0))
 			qts->sq = ft_qt_check(line, &i, SQ, qts);
 		else if ((line[i] == '\"' && line[i - 1] != '\\') ||
 		(line[i] == '\"' && ft_backslash_check(line, i) % 2 == 0))
