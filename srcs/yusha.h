@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/12 14:46:44 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/12 15:47:12 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ typedef struct	s_struct_e
 	char*		s_begin;
 	char*		s_end;
 }				t_struct_e;
+
+typedef struct	s_struct_rd
+{
+	int			i;
+	char*		s_str;
+}				t_struct_rd;
 
 //echo main
 char       *echo_main(char  *str, t_struct_m *echo, t_shell *shell);
