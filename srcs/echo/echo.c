@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/12 12:28:18 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/12 14:26:27 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,10 @@ int		skip_character(char *str, int i, char c)
 
 static void		ft_handle_quote(t_struct_m *echo)
 {
-	//can be smaller
-	t_struct_q han;
-
-	set_value_han(&han);
-	han.s_str = ft_strdup(echo->str);
-	han.i = echo->i;
-	free(echo->str);
-	if (han.s_str[han.i] == '\'')
-	{
-		echo_single_str(&han);
-	}
-	echo->str = ft_strdup(han.s_store);
-	free(han.s_str);
-	free(han.s_store);
-	echo->i = han.i;
+	ft_trim_single_c(echo);
+	while (echo->str[echo->i] != '\'')
+		echo->i++;
+	ft_trim_single_c(echo);
 }
 
 void		ft_trim_single_c(t_struct_m *echo)
@@ -61,7 +50,7 @@ void		ft_trim_single_c(t_struct_m *echo)
 	while (echo->str[i] != '\0' && echo->str[i] != '\n')
 	{
 		if (i != echo->i)
-		{	
+		{
 			cache[len] = echo->str[i];
 			len++;
 		}
@@ -77,31 +66,22 @@ void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
 {
 	while (echo->str[echo->i] && echo->str[echo->i] != '\n')
 	{
-		if (echo->str[echo->i] == '\\' && (echo->str[echo->i + 1] == '\'' || echo->str[echo->i + 1] == '\"' || echo->str[echo->i + 1] == '$'))
-		{
-			ft_trim_single_c(echo);//remove the backslash
-			echo->i++;//after the symboleafter
-		}
-		else if (echo->str[echo->i] == '\\' && echo->str[echo->i + 1] == '\\')//single, meaning there is a backslash, so error check
-		{
-			ft_trim_single_c(echo);//remove the backslash
-		}
-		else if (echo->str[echo->i] == '$')
-		{
-			ft_add_variables_double(echo, shell);//checks and takes it
-		}
-		else if (echo->str[echo->i] == '\"')
+		if (echo->str[echo->i] == '\\' && (echo->str[echo->i + 1] == '\''
+		|| echo->str[echo->i + 1] == '\"' || echo->str[echo->i + 1] == '$'))
 		{
 			ft_trim_single_c(echo);
-		}
-		else if (echo->str[echo->i] == '\'')
-		{
-			ft_handle_quote(echo);
-		}
-		else
-		{
 			echo->i++;
 		}
+		else if (echo->str[echo->i] == '\\' && echo->str[echo->i + 1] == '\\')
+			ft_trim_single_c(echo);
+		else if (echo->str[echo->i] == '$')
+			ft_add_variables_double(echo, shell);
+		else if (echo->str[echo->i] == '\"')
+			ft_trim_single_c(echo);
+		else if (echo->str[echo->i] == '\'')
+			ft_handle_quote(echo);
+		else
+			echo->i++;
 	}
 }
 
@@ -131,7 +111,7 @@ static void		get_echo_str(t_struct_m *echo)
 	free(str);
 }
 
-char       *echo_main(char  *str, t_struct_m *echo, t_shell *shell)
+char			*echo_main(char *str, t_struct_m *echo, t_shell *shell)
 {
 	set_value_echo(echo);
 	echo->str = ft_strdup(str);
