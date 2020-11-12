@@ -28,7 +28,7 @@ ECHO =			srcs/echo/echo.c\
 				srcs/echo/check_nflag.c\
 				srcs/echo/ft_add_enviorment.c\
 				srcs/echo/ft_clean_echo.c\
-				srcs/echo/ft_get_variable.c\
+				srcs/echo/ft_get_variable.c
 
 OMINISHELL = 	$(MINISHELL:.c=.o)
 
