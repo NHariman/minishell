@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/12 12:05:48 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/12 14:47:19 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,7 @@ static void   ft_split_end(t_struct_tr *trim)
 
 void		ft_split_variable(t_struct_tr *trim, t_shell *shell)
 {
-	ft_printf("---begin---\n");
-	printf("begin c == [%c]\n", trim->s_str[trim->begin]);
 	ft_split_begin(trim);
-	printf("begin str == [%s]\n", trim->s_begin);
 	ft_get_variable(trim, shell);
 	ft_split_end(trim);
     trim->s_cache = ft_strjoin(trim->s_begin, trim->s_variable);
@@ -78,7 +75,7 @@ void    ft_add_variables(t_struct_m *echo, t_shell *shell)
 
 	set_value_trim(&trim);
 	trim.s_str = ft_strdup(echo->str);
-	trim.begin = echo->i;//$
+	trim.begin = echo->i;
 	free(echo->str);
 	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
 		trim.empty = 1;
@@ -92,11 +89,9 @@ void    ft_add_variables_double(t_struct_m *echo, t_shell *shell)
 	t_struct_tr trim;
 
 	set_value_trim(&trim);
-	ft_printf("s == [%s]\n", echo->str);
 	trim.s_str = ft_strdup(echo->str);
-	trim.begin = echo->i;//$
+	trim.begin = echo->i;
 	free(echo->str);
-	ft_printf("variable begin i == [%i]\n", trim.begin);
 	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
 		trim.empty = 1;
 	ft_split_variable(&trim, shell);
