@@ -6,9 +6,11 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/08 22:23:08 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/10 22:59:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "niks.h"
 
 typedef struct	s_struct_m
 {
@@ -68,33 +70,6 @@ typedef struct	s_struct_q
 	char*		s_end;
 	char*		s_store;
 }				t_struct_q;
-
-typedef struct	s_check
-{
-	int			echo;
-	int			env;
-	int			exec;
-	int			envvar;
-	int			exp;
-	int			err;
-	int			cd;
-	int			pipe;
-	int			pwd;
-	int			redir;
-	int			semicol;
-	int			endstr;
-}				t_check;
-
-typedef struct	s_shell
-{
-	t_check		*check;
-	char		*echo;
-	char		*pwd;
-	char		**env;
-	char		*pipe;
-	char		**exprt;
-
-}				t_shell;
 
 
 //echo main
