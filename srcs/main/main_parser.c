@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/12 20:33:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/12 22:13:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 ** backslash preceeding characters without a special meaning are left
 ** unmodified.
 */
-
-
 
 // static char	*get_cmd(char *str, int i)
 // {
