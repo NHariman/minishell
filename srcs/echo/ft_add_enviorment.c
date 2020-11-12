@@ -6,12 +6,71 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/08 22:28:06 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/12 12:05:48 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
+
+static void   ft_split_begin(t_struct_tr *trim)
+{
+	int		i;
+
+	i = 0;
+	if (trim->begin == 0)
+		trim->s_begin = ft_strdup("");
+	else
+	{
+		trim->s_begin = (char *)malloc((trim->begin + 1) * sizeof(char));
+		while (i < trim->begin)
+		{
+			trim->s_begin[i] = trim->s_str[i];
+			i++;
+		}
+		trim->s_begin[i] = '\0';		
+	}	
+}
+
+static void   ft_split_end(t_struct_tr *trim)
+{
+	int		i;
+	int		len;
+
+	i = trim->end;
+	len = 0;
+	while (trim->s_str[trim->end] && trim->s_str[trim->end] != '\n')
+	{
+        trim->end++;
+		len++;
+	}
+	trim->s_end = (char *)malloc((len + 1) * sizeof(char));
+	len = 0;
+	while (i <= trim->end)
+	{
+		trim->s_end[len] = trim->s_str[i];
+		i++;
+		len++;
+	}
+	trim->s_end[len] = '\0';
+}
+
+void		ft_split_variable(t_struct_tr *trim, t_shell *shell)
+{
+	ft_printf("---begin---\n");
+	printf("begin c == [%c]\n", trim->s_str[trim->begin]);
+	ft_split_begin(trim);
+	printf("begin str == [%s]\n", trim->s_begin);
+	ft_get_variable(trim, shell);
+	ft_split_end(trim);
+    trim->s_cache = ft_strjoin(trim->s_begin, trim->s_variable);
+    free(trim->s_begin);
+    free(trim->s_variable);
+    trim->begin = ft_strlen(trim->s_cache);
+    trim->s_str = ft_strjoin(trim->s_cache, trim->s_end);
+    free(trim->s_cache);
+    free(trim->s_end);
+}
 
 void    ft_add_variables(t_struct_m *echo, t_shell *shell)
 {
@@ -19,39 +78,28 @@ void    ft_add_variables(t_struct_m *echo, t_shell *shell)
 
 	set_value_trim(&trim);
 	trim.s_str = ft_strdup(echo->str);
+	trim.begin = echo->i;//$
 	free(echo->str);
-	while (trim.s_str[trim.begin] && trim.s_str[trim.begin] != '\n')
-	{
-		if (trim.s_str[trim.begin] == '$')
-		{
-			if (trim.s_str[trim.begin - 1] == ' ')
-				trim.empty = 1;
-			ft_split_variable(&trim, shell);
-			
-		}
-		trim.begin++;
-	}
+	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
+		trim.empty = 1;
+	ft_split_variable(&trim, shell);
 	echo->str = ft_strdup(trim.s_str);
 	free(trim.s_str);
 }
 
+void    ft_add_variables_double(t_struct_m *echo, t_shell *shell)
+{
+	t_struct_tr trim;
 
-/*
-----variablles---
-if in $ and single is on, then sue this logic, you don't do the variable
-if uneven, add 1 and divide by 2. the result is the amount of backslashes
-example. if there are 5%2 = 1, so uneven, so 5 + 1 1 = 6. 6/2 == 3. so 3 backslashes
-
-if money is in double
-
-
-----quotations---
-if no quotation or double. use the specil format 
-if 1 then no variable but no backslash added either
-if uneven, then 01122334455 pattern no variable
-if even 00112233 with \/ after itadd variable
-
-//also works with double quotations
-if they're even the the quoatation after it isn't stopped, hwoever, the amount is divided by 2 and thats the amount
-if its uneven, 'no logic yet"
-*/
+	set_value_trim(&trim);
+	ft_printf("s == [%s]\n", echo->str);
+	trim.s_str = ft_strdup(echo->str);
+	trim.begin = echo->i;//$
+	free(echo->str);
+	ft_printf("variable begin i == [%i]\n", trim.begin);
+	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
+		trim.empty = 1;
+	ft_split_variable(&trim, shell);
+	echo->str = ft_strdup(trim.s_str);
+	free(trim.s_str);
+}

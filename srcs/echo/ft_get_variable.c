@@ -21,7 +21,9 @@ static void     ft_save_f(t_struct_tr *trim)
     i = 0;
     len = 0;
     trim->end = trim->begin;
-    while (trim->s_str[trim->end] && trim->s_str[trim->end] != ' ' && trim->s_str[trim->end] != '\n')
+    while (trim->s_str[trim->end] && trim->s_str[trim->end] != ' ' &&
+    trim->s_str[trim->end] != '\n' && trim->s_str[trim->end] != '\"'
+    && trim->s_str[trim->end] != '\'')
     {
         trim->end++;
         i++;

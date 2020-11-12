@@ -42,14 +42,14 @@ EXECV (EXECUTE PROGRAMS)
 [ ] search and launch the right executable (based on the PATH variable or by using relative or absolute path) like in bash
 
 BUILT-INS
-[ ] echo with '-n'
-	[ ] -n implementation, echos without newline at the end.
+[x] echo with '-n'
+	[x] -n implementation, echos without newline at the end.
 [ ] cd with relative and absolute path
 [ ] pwd without any options
 [ ] export without any options
 [ ] unset without any options
 [ ] env without any options and any arguments
-[ ] exit without any options
+[x] exit without any options
 
 COMMAND SEPARATOR (;)
 [ ] ; separate commands like in bash.
@@ -57,10 +57,10 @@ COMMAND SEPARATOR (;)
 		this will execute command2 regardless of if command1 succeeded.
 
 ECHO ' and "
-[ ] ' should work like in bash except for multiline commands
+[x] ' should work like in bash except for multiline commands
 	ie. echo "$PATH"
 	output: /usr/USERNAME/pathlocation
-[ ] " should work like in bash except for multiline commands
+[x] " should work like in bash except for multiline commands
 	ie. echo '$PATH'
 	output: $PATH
 
