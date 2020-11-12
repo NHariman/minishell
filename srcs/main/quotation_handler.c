@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 20:28:01 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/12 12:59:17 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/12 13:17:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,25 @@ static int			ft_backslash_check(char *line, int i)
 
 static int			ft_qt_check(char *line, int *i, int type, t_qts *qts)
 {
+	int backslash;
+
+	backslash = 0;
 	ft_set_qts(qts);
 	*i = *i + 1;
 	while (line[*i] != '\0' && line[*i] != '\n')
 	{
 		if ((line[*i] == '\'' && type == SQ) ||
-		(line[*i] == '\"' && ft_backslash_check(line, *i) % 2 == 0))
-			return (0);
+		(line[*i] == '\"' && type == DQ))
+		{
+			if (type == DQ)
+			{
+				backslash = ft_backslash_check(line, *i);
+				if (backslash % 2 > 0)
+					return (0);
+			}
+			else
+				return (0);
+		}
 		*i = *i + 1;
 	}
 	return (1);
@@ -73,7 +85,7 @@ void				ft_qt_start(char *line, t_qts *qts)
 		(line[i] == '\'' && line[i - 1] == '\\' && line[i - 2] == '\\'))
 			qts->sq = ft_qt_check(line, &i, SQ, qts);
 		else if ((line[i] == '\"' && line[i - 1] != '\\') ||
-		(line[i] == '\"' && line[i - 1] == '\\' && line[i - 2] == '\\'))
+		(line[i] == '\"' && ft_backslash_check(line, i) % 2 == 0))
 			qts->dq = ft_qt_check(line, &i, DQ, qts);
 		i++;
 	}
