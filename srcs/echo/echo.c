@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/12 12:26:26 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/12 12:28:18 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		skip_character(char *str, int i, char c)
 
 static void		ft_handle_quote(t_struct_m *echo)
 {
+	//can be smaller
 	t_struct_q han;
 
 	set_value_han(&han);
