@@ -6,11 +6,17 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 18:50:43 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 19:30:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 21:50:02 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+/*
+** for improvement: copy the cmd word, lowercase it, compare it
+** to echo and pwd, if correct, return the lowercased word
+** else return the original.
+*/
 
 void		ft_find_echo_pwd(char **cmd)
 {
@@ -39,4 +45,33 @@ void		ft_find_echo_pwd(char **cmd)
 		i++;
 	}
 	ft_wordlow(cmd);
+}
+
+int		ft_envlen(t_shell *shell)
+{
+	int i;
+
+	i = 0;
+	while (shell->env[i])
+		i++;
+	return (i);
+}
+
+void	ft_add_env_back(t_shell *shell, char *input)
+{
+	char	**new_envp;
+	int		len;
+	int		i;
+
+	len = ft_envlen(shell);
+	i = 0;
+	new_envp = (char **)malloc(sizeof(char *) * (len + 1));
+	while (shell->env[i])
+	{
+		new_envp[i] = shell->env[i];
+		i++;
+	}
+	new_envp[i] = input;
+	shell->env = new_envp;
+	free(new_envp);
 }
