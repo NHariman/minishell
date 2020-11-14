@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 03:52:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 14:39:40 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 19:28:30 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,16 @@ int		exit_minishell(void)
 	exit(0);
 }
 
-void	ft_wordlow(char *line, int start)
+void	ft_wordlow(char **line)
 {
-	while (line[start] != '\0')
+	int start;
+
+	start = 0;
+	while (line[0][start] != '\0')
 	{
-		if (!ft_isalpha(line[start]))
+		if (!ft_isalpha(line[0][start]))
 			break ;
-		line[start] = ft_tolower(line[start]);
+		line[0][start] = ft_tolower(line[0][start]);
 		start++;
 	}
 }

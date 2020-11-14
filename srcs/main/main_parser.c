@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 15:47:46 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 20:14:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,17 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 	if (line[*i] == '\n' || line[*i] == '\0')
 		return ;
 	cmd = get_cmd(line, i, shell);
-	if (ft_strchr("eEpP", line[*i]))
-		ft_wordlow(line, *i);
-	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
+	if (ft_strchr("eEpP", cmd[0]))
+		ft_find_echo_pwd(&cmd);
+	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("export"))
 		ft_printf("export function here\n");
-	else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
+	else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("echo"))
 		ft_echo_parser(line, i, shell);
-	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
-		ft_cd(line);
-	else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
+	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("cd"))
+		ft_cd(line, i, shell);
+	else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("pwd"))
 	{
-		ft_printf("%s\n", ft_pwd());
+		ft_printf("%s\n", ft_pwd_main(line, i));
 	}
 	else if (cmd == NULL)
 		shell->err = ft_strdup("");
@@ -84,7 +84,7 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 
 static void	function_dispatcher(char *line, t_shell *shell)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	while (line[i] != '\0' && line[i] != '\n')
@@ -107,7 +107,7 @@ static void	function_dispatcher(char *line, t_shell *shell)
 		if (line[i] == '|')
 			ft_printf("pipe function here, |, takes the shell struct\n");
 		if (line[i] == ';' || line[i] == '\n' || line[i] == '\0')
-			ft_printf("whatever it received will be executed or printed etc.\n");
+			ft_printf("");
 		i++;
 	}
 }
@@ -125,5 +125,4 @@ void		minishell_parser(char *line, char **envp)
 		ft_printf("Error\nHanging quotes. Parsing failed.\n");
 	else
 		function_dispatcher(line, shell);
-	//free(shell);
 }

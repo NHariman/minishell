@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 15:11:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 21:50:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ char			*gnl_strjoin(char *s1, char *s2);
 char			*ft_find_arg(char *cmd, char *str, int *i);
 int				get_next_line(int fd, char **line);
 char			*ft_find_variable(char *str, int *i, t_shell *shell);
+char			*ft_find_envvar(char *var, t_shell *shell);
 char			*ft_charjoin(char *str, char c);
 char			*ft_make_single_char_str(char c);
 void			ft_strspecial(char *str, t_trim *trim, int *i, char c);
@@ -99,6 +100,7 @@ void			ft_parse_dollar(char *str, int *i,
 							t_trim *trim, t_shell *shell);
 char			*ft_doublequotes_str(char *str, int *i, t_shell *shell);
 char			*ft_no_quotes_str(char *str, int *i, t_shell *shell);
+char			*ft_singlequotes_str(char *str, int *i);
 
 /*
 ** checks for correct input before parsing.
@@ -108,7 +110,8 @@ void			ft_set_qts(t_qts *qts);
 void			ft_qt_line(char *line, t_qts *qts, int *i);
 void			ft_qt_start(char *line, t_qts *qts);
 int				ft_backslash_check(char *line, int i);
-void			ft_wordlow(char *line, int start);
+void			ft_wordlow(char **line);
+void			ft_find_echo_pwd(char **cmd);
 
 /*
 ** parsing functions, command specific functions.
@@ -116,8 +119,13 @@ void			ft_wordlow(char *line, int start);
 
 void			minishell_parser(char *line, char **envp);
 int				ft_echo_parser(char *line, int *i, t_shell *shell);
-//void			ft_cd(char *str, int *i, t_shell *shell);
-void			ft_cd(char *str);
+void			ft_cd(char *str, int *i, t_shell *shell);
 char			*ft_pwd(void);
+char			*ft_pwd_main(char *str, int *i);
 
+/*
+** env stuff
+*/
+void			ft_add_env_back(t_shell *shell, char *input);
+int				ft_envlen(t_shell *shell);
 #endif

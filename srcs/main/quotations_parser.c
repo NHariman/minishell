@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 20:52:54 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 15:24:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 18:41:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			ft_strspecial(char *str, t_trim *trim, int *i, char c)
 	if (trim->res)
 		new_str = ft_strjoin(trim->res, ft_charjoin(old_str, c));
 	else
-		new_str = ft_make_single_char_str(c);
+		new_str = ft_strjoin(old_str, ft_make_single_char_str(c));
 	trim->res = new_str;
 	*i = *i + 2;
 	trim->start = *i;
@@ -97,9 +97,9 @@ char			*ft_doublequotes_str(char *str, int *i, t_shell *shell)
 	output = NULL;
 	while ((str[*i] != '\"' && str[*i] != '\n' && str[*i] != '\0'))
 	{
-		if (str[*i] == '$' && !ft_strchr("\\\'\"", str[*i + 1]))
+		if (str[*i] == '$' && !ft_strchr("\\\"", str[*i + 1]))
 			ft_parse_dollar(str, i, trim, shell);
-		else if (str[*i] == '\\' && ft_strchr("\\\'\"", str[*i + 1]))
+		else if (str[*i] == '\\' && ft_strchr("\\\"", str[*i + 1]))
 			ft_strspecial(str, trim, i, str[*i + 1]);
 		else
 			*i = *i + 1;
