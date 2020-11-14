@@ -14,9 +14,9 @@
 
 typedef struct	s_struct_m
 {
-	char*		str;
-	char*		cache;
-	char*		tmp;
+	char		*str;
+	char		*cache;
+	char		*tmp;
 	int			n;
 	int			i;
 	int			s;
@@ -31,13 +31,13 @@ typedef struct	s_struct_tr
 	int			quote;
 	int			empty;
 	int			error;
-	char*		s_str;
-	char*		s_tmp;
-	char*		s_cache;
-	char*		s_begin;
-	char*		s_end;
-	char*		s_variable;
-	char*		e_check;
+	char		*s_str;
+	char		*s_tmp;
+	char		*s_cache;
+	char		*s_begin;
+	char		*s_end;
+	char		*s_variable;
+	char		*e_check;
 }				t_struct_tr;
 
 typedef struct	s_struct_e
@@ -46,17 +46,19 @@ typedef struct	s_struct_e
 	int			end;
 	int			single;
 	int			doubble;
-	char*		s_str;
-	char*		s_tmp;
-	char*		s_cache;
-	char*		s_begin;
-	char*		s_end;
+	char		*s_str;
+	char		*s_tmp;
+	char		*s_cache;
+	char		*s_begin;
+	char		*s_end;
 }				t_struct_e;
 
 typedef struct	s_struct_rd
 {
 	int			i;
-	char*		s_str;
+	char		*s_str;
+	char		*input;
+	char		**files;
 }				t_struct_rd;
 
 //echo main
@@ -65,6 +67,9 @@ int			skip_character(char *str, int i, char c);
 int			check_flag_n(t_struct_m *echo);
 void        set_value_echo(t_struct_m *echo);
 void		ft_trim_backslash(t_struct_m *echo);
+
+//handle quotes
+void        ft_handle_quotes(t_struct_m *echo);
 
 //struct clean
 void        set_value_echo(t_struct_m *echo);
@@ -76,8 +81,8 @@ void		ft_get_variable(t_struct_tr *trim, t_shell *shell);
 void		ft_split_variable(t_struct_tr *trim, t_shell *shell);
 void    	ft_add_variables_double(t_struct_m *echo, t_shell *shell);
 
-//handle quotes
-void        ft_handle_quotes(t_struct_m *echo);
+//redirect
+char		*rd_main(char *str, t_struct_rd *rd, t_shell *shell);
 
 //functions
 void		ft_trim_single_c(t_struct_m *echo);

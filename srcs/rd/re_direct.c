@@ -22,11 +22,11 @@
 
 void		start_rd(t_struct_rd *rd, t_shell *shell)
 {
-	rd->i = ft_strlen(rd->s_str);
-	while (rd->i >= 0)
-	{
-		 
-	}
+	rd->i = 0;
+	while (rd->s_str[rd->i] == ' ')
+		rd->i++;
+	if (ft_strncmp("ECHO", rd->s_str + rd->i++, 3) == 0)
+		rd_echo(rd, shell);
 }
 
 char		*rd_main(char *str, t_struct_rd *rd, t_shell *shell)
