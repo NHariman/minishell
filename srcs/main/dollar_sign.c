@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 00:26:53 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 13:31:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int				ft_isspecial(int c)
 		return (1);
 	else
 		return (0);
-	
 }
 
 static char		*ft_find_env_variable(char *var, t_shell *shell)

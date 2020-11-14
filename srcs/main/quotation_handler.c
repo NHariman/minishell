@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 20:28:01 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/12 23:25:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 15:03:54 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void				ft_qt_line(char *line, t_qts *qts, int *i)
 		else if ((line[*i] == '\"' && line[*i - 1] != '\\') ||
 		(line[*i] == '\"' && ft_backslash_check(line, *i) % 2 == 0))
 			qts->dq = ft_qt_check(line, i, DQ, qts);
-		*i = *i + 1;
+		else
+			*i = *i + 1;
 	}
 }
 
