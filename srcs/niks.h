@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/12 20:36:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 00:24:08 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ typedef struct	s_gnl
 	int				fd;
 	char			*line_read;
 }				t_gnl;
+
+typedef	struct 	s_dq_trim
+{
+	int			start;
+	char		*res;
+}				t_dq_trim;
+
 
 /*
 ** dq: checks for equal amount of double quotes " "
@@ -92,5 +99,8 @@ void			ft_wordlow(char *line, int start);
 void			minishell_parser(char *line, char **envp);
 int				ft_backslash_check(char *line, int i);
 char			*ft_find_variable(char *str, int *i, t_shell *shell);
+char			*ft_doublequotes_str(char *str, int *i, t_shell *shell);
+char			*ft_charjoin(char *str, char c);
+char			*ft_make_single_char_str(char c);
 
 #endif
