@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 23:38:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/08 22:05:39 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/14 14:43:30 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ int					ft_echo_parser(char *line, int *i, t_shell *shell)
 	char		*echo_str;
 	t_struct_m	*echo;
 
-	start = *i + ft_strlen("echo ");
-	*i = *i + ft_strlen("echo ");
+	start = *i;
 	echo = ft_calloc(1, sizeof(t_struct_m));
 	if (echo == NULL)
 		return (0);

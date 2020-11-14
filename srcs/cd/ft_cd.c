@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/11 10:07:48 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/12 20:27:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		ft_cd(char *str)
 	return ;
 }
 
-// void		ft_cd(char *str, int *i)
+// void		ft_cd(char *str, int *i, t_shell *shell)
 // {
 // 	char	*newdir;
 // 	int		i;

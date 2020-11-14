@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 20:28:01 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/12 14:26:12 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 15:03:54 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void				ft_set_qts(t_qts *qts)
 	qts->sq = 0;
 }
 
-static int			ft_backslash_check(char *line, int i)
+int					ft_backslash_check(char *line, int i)
 {
 	int	backslash;
 
@@ -66,11 +66,14 @@ void				ft_qt_line(char *line, t_qts *qts, int *i)
 	{
 		if (ft_strchr(">|;<", line[*i]))
 			return ;
-		else if (line[*i] == '\'' && line[*i - 1] != '\\')
+		else if ((line[*i] == '\'' && line[*i - 1] != '\\') ||
+		(line[*i] == '\'' && ft_backslash_check(line, *i) % 2 == 0))
 			qts->sq = ft_qt_check(line, i, SQ, qts);
-		else if (line[*i] == '\"')
+		else if ((line[*i] == '\"' && line[*i - 1] != '\\') ||
+		(line[*i] == '\"' && ft_backslash_check(line, *i) % 2 == 0))
 			qts->dq = ft_qt_check(line, i, DQ, qts);
-		*i = *i + 1;
+		else
+			*i = *i + 1;
 	}
 }
 

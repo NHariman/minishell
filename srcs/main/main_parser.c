@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/11 00:14:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 15:47:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,84 +22,52 @@
 ** unmodified.
 */
 
-// static char	*get_cmd(char *str, int i)
-// {
-// 	int start;
+static char	*get_cmd(char *str, int *i, t_shell *shell)
+{
+	char	*cmd;
+	int		start;
 
-// 	start = i;
-// 	if (str[i] == '\'')
-// 	{
-// 		i++;
-// 		while (str[i] != '\'')
-// 			i++;
-// 	}
-// 	if (str[i] == '\"')
-// 	{
-// 		i++;
-// 		while (str[i] != '\"' && str[i - 1] != '\\')
-// 		{
-			
-// 			i++;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		// if \ then ensure that whatever comes after it is printed
-// 		// if it finds a $ expand that, if it exist it's the first argument.
-// 		// if it doesn't exist, look for the next word
-// 	}
-	
-// }
-
-// static void	ft_wordparser(char *line, int *i, t_shell *shell)
-// {
-// 	char	*cmd;
-
-// 	cmd = NULL;
-// 	if (line[*i] == '\n' || line[*i] == '\0')
-// 		return ;
-// 	cmd = get_cmd(line, *i);
-// 	if (!ft_strncmp(cmd, "export ", ft_strlen("export ")) ||
-// 		!ft_strncmp(cmd, "export\n", ft_strlen("export\n")))
-// 		ft_printf("export function here\n");
-// 	if (ft_strchr("eEpP", line[*i]))
-// 		ft_wordlow(line, *i);
-// 	if (!ft_strncmp(cmd, "echo ", ft_strlen("echo ")))
-// 		ft_echo_parser(line, i, shell);
-// 	if (!ft_strncmp(cmd, "cd ", ft_strlen("cd ")) ||
-// 		!ft_strncmp(cmd, "cd\n", ft_strlen("cd\n")))
-// 		ft_cd(line, i);
-// 	if (!ft_strncmp(cmd, "pwd ", ft_strlen("pwd ")) ||
-// 		!ft_strncmp(cmd, "pwd\n", ft_strlen("pwd\n")))
-// 	{
-// 		*i = *i + 4;
-// 		ft_printf("%s\n", ft_pwd());
-// 	}
-// 	else
-// 		ft_printf("minishell: %s: command not found\n",
-// 			ft_find_arg(line, i));
-// }
+	start = *i + 1;
+	if (str[*i] == '\'')
+	{
+		*i = *i + 1;
+		while (str[*i] != '\'')
+			*i = *i + 1;
+		cmd = ft_substr(str, start, *i - start);
+		*i = *i + 1;
+	}
+	else if (str[*i] == '\"' && ft_backslash_check(str, *i) % 2 == 0)
+		cmd = ft_doublequotes_str(str, i, shell);
+	else
+		cmd = ft_no_quotes_str(str, i, shell);
+	return (cmd);
+}
 
 static void	ft_wordparser(char *line, int *i, t_shell *shell)
 {
-	if (!ft_strncmp(line + *i, "export ", ft_strlen("export ")) ||
-		!ft_strncmp(line + *i, "export\n", ft_strlen("export\n")))
-		ft_printf("export function here\n");
+	char	*cmd;
+
+	cmd = NULL;
+	if (line[*i] == '\n' || line[*i] == '\0')
+		return ;
+	cmd = get_cmd(line, i, shell);
 	if (ft_strchr("eEpP", line[*i]))
 		ft_wordlow(line, *i);
-	if (!ft_strncmp(line + *i, "echo ", ft_strlen("echo ")))
+	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
+		ft_printf("export function here\n");
+	else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
 		ft_echo_parser(line, i, shell);
-	else if (!ft_strncmp(line + *i, "cd ", ft_strlen("cd ")))
-		ft_cd(line + *i + ft_strlen("cd "));
-	else if (!ft_strncmp(line + *i, "pwd ", ft_strlen("pwd ")) ||
-		!ft_strncmp(line + *i, "pwd\n", ft_strlen("pwd\n")))
+	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
+		ft_cd(line);
+	else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
 	{
-		*i = *i + ft_strlen("pwd ");
 		ft_printf("%s\n", ft_pwd());
 	}
+	else if (cmd == NULL)
+		shell->err = ft_strdup("");
 	else
 		ft_printf("minishell: %s: command not found\n",
-			ft_find_arg(line, i));
+			ft_find_arg(cmd, line, i));
 }
 
 /*
@@ -126,14 +94,14 @@ static void	function_dispatcher(char *line, t_shell *shell)
 		if (!ft_strncmp(line + i, "exit\n", ft_strlen("exit\n")) ||
 			!ft_strncmp(line + i, "exit ", ft_strlen("exit ")))
 			exit_minishell();
-		if (!ft_strchr("$><;| \n\0", line[i]))
+		if (!ft_strchr("$><;|\n\0", line[i]))
 			ft_wordparser(line, &i, shell);
 		if (line[i] == '$')
-			ft_printf("show env variable followed by: command not found lol.\n");
+			ft_printf("env: %s\n", ft_find_variable(line, &i, shell));
 		if (line[i] == '.')
 			ft_printf("filename argument execute, execv()\n");
 		if (line[i] == '>')
-			ft_printf("pipe function here, should handle > and >>, takes the shell struct\n");
+			ft_printf("pipe function here, should handle > and >>, takes the shell struct and line starting from first >\n");
 		if (line[i] == '<')
 			ft_printf("pipe function here, should handle <, takes the shell struct\n");
 		if (line[i] == '|')

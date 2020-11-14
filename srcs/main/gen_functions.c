@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 03:52:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/08 19:19:23 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 14:39:40 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,12 @@ void	ft_wordlow(char *line, int start)
 	}
 }
 
-char	*ft_find_arg(char *str, int *i)
+char	*ft_find_arg(char *cmd, char *str, int *i)
 {
 	char	*word;
-	int		start;
 	t_qts	qts;
 
-	start = *i;
-	while (!ft_strchr(" \n", str[*i]) && str[*i] != '\0')
-		*i = *i + 1;
-	word = ft_substr(str, start, *i - start);
-	word = ft_strtrim(word, "\"\'");
+	word = cmd;
 	ft_set_qts(&qts);
 	ft_qt_line(str, &qts, i);
 	while (!ft_strchr("$><;| \n\0", str[*i]))
