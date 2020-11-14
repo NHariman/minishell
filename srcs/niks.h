@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 15:11:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 19:09:17 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ void			ft_set_qts(t_qts *qts);
 void			ft_qt_line(char *line, t_qts *qts, int *i);
 void			ft_qt_start(char *line, t_qts *qts);
 int				ft_backslash_check(char *line, int i);
-void			ft_wordlow(char *line, int start);
+void			ft_wordlow(char **line);
+void			ft_find_echo_pwd(char **cmd);
 
 /*
 ** parsing functions, command specific functions.

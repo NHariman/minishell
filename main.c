@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/14 15:31:43 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 17:10:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		main(int argc, char *argv[], char *envp[])
 
 	i = argc;
 	hold = argv;
+	line = NULL;
 	while (i > 0)
 	{
 		ft_printf("\033[1;36m");
@@ -29,7 +30,8 @@ int		main(int argc, char *argv[], char *envp[])
 		i = get_next_line(0, &line);
 		if (!ft_strncmp(line, "exit\n", ft_strlen("exit\n")))
 			exit_minishell();
-		minishell_parser(line, envp);
+		else
+			minishell_parser(line, envp);
 		free(line);
 	}
 	return (0);

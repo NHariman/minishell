@@ -6,12 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 17:14:10 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/07 14:14:10 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/14 17:27:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdio.h>
 
 char					*gnl_strjoin(char *s1, char *s2)
 {
@@ -78,7 +77,7 @@ static char				*read_line(t_gnl gnl)
 		}
 		if (!gnl.line_read)
 			return (NULL);
-		if (find_newline(gnl.line_read))
+		if (find_newline(gnl.line_read) || gnl.line_read[0] == '\n')
 			break ;
 	}
 	return (gnl.line_read);
