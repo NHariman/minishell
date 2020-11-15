@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 18:50:43 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 21:50:02 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/15 18:56:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,18 @@ void	ft_add_env_back(t_shell *shell, char *input)
 	new_envp[i] = input;
 	shell->env = new_envp;
 	free(new_envp);
+}
+
+void	ft_clear_shell(t_shell *shell)
+{
+	shell->check.echo = 0;
+	shell->check.env = 0;
+	shell->check.exp = 0;
+	shell->check.err = 0;
+	shell->check.pwd = 0;
+	shell->exit = 0;
+	shell->echo = NULL;
+	shell->pwd = NULL;
+	shell->err = NULL;
+	shell->env_s = NULL;
 }

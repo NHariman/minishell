@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 21:50:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/15 18:54:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,12 @@ typedef struct	s_check
 
 typedef struct	s_shell
 {
-	t_check		*check;
+	t_check		check;
 	int			exit;
 	char		*echo;
 	char		*pwd;
 	char		**env;
+	char		*env_s;
 	char		*err;
 	char		**exprt;
 
@@ -101,6 +102,7 @@ void			ft_parse_dollar(char *str, int *i,
 char			*ft_doublequotes_str(char *str, int *i, t_shell *shell);
 char			*ft_no_quotes_str(char *str, int *i, t_shell *shell);
 char			*ft_singlequotes_str(char *str, int *i);
+char			*ft_pwd(void);
 
 /*
 ** checks for correct input before parsing.
@@ -120,12 +122,17 @@ void			ft_find_echo_pwd(char **cmd);
 void			minishell_parser(char *line, char **envp);
 int				ft_echo_parser(char *line, int *i, t_shell *shell);
 void			ft_cd(char *str, int *i, t_shell *shell);
-char			*ft_pwd(void);
-char			*ft_pwd_main(char *str, int *i);
+void			ft_pwd_main(char *str, int *i, t_shell *shell);
+void			ft_rd_parser(char *str, int *i, t_shell *shell);
 
 /*
 ** env stuff
 */
 void			ft_add_env_back(t_shell *shell, char *input);
 int				ft_envlen(t_shell *shell);
+
+/*
+** clear shell struct
+*/
+void			ft_clear_shell(t_shell *shell);
 #endif
