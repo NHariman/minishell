@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 19:10:50 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/13 18:27:31 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,48 @@
 
 int		main(int argc, char *argv[], char *envp[])
 {
-	int			i;
-	char		*line;
-	char		**hold;
-	char		*str;
-	t_shell		*shell;
-	// t_struct_m	*echo;
-	t_struct_rd	*rd;
+	int		i;
+	int		j;
+	char	*line;
+	char	**hold;
+	t_shell	*shell;
 
 	i = argc;
+	j = 0;
 	hold = argv;
-	shell = calloc(1, sizeof(t_shell));
-	rd = calloc(1, sizeof(t_struct_m));
+	shell = ft_calloc(1, sizeof(t_shell));
 	shell->env = envp;
 	while (i > 0)
 	{
-		ft_printf("\033[1;36m");
+		j = 0;
 		ft_printf("minishell> ");
-		ft_printf("\033[0m");
 		i = get_next_line(0, &line);
 		if (!ft_strncmp(line, "exit\n", ft_strlen("exit\n")))
-			exit(0);
-		str = rd_main(line, rd, shell);
+			exit_minishell();
+		ft_doublequotes_str(line, &j, shell);
 		//minishell_parser(line, envp);
-		// free(line);//double free???
-		free(str);
+		free(line);
 	}
 	return (0);
 }
+
+
+// int		main(int argc, char *argv[], char *envp[])
+// {
+// 	int		i;
+// 	char	*line;
+// 	char	**hold;
+
+// 	i = argc;
+// 	hold = argv;
+// 	while (i > 0)
+// 	{
+// 		ft_printf("minishell> ");
+// 		i = get_next_line(0, &line);
+// 		if (!ft_strncmp(line, "exit\n", ft_strlen("exit\n")))
+// 			exit_minishell();
+// 		minishell_parser(line, envp);
+// 		free(line);
+// 	}
+// 	return (0);
+// }

@@ -6,84 +6,78 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/11 10:07:48 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/15 18:05:06 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-** TO DO: multiple ../../..
-** exchange strtrim for something that starts at the front
-** and pays attention to " " and ' '
-*/
-
-static int	ft_cd_back(char *str)
+char		*ft_singlequotes_str(char *str, int *i)
 {
-	int		i;
+	int		start;
+	char	*new_str;
 
-	i = ft_strlen(str);
-	while (i >= 0)
-	{
-		i--;
-		if (str[i] == '/')
-			return (i);
-	}
-	return (-1);
+	*i = *i + 1;
+	start = *i;
+	while (str[*i] != '\'')
+		*i = *i + 1;
+	new_str = ft_substr(str, start, *i - start);
+	*i = *i + 1;
+	return (new_str);
 }
 
-static char	*ft_get_prevdir(void)
+static char	*ft_get_path(char *str, int *i, t_shell *shell)
 {
-	char	*pwd;
-	int		lastdir;
 	char	*newdir;
 
-	pwd = ft_pwd();
-	lastdir = ft_cd_back(pwd);
-	newdir = ft_substr(pwd, 0, lastdir);
+	newdir = NULL;
+	if (str[*i] == '\n')
+		newdir = ft_find_envvar("HOME", shell);
+	else
+		newdir = ft_no_quotes_str(str, i, shell);
 	return (newdir);
 }
 
-void		ft_cd(char *str)
+static void	ft_update_env(t_shell *shell, char *olddir, char *newdir)
 {
-	char	*newdir;
+	char	*olddir_input;
+	char	*newdir_input;
 	int		i;
-	int		check;
 
+	olddir_input = ft_strjoin("OLDPWD=", olddir);
+	newdir_input = ft_strjoin("PWD=", newdir);
 	i = 0;
-	errno = 0;
-	while (str[i] == ' ')
+	if (!ft_find_envvar("OLDPWD", shell))
+		ft_add_env_back(shell, olddir);
+	while (shell->env[i])
+	{
+		if (!ft_strncmp(shell->env[i], "OLDPWD=", ft_strlen("OLDPWD=")))
+			shell->env[i] = ft_strdup(olddir_input);
+		else if (!ft_strncmp(shell->env[i], "PWD=", ft_strlen("PWD=")))
+			shell->env[i] = ft_strdup(newdir_input);
 		i++;
-	if (!ft_strncmp(str + i, ".. ", ft_strlen(".. ")) ||
-	!ft_strncmp(str + i, "..\n", ft_strlen("..\n")))
-		newdir = ft_get_prevdir();
-	else
-		newdir = ft_strtrim(str, " \n");
-	check = chdir(newdir);
-	if (check == -1)
-		ft_printf("minishell: cd: %s: %s\n",
-			ft_rm_endline(str), strerror(errno));
-	return ;
+	}
+	free(olddir_input);
+	free(newdir_input);
 }
 
-// void		ft_cd(char *str, int *i)
-// {
-// 	char	*newdir;
-// 	int		i;
-// 	int		check;
+void		ft_cd(char *str, int *i, t_shell *shell)
+{
+	char	*newdir;
+	int		check;
+	char	*olddir;
 
-// 	i = 0;
-// 	errno = 0;
-// 	while (str[*i] == ' ')
-// 		*i = *i + 1;
-// 	if (!ft_strncmp(str + *i, ".. ", ft_strlen(".. ")) ||
-// 	!ft_strncmp(str + *i, "..\n", ft_strlen("..\n")))
-// 		newdir = ft_get_prevdir();
-// 	else
-// 		newdir = ft_strtrim(str, "\"\' \n");
-// 	check = chdir(newdir);
-// 	if (check == -1)
-// 		ft_printf("minishell: cd: %s: %s\n",
-// 			ft_rm_endline(str), strerror(errno));
-// 	return ;
-// }
+	olddir = ft_pwd();
+	errno = 0;
+	while (str[*i] == ' ')
+		*i = *i + 1;
+	newdir = ft_get_path(str, i, shell);
+	check = chdir(newdir);
+	if (check == -1)
+		ft_printf_err("minishell: cd: %s: %s\n",
+			newdir, strerror(errno));
+	else
+		ft_update_env(shell, olddir, ft_pwd());
+	shell->check.cd = 1;
+	return ;
+}
