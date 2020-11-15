@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 18:06:37 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/15 18:52:47 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@
 
 int         rd_check_error_rd(t_struct_rd *rd)
 {
+    int     error;
+
+    error = 0;
     if (rd->str[rd->i] == '>')
         rd->dir++;
     rd->i++;
@@ -56,12 +59,12 @@ int         rd_check_error_rd(t_struct_rd *rd)
     rd->i++;
     if (rd->str[rd->i] == '>' && rd->str[rd->i + 1] == '>')
     {
-        error = 4
+        error = 4;
         return (4);
     }
     else if (rd->str[rd->i] == '>')
     {
-        error = 3
+        error = 3;
         return (3);
     }
     return (0);
@@ -85,6 +88,7 @@ char        *rd_save_echo(t_struct_rd *rd)
         rd->i++;
     }
     str[i] = '\0';
+    return (str);
 }
 
 // char        *make_file(t_struct_rd *rd)
@@ -137,10 +141,10 @@ int			rd_loop(t_struct_rd *rd, t_shell *shell)
         free(cache);
         while (rd->str[rd->i] == ' ')
             rd->i++;
-        else if (rd->str[rd->i] == '>')
+        if (rd->str[rd->i] == '>')
         {
             ft_printf("[%s], ", rd->file);
-            error = make_file(rd);
+            // error = make_file(rd);
         }
         else
         {
@@ -153,7 +157,7 @@ int			rd_loop(t_struct_rd *rd, t_shell *shell)
             rd->string = ft_strdup(cache);
             if (rd->str[rd->i] == '\n' || rd->str[rd->i])
             {
-                error = rd_input_file(rd);
+                // error = rd_input_file(rd);
                 ft_printf("[%s], ", rd->file);
                 ft_printf("[%s]\n", rd->txt);
                 return (error);
@@ -161,7 +165,7 @@ int			rd_loop(t_struct_rd *rd, t_shell *shell)
             else
             {
                 ft_printf("[%s], ", rd->file);
-                error = make_file(rd);
+                // error = make_file(rd);
             }
         }
     }
@@ -170,7 +174,6 @@ int			rd_loop(t_struct_rd *rd, t_shell *shell)
 
 int		start_rd(t_struct_rd *rd, t_shell *shell)
 {
-	char	*str;
 	int		error;
 
 	rd->i = 0;
@@ -178,7 +181,7 @@ int		start_rd(t_struct_rd *rd, t_shell *shell)
 	// cut_string_shell(rd->s_str, rd, shell);//use to get the string out
     rd->string = ft_strdup(" ");
     error = ft_check_rd(rd, shell);
-	else if (error == 0)
+	if (error == 0)
 		error = rd_loop(rd, shell);
 	return (error);
 }
@@ -189,10 +192,10 @@ int		rd_main(char *str, t_shell *shell)
 	int		error;
 
     rd = calloc(1, sizeof(t_struct_rd));
-	set_value_rd(&rd);
-    rd.i = 0;
-	rd.str = ft_strdup(str);
-	error = start_rd(&rd, shell);
+	set_value_rd(rd);
+    rd->i = 0;
+	rd->str = ft_strdup(str);
+	error = start_rd(rd, shell);
     free(rd); 
 	return (error);
 }

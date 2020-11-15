@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 18:06:52 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/15 18:55:07 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,14 @@ void    	ft_add_variables_double(t_struct_m *echo, t_shell *shell);
 
 //redirect
 int			rd_main(char *str, t_shell *shell);
-void		start_rd(t_struct_rd *rd, t_shell *shell);
+void		set_value_rd(t_struct_rd *rd);
+int			start_rd(t_struct_rd *rd, t_shell *shell);
 char		*cut_string_shell(char *str, t_struct_rd *rd, t_shell *shell);
-void		*cut_string_shell_len(char *str, t_struct_rd *rd, t_shell *shell);
+void		cut_string_shell_len(char *str, t_struct_rd *rd, t_shell *shell);
 int			rd_loop(t_struct_rd *rd, t_shell *shell);
 char   		*ft_add_variables_rd(char *str, t_struct_rd *rd, t_shell *shell);
+int			ft_check_rd(t_struct_rd *rd, t_shell *shell);
+int			ft_check_rd_echo(t_struct_rd *rd, t_shell *shell);
 
 //functions
 void		ft_trim_single_c(t_struct_m *echo);
