@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_add_enviorment.c                                :+:    :+:            */
+/*   ft_get_variable.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/08 22:28:06 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/15 15:57:14 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ static void     ft_cut_env(t_struct_tr *trim, char  *str, int   i)
     }
     trim->s_variable[len] = '\0';
 }
-
-
 
 static void     ft_check_variable(t_struct_tr *trim, t_shell *shell)
 {

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/12 14:47:19 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/15 16:07:02 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,20 @@ void    ft_add_variables_double(t_struct_m *echo, t_shell *shell)
 	ft_split_variable(&trim, shell);
 	echo->str = ft_strdup(trim.s_str);
 	free(trim.s_str);
+}
+
+char   *ft_add_variables_rd(char *str, t_struct_rd *rd, t_shell *shell)
+{
+	t_struct_tr trim;
+
+	set_value_trim(&trim);
+	trim.s_str = ft_strdup(str);
+	trim.begin = rd->i;
+	free(str);
+	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
+		trim.empty = 1;
+	ft_split_variable(&trim, shell);
+	str = ft_strdup(trim.s_str);
+	free(trim.s_str);
+	return (str);
 }

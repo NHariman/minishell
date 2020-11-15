@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:36:24 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 12:24:31 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/15 13:15:18 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void		set_value_trim(t_struct_tr *trim)
 
 void		set_value_rd(t_struct_rd *rd)
 {
+	rd->string = NULL;
 	rd->i = 0;
 	rd->error = 0;
 	rd->single = 0;

@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/11/12 14:27:08 by ybakker       ########   odam.nl          #
+#    Updated: 2020/11/15 13:40:21 by ybakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,15 +24,21 @@ MINISHELL =		main.c \
 				srcs/cd/ft_cd.c \
 				srcs/pwd/ft_pwd.c
 
-ECHO =			srcs/echo/echo.c\
-				srcs/echo/check_nflag.c\
+ECHO =			srcs/echo/check_nflag.c\
+				srcs/echo/echo.c\
 				srcs/echo/ft_add_enviorment.c\
 				srcs/echo/ft_clean_echo.c\
-				srcs/echo/ft_get_variable.c
+				srcs/echo/ft_get_variable.c\
+				srcs/rd/cutstring_rd.c\
+				srcs/rd/re_direct.c
 
-OMINISHELL = 	$(MINISHELL:.c=.o)
+# RD =			srcs/rd/cutstring_rd.c\
+# 				srcs/rd/re_direct.c
 
-OECHO =			$(ECHO:.c=.o)
+OMINISHELL 	= 	$(MINISHELL:.c=.o)
+
+OECHO		=	$(ECHO:.c=.o)
+# ORD			=	$(RD:.c=.o)
 
 
 NAME = minishell

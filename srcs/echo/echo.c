@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 12:07:28 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/15 16:02:40 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
 		else if (echo->str[echo->i] == '\\' && echo->str[echo->i + 1] == '\\')
 			ft_trim_single_c(echo);
 		else if (echo->str[echo->i] == '$')
-			ft_add_variables_double(echo, shell);
+			ft_add_variables(echo, shell);
 		else if (echo->str[echo->i] == '\"')
 			ft_trim_single_c(echo);
 		else if (echo->str[echo->i] == '\'')
