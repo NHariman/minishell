@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/12 19:33:30 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/15 12:07:28 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
 	while (echo->str[echo->i] && echo->str[echo->i] != '\n')
 	{
 		if (echo->str[echo->i] == '\\' && (echo->str[echo->i + 1] == '\''
-		|| echo->str[echo->i + 1] == '\"' || echo->str[echo->i + 1] == '$')
+		|| echo->str[echo->i + 1] == '\"' || echo->str[echo->i + 1] == '$'
 		|| echo->str[echo->i + 1] == '>'))
 		{
 			ft_trim_single_c(echo);

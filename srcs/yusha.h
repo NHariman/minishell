@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/12 15:47:12 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/15 12:23:54 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,15 @@ typedef struct	s_struct_e
 typedef struct	s_struct_rd
 {
 	int			i;
-	char		*s_str;
-	char		*input;
-	char		**files;
+	int			error;
+	int			single;
+	int			doubble;
+	int			len;
+	char		*string;
+
+	int			echo;
+	int			variable;
+	int			txt;
 }				t_struct_rd;
 
 //echo main
@@ -83,6 +89,11 @@ void    	ft_add_variables_double(t_struct_m *echo, t_shell *shell);
 
 //redirect
 char		*rd_main(char *str, t_struct_rd *rd, t_shell *shell);
+void		start_rd(t_struct_rd *rd, t_shell *shell);
+char		*cut_string_shell(char *str, t_struct_rd *rd);
+void		*cut_string_shell_len(char *str, t_struct_rd *rd);
+
+void		action_check_rd(t_struct_rd *rd, t_shell *shell);
 
 //functions
 void		ft_trim_single_c(t_struct_m *echo);
