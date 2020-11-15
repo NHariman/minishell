@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/15 16:03:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/15 16:19:52 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("cd"))
 		ft_cd(line, i, shell);
 	else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("pwd"))
-		ft_pwd_main(line, i, shell);
+		ft_printf("%s\n", ft_pwd_main(line, i));
 	else if (cmd == NULL)
 		shell->err = ft_strdup("");
 	else
