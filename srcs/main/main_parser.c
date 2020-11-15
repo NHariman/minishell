@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/15 16:19:52 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/15 18:54:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,13 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("cd"))
 		ft_cd(line, i, shell);
 	else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("pwd"))
-		ft_printf("%s\n", ft_pwd_main(line, i));
+		ft_pwd_main(line, i, shell);
 	else if (cmd == NULL)
 		shell->err = ft_strdup("");
-	else
+	else if (line[*i] != '\n' && line[*i] != '\0')
 		ft_printf("minishell: %s: command not found\n",
 			ft_find_arg(cmd, line, i));
 }
-
-/*
-** TODO: find word and create string until the end or if it finds a
-** >> > < | ;
-** create the line BEFORE you send it to the main function.
-** so you can also create command not found accurately.
-*/
-
-/*
-** find cmd and save it in args->cmd
-** fid line it should execute and send it to args->str
-*/
 
 static void	function_dispatcher(char *line, t_shell *shell)
 {
@@ -84,17 +72,17 @@ static void	function_dispatcher(char *line, t_shell *shell)
 		if (!ft_strchr("$><;|\n\0", line[i]))
 			ft_wordparser(line, &i, shell);
 		if (line[i] == '$')
-			ft_printf("env: %s\n", ft_find_variable(line, &i, shell));
+			ft_printf("try to execute: %s\n", ft_find_variable(line, &i, shell));
 		if (line[i] == '.')
 			ft_printf("filename argument execute, execv()\n");
 		if (line[i] == '>')
-			ft_printf("pipe function here, should handle > and >>, takes the shell struct and line starting from first >\n");
+			ft_rd_parser(line, &i, shell);
 		if (line[i] == '<')
 			ft_printf("pipe function here, should handle <, takes the shell struct\n");
 		if (line[i] == '|')
 			ft_printf("pipe function here, |, takes the shell struct\n");
 		if (line[i] == ';' || line[i] == '\n' || line[i] == '\0')
-			ft_printf("");
+			ft_clear_shell(shell);
 		i++;
 	}
 }
@@ -109,7 +97,7 @@ void		minishell_parser(char *line, char **envp)
 	ft_set_qts(&qts);
 	ft_qt_start(line, &qts);
 	if (qts.dq % 2 != 0 || qts.sq % 2 != 0)
-		ft_printf("Error\nHanging quotes. Parsing failed.\n");
+		ft_printf_err("Error\nHanging quotes. Parsing failed.\n");
 	else
 		function_dispatcher(line, shell);
 }

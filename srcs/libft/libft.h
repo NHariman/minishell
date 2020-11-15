@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/29 16:45:38 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/08/22 02:43:39 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/15 16:52:56 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,4 +138,5 @@ void				pft_putchar_fd(char c, int fd, int *count);
 void				pft_putstr_fd(char *s, int fd, int *count);
 
 int					ft_printf(const char *format, ...);
+int					ft_printf_err(const char *format, ...);
 #endif

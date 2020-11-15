@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 22:01:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/15 18:05:06 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,8 @@ static char	*ft_get_path(char *str, int *i, t_shell *shell)
 	char	*newdir;
 
 	newdir = NULL;
-	if (str[*i] == '\'')
-		newdir = ft_singlequotes_str(str, i);
-	else if (str[*i] == '\n')
+	if (str[*i] == '\n')
 		newdir = ft_find_envvar("HOME", shell);
-	else if (str[*i] == '\"')
-		newdir = ft_doublequotes_str(str, i, shell);
 	else
 		newdir = ft_no_quotes_str(str, i, shell);
 	return (newdir);
@@ -78,9 +74,10 @@ void		ft_cd(char *str, int *i, t_shell *shell)
 	newdir = ft_get_path(str, i, shell);
 	check = chdir(newdir);
 	if (check == -1)
-		ft_printf("minishell: cd: %s: %s\n",
+		ft_printf_err("minishell: cd: %s: %s\n",
 			newdir, strerror(errno));
 	else
 		ft_update_env(shell, olddir, ft_pwd());
+	shell->check.cd = 1;
 	return ;
 }

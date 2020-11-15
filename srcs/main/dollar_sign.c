@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 21:08:12 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/15 17:12:25 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,7 @@ char	*ft_find_variable(char *str, int *i, t_shell *shell)
 		*i = *i + 1;
 	}
 	else
-	{
-		while (ft_isalnum(str[*i]) || str[*i] == '_')
-			*i = *i + 1;
-		var = ft_substr(str, start, *i - start);
-	}
+		var = ft_no_quotes_str(str, i, shell);
 	output = ft_find_env_variable(var, shell);
 	if (output == NULL)
 		output = ft_strdup("");
