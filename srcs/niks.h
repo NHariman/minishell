@@ -58,16 +58,9 @@ typedef struct	s_check
 {
 	int			echo;
 	int			env;
-	int			exec;
-	int			envvar;
 	int			exp;
 	int			err;
-	int			cd;
-	int			pipe;
 	int			pwd;
-	int			redir;
-	int			semicol;
-	int			endstr;
 }				t_check;
 
 typedef struct	s_shell
