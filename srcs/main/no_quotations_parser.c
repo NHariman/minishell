@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 13:44:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 20:13:11 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/15 14:44:14 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char		*ft_insert_nqt_output(char *str, int i, t_trim *trim)
 	else
 	{
 		old_str = trim->res;
-		output = ft_strjoin(old_str,
+		output = gnl_strjoin(old_str,
 			ft_substr(str, trim->start, i - trim->start));
 	}
 	return (output);
@@ -36,8 +36,10 @@ static	void	ft_nqts_dq_strjoin(char *str, int *i,
 	char	*tmp;
 	char	*new_str;
 
+	if (trim->res == '\0')
+		trim->res = ft_substr(str, trim->start, *i - trim->start);
 	new_str = ft_doublequotes_str(str, i, shell);
-	tmp = trim->res;
+	tmp = ft_strdup(trim->res);
 	trim->res = gnl_strjoin(tmp, new_str);
 	trim->start = *i;
 }
@@ -48,6 +50,8 @@ static	void	ft_nqts_sq_strjoin(char *str, int *i, t_trim *trim)
 	char	*new_str;
 	int		start;
 
+	if (trim->res == '\0')
+		trim->res = ft_substr(str, trim->start, *i - trim->start);
 	*i = *i + 1;
 	start = *i;
 	while (str[*i] != '\'')
@@ -81,6 +85,5 @@ char			*ft_no_quotes_str(char *str, int *i, t_shell *shell)
 			*i = *i + 1;
 	}
 	output = ft_insert_nqt_output(str, *i, trim);
-	free(trim);
 	return (output);
 }

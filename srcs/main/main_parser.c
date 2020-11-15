@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 20:14:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/15 16:03:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,7 @@ static char	*get_cmd(char *str, int *i, t_shell *shell)
 	int		start;
 
 	start = *i + 1;
-	if (str[*i] == '\'')
-	{
-		*i = *i + 1;
-		while (str[*i] != '\'')
-			*i = *i + 1;
-		cmd = ft_substr(str, start, *i - start);
-		*i = *i + 1;
-	}
-	else if (str[*i] == '\"' && ft_backslash_check(str, *i) % 2 == 0)
-		cmd = ft_doublequotes_str(str, i, shell);
-	else
-		cmd = ft_no_quotes_str(str, i, shell);
+	cmd = ft_no_quotes_str(str, i, shell);
 	return (cmd);
 }
 
@@ -60,9 +49,7 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("cd"))
 		ft_cd(line, i, shell);
 	else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("pwd"))
-	{
-		ft_printf("%s\n", ft_pwd_main(line, i));
-	}
+		ft_pwd_main(line, i, shell);
 	else if (cmd == NULL)
 		shell->err = ft_strdup("");
 	else
