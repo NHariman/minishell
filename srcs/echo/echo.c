@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 16:02:40 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/15 17:53:16 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ void		ft_trim_single_c(t_struct_m *echo)
 	echo->str = ft_strdup(cache);
 	free(cache);
 }
+
+/*
+
+echo $" "
+single quotes change
+echo; gewoon newline
+*/
 
 void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
 {

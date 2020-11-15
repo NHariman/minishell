@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_clean_echo.c                                    :+:    :+:            */
+/*   rd_check.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/07 18:36:24 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 17:29:33 by ybakker       ########   odam.nl         */
+/*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
+/*   Updated: 2020/11/15 16:59:25 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-void		set_value_echo(t_struct_m *echo)
+void        ft_check_rd_echo(t_struct_rd *rd, t_shell *shell)
 {
-	echo->n = 0;
-	echo->i = 0;
+    free(rd->string);
+    rd->string = ft_strdup(shell->echo);
+    rd->txt = 0;
 }
 
-void		set_value_trim(t_struct_tr *trim)
+int			ft_check_rd(t_struct_rd *rd, t_shell *shell)
 {
-	trim->begin = 0;
-	trim->end = 0;
-	trim->single = 0;
-	trim->doubble = 0;
-	trim->quote = 0;
-	trim->empty = 0;
-	trim->error = 0;
-}
-
-void		set_value_rd(t_struct_rd *rd)
-{
-	rd->error = 0;
-	rd->single = 0;
-	rd->doubble = 0;
-	rd->echo = 0;
-	rd->variable = 0;
-	rd->txt = 0;//if 1, then thre cna't be txt
+    if (shell->check->echo == 1)
+        ft_check_rd_echo(t_struct_rd *rd, t_shell *shell);
+    else
+        return (1);
+    return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 16:17:12 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/15 18:06:52 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,13 @@ typedef struct	s_struct_rd
 	int			len;
 	char		*cache;
 	char		*string;
+	char		*file;
+	char		*str;
 
 	int			echo;
 	int			variable;
 	int			txt;
+	int			dir;
 }				t_struct_rd;
 
 //echo main
@@ -89,7 +92,7 @@ void		ft_split_variable(t_struct_tr *trim, t_shell *shell);
 void    	ft_add_variables_double(t_struct_m *echo, t_shell *shell);
 
 //redirect
-int			*rd_main(char *str, t_shell *shell);
+int			rd_main(char *str, t_shell *shell);
 void		start_rd(t_struct_rd *rd, t_shell *shell);
 char		*cut_string_shell(char *str, t_struct_rd *rd, t_shell *shell);
 void		*cut_string_shell_len(char *str, t_struct_rd *rd, t_shell *shell);
