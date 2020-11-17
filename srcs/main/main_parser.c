@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/15 18:54:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/17 20:23:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,13 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 		return ;
 	cmd = get_cmd(line, i, shell);
 	if (ft_strchr("eEpP", cmd[0]))
-		ft_find_echo_pwd(&cmd);
+		cmd = ft_find_case_cmd(cmd);
 	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("export"))
 		ft_printf("export function here\n");
+	else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("env"))
+		ft_printf("env function here\n");
+	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("unset"))
+		ft_printf("unset function here\n");
 	else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("echo"))
 		ft_echo_parser(line, i, shell);
 	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("cd"))
@@ -52,7 +56,7 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 		ft_pwd_main(line, i, shell);
 	else if (cmd == NULL)
 		shell->err = ft_strdup("");
-	else if (line[*i] != '\n' && line[*i] != '\0')
+	else if (line[*i] != '\0')
 		ft_printf("minishell: %s: command not found\n",
 			ft_find_arg(cmd, line, i));
 }
@@ -69,12 +73,8 @@ static void	function_dispatcher(char *line, t_shell *shell)
 		if (!ft_strncmp(line + i, "exit\n", ft_strlen("exit\n")) ||
 			!ft_strncmp(line + i, "exit ", ft_strlen("exit ")))
 			exit_minishell();
-		if (!ft_strchr("$><;|\n\0", line[i]))
+		if (!ft_strchr("><;|\n\0", line[i]))
 			ft_wordparser(line, &i, shell);
-		if (line[i] == '$')
-			ft_printf("try to execute: %s\n", ft_find_variable(line, &i, shell));
-		if (line[i] == '.')
-			ft_printf("filename argument execute, execv()\n");
 		if (line[i] == '>')
 			ft_rd_parser(line, &i, shell);
 		if (line[i] == '<')
@@ -87,12 +87,10 @@ static void	function_dispatcher(char *line, t_shell *shell)
 	}
 }
 
-void		minishell_parser(char *line, char **envp)
+void		minishell_parser(char *line, t_shell *shell, char **envp)
 {
-	t_shell		*shell;
 	t_qts		qts;
 
-	shell = calloc(1, sizeof(t_shell));
 	shell->env = envp;
 	ft_set_qts(&qts);
 	ft_qt_start(line, &qts);

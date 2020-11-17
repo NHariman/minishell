@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/14 17:10:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/17 20:22:47 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ int		main(int argc, char *argv[], char *envp[])
 	int		i;
 	char	*line;
 	char	**hold;
+	t_shell	*shell;
 
 	i = argc;
 	hold = argv;
+	shell = calloc(1, sizeof(t_shell));
 	line = NULL;
 	while (i > 0)
 	{
@@ -31,7 +33,7 @@ int		main(int argc, char *argv[], char *envp[])
 		if (!ft_strncmp(line, "exit\n", ft_strlen("exit\n")))
 			exit_minishell();
 		else
-			minishell_parser(line, envp);
+			minishell_parser(line, shell, envp);
 		free(line);
 	}
 	return (0);

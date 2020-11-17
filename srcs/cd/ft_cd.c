@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/15 18:05:06 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/17 20:03:49 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,12 @@ void		ft_cd(char *str, int *i, t_shell *shell)
 	newdir = ft_get_path(str, i, shell);
 	check = chdir(newdir);
 	if (check == -1)
+	{
 		ft_printf_err("minishell: cd: %s: %s\n",
 			newdir, strerror(errno));
+		shell->exit_code = 1;
+	}
 	else
 		ft_update_env(shell, olddir, ft_pwd());
-	shell->check.cd = 1;
 	return ;
 }

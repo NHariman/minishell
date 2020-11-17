@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:58 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/15 18:16:00 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/17 18:13:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		ft_pwd_main(char *str, int *i, t_shell *shell)
 	while (!ft_strchr("><|;\n", str[*i]))
 		*i = *i + 1;
 	shell->check.pwd = 1;
+	shell->exit_code = errno;
 	if (str[*i] == ';' || str[*i] == '\n' || str[*i] == '\0')
 		ft_printf("%s\n", shell->pwd);
 	return ;
