@@ -69,6 +69,8 @@ void		ft_split_variable(t_struct_tr *trim, t_shell *shell)
     free(trim->s_end);
 }
 
+//take a look on hwo to combine these last three
+
 void    ft_add_variables(t_struct_m *echo, t_shell *shell)
 {
 	t_struct_tr trim;

@@ -62,8 +62,8 @@ void		ft_trim_single_c(t_struct_m *echo)
 /*
 
 echo $" "
-single quotes change
-echo; gewoon newline
+$' '
+
 */
 
 void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
@@ -72,13 +72,15 @@ void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
 	{
 		if (echo->str[echo->i] == '\\' && (echo->str[echo->i + 1] == '\''
 		|| echo->str[echo->i + 1] == '\"' || echo->str[echo->i + 1] == '$'
-		|| echo->str[echo->i + 1] == '>'))
+		|| echo->str[echo->i + 1] == '>' || echo->str[echo->i + 1] == '|'))
 		{
 			ft_trim_single_c(echo);
 			echo->i++;
 		}
 		else if (echo->str[echo->i] == '\\' && echo->str[echo->i + 1] == '\\')
 			ft_trim_single_c(echo);
+		else if (echo->str[echo->i] == '$' && (echo->str[echo->i + 1] == '\"' || echo->str[echo->i + 1] == '\''))
+			ft_add_variables_double(echo, shell);
 		else if (echo->str[echo->i] == '$')
 			ft_add_variables(echo, shell);
 		else if (echo->str[echo->i] == '\"')
@@ -121,7 +123,7 @@ char			*echo_main(char *str, t_struct_m *echo, t_shell *shell)
 	set_value_echo(echo);
 	echo->str = ft_strdup(str);
 	free(str);
-	if (echo->str[0] == '\n')
+	if (echo->str[0] == '\n' || echo->str[0] == '\0')
 		return (echo->str);
 	echo->i = check_flag_n(echo);
 	get_echo_str(echo);
@@ -132,6 +134,6 @@ char			*echo_main(char *str, t_struct_m *echo, t_shell *shell)
 		free(echo->str);
 		echo->str = ft_strdup(echo->cache);
 	}
-	ft_printf("end   == [%s]\n", echo->str);
+	ft_printf("end  == [%s]\n", echo->str);
 	return (echo->str);
 }
