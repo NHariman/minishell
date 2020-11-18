@@ -92,7 +92,7 @@ void		ft_split_variable(t_struct_tr *trim, t_shell *shell);
 void    	ft_add_variables_double(t_struct_m *echo, t_shell *shell);
 
 //redirect
-int			rd_main(char *str, t_shell *shell);
+char		*rd_main(char *str, t_struct_rd *rd, t_shell *shell);
 void		set_value_rd(t_struct_rd *rd);
 int			start_rd(t_struct_rd *rd, t_shell *shell);
 char		*cut_string_shell(char *str, t_struct_rd *rd, t_shell *shell);

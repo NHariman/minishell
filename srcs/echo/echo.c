@@ -72,15 +72,13 @@ void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
 	{
 		if (echo->str[echo->i] == '\\' && (echo->str[echo->i + 1] == '\''
 		|| echo->str[echo->i + 1] == '\"' || echo->str[echo->i + 1] == '$'
-		|| echo->str[echo->i + 1] == '>' || echo->str[echo->i + 1] == '|'))
+		|| echo->str[echo->i + 1] == '>'))
 		{
 			ft_trim_single_c(echo);
 			echo->i++;
 		}
 		else if (echo->str[echo->i] == '\\' && echo->str[echo->i + 1] == '\\')
 			ft_trim_single_c(echo);
-		else if (echo->str[echo->i] == '$' && (echo->str[echo->i + 1] == '\"' || echo->str[echo->i + 1] == '\''))
-			ft_add_variables_double(echo, shell);
 		else if (echo->str[echo->i] == '$')
 			ft_add_variables(echo, shell);
 		else if (echo->str[echo->i] == '\"')
