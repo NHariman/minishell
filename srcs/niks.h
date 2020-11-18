@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/17 20:23:18 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/18 20:31:37 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,15 @@ int				ft_echo_parser(char *line, int *i, t_shell *shell);
 void			ft_cd(char *str, int *i, t_shell *shell);
 void			ft_pwd_main(char *str, int *i, t_shell *shell);
 void			ft_rd_parser(char *str, int *i, t_shell *shell);
+void			ft_env_parser(char *str, int *i, t_shell *shell);
+int				env_main(char *str, t_shell *shell);
 
 /*
 ** env stuff
 */
 void			ft_add_env_back(t_shell *shell, char *input);
 int				ft_envlen(t_shell *shell);
+int				env_main(char *str, t_shell *shell);
 
 /*
 ** clear shell struct
