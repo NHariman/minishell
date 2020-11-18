@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/15 17:12:25 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/17 20:30:30 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				ft_isspecial(int c)
 {
-	if ((c > 32 && c < 48) || (c < 57 && c < 65) ||
+	if ((c > 32 && c < 48) || (c > 57 && c < 65) ||
 	(c > 90 && c < 97) || (c > 122 && c < 127))
 		return (1);
 	else
@@ -30,6 +30,8 @@ static char			*ft_find_env_variable(char *var, t_shell *shell)
 	i = 0;
 	if (var == NULL)
 		return (NULL);
+	if (!ft_strncmp(var, "?", ft_strlen(var)))
+		return (ft_itoa(shell->exit_code));
 	tmp = gnl_strjoin(var, "=");
 	while (shell->env[i])
 	{
@@ -49,6 +51,8 @@ char	*ft_make_single_char_str(char c)
 	char *num;
 
 	num = (char *)malloc(sizeof(char) * 2);
+	if (!num)
+		return (NULL);
 	num[0] = c;
 	num[1] = '\0';
 	return (num);
@@ -69,8 +73,8 @@ char	*ft_find_variable(char *str, int *i, t_shell *shell)
 		var = ft_make_single_char_str(str[*i]);
 		*i = *i + 1;
 	}
-	else
-		var = ft_no_quotes_str(str, i, shell);
+	else if (ft_isalpha(str[*i]))
+		var = ft_no_quotes_str(str, i, shell);	
 	output = ft_find_env_variable(var, shell);
 	if (output == NULL)
 		output = ft_strdup("");

@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/29 16:45:38 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/15 16:52:56 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/17 16:35:40 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 long				ft_iswhitespaces(const char *str);
+int					ft_strcasecmp(char *s1, char *s2);
+int					ft_strcmp(const char *s1, const char *s2);
+char				*ft_strlower(char *str);
 
 /*
 ** the first layer, checks for flags, width, precision (-0.)

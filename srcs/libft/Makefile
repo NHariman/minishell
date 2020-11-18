@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/11/15 16:47:17 by nhariman      ########   odam.nl          #
+#    Updated: 2020/11/17 15:55:17 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,10 @@ CFILES = 	ft_atoi.c \
 			ft_printf_err_hexflags.c \
 			ft_printf_err_numflags.c \
 			ft_printf_err_num.c \
-			ft_printf_err_str.c
+			ft_printf_err_str.c \
+			ft_strcasecmp.c \
+			ft_strcmp.c \
+			ft_strlower.c
 
 CBONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \

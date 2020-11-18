@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 18:50:43 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/15 18:56:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/17 20:21:25 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,18 @@
 ** else return the original.
 */
 
-void		ft_find_echo_pwd(char **cmd)
+char		*ft_find_case_cmd(char *cmd)
 {
-	int		check[5];
-	int		i;
+	char *tmp;
 
-	check[4] = 3;
-	check[0] = 0;
-	i = 0;
-	if (ft_strchr("eE", *cmd[0]))
+	tmp = NULL;
+	if (!ft_strcasecmp(cmd, "echo") || !ft_strcasecmp(cmd, "env") ||
+		!ft_strcasecmp(cmd, "pwd"))
 	{
-		check[1] = ft_strchr("cC", cmd[0][1]) ? 0 : 1;
-		check[2] = ft_strchr("hH", cmd[0][2]) ? 0 : 1;
-		check[3] = ft_strchr("oO", cmd[0][3]) ? 0 : 1;
+		tmp = ft_strlower(cmd);
+		cmd = ft_strdup(tmp);
 	}
-	else if (ft_strchr("pP", *cmd[0]))
-	{
-		check[1] = ft_strchr("wW", cmd[0][1]) ? 0 : 1;
-		check[2] = ft_strchr("dD", cmd[0][2]) ? 0 : 1;
-		check[3] = 0;
-	}
-	while (i != 4)
-	{
-		if (check[i] != 0)
-			return ;
-		i++;
-	}
-	ft_wordlow(cmd);
+	return (cmd);
 }
 
 int		ft_envlen(t_shell *shell)
@@ -83,7 +68,6 @@ void	ft_clear_shell(t_shell *shell)
 	shell->check.exp = 0;
 	shell->check.err = 0;
 	shell->check.pwd = 0;
-	shell->exit = 0;
 	shell->echo = NULL;
 	shell->pwd = NULL;
 	shell->err = NULL;

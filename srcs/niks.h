@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/15 18:54:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/17 20:23:18 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,8 @@ typedef struct	s_qts
 **	int			echo;	- echo command was used
 **	int			env;	- env command was used
 **	int			exec;	- exec command was used
-**	int			envvar;	- an environment variable was called (badly)
 **	int			exp;	- export command was used
-**	int			err;	- a command that doesn't exist was used
-**	int			cd;		- cd was used
-**	int			pipe;	- a pipe was used
 **	int			pwd;	- pwd was used
-**	int			redir;	- a << < or > was used
-**	int			semicol; - a semicolon was used
-**	int			endstr; - the end of the string has been reached.
 */
 typedef struct	s_check
 {
@@ -66,7 +59,7 @@ typedef struct	s_check
 typedef struct	s_shell
 {
 	t_check		check;
-	int			exit;
+	int			exit_code;
 	char		*echo;
 	char		*pwd;
 	char		**env;
@@ -105,14 +98,13 @@ void			ft_set_qts(t_qts *qts);
 void			ft_qt_line(char *line, t_qts *qts, int *i);
 void			ft_qt_start(char *line, t_qts *qts);
 int				ft_backslash_check(char *line, int i);
-void			ft_wordlow(char **line);
-void			ft_find_echo_pwd(char **cmd);
+char			*ft_find_case_cmd(char *cmd);
 
 /*
 ** parsing functions, command specific functions.
 */
 
-void			minishell_parser(char *line, char **envp);
+void			minishell_parser(char *line, t_shell *shell, char **envp);
 int				ft_echo_parser(char *line, int *i, t_shell *shell);
 void			ft_cd(char *str, int *i, t_shell *shell);
 void			ft_pwd_main(char *str, int *i, t_shell *shell);
