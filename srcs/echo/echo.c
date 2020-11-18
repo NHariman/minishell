@@ -132,6 +132,6 @@ char			*echo_main(char *str, t_struct_m *echo, t_shell *shell)
 		free(echo->str);
 		echo->str = ft_strdup(echo->cache);
 	}
-	ft_printf("end  == [%s]\n", echo->str);
+	// ft_printf("end  == [%s]\n", echo->str);
 	return (echo->str);
 }

@@ -37,5 +37,5 @@ void		set_value_rd(t_struct_rd *rd)
 	rd->doubble = 0;
 	rd->echo = 0;
 	rd->variable = 0;
-	rd->txt = 0;//if 1, then thre cna't be txt
+	rd->dir = 0;
 }

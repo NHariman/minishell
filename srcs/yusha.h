@@ -64,6 +64,7 @@ typedef struct	s_struct_rd
 	char		*string;
 	char		*file;
 	char		*str;
+	char		*tmp;
 
 	int			echo;
 	int			variable;
@@ -95,12 +96,18 @@ void    	ft_add_variables_double(t_struct_m *echo, t_shell *shell);
 char		*rd_main(char *str, t_shell *shell);
 void		set_value_rd(t_struct_rd *rd);
 int			start_rd(t_struct_rd *rd, t_shell *shell);
-char		*cut_string_shell(char *str, t_struct_rd *rd, t_shell *shell);
-void		cut_string_shell_len(char *str, t_struct_rd *rd, t_shell *shell);
 int			rd_loop(t_struct_rd *rd, t_shell *shell);
 char   		*ft_add_variables_rd(char *str, t_struct_rd *rd, t_shell *shell);
+int         rd_check_error_rd(t_struct_rd *rd);
 int			ft_check_rd(t_struct_rd *rd, t_shell *shell);
 int			ft_check_rd_echo(t_struct_rd *rd, t_shell *shell);
+int         error_sytax(t_struct_rd *rd);
+// char		*cut_string_shell(char *str, t_struct_rd *rd, t_shell *shell);
+// void		cut_string_shell_len(char *str, t_struct_rd *rd, t_shell *shell);
+void 		cut_string_shell_len(t_struct_rd *rd);
+void		cut_string_shell(t_struct_rd *rd, t_shell *shell);
+int         ft_len_string_rd(t_struct_rd *rd);
+void		ft_echo_string_rd(t_struct_rd *rd, t_shell *shell);
 
 //functions
 void		ft_trim_single_c(t_struct_m *echo);

@@ -10,7 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-COMPILE = 	gcc
+# COMPILE = 	gcc
+COMPILE = 	clang
 
 FLAGS = 	-Wall -Werror -Wextra
 
