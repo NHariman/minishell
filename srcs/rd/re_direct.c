@@ -169,13 +169,17 @@ int		start_rd(t_struct_rd *rd, t_shell *shell)
 	return (error);
 }
 
-char		*rd_main(char *str, t_struct_rd *rd, t_shell *shell)
+char		*rd_main(char *str, t_shell *shell)
 {
-	int		error;
+	int		        error;
+    t_struct_rd     rd;
 
+    rd = calloc(1, sizeof(t_struct_rd));
 	set_value_rd(rd);
     rd->i = 0;
 	rd->str = ft_strdup(str);
 	error = start_rd(rd, shell);
-	return (error);
+    str = ft_strdup(rd->str);
+    free(rd->str);
+	return (str);
 }
