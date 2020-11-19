@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/19 12:08:49 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 21:58:37 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,20 @@ int		start_rd(t_struct_rd *rd, t_shell *shell)
 
 char		*rd_main(char *str, t_shell *shell)
 {
-	int		        error;
+	int             error;
     t_struct_rd     *rd;
 
     rd = calloc(1, sizeof(t_struct_rd));
 	set_value_rd(rd);
+    rd->tmp = ft_strtrim(str, "\n");
+    free(str);
+    str = ft_strdup(rd->tmp);
+    // free(rd->tmp);
     rd->i = 0;
 	rd->str = ft_strdup(str);
     ft_printf("in == [%s][%i]\n", rd->str, rd->i);
 	error = start_rd(rd, shell);
-    str = ft_strdup(rd->str);
-    free(rd->str);
+    str = ft_strdup(rd->file);
+    free(rd->file);
 	return (str);
 }
