@@ -6,12 +6,14 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/19 18:35:19 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/19 21:41:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NIKS_H
 # define NIKS_H
+
+#include "libft/libft.h"
 
 # define SQ 1
 # define DQ 2
@@ -58,16 +60,10 @@ typedef struct	s_check
 	int			pwd;
 }				t_check;
 
-typedef struct	s_exec
-{
-	char			*cmd;
-	struct s_exec	*next;
-}				t_exec;
-
 typedef struct	s_shell
 {
 	t_check		check;
-	t_exec		*exec;
+	t_list		*exec;
 	int			exit_code;
 	char		*echo;
 	char		*pwd;
@@ -106,6 +102,8 @@ char			*ft_pwd(void);
 
 void			ft_set_qts(t_qts *qts);
 void			ft_qt_line(char *line, t_qts *qts, int *i);
+void			ft_qt_rd(char *line, t_qts *qts, int *i);
+int				ft_qt_check(char *line, int *i, int type, t_qts *qts);
 void			ft_qt_start(char *line, t_qts *qts);
 int				ft_backslash_check(char *line, int i);
 char			*ft_find_case_cmd(char *cmd);
