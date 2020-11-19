@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/18 20:31:37 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/19 18:35:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,29 @@ typedef struct	s_check
 {
 	int			echo;
 	int			env;
+	int			exec;
+	int			rd;
 	int			exp;
 	int			err;
 	int			pwd;
 }				t_check;
 
+typedef struct	s_exec
+{
+	char			*cmd;
+	struct s_exec	*next;
+}				t_exec;
+
 typedef struct	s_shell
 {
 	t_check		check;
+	t_exec		*exec;
 	int			exit_code;
 	char		*echo;
 	char		*pwd;
 	char		**env;
 	char		*env_s;
+	char		*rd_r;
 	char		*err;
 	char		**exprt;
 
