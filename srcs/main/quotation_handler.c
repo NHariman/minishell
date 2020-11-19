@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 20:28:01 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/14 16:24:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/19 21:41:08 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int					ft_backslash_check(char *line, int i)
 	return (backslash);
 }
 
-static int			ft_qt_check(char *line, int *i, int type, t_qts *qts)
+int					ft_qt_check(char *line, int *i, int type, t_qts *qts)
 {
 	int backslash;
 
