@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/12 14:49:41 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 14:19:27 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,20 @@ void		ft_trim_single_c(t_struct_m *echo)
 	free(cache);
 }
 
+/*
+
+echo $" "
+$' '
+
+*/
+
 void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
 {
 	while (echo->str[echo->i] && echo->str[echo->i] != '\n')
 	{
 		if (echo->str[echo->i] == '\\' && (echo->str[echo->i + 1] == '\''
-		|| echo->str[echo->i + 1] == '\"' || echo->str[echo->i + 1] == '$'))
+		|| echo->str[echo->i + 1] == '\"' || echo->str[echo->i + 1] == '$'
+		|| echo->str[echo->i + 1] == '>'))
 		{
 			ft_trim_single_c(echo);
 			echo->i++;
@@ -72,7 +80,7 @@ void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
 		else if (echo->str[echo->i] == '\\' && echo->str[echo->i + 1] == '\\')
 			ft_trim_single_c(echo);
 		else if (echo->str[echo->i] == '$')
-			ft_add_variables_double(echo, shell);
+			ft_add_variables(echo, shell);
 		else if (echo->str[echo->i] == '\"')
 			ft_trim_single_c(echo);
 		else if (echo->str[echo->i] == '\'')
@@ -113,17 +121,18 @@ char			*echo_main(char *str, t_struct_m *echo, t_shell *shell)
 	set_value_echo(echo);
 	echo->str = ft_strdup(str);
 	free(str);
-	if (echo->str[0] == '\n')
+	if (echo->str[0] == '\n' || echo->str[0] == '\0')
 		return (echo->str);
-	echo->i = check_flag_n(echo);
+	if (echo->flag != 1)
+		echo->i = check_flag_n(echo);
 	get_echo_str(echo);
 	ft_handle_echo(echo, shell);
-	if (echo->n == 0)
+	if (echo->n == 0 && echo->flag != 1)
 	{
 		echo->cache = ft_strjoin(echo->str, "\n");
 		free(echo->str);
 		echo->str = ft_strdup(echo->cache);
 	}
-	ft_printf("end   == [%s]\n", echo->str);
+	// ft_printf("end  == [%s]\n", echo->str);
 	return (echo->str);
 }

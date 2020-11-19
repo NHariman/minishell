@@ -36,31 +36,31 @@ LEGEND:
 [X] done
 
 BASIC INTERFACE
-[ ] Show prompt when waiting for a new command
+[x] Show prompt when waiting for a new command
 
 EXECV (EXECUTE PROGRAMS)
 [ ] search and launch the right executable (based on the PATH variable or by using relative or absolute path) like in bash
 
 BUILT-INS
-[x] echo with '-n'
-	[x] -n implementation, echos without newline at the end.
-[ ] cd with relative and absolute path
-[ ] pwd without any options
+[xY] echo with '-n'
+	[Y] -n implementation, echos without newline at the end.
+[N] cd with relative and absolute path
+[N] pwd without any options
 [ ] export without any options
 [ ] unset without any options
-[ ] env without any options and any arguments
-[x] exit without any options
+[N] env without any options and any arguments
+[xN] exit without any options
 
 COMMAND SEPARATOR (;)
-[ ] ; separate commands like in bash.
+[xN] ; separate commands like in bash.
 		ie. command1; command2
 		this will execute command2 regardless of if command1 succeeded.
 
 ECHO ' and "
-[x] ' should work like in bash except for multiline commands
+[xY] ' should work like in bash except for multiline commands
 	ie. echo "$PATH"
 	output: /usr/USERNAME/pathlocation
-[x] " should work like in bash except for multiline commands
+[xY] " should work like in bash except for multiline commands
 	ie. echo '$PATH'
 	output: $PATH
 

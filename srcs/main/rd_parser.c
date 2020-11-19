@@ -24,5 +24,5 @@ void		ft_rd_parser(char *str, int *i, t_shell *shell)
 		rd_str = ft_strdup("\n");
 	else
 		rd_str = ft_substr(str, start, *i - start);
-	fake_rd_main(rd_str, shell);
+	rd_main(rd_str, shell);
 }
