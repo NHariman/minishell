@@ -6,9 +6,12 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/19 14:55:00 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 21:08:19 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef YUSHA_H
+# define YUSHA_H
 
 # include "niks.h"
 
@@ -67,6 +70,7 @@ typedef struct	s_struct_rd
 	char		*file;
 	char		*str;
 	char		*tmp;
+	char		*output;
 
 	int			echo;
 	int			variable;
@@ -114,3 +118,4 @@ void		ft_file_input_string(t_struct_rd *rd, t_shell *shell);
 
 //functions
 void		ft_trim_single_c(t_struct_m *echo);
+#endif

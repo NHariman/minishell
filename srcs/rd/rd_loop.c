@@ -6,27 +6,20 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/19 14:40:37 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 22:00:25 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 /*
-echo hello > file1 hello > file2 > hello hello hello
-in == [> file1 hello > file2 > hello hello hello][0]
-file == [file1
-]file == [file2
-]file == [hello
-]string before == [hello hello  hello hello]
-string after == [hello hello  hello hello
-]
+file,rd,file,rd,file,rd;;string
 hello too many ' '
  */
 void		ft_file_input_string(t_struct_rd *rd, t_shell *shell)
 {
 	t_struct_m	*echo;
-    
+
     echo = ft_calloc(1, sizeof(t_struct_m));
 	rd->tmp = ft_strdup(echo_main(rd->string, echo, shell));
     rd->string = ft_strdup(rd->tmp);
@@ -81,7 +74,6 @@ int			rd_loop(t_struct_rd *rd, t_shell *shell)
         rd->file = ft_strdup(rd->tmp);
         free(rd->tmp);
         ft_printf("file == [%s]", rd->file);
-        free(rd->file);
     }
     ft_file_input_string(rd, shell);
     ft_printf("string after == [%s]\n", rd->string);
