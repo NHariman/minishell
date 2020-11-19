@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 18:55:22 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 12:44:05 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,17 @@ int			ft_check_rd_echo(t_struct_rd *rd, t_shell *shell)
     len = 0;
     rd->txt = 0;
     free(rd->string);
-    while (shell->echo[len] != '\n' || shell->echo[len])
+    while (shell->echo[len] != '\n' && shell->echo[len])
         len++;
     rd->string = (char *)malloc((len + 1) * sizeof(char));
     i = 0;
-    while (len >= 0)
+    while (len > 0)
     {
         rd->string[i] = shell->echo[i];
         i++;
         len--;
     }
     rd->string[i] = '\0';
-    ft_printf("echo string == [%s]\n", rd->string);
     return (0);
 }
 

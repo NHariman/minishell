@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/15 12:02:13 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 18:12:03 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 14:06:26 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void 		cut_string_shell_len(t_struct_rd *rd)
 		else
 			rd->len++;
 	}
+	if (rd->str[rd->len] == '\n')
+		rd->len--;
 }
 
 void		cut_string_shell(t_struct_rd *rd, t_shell *shell)
@@ -73,8 +75,9 @@ void		cut_string_shell(t_struct_rd *rd, t_shell *shell)
 	}
 	rd->cache[i] = '\0';
 	rd->i = rd->len;
+	echo->flag = 0;
 	rd->file = ft_strdup(echo_main(rd->cache, echo, shell));
-	free(echo->cache);
+	free(echo->tmp);
 	free(echo->str);
 	free(echo);
 }
@@ -84,13 +87,13 @@ int         ft_len_string_rd(t_struct_rd *rd)
 	int		len;
 
 	len = 0;
-	rd->i = rd->len;
+	rd->len = rd->i;
 	while (rd->str[rd->len] != '\0' && rd->str[rd->len] != '\n' && rd->str[rd->len] != '>')
 	{
 		rd->len++;
 	}
 	len = rd->len - rd->i;
-	return(len);
+	return (len);
 }
 
 void		ft_echo_string_rd(t_struct_rd *rd, t_shell *shell)
@@ -100,20 +103,17 @@ void		ft_echo_string_rd(t_struct_rd *rd, t_shell *shell)
 	t_struct_m	*echo;
 
 	echo = ft_calloc(1, sizeof(t_struct_m));
-
 	i = 0;
-	str = (char *)malloc((rd->len) * sizeof(char));
-	while (rd->len >= 0)
+	str = (char *)malloc((rd->len + 1) * sizeof(char));
+	while (i < rd->len)
 	{
 		str[i] = rd->str[rd->i];
 		rd->i++;
 		i++;
-		rd->len--;
 	}
 	str[i] = '\0';
 	rd->cache = ft_strdup(echo_main(str, echo, shell));
-	free(str);
-	free(echo->cache);
+	free(echo->tmp);
 	free(echo->str);
 	free(echo);
 }

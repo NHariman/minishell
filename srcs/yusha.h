@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 18:55:07 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 13:13:26 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct	s_struct_m
 	char		*str;
 	char		*cache;
 	char		*tmp;
+	int			flag;
 	int			n;
 	int			i;
 	int			s;

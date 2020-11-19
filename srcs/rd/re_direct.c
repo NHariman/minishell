@@ -6,34 +6,12 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 19:23:21 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 12:08:49 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
-
-/*
-	action txt > file txt
-
-    error
-
-    3 = bash: syntax error near unexpected token `>' 
-    4 = bash: syntax error near unexpected token `>>'
-
-    syntax error, so too many >>> first check before going in.
-*/
-int         error_sytax(t_struct_rd *rd)
-{
-    // put this in a check before
-    if (rd->str[rd->i] == '>' && rd->str[rd->i + 1] == '>')
-        return (4);
-    else if (rd->str[rd->i] == '>')
-        return (3);
-    else
-        return (0);
-    
-}
 
 int         rd_check_error_rd(t_struct_rd *rd)
 {
