@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/18 12:20:15 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/19 17:58:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("export"))
 		ft_printf("export function here\n");
 	else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("env"))
-		ft_printf("env function here\n");
+		ft_env_parser(line, i, shell);
 	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("unset"))
 		ft_printf("unset function here\n");
 	else if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)) && strlen(cmd) == ft_strlen("echo"))
