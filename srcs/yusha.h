@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/19 13:13:26 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 14:55:00 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_struct_tr
 	int			quote;
 	int			empty;
 	int			error;
+	int			flag;
 	char		*s_str;
 	char		*s_tmp;
 	char		*s_cache;
@@ -108,7 +109,8 @@ int         error_sytax(t_struct_rd *rd);
 void 		cut_string_shell_len(t_struct_rd *rd);
 void		cut_string_shell(t_struct_rd *rd, t_shell *shell);
 int         ft_len_string_rd(t_struct_rd *rd);
-void		ft_echo_string_rd(t_struct_rd *rd, t_shell *shell);
+void		ft_echo_string_rd(t_struct_rd *rd);
+void		ft_file_input_string(t_struct_rd *rd, t_shell *shell);
 
 //functions
 void		ft_trim_single_c(t_struct_m *echo);

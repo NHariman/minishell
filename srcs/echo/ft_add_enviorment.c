@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 16:07:02 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 14:58:45 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void    ft_add_variables(t_struct_m *echo, t_shell *shell)
 	t_struct_tr trim;
 
 	set_value_trim(&trim);
+	trim.flag = echo->flag;
 	trim.s_str = ft_strdup(echo->str);
 	trim.begin = echo->i;
 	free(echo->str);
@@ -83,6 +84,7 @@ void    ft_add_variables(t_struct_m *echo, t_shell *shell)
 		trim.empty = 1;
 	ft_split_variable(&trim, shell);
 	echo->str = ft_strdup(trim.s_str);
+	echo->flag = trim.flag;
 	free(trim.s_str);
 }
 
@@ -91,6 +93,7 @@ void    ft_add_variables_double(t_struct_m *echo, t_shell *shell)
 	t_struct_tr trim;
 
 	set_value_trim(&trim);
+	trim.flag = 0;
 	trim.s_str = ft_strdup(echo->str);
 	trim.begin = echo->i;
 	free(echo->str);
@@ -106,6 +109,7 @@ char   *ft_add_variables_rd(char *str, t_struct_rd *rd, t_shell *shell)
 	t_struct_tr trim;
 
 	set_value_trim(&trim);
+	trim.flag = 0;
 	trim.s_str = ft_strdup(str);
 	trim.begin = rd->i;
 	free(str);

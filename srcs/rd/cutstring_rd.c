@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/15 12:02:13 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/19 14:06:26 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 14:51:42 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ void		cut_string_shell(t_struct_rd *rd, t_shell *shell)
 	}
 	rd->cache[i] = '\0';
 	rd->i = rd->len;
-	echo->flag = 0;
+	echo->flag = 3;
 	rd->file = ft_strdup(echo_main(rd->cache, echo, shell));
+	// if (echo->flag != 3)
+	// 	error
 	free(echo->tmp);
 	free(echo->str);
 	free(echo);
@@ -96,13 +98,11 @@ int         ft_len_string_rd(t_struct_rd *rd)
 	return (len);
 }
 
-void		ft_echo_string_rd(t_struct_rd *rd, t_shell *shell)
+void		ft_echo_string_rd(t_struct_rd *rd)
 {
 	char	*str;
 	int		i;
-	t_struct_m	*echo;
 
-	echo = ft_calloc(1, sizeof(t_struct_m));
 	i = 0;
 	str = (char *)malloc((rd->len + 1) * sizeof(char));
 	while (i < rd->len)
@@ -112,8 +112,6 @@ void		ft_echo_string_rd(t_struct_rd *rd, t_shell *shell)
 		i++;
 	}
 	str[i] = '\0';
-	rd->cache = ft_strdup(echo_main(str, echo, shell));
-	free(echo->tmp);
-	free(echo->str);
-	free(echo);
+	rd->cache = ft_strdup(str);
+	free(str);
 }

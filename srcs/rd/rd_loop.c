@@ -6,12 +6,35 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/19 14:06:15 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 14:40:37 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
+/*
+echo hello > file1 hello > file2 > hello hello hello
+in == [> file1 hello > file2 > hello hello hello][0]
+file == [file1
+]file == [file2
+]file == [hello
+]string before == [hello hello  hello hello]
+string after == [hello hello  hello hello
+]
+hello too many ' '
+ */
+void		ft_file_input_string(t_struct_rd *rd, t_shell *shell)
+{
+	t_struct_m	*echo;
+    
+    echo = ft_calloc(1, sizeof(t_struct_m));
+	rd->tmp = ft_strdup(echo_main(rd->string, echo, shell));
+    rd->string = ft_strdup(rd->tmp);
+    free(rd->tmp);
+	free(echo->tmp);
+	free(echo->str);
+	free(echo);
+}
 
 int			rd_loop(t_struct_rd *rd, t_shell *shell)
 {
@@ -39,25 +62,28 @@ int			rd_loop(t_struct_rd *rd, t_shell *shell)
                 rd->string = ft_strdup(rd->cache);
                 free(rd->cache);
             }
-            // printf("len == [%i] c == [%c][%i]\n", rd->len, rd->str[rd->i], rd->i);
+            while (rd->str[rd->i] == ' ')
+                rd->i++;
             rd->len = ft_len_string_rd(rd);
-            ft_echo_string_rd(rd, shell);
+            ft_echo_string_rd(rd);
             rd->tmp = ft_strjoin(rd->string, rd->cache);
             free(rd->string);
             free(rd->cache);
-            rd->string = ft_strdup(rd->tmp);
+            rd->string = ft_strtrim(rd->tmp, " ");
             free(rd->tmp);
         }
         else if (rd->str[rd->i] != '>' && rd->str[rd->i] != '\0' && rd->str[rd->i] != '\n' && rd->txt == 1)
         {
             rd->len = ft_len_string_rd(rd);
         }
+        rd->tmp = ft_strtrim(rd->file, "\n");
+        free(rd->file);
+        rd->file = ft_strdup(rd->tmp);
+        free(rd->tmp);
         ft_printf("file == [%s]", rd->file);
-        //rd->str[rd->i] != '>' && rd->str[rd->i] != '\0' && rd->str[rd->i] != '\n'
-        //string add
-        //if rd->str[rd->i] == '\0' && rd->str[rd->i] == '\n'
         free(rd->file);
     }
-    ft_printf("string == [%s]\n", rd->string);
+    ft_file_input_string(rd, shell);
+    ft_printf("string after == [%s]\n", rd->string);
     return (error);
 }

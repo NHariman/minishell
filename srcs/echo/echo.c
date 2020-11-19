@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 17:53:16 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/19 14:19:27 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,11 @@ char			*echo_main(char *str, t_struct_m *echo, t_shell *shell)
 	free(str);
 	if (echo->str[0] == '\n' || echo->str[0] == '\0')
 		return (echo->str);
-	echo->i = check_flag_n(echo);
+	if (echo->flag != 1)
+		echo->i = check_flag_n(echo);
 	get_echo_str(echo);
 	ft_handle_echo(echo, shell);
-	if (echo->n == 0)
+	if (echo->n == 0 && echo->flag != 1)
 	{
 		echo->cache = ft_strjoin(echo->str, "\n");
 		free(echo->str);
