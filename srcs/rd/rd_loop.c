@@ -6,16 +6,17 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/21 17:12:27 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/21 19:08:36 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
+
 /*
 file,rd,file,rd,file,rd;;string
 hello too many ' '
- */
+*/
 
 void			ft_file_input_string(t_struct_rd *rd, t_shell *shell)
 {
