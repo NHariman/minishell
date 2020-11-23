@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/18 17:45:23 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/18 20:52:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/22 22:57:29 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,48 @@
 ** the redirection or pipe.
 */
 
+static char	*ft_make_env_str(t_shell *shell)
+{
+	int		len;
+	int		i;
+	char	*new_str;
+	char	*tmp;
+
+	len = ft_envlen(shell);
+	new_str = ft_charjoin(shell->env[0], '\n');
+	i = 1;
+	while (i < len - 1)
+	{
+		tmp = gnl_strjoin(new_str, ft_charjoin(shell->env[i], '\n'));
+		new_str = tmp;
+		i++;
+	}
+	tmp = gnl_strjoin(new_str, shell->env[i]);
+	new_str = tmp;
+	return (new_str);
+}
+
 int			env_main(char *str, t_shell *shell)
 {
-	int		i;
-	char	*first_arg;
+	size_t	j;
 
-	i = 0;
-	while (str[i] == ' ')
-		i++;
-	first_arg = ft_no_quotes_str(str, &i, shell);
-
+	j = 0;
+	while (str[j] != '\0')
+	{
+		if (str[j] != ' ' && str[j] != '\n')
+			break ;
+		j++;
+	}
+	if (j == ft_strlen(str))
+	{
+		shell->env_s = ft_make_env_str(shell);
+		shell->exit_code = 0;
+		return (1);
+	}
+	else
+	{
+		ft_printf_err("minishell: env: too many arguments.\n");
+		shell->exit_code = 1;
+	}	
 	return (0);
 }

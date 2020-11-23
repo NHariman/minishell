@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:58 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/17 18:13:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/22 00:05:21 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char		*ft_pwd(void)
 {
 	char	cwd[1024];
 	char	*cwd_res;
-	char	*ret;
 
 	cwd_res = getcwd(cwd, sizeof(cwd));
 	errno = 0;
@@ -25,23 +24,22 @@ char		*ft_pwd(void)
 		ft_printf_err("Error\n%s\n", strerror(errno));
 		return (NULL);
 	}
-	ret = ft_strdup(cwd);
-	return (ret);
+	return (cwd_res);
 }
 
 void		ft_pwd_main(char *str, int *i, t_shell *shell)
 {
 	char	cwd[1024];
 	char	*cwd_res;
-
-	cwd_res = getcwd(cwd, sizeof(cwd));
+	
 	errno = 0;
+	cwd_res = getcwd(cwd, sizeof(cwd));
 	if (cwd_res == NULL)
 	{
 		ft_printf_err("Error\n%s\n", strerror(errno));
 		return ;
 	}
-	shell->pwd = ft_strdup(cwd);
+	shell->pwd = cwd_res;
 	while (!ft_strchr("><|;\n", str[*i]))
 		*i = *i + 1;
 	shell->check.pwd = 1;
