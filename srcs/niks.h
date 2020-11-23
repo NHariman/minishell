@@ -6,17 +6,16 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/19 21:41:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/23 21:16:05 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NIKS_H
 # define NIKS_H
 
-#include "libft/libft.h"
-
 # define SQ 1
 # define DQ 2
+# define NQ 3
 
 typedef struct	s_gnl
 {
@@ -53,8 +52,6 @@ typedef struct	s_check
 {
 	int			echo;
 	int			env;
-	int			exec;
-	int			rd;
 	int			exp;
 	int			err;
 	int			pwd;
@@ -63,13 +60,11 @@ typedef struct	s_check
 typedef struct	s_shell
 {
 	t_check		check;
-	t_list		*exec;
 	int			exit_code;
 	char		*echo;
 	char		*pwd;
 	char		**env;
 	char		*env_s;
-	char		*rd_r;
 	char		*err;
 	char		**exprt;
 
@@ -80,21 +75,26 @@ typedef struct	s_shell
 */
 
 char			*ft_rm_endline(char *str);
-int				exit_minishell(void);
 char			*gnl_strjoin(char *s1, char *s2);
-char			*ft_find_arg(char *cmd, char *str, int *i);
+char			*ft_strjointwo(char *s1, char *s2);
+void			ft_find_arg(char *str, int *i);
 int				get_next_line(int fd, char **line);
-char			*ft_find_variable(char *str, int *i, t_shell *shell);
-char			*ft_find_envvar(char *var, t_shell *shell);
 char			*ft_charjoin(char *str, char c);
 char			*ft_make_single_char_str(char c);
+char			**ft_argv(char *str, t_shell *shell);
+int				ft_count_arr(char *str);
+void			ft_free_array(char **arr, int len);
+
+/*
+** quotes parsing.
+*/
+
 void			ft_strspecial(char *str, t_trim *trim, int *i, char c);
 void			ft_parse_dollar(char *str, int *i,
 							t_trim *trim, t_shell *shell);
 char			*ft_doublequotes_str(char *str, int *i, t_shell *shell);
 char			*ft_no_quotes_str(char *str, int *i, t_shell *shell);
 char			*ft_singlequotes_str(char *str, int *i);
-char			*ft_pwd(void);
 
 /*
 ** checks for correct input before parsing.
@@ -102,8 +102,6 @@ char			*ft_pwd(void);
 
 void			ft_set_qts(t_qts *qts);
 void			ft_qt_line(char *line, t_qts *qts, int *i);
-void			ft_qt_rd(char *line, t_qts *qts, int *i);
-int				ft_qt_check(char *line, int *i, int type, t_qts *qts);
 void			ft_qt_start(char *line, t_qts *qts);
 int				ft_backslash_check(char *line, int i);
 char			*ft_find_case_cmd(char *cmd);
@@ -112,20 +110,24 @@ char			*ft_find_case_cmd(char *cmd);
 ** parsing functions, command specific functions.
 */
 
-void			minishell_parser(char *line, t_shell *shell, char **envp);
+void			minishell_parser(char *line, t_shell *shell);
 int				ft_echo_parser(char *line, int *i, t_shell *shell);
 void			ft_cd(char *str, int *i, t_shell *shell);
 void			ft_pwd_main(char *str, int *i, t_shell *shell);
 void			ft_rd_parser(char *str, int *i, t_shell *shell);
 void			ft_env_parser(char *str, int *i, t_shell *shell);
-int				env_main(char *str, t_shell *shell);
+char			*ft_pwd(void);
+void			exit_minishell(char *str, int *i, t_shell *shell);
 
 /*
 ** env stuff
 */
+
+int				env_main(char *str, t_shell *shell);
 void			ft_add_env_back(t_shell *shell, char *input);
 int				ft_envlen(t_shell *shell);
-int				env_main(char *str, t_shell *shell);
+char			*ft_find_variable(char *str, int *i, t_shell *shell);
+char			*ft_find_envvar(char *var, t_shell *shell);
 
 /*
 ** clear shell struct

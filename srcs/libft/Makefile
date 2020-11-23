@@ -6,12 +6,11 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/11/18 12:18:42 by anonymous     ########   odam.nl          #
+#    Updated: 2020/11/17 15:55:17 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-# COMPILE = 	gcc
-COMPILE = 	clang
+COMPILE = 	gcc
 
 FLAGS = 	-Wall -Werror -Wextra
 
