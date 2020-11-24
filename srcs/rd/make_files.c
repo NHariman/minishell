@@ -79,6 +79,7 @@ static int		open_fill_close_file(char *str, int nb, t_shell *shell)
 	close(fd);//if shell is on, do this after shell is done
 	return (0);
 }
+
 void	ft_rd_output(char *str, t_shell *shell)
 {
 	int		i;
@@ -86,31 +87,35 @@ void	ft_rd_output(char *str, t_shell *shell)
 	char	*string;
 
 	ft_printf("string str output == : {%s}\n", str);
-	i = 1;
-	while (str[i] != '\n' && str[i + 1] != '\n')
+	i = 0;
+	while (str[i])
 	{
+		while (str[i] == '\n')
+			i++;
 		string = ft_strcpystr(i, str, '\n');
-		ft_printf("string ==: {%s}\n", string);
 		while (str[i] != '\n')
 			i++;
-		i++;//after single /n
 		nb = ft_c_atot(str[i]);//get dir
-		i++;//after /n
+		i += 2;
 		if (str[i] == '\n' && str[i + 1] == '\n')
 		{
 			if(open_fill_close_file(string, nb, shell) == 1)
+			{
+				free(string);
 				return ;
-		}
-		else if (open_close_file(string, nb, shell) == 1)
-		{
+			}
 			free(string);
 			return ;
 		}
+		else
+		{
+			if (open_close_file(string, nb, shell) == 1)
+			{
+				free(string);
+				return ;
+			}
+			i++;
+		}
 		free(string);
-	}
-	if (str[i] == '\n' && str[i + 1] == '\n')
-	{
-		if(open_fill_close_file(string, nb, shell) == 1)
-			return ;
 	}
 }

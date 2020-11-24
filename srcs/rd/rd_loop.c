@@ -24,12 +24,12 @@ void			ft_file_input_string(t_struct_rd *rd, t_shell *shell)
 
 	echo = ft_calloc(1, sizeof(t_struct_m));
 	rd->tmp = ft_strdup(echo_main(rd->string, echo, shell));
-	rd->string = ft_strdup(rd->tmp);
+	rd->string = ft_strdup(ft_strtrim(rd->tmp, "\n"));
 	free(rd->tmp);
 	free(echo->tmp);
 	free(echo->str);
 	free(echo);
-	rd->cache = ft_strjoin("\n", rd->output);
+	rd->cache = ft_strjoin(rd->output, "\n");
 	free(rd->output);
 	rd->output = ft_strjoin(rd->cache, rd->string);
 	free(rd->cache);
@@ -42,7 +42,6 @@ static void		create_string(t_struct_rd *rd)
 	free(rd->file);
 	rd->file = ft_strdup(rd->tmp);
 	free(rd->tmp);
-	// ft_printf("file == [%s]", rd->file);
 	rd->cache = ft_strjoin(rd->output, rd->file);
 	free(rd->file);
 	free(rd->output);
