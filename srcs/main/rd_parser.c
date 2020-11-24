@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/15 18:26:39 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/21 21:40:38 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/24 22:03:28 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void		ft_rd_parser(char *str, int *i, t_shell *shell)
 	t_qts	qts;
 
 	start = *i;
-	while (str[*i] != '\n' && str[*i] != '\0' && !ft_strchr("|;", str[*i]))
-		*i = *i + 1;
+	ft_set_qts(&qts);
+	ft_qt_line(str, &qts, i);
 	if (start == *i || *i == 0)
 		rd_str = ft_strdup("\n");
 	else
