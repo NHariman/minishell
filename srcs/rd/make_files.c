@@ -45,27 +45,34 @@ static int		open_close_file(char *str, int nb, t_shell *shell)
 	return (0);
 }
 
-static int		open_fill_close_file(char *str, int nb, t_shell *shell)
+static int		open_fill_close_file(char *file, char *string, int nb, t_shell *shell)
 {
 	int		fd;
 
 	errno = 0;
-	ft_printf("fill file close\n");
-	fd = open(str, O_WRONLY | O_APPEND, 0666);
-	if (fd < 0)
-	{
-		ft_printf_err("Error\n%s\n", strerror(errno));
-		shell->exit_code = 1;
-		return (1);
-	}
+	fd = 0;
 	if (nb == 1)
 	{
-		write(fd, "helllllllo\n", 5);
+		fd = open(file, O_WRONLY | O_TRUNC  | O_CREAT, 0666);
+		if (fd < 0)
+		{
+			ft_printf_err("Error\n%s\n", strerror(errno));
+			shell->exit_code = 1;
+			return (1);
+		}
+		write(fd, string, ft_strlen(string));
 		return (0);
 	}
 	if (nb == 2)
 	{
-		write(fd, "niks is hier\n", 5);
+		fd = open(file, O_WRONLY | O_APPEND| O_CREAT, 0666);
+		if (fd < 0)
+		{
+			ft_printf_err("Error\n%s\n", strerror(errno));
+			shell->exit_code = 1;
+			return (1);
+		}
+		write(fd, string, ft_strlen(string));
 		return (0);
 	}
 	nb = 0;
@@ -84,38 +91,38 @@ void	ft_rd_output(char *str, t_shell *shell)
 {
 	int		i;
 	int		nb;
+	char	*file;
 	char	*string;
 
-	ft_printf("string str output == : {%s}\n", str);
 	i = 0;
 	while (str[i])
 	{
 		while (str[i] == '\n')
 			i++;
-		string = ft_strcpystr(i, str, '\n');
+		file = ft_strcpystr(i, str, '\n');
 		while (str[i] != '\n')
 			i++;
+		i++;
 		nb = ft_c_atot(str[i]);//get dir
-		i += 2;
+		i++;
 		if (str[i] == '\n' && str[i + 1] == '\n')
 		{
-			if(open_fill_close_file(string, nb, shell) == 1)
-			{
-				free(string);
-				return ;
-			}
+			i += 2;
+			string = ft_strcpystr(i, str, '\0');
+			open_fill_close_file(file, string, nb, shell);
+			free(file);
 			free(string);
 			return ;
 		}
 		else
 		{
-			if (open_close_file(string, nb, shell) == 1)
+			if (open_close_file(file, nb, shell) == 1)
 			{
-				free(string);
+				free(file);
 				return ;
 			}
 			i++;
 		}
-		free(string);
+		free(file);
 	}
 }
