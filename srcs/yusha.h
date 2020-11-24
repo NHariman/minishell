@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/19 21:08:19 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/21 20:09:04 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,10 @@ void		cut_string_shell(t_struct_rd *rd, t_shell *shell);
 int         ft_len_string_rd(t_struct_rd *rd);
 void		ft_echo_string_rd(t_struct_rd *rd);
 void		ft_file_input_string(t_struct_rd *rd, t_shell *shell);
+void		ft_rd_output(char *str, t_shell *shell);
 
 //functions
 void		ft_trim_single_c(t_struct_m *echo);
+char		*ft_strcpystr(int start, char *str, char c);
+
 #endif

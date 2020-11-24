@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/19 14:19:27 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/21 16:27:02 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,5 @@ char			*echo_main(char *str, t_struct_m *echo, t_shell *shell)
 		free(echo->str);
 		echo->str = ft_strdup(echo->cache);
 	}
-	// ft_printf("end  == [%s]\n", echo->str);
 	return (echo->str);
 }
