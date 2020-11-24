@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 03:52:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/17 16:06:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/22 18:29:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,42 @@ char	*ft_rm_endline(char *str)
 	return (new);
 }
 
-int		exit_minishell(void)
+void	ft_find_arg(char *str, int *i)
 {
-	ft_printf("exit\n");
-	exit(0);
-}
-
-char	*ft_find_arg(char *cmd, char *str, int *i)
-{
-	char	*word;
 	t_qts	qts;
 
-	word = cmd;
 	ft_set_qts(&qts);
 	ft_qt_line(str, &qts, i);
 	while (!ft_strchr("$><;| \n\0", str[*i]))
 		*i = *i + 1;
-	return (word);
+	return ;
+}
+
+char					*ft_strjointwo(char *s1, char *s2)
+{
+	char		*strduo;
+	size_t		i;
+	size_t		j;
+
+	i = 0;
+	j = 0;
+	strduo = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!strduo)
+	{
+		free(s2);
+		return (NULL);
+	}
+	while (s1 && i < ft_strlen(s1))
+	{
+		strduo[i] = s1[i];
+		i++;
+	}
+	while (s2 && j < ft_strlen(s2))
+	{
+		strduo[i + j] = s2[j];
+		j++;
+	}
+	strduo[i + j] = '\0';
+	free(s2);
+	return (strduo);
 }

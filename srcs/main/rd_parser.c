@@ -19,8 +19,8 @@ void		ft_rd_parser(char *str, int *i, t_shell *shell)
 	t_qts	qts;
 
 	start = *i;
-	ft_set_qts(&qts);
-	ft_qt_rd(str, &qts, i);
+	while (str[*i] != '\n' && str[*i] != '\0' && !ft_strchr("|;", str[*i]))
+		*i = *i + 1;
 	if (start == *i || *i == 0)
 		rd_str = ft_strdup("\n");
 	else

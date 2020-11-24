@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 20:52:54 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/18 12:20:31 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/23 18:10:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void			ft_parse_dollar(char *str, int *i,
 		tmp = ft_find_variable(str, i, shell);
 		trim->res = ft_strjoin(old_str, ft_strjoin(new_str, tmp));
 		trim->start = *i;
+		free(tmp);
 	}
 	else
 	{
@@ -53,6 +54,8 @@ void			ft_parse_dollar(char *str, int *i,
 		trim->start = *i;
 		*i = *i + 1;
 	}
+	free(old_str);
+	free(new_str);
 }
 
 void			ft_strspecial(char *str, t_trim *trim, int *i, char c)
@@ -88,24 +91,24 @@ static char		*ft_insert_output(char *str, int i, t_trim *trim)
 
 char			*ft_doublequotes_str(char *str, int *i, t_shell *shell)
 {
-	t_trim		*trim;
+	t_trim		trim;
 	char		*output;
 
-	trim = calloc(1, sizeof(t_trim));
-	trim->start = *i + 1;
+	trim.res = calloc(1, sizeof(char *));
+	trim.start = *i + 1;
 	*i = *i + 1;
 	output = NULL;
 	while ((str[*i] != '\"' && str[*i] != '\n' && str[*i] != '\0'))
 	{
 		if (str[*i] == '$' && !ft_strchr("\\\"", str[*i + 1]))
-			ft_parse_dollar(str, i, trim, shell);
+			ft_parse_dollar(str, i, &trim, shell);
 		else if (str[*i] == '\\' && ft_strchr("\\\"", str[*i + 1]))
-			ft_strspecial(str, trim, i, str[*i + 1]);
+			ft_strspecial(str, &trim, i, str[*i + 1]);
 		else
 			*i = *i + 1;
 	}
 	*i = *i + 1;
-	output = ft_insert_output(str, *i, trim);
-	free(trim);
+	output = ft_insert_output(str, *i, &trim);
+	free(trim.res);
 	return (output);
 }

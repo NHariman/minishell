@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/17 20:03:49 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/22 01:10:25 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,19 @@ static char	*ft_get_path(char *str, int *i, t_shell *shell)
 
 static void	ft_update_env(t_shell *shell, char *olddir, char *newdir)
 {
-	char	*olddir_input;
-	char	*newdir_input;
 	int		i;
 
-	olddir_input = ft_strjoin("OLDPWD=", olddir);
-	newdir_input = ft_strjoin("PWD=", newdir);
 	i = 0;
-	if (!ft_find_envvar("OLDPWD", shell))
+	if (ft_find_envvar("OLDPWD", shell) == NULL)
 		ft_add_env_back(shell, olddir);
 	while (shell->env[i])
 	{
 		if (!ft_strncmp(shell->env[i], "OLDPWD=", ft_strlen("OLDPWD=")))
-			shell->env[i] = ft_strdup(olddir_input);
+			shell->env[i] = ft_strjoin("OLDPWD=", olddir);
 		else if (!ft_strncmp(shell->env[i], "PWD=", ft_strlen("PWD=")))
-			shell->env[i] = ft_strdup(newdir_input);
+			shell->env[i] = ft_strjoin("PWD=", newdir);;
 		i++;
 	}
-	free(olddir_input);
-	free(newdir_input);
 }
 
 void		ft_cd(char *str, int *i, t_shell *shell)
@@ -81,5 +75,6 @@ void		ft_cd(char *str, int *i, t_shell *shell)
 	}
 	else
 		ft_update_env(shell, olddir, ft_pwd());
+	free(newdir);
 	return ;
 }

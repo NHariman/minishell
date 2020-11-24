@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/18 12:20:03 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/22 01:19:47 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static char			*ft_find_env_variable(char *var, t_shell *shell)
 		{
 			env_var = ft_substr(shell->env[i], ft_strlen(tmp),
 									ft_strlen(shell->env[i]));
+			free(tmp);
 			return (env_var);
 		}
 		i++;
@@ -97,6 +98,7 @@ char			*ft_find_envvar(char *var, t_shell *shell)
 		{
 			env_var = ft_substr(shell->env[i], ft_strlen(tmp),
 									ft_strlen(shell->env[i]));
+			free(tmp);
 			return (env_var);
 		}
 		i++;

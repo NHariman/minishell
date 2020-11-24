@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 18:50:43 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/17 20:21:25 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/23 21:18:02 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ char		*ft_find_case_cmd(char *cmd)
 	tmp = NULL;
 	if (!ft_strcasecmp(cmd, "echo") || !ft_strcasecmp(cmd, "env") ||
 		!ft_strcasecmp(cmd, "pwd"))
-	{
 		tmp = ft_strlower(cmd);
-		cmd = ft_strdup(tmp);
-	}
-	return (cmd);
+	else
+		tmp = ft_strdup(cmd);
+	free(cmd);
+	return (tmp);
 }
 
 int		ft_envlen(t_shell *shell)
@@ -58,18 +58,5 @@ void	ft_add_env_back(t_shell *shell, char *input)
 	}
 	new_envp[i] = input;
 	shell->env = new_envp;
-	free(new_envp);
 }
 
-void	ft_clear_shell(t_shell *shell)
-{
-	shell->check.echo = 0;
-	shell->check.env = 0;
-	shell->check.exp = 0;
-	shell->check.err = 0;
-	shell->check.pwd = 0;
-	shell->echo = NULL;
-	shell->pwd = NULL;
-	shell->err = NULL;
-	shell->env_s = NULL;
-}

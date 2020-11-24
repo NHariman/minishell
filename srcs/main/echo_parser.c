@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 23:38:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/19 14:14:23 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/17 20:09:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int					ft_echo_parser(char *line, int *i, t_shell *shell)
 	ft_set_qts(&qts);
 	ft_qt_line(line, &qts, i);
 	echo_str = ft_create_str(line, *i, start);
-	echo->flag = 0;
 	shell->echo = ft_strdup(echo_main(echo_str, echo, shell));
 	shell->check.echo = 1;
 	if (line[*i] == ';' || line[*i] == '\n' || line[*i] == '\0')
