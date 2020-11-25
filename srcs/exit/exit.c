@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 18:29:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/23 23:01:40 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/25 13:50:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ static int		ft_read_array_input(char *str)
 			&& !ft_isdigit(str[i + 1])))
 			return (-1);
 		check = ft_atoi(str + i);
-		if (check < 0 || check > 255)
-			check = 255;
 		while (ft_isdigit(str[i]) && str[i] != '\0')
 			i++;
 		if (str[i] != '\0')
@@ -73,7 +71,7 @@ static void		ft_parse_exit_argv(char **arr, int len)
 	else
 	{
 		ft_printf_err(
-			"minishell: exit: %s: numeric argument required\n", arr[0]);
+			"minishell: exit: %s: numeric argument required\n", arr[0]); 
 			exit(255);
 	}
 	return ;
@@ -88,6 +86,11 @@ static void		exit_main(char *str, t_shell *shell)
 	if (len == 0)
 		exit(0);
 	argv = ft_argv(str, shell);
+	if (!argv)
+	{
+		ft_free_array(argv, len);
+		return ;
+	}
 	ft_parse_exit_argv(argv, len);
 	ft_free_array(argv, len);
 	shell->exit_code = 1;	
@@ -103,7 +106,7 @@ void		exit_minishell(char *str, int *i, t_shell *shell)
 	start = *i;
 	ft_set_qts(&qts);
 	ft_qt_line(str, &qts, i);
-	ft_printf_err("exit\n");
+	ft_printf("exit\n");
 	exit_str = ft_substr(str, start, *i - start);
 	exit_main(exit_str, shell);
 	while (str[*i] != '\0')
