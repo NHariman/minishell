@@ -6,16 +6,16 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/21 17:00:28 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/26 15:09:20 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-int         rd_check_error_rd(t_struct_rd *rd)
+int			rd_check_error_rd(t_struct_rd *rd)
 {
-	int     error;
+	int		error;
 
 	error = 0;
 	if (rd->str[rd->i] == '>')
@@ -35,11 +35,11 @@ int         rd_check_error_rd(t_struct_rd *rd)
 	return (0);
 }
 
-char        *rd_save_echo(t_struct_rd *rd)
+char		*rd_save_echo(t_struct_rd *rd)
 {
-	int     len;
-	int     i;
-	char    *str;
+	int		len;
+	int		i;
+	char	*str;
 
 	len = rd->i;
 	i = 0;
@@ -55,34 +55,6 @@ char        *rd_save_echo(t_struct_rd *rd)
 	str[i] = '\0';
 	return (str);
 }
-
-// char        *make_file(t_struct_rd *rd)
-// {
-//     int     fd;
-	
-//     fd = open(rd->file, O_EXCL | O_CREAT, 0666);
-//     if (fd < 0)
-//         return (0);
-//     return (0);
-// }
-
-// char        *rd_input_file(t_struct_rd *rd)
-// {
-//     int     fd;
-	
-//     fd = open(rd->file, O_EXCL | O_CREAT, 0666);
-//     if (fd < 0)
-//         return (0);
-//     if (rd->dir == 1)
-//     {
-
-//     }
-//     else if (rd->dir == 2)
-//     {
-		
-//     }
-//     return (0);
-// }
 
 int		start_rd(t_struct_rd *rd, t_shell *shell)
 {

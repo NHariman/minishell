@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/21 19:23:37 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/21 21:41:44 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/26 15:11:38 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static int		open_close_file(char *str, int nb, t_shell *shell)
 	return (0);
 }
 
-static int		open_fill_close_file(char *file, char *string, int nb, t_shell *shell)
+static int		open_fill_close_file(char *file, char *string,
+int nb, t_shell *shell)
 {
 	int		fd;
 
@@ -53,7 +54,7 @@ static int		open_fill_close_file(char *file, char *string, int nb, t_shell *shel
 	fd = 0;
 	if (nb == 1)
 	{
-		fd = open(file, O_WRONLY | O_TRUNC  | O_CREAT, 0666);
+		fd = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 		if (fd < 0)
 		{
 			ft_printf_err("Error\n%s\n", strerror(errno));
@@ -61,11 +62,12 @@ static int		open_fill_close_file(char *file, char *string, int nb, t_shell *shel
 			return (1);
 		}
 		write(fd, string, ft_strlen(string));
+		write(fd, "\n", 1);
 		return (0);
 	}
 	if (nb == 2)
 	{
-		fd = open(file, O_WRONLY | O_APPEND| O_CREAT, 0666);
+		fd = open(file, O_WRONLY | O_APPEND | O_CREAT, 0666);
 		if (fd < 0)
 		{
 			ft_printf_err("Error\n%s\n", strerror(errno));
@@ -73,6 +75,7 @@ static int		open_fill_close_file(char *file, char *string, int nb, t_shell *shel
 			return (1);
 		}
 		write(fd, string, ft_strlen(string));
+		write(fd, "\n", 1);
 		return (0);
 	}
 	nb = 0;

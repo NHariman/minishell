@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/15 12:02:13 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/19 14:51:42 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/26 15:10:11 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 
 void 		cut_string_shell_len(t_struct_rd *rd)
 {
-	while (rd->str[rd->len] != '\0' && rd->str[rd->len] != '\n' && rd->str[rd->len] != ' ' && rd->str[rd->len] != '>')
+	while (rd->str[rd->len] != '\0' && rd->str[rd->len] != '\n'
+	&& rd->str[rd->len] != ' ' && rd->str[rd->len] != '>')
 	{
 		if (rd->str[rd->len] == '\\' && (rd->str[rd->len + 1] == '\''
 		|| rd->str[rd->len + 1] == '\"' || rd->str[rd->len + 1] == '$'))
 			rd->len += 2;
 		else if (rd->str[rd->len] == '\"')
 		{
-			rd->len++;//moves away from double
-			while (rd->str[rd->len] != '\"')//unitl its not
+			rd->len++;
+			while (rd->str[rd->len] != '\"')
 			{
 				if (rd->str[rd->len] == '\\' && rd->str[rd->len + 1] == '\"')
 					rd->len += 2;
@@ -35,8 +36,8 @@ void 		cut_string_shell_len(t_struct_rd *rd)
 		}
 		else if (rd->str[rd->len] == '\'')
 		{
-			rd->len++;//moves away from double
-			while (rd->str[rd->len] != '\'')//unitl its not
+			rd->len++;
+			while (rd->str[rd->len] != '\'')
 			{
 				if (rd->str[rd->len] == '\\' && rd->str[rd->len + 1] == '\'')
 					rd->len += 2;
@@ -61,7 +62,7 @@ void		cut_string_shell(t_struct_rd *rd, t_shell *shell)
 
 	echo = ft_calloc(1, sizeof(t_struct_m));
 	while (rd->str[rd->i] == ' ')
-        rd->i++;
+		rd->i++;
 	i = 0;
 	rd->len = rd->i;
 	cut_string_shell_len(rd);
@@ -77,8 +78,6 @@ void		cut_string_shell(t_struct_rd *rd, t_shell *shell)
 	rd->i = rd->len;
 	echo->flag = 3;
 	rd->file = ft_strdup(echo_main(rd->cache, echo, shell));
-	// if (echo->flag != 3)
-	// 	error
 	free(echo->tmp);
 	free(echo->str);
 	free(echo);
@@ -90,7 +89,8 @@ int         ft_len_string_rd(t_struct_rd *rd)
 
 	len = 0;
 	rd->len = rd->i;
-	while (rd->str[rd->len] != '\0' && rd->str[rd->len] != '\n' && rd->str[rd->len] != '>')
+	while (rd->str[rd->len] != '\0' && rd->str[rd->len] != '\n'
+	&& rd->str[rd->len] != '>')
 	{
 		rd->len++;
 	}
