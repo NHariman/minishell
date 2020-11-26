@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/25 17:52:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/26 15:38:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,10 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 		else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
 			ft_pwd_main(line, i, shell);
 		else
-		{
 			ft_execv_parser(cmd, line, i, shell);
-			// ft_printf("minishell: %s: command not found\n", cmd);
-			// ft_find_arg(line, i);
-		}
 	}
 	else if (line[*i] != '\0')
-	{
 		ft_execv_parser(cmd, line, i, shell);
-		// ft_printf("minishell: %s: command not found\n", cmd);
-		// ft_find_arg(line, i);
-	}
 	cmd = NULL;
 	free(cmd);
 }
