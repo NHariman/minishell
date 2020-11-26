@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 15:38:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/26 20:05:40 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	function_dispatcher(char *line, t_shell *shell)
 		if (line[i] == '>')
 			ft_rd_parser(line, &i, shell);
 		if (line[i] == '<')
-			ft_printf("pipe function here, should handle <, takes the shell struct\n");
+			ft_rd_parser(line, &i, shell);
 		if (line[i] == '|')
 			ft_printf("pipe function here, |, takes the shell struct\n");
 		if (line[i] == ';' || line[i] == '\n' || line[i] == '\0')
