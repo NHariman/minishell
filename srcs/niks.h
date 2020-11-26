@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 19:56:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/26 21:57:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int				ft_arrlen(char **arr);
 char			**ft_add_arr_front(char **arr, char *input);
 void			ft_free_array(char **arr, int len);
 char			**empty_array(char *cmd);
+void			ft_malloc_fail(void);
 
 /*
 ** quotes parsing.
@@ -137,6 +138,11 @@ void			exit_minishell(char *str, int *i, t_shell *shell);
 char			**ft_path_array(char *str, char *cmd);
 void			ft_execute(char *cmd, char *str, char end, t_shell *shell);
 int				ft_execve(char **argv, t_shell *shell);
+
+/*
+** export
+*/
+void			ft_export_parser(char *str, int *i, t_shell *shell);
 
 /*
 ** env stuff

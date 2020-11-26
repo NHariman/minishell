@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   detail_functions.c                                 :+:    :+:            */
+/*   ft_export_parser.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/14 18:50:43 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 20:44:44 by nhariman      ########   odam.nl         */
+/*   Created: 2020/11/26 20:36:01 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/11/26 20:41:06 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-** for improvement: copy the cmd word, lowercase it, compare it
-** to echo and pwd, if correct, return the lowercased word
-** else return the original.
-*/
-
-char		*ft_find_case_cmd(char *cmd)
+void			ft_export_parser(char *str, int *i, t_shell *shell)
 {
-	char *tmp;
+	int		start;
+	int		check;
+	char	*exp_str;
+	t_qts	qts;
 
-	tmp = NULL;
-	if (!ft_strcasecmp(cmd, "echo") || !ft_strcasecmp(cmd, "env") ||
-		!ft_strcasecmp(cmd, "pwd"))
-		tmp = ft_strlower(cmd);
-	else
-		tmp = ft_strdup(cmd);
-	free(cmd);
-	return (tmp);
+	start = *i;
+	ft_set_qts(&qts);
+	ft_qt_line(str, &qts, i);
+	exp_str = ft_substr(str, start, *i - start);
+	ft_export(exp_str, shell);
+	if (ft_strchr("\n;\0", str[*i]) && check == 1)
+		ft_printf("%s\n", shell->exp_str);
+	free(exp_str);
+	return ;
 }

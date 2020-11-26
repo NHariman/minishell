@@ -6,11 +6,17 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 21:15:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 19:57:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/26 20:45:09 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void		ft_malloc_fail(void)
+{
+	ft_printf_err("Error\nMalloc failed. Exiting program.\n");
+	exit(1);
+}
 
 void	ft_free_array(char **arr, int len)
 {

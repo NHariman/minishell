@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 20:05:40 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/26 21:41:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,22 @@ static char	*get_cmd(char *str, int *i, t_shell *shell)
 	return (cmd);
 }
 
+static void	ft_check_case(char *cmd, char *line, int *i, t_shell *shell)
+{
+	char *tmp;
+
+	tmp = ft_find_case_cmd(cmd);
+	if (!ft_strncmp(tmp, "echo", ft_strlen(tmp)))
+		ft_echo_parser(line, i, shell);
+	else if (!ft_strncmp(tmp, "env", ft_strlen(tmp)))
+		ft_env_parser(line, i, shell);
+	else if (!ft_strncmp(tmp, "pwd", ft_strlen(tmp)))
+		ft_pwd_main(line, i, shell);
+	else
+		ft_execv_parser(tmp, line, i, shell);
+	free(tmp);
+}
+
 static void	ft_wordparser(char *line, int *i, t_shell *shell)
 {
 	char	*cmd;
@@ -41,23 +57,13 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 	if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
 		exit_minishell(line, i, shell);
 	else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
-		ft_printf("export function here\n");
+		ft_export_parser(line, i, shell);
 	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
 		ft_printf("unset function here\n");
 	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
 		ft_cd(line, i, shell);
 	else if (ft_strchr("eEpP", cmd[0]))
-	{
-		cmd = ft_find_case_cmd(cmd);
-		if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
-			ft_echo_parser(line, i, shell);
-		else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
-			ft_env_parser(line, i, shell);
-		else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
-			ft_pwd_main(line, i, shell);
-		else
-			ft_execv_parser(cmd, line, i, shell);
-	}
+		ft_check_case(cmd, line, i, shell);
 	else if (line[*i] != '\0')
 		ft_execv_parser(cmd, line, i, shell);
 	cmd = NULL;
