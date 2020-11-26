@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/24 22:02:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/26 13:07:52 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void			ft_parse_dollar(char *str, int *i,
 char			*ft_doublequotes_str(char *str, int *i, t_shell *shell);
 char			*ft_no_quotes_str(char *str, int *i, t_shell *shell);
 char			*ft_singlequotes_str(char *str, int *i);
+int				ft_qt_check(char *line, int *i, int type, t_qts *qts);
 
 /*
 ** checks for correct input before parsing.
