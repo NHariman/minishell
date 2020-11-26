@@ -6,21 +6,12 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/21 16:27:02 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/26 12:14:40 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
-
-int		skip_character(char *str, int i, char c)
-{
-	while (str[i] == c && (str[i]))
-	{
-		i++;
-	}
-	return (i);
-}
 
 static void		ft_handle_quote(t_struct_m *echo)
 {
@@ -59,13 +50,6 @@ void		ft_trim_single_c(t_struct_m *echo)
 	free(cache);
 }
 
-/*
-
-echo $" "
-$' '
-
-*/
-
 void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
 {
 	while (echo->str[echo->i] && echo->str[echo->i] != '\n')
@@ -78,6 +62,9 @@ void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
 			echo->i++;
 		}
 		else if (echo->str[echo->i] == '\\' && echo->str[echo->i + 1] == '\\')
+			ft_trim_single_c(echo);
+		else if (echo->str[echo->i] == '$' &&
+		(echo->str[echo->i + 1] == '\'' || echo->str[echo->i + 1] == '\"'))
 			ft_trim_single_c(echo);
 		else if (echo->str[echo->i] == '$')
 			ft_add_variables(echo, shell);

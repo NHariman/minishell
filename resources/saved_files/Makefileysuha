@@ -6,18 +6,19 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/11/23 19:49:40 by ybakker       ########   odam.nl          #
+#    Updated: 2020/11/24 22:19:35 by anonymous     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-COMPILE = gcc
-# COMPILE = clang
+# COMPILE = gcc
+COMPILE = clang
 
 FLAGS = -Wall -Werror -Wextra
 
 MINISHELL =		main.c \
 				srcs/main/get_next_line.c \
 				srcs/main/gen_functions.c \
+				srcs/main/ft_argv.c \
 				srcs/main/main_parser.c \
 				srcs/main/dollar_sign.c \
 				srcs/main/quotation_handler.c \
@@ -26,11 +27,12 @@ MINISHELL =		main.c \
 				srcs/main/echo_parser.c \
 				srcs/main/rd_parser.c \
 				srcs/main/env_parser.c \
-				srcs/main/get_input.c \
 				srcs/main/detail_functions.c \
 				srcs/cd/ft_cd.c \
 				srcs/pwd/ft_pwd.c \
-				srcs/env/env.c
+				srcs/env/env.c \
+				srcs/exit/exit.c \
+				srcs/free/free.c
 
 ECHO =			srcs/echo/echo.c\
 				srcs/echo/check_nflag.c\
@@ -54,7 +56,7 @@ NAME = minishell
 all: $(NAME)
 
 $(NAME): $(OMINISHELL) $(OECHO) srcs/libft/libft.a
-	@$(COMPILE) $(OMINISHELL) $(OECHO) -g -fsanitize=address srcs/libft/libft.a -o $@
+	@$(COMPILE) $(OMINISHELL) $(OECHO) -fsanitize=address scan-build -g srcs/libft/libft.a -o $@
 
 srcs/libft/libft.a:
 	@cd srcs/libft && $(MAKE)
