@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/26 19:42:55 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/26 20:10:44 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ char		*rd_main(char *str, t_shell *shell)
 	//put the string in shell
 	if (rd->redirect == 0 && shell->check.echo == 1 && rd->string_save != NULL)
 	{
-		write(shell->fd, rd->string_save, ft_strlen(rd->string_save));
-		write(shell->fd, "\n", 1);
+		write(1, rd->string_save, ft_strlen(rd->string_save));
+		write(1, "\n", 1);
 	}
 	if (rd->string_save != NULL)
 		free(rd->string_save);
