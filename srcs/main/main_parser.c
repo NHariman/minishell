@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/23 17:06:54 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/26 15:38:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,37 +38,28 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 	if (line[*i] == '\n' || line[*i] == '\0')
 		return ;
 	cmd = get_cmd(line, i, shell);
-	if (!ft_strncmp(cmd, "exit", ft_strlen("exit")) &&
-		ft_strlen(cmd) == ft_strlen("exit"))
+	if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
 		exit_minishell(line, i, shell);
-	else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)) && ft_strlen(cmd) == ft_strlen("export"))
+	else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
 		ft_printf("export function here\n");
-	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)) && ft_strlen(cmd) == ft_strlen("unset"))
+	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
 		ft_printf("unset function here\n");
-	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)) && ft_strlen(cmd) == ft_strlen("cd"))
+	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
 		ft_cd(line, i, shell);
 	else if (ft_strchr("eEpP", cmd[0]))
 	{
 		cmd = ft_find_case_cmd(cmd);
-		if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)) && ft_strlen(cmd) == ft_strlen("echo"))
+		if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
 			ft_echo_parser(line, i, shell);
-		else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)) && ft_strlen(cmd) == ft_strlen("env"))
+		else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
 			ft_env_parser(line, i, shell);
-		else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)) && ft_strlen(cmd) == ft_strlen("pwd"))
+		else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
 			ft_pwd_main(line, i, shell);
-		else if (cmd == NULL)
-			shell->err = ft_strdup("");
 		else
-		{
-			ft_printf("minishell: %s: command not found\n", cmd);
-			ft_find_arg(line, i);
-		}
+			ft_execv_parser(cmd, line, i, shell);
 	}
 	else if (line[*i] != '\0')
-	{
-		ft_printf("minishell: %s: command not found\n", cmd);
-		ft_find_arg(line, i);
-	}
+		ft_execv_parser(cmd, line, i, shell);
 	cmd = NULL;
 	free(cmd);
 }

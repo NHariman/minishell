@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 21:15:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/23 22:38:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/26 19:57:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ void	ft_free_array(char **arr, int len)
 		i++;
 	}
 	free(arr);
+	arr = NULL;
+}
+
+static void	ft_free_shell(char *str)
+{
+	str = NULL;
+	free(str);
 }
 
 void	ft_clear_shell(t_shell *shell)
@@ -32,29 +39,14 @@ void	ft_clear_shell(t_shell *shell)
 	shell->check.exp = 0;
 	shell->check.err = 0;
 	shell->check.pwd = 0;
-	if (shell->echo)
-	{
-		shell->echo = NULL;
-		free(shell->echo);
-	}
-	if (shell->echo)
-	{
-		shell->echo = NULL;
-		free(shell->echo);
-	}
-	if (shell->pwd)
-	{
-		shell->pwd = NULL;
-		free(shell->pwd);
-	}
-	if (shell->env_s)
-	{
-		shell->env_s = NULL;
-		free(shell->env_s);
-	}
-	if (shell->err)
-	{
-		shell->err = NULL;
-		free(shell->err);
-	}
+	shell->fd = -1;
+	shell->oldnb = 0;
+	if (shell->echo != (char *)0)
+		ft_free_shell(shell->echo);
+	if (shell->pwd != (char *)0)
+		ft_free_shell(shell->pwd);
+	if (shell->env_s != (char *)0)
+		ft_free_shell(shell->env_s);
+	if (shell->err != (char *)0)
+		ft_free_shell(shell->err);
 }

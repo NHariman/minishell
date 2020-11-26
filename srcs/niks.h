@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 13:07:52 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/26 19:56:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct	s_check
 	int			echo;
 	int			env;
 	int			exp;
+	int			exec;
 	int			err;
 	int			pwd;
 	int			rd;
@@ -62,8 +63,11 @@ typedef struct	s_shell
 {
 	t_check		check;
 	int			exit_code;
+	int			fd;
+	int			oldnb;
 	char		*echo;
 	char		*pwd;
+	char		**argv;
 	char		**env;
 	char		*env_s;
 	char		*rd_r;
@@ -85,7 +89,10 @@ char			*ft_charjoin(char *str, char c);
 char			*ft_make_single_char_str(char c);
 char			**ft_argv(char *str, t_shell *shell);
 int				ft_count_arr(char *str);
+int				ft_arrlen(char **arr);
+char			**ft_add_arr_front(char **arr, char *input);
 void			ft_free_array(char **arr, int len);
+char			**empty_array(char *cmd);
 
 /*
 ** quotes parsing.
@@ -119,8 +126,17 @@ void			ft_cd(char *str, int *i, t_shell *shell);
 void			ft_pwd_main(char *str, int *i, t_shell *shell);
 void			ft_rd_parser(char *str, int *i, t_shell *shell);
 void			ft_env_parser(char *str, int *i, t_shell *shell);
+void			ft_execv_parser(char *cmd, char *str, int *i, t_shell *shell);
 char			*ft_pwd(void);
 void			exit_minishell(char *str, int *i, t_shell *shell);
+
+/*
+** execve/execute functions
+*/
+
+char			**ft_path_array(char *str, char *cmd);
+void			ft_execute(char *cmd, char *str, char end, t_shell *shell);
+int				ft_execve(char **argv, t_shell *shell);
 
 /*
 ** env stuff

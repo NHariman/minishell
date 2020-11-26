@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/22 01:10:25 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/26 19:47:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	ft_update_env(t_shell *shell, char *olddir, char *newdir)
 		if (!ft_strncmp(shell->env[i], "OLDPWD=", ft_strlen("OLDPWD=")))
 			shell->env[i] = ft_strjoin("OLDPWD=", olddir);
 		else if (!ft_strncmp(shell->env[i], "PWD=", ft_strlen("PWD=")))
-			shell->env[i] = ft_strjoin("PWD=", newdir);;
+			shell->env[i] = ft_strjoin("PWD=", newdir);
 		i++;
 	}
 }
