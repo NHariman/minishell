@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-static void	ft_qt_line(char *line, t_qts *qts, int *i)
+static void	ft_qt_rd(char *line, t_qts *qts, int *i)
 {
 	while (line[*i] != '\0')
 	{
