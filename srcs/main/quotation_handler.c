@@ -34,7 +34,7 @@ int					ft_backslash_check(char *line, int i)
 	return (backslash);
 }
 
-static int			ft_qt_check(char *line, int *i, int type, t_qts *qts)
+int				ft_qt_check(char *line, int *i, int type, t_qts *qts)
 {
 	int backslash;
 
