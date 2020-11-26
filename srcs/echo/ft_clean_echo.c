@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:36:24 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/15 17:29:33 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/26 15:51:33 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void		set_value_rd(t_struct_rd *rd)
 	rd->echo = 0;
 	rd->variable = 0;
 	rd->dir = 0;
+	rd->rd_rd = 0;
 }

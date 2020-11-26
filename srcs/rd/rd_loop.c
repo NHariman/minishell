@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/21 19:08:36 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/26 18:06:37 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void			ft_file_input_string(t_struct_rd *rd, t_shell *shell)
 	rd->cache = ft_strjoin(rd->output, "\n");
 	free(rd->output);
 	rd->output = ft_strjoin(rd->cache, rd->string);
+	rd->string_save = ft_strdup(rd->output);
 	free(rd->cache);
 	free(rd->string);
 }

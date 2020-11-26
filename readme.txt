@@ -39,7 +39,8 @@ BASIC INTERFACE
 [x] Show prompt when waiting for a new command
 
 EXECV (EXECUTE PROGRAMS)
-[ ] search and launch the right executable (based on the PATH variable or by using relative or absolute path) like in bash
+[N] search and launch the right executable (based on the PATH variable or by using
+relative or absolute path) like in bash
 
 BUILT-INS
 [xY] echo with '-n'
@@ -68,10 +69,10 @@ REDIRECTIONS
 [ ] < (REDIRECT INPUT) should work like in bash except for the file descriptor aggregation
 	ie. cat < file.txt
 	output: whatever's in file.txt gets cat'd.
-[*] > (REDIRECT OUTPUT) should work like in bash except for the file descriptor aggregation
+[Y] > (REDIRECT OUTPUT) should work like in bash except for the file descriptor aggregation
 	ie. echo "hello > file.txt
 	output: the word "hello" is placed in file.txt
-[ ] >> (APPEND OUTPUT TO END OF FILE) should work like in bash except for the file descriptor aggregation
+[Y] >> (APPEND OUTPUT TO END OF FILE) should work like in bash except for the file descriptor aggregation
 	ie. echo "world!" >> file.txt
 	output: "world!" gets added to the end of file.txt
 
@@ -80,12 +81,12 @@ PIPE COMMANDS
 	ie. command1 | command2
 	output: command1 is executed and its output it sent to command2.
 ENVIRONMENT VARIABLES
-[ ] environment variables ($ followed by characters) should work like in bash.
+[N] environment variables ($ followed by characters) should work like in bash.
 	[ ] make new env variables
-	[ ] call env variables
+	[N] call env variables
 
 DOLLAR QUESTION MARK ($?)
-[ ] $? (EXIT STATUS OF LAST EXECUTED COMMAND) should work like in bash
+[N] $? (EXIT STATUS OF LAST EXECUTED COMMAND) should work like in bash
 	output: returns 0 if last executed command is true
 			returns 1 if last executed command is false
 
