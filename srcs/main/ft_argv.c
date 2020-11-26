@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/23 20:20:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/25 20:26:25 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,16 @@ static char	**ft_make_array(char **arr, char *str, t_shell *shell, int arr_len)
 		if (str[i] != ' ' && str[i] != '\n')
 		{
 			arr[count] = ft_no_quotes_str(str, &i, shell);
+			if (!arr[count])
+				return (NULL);
 			count++;
-			if (count == arr_len)
+			if (count + 1 == arr_len)
 				break ;
 		}
 		else
 			i++;
 	}
-	arr[count + 1] = 0;
+	arr[count] = (char *)0;
 	return (arr);
 }
 
@@ -104,9 +106,13 @@ char		**ft_argv(char *s, t_shell *shell)
 	if (!split)
 	{
 		ft_printf_err("Error, malloc failed.\n");
-		shell->exit_code = 1;
-		return (NULL);
+		exit(1);
 	}
 	split = ft_make_array(split, s, shell, arr_len);
+	if (!split)
+	{
+		ft_printf_err("Error, array making failed.\n");
+		exit(1);
+	}
 	return (split);
 }

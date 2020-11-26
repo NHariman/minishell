@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/18 17:45:23 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/22 22:57:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/26 15:37:25 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ int			env_main(char *str, t_shell *shell)
 	{
 		ft_printf_err("minishell: env: too many arguments.\n");
 		shell->exit_code = 1;
-	}	
+	}
 	return (0);
 }
