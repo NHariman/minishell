@@ -6,11 +6,34 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/15 18:26:39 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/24 22:03:28 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/26 13:06:28 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	ft_qt_line(char *line, t_qts *qts, int *i)
+{
+	while (line[*i] != '\0')
+	{
+		if (line[*i] == ';')
+			return ;
+		else if ((line[*i] == '\'' && line[*i - 1] != '\\') ||
+		(line[*i] == '\'' && ft_backslash_check(line, *i) % 2 == 0))
+		{
+			qts->sq = ft_qt_check(line, i, SQ, qts);
+			*i = *i + 1;
+		}
+		else if ((line[*i] == '\"' && line[*i - 1] != '\\') ||
+		(line[*i] == '\"' && ft_backslash_check(line, *i) % 2 == 0))
+		{
+			qts->dq = ft_qt_check(line, i, DQ, qts);
+			*i = *i + 1;
+		}
+		else
+			*i = *i + 1;
+	}
+}
 
 void		ft_rd_parser(char *str, int *i, t_shell *shell)
 {
@@ -20,7 +43,7 @@ void		ft_rd_parser(char *str, int *i, t_shell *shell)
 
 	start = *i;
 	ft_set_qts(&qts);
-	ft_qt_line(str, &qts, i);
+	ft_qt_rd(str, &qts, i);
 	if (start == *i || *i == 0)
 		rd_str = ft_strdup("\n");
 	else
