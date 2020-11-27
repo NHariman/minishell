@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/27 05:34:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/27 08:41:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,18 @@ void			ft_sort_env(int *order, char **env, int start);
 char			*ft_parse_env_str(int *order, char **env);
 char			*ft_add_quotations(char *str, int start);
 void			ft_update_env(t_shell *shell, char *str);
+int				ft_valid_envvar(char *str);
+char			*ft_find_varname(char *str);
 
 /*
-** env stuff
+** unset
+*/
+
+void			ft_unset_parser(char *str, int *i, t_shell *shell);
+void			ft_unset(char *str, t_shell *shell);
+
+/*
+** env
 */
 
 int				env_main(char *str, t_shell *shell);
