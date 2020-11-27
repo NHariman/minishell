@@ -6,11 +6,17 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 21:15:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 19:57:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/27 06:44:14 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void		ft_malloc_fail(void)
+{
+	ft_printf_err("Error\nMalloc failed. Exiting program.\n");
+	exit(1);
+}
 
 void	ft_free_array(char **arr, int len)
 {
@@ -47,6 +53,8 @@ void	ft_clear_shell(t_shell *shell)
 		ft_free_shell(shell->pwd);
 	if (shell->env_s != (char *)0)
 		ft_free_shell(shell->env_s);
+	if (shell->exprt != NULL)
+		ft_free_shell(shell->exprt);
 	if (shell->err != (char *)0)
 		ft_free_shell(shell->err);
 }

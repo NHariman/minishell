@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 13:44:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/22 01:39:53 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/27 07:22:53 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char		*ft_insert_nqt_output(char *str, int i, t_trim *trim)
 
 	output = NULL;
 	old_str = NULL;
-	if (trim->res == '\0')
+	if (trim->res == NULL)
 		output = ft_substr(str, trim->start, i - trim->start);
 	else
 	{
@@ -36,10 +36,10 @@ static	void	ft_nqts_dq_strjoin(char *str, int *i,
 	char	*tmp;
 	char	*new_str;
 
-	if (trim->res == '\0')
+	if (trim->res == NULL)
 		trim->res = ft_substr(str, trim->start, *i - trim->start);
 	new_str = ft_doublequotes_str(str, i, shell);
-	tmp = ft_strdup(trim->res);
+	tmp = trim->res;
 	trim->res = gnl_strjoin(tmp, new_str);
 	trim->start = *i;
 }
@@ -50,7 +50,7 @@ static	void	ft_nqts_sq_strjoin(char *str, int *i, t_trim *trim)
 	char	*new_str;
 	int		start;
 
-	if (trim->res == '\0')
+	if (trim->res == NULL)
 		trim->res = ft_substr(str, trim->start, *i - trim->start);
 	*i = *i + 1;
 	start = *i;
@@ -68,7 +68,7 @@ char			*ft_no_quotes_str(char *str, int *i, t_shell *shell)
 	t_trim		trim;
 	char		*output;
 
-	trim.res = ft_calloc(1, sizeof(char *));
+	trim.res = (char *)0;
 	output = NULL;
 	trim.start = *i;
 	while (!ft_strchr("><|; ", str[*i]) && str[*i] != '\n' && str[*i] != '\0')

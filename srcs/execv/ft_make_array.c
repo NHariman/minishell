@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/25 21:41:05 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 19:41:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/27 05:26:00 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ char			**ft_add_arr_front(char **arr, char *input)
 	i = 0;
 	new_argv = (char **)malloc(sizeof(char *) * (len + 2));
 	if (!new_argv)
-	{
-		ft_printf_err("Error\nMalloc failed.\n");
-		exit(1);
-	}
+		ft_malloc_fail();
 	new_argv[i] = ft_strdup(input);
 	new_argv[len + 1] = (char *)0;
 	while (i + 1 < len + 1)
@@ -44,6 +41,27 @@ char			**ft_add_arr_front(char **arr, char *input)
 		i++;
 	}
 	ft_free_array(arr, len);
+	return (new_argv);
+}
+
+char			**ft_add_arr_back(char **arr, char *input)
+{
+	char	**new_argv;
+	int		len;
+	int		i;
+
+	len = ft_arrlen(arr);
+	i = 0;
+	new_argv = (char **)malloc(sizeof(char *) * (len + 2));
+	if (!new_argv)
+		ft_malloc_fail();
+	new_argv[len] = ft_strdup(input);
+	new_argv[len + 1] = (char *)0;
+	while (i < len)
+	{
+		new_argv[i] = ft_strdup(arr[i]);
+		i++;
+	}
 	return (new_argv);
 }
 
