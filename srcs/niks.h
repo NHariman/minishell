@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 21:57:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/27 05:34:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct	s_shell
 	char		*env_s;
 	char		*rd_r;
 	char		*err;
-	char		**exprt;
+	char		*exprt;
 
 }				t_shell;
 
@@ -91,6 +91,7 @@ char			**ft_argv(char *str, t_shell *shell);
 int				ft_count_arr(char *str);
 int				ft_arrlen(char **arr);
 char			**ft_add_arr_front(char **arr, char *input);
+char			**ft_add_arr_back(char **arr, char *input);
 void			ft_free_array(char **arr, int len);
 char			**empty_array(char *cmd);
 void			ft_malloc_fail(void);
@@ -143,6 +144,12 @@ int				ft_execve(char **argv, t_shell *shell);
 ** export
 */
 void			ft_export_parser(char *str, int *i, t_shell *shell);
+int				ft_export(char *str, t_shell *shell);
+int				*ft_order_env(char **env);
+void			ft_sort_env(int *order, char **env, int start);
+char			*ft_parse_env_str(int *order, char **env);
+char			*ft_add_quotations(char *str, int start);
+void			ft_update_env(t_shell *shell, char *str);
 
 /*
 ** env stuff

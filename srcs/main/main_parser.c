@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 21:41:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/27 07:29:38 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	ft_check_case(char *cmd, char *line, int *i, t_shell *shell)
 		ft_pwd_main(line, i, shell);
 	else
 		ft_execv_parser(tmp, line, i, shell);
-	free(tmp);
 }
 
 static void	ft_wordparser(char *line, int *i, t_shell *shell)
