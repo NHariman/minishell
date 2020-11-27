@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/27 07:01:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/27 08:28:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char		*ft_make_export_str(char **env)
 	return (export_str);
 }
 
-static int		ft_valid_envvar(char *str)
+int				ft_valid_envvar(char *str)
 {
 	int i;
 
@@ -32,7 +32,7 @@ static int		ft_valid_envvar(char *str)
 		return (-1);
 	while (str[i] != '\0')
 	{
-		if (str[i] == ' ')
+		if (str[i] == ' ' || str[i] == '/')
 			return (-1);
 		else if (str[i] == '=')
 			return (1);

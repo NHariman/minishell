@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/27 07:29:38 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/27 08:41:15 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 	else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
 		ft_export_parser(line, i, shell);
 	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
-		ft_printf("unset function here\n");
+		ft_unset_parser(line, i, shell);
 	else if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
 		ft_cd(line, i, shell);
 	else if (ft_strchr("eEpP", cmd[0]))
