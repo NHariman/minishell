@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 19:56:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/28 17:09:25 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct	s_shell
 	int			exit_code;
 	int			fd;
 	int			oldnb;
+	char		*nb_file_input;
+	char		*rd_file_fd;
 	char		*echo;
 	char		*pwd;
 	char		**argv;

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/26 17:28:01 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/28 17:52:06 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,14 @@ int			ft_check_rd(t_struct_rd *rd, t_shell *shell)
 		rd->txt = 1;//ignore strings
 		ft_check_rd_echo(rd, shell);
 	}
-	if (shell->check.env == 1 || shell->check.exp == 1)
+	if (shell->check.env == 1)
 	{
 		rd->txt = 2;//no strings allowed
+		ft_check_rd_echo(rd, shell);
+	}
+	if (shell->check.exp == 1)
+	{
+		rd->txt = 3;//no strings allowed
 		ft_check_rd_echo(rd, shell);
 	}
 	else

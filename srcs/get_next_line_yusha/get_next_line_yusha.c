@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_next_line.c                                    :+:    :+:            */
+/*   get_next_line_yusha.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 16:41:21 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/04/22 11:41:50 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/11/28 15:59:12 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_yusha.h"
 
 static int				find_newline(char *str)
 {
@@ -26,7 +26,7 @@ static int				find_newline(char *str)
 	return (-1);
 }
 
-static char				*read_line(t_gnl gnl)
+static char				*read_line(t_ynl gnl)
 {
 	char		buf[BUFFER_SIZE + 1];
 	char		*tmp;
@@ -39,11 +39,11 @@ static char				*read_line(t_gnl gnl)
 			return (NULL);
 		buf[gnl.bytes_read] = '\0';
 		if (!gnl.line_read)
-			gnl.line_read = ft_strdup(buf);
+			gnl.line_read = gn_strdup(buf);
 		else
 		{
-			tmp = ft_strjoin(gnl.line_read, buf);
-			gnl.line_read = (!tmp ? NULL : ft_strdup(tmp));
+			tmp = gn_strjoin(gnl.line_read, buf);
+			gnl.line_read = (!tmp ? NULL : gn_strdup(tmp));
 			free(tmp);
 		}
 		if (!gnl.line_read)
@@ -54,7 +54,7 @@ static char				*read_line(t_gnl gnl)
 	return (gnl.line_read);
 }
 
-static int				fill_line(t_gnl gnl, char **line)
+static int				fill_line(t_ynl gnl, char **line)
 {
 	int		newline;
 	size_t	remainder;
@@ -64,13 +64,13 @@ static int				fill_line(t_gnl gnl, char **line)
 	if (newline != -1)
 	{
 		if (newline != 0)
-			*line = ft_substr(gnl.line_read, 0, newline);
+			*line = gn_substr(gnl.line_read, 0, newline);
 		else
-			*line = ft_strdup("");
+			*line = gn_strdup("");
 		remainder = 1;
 	}
 	else
-		*line = ft_strdup(gnl.line_read);
+		*line = gn_strdup(gnl.line_read);
 	if (!*line)
 		return (-1);
 	return (newline != -1 && remainder ? 1 : 0);
@@ -84,7 +84,7 @@ static char				*fill_leftover(char *str)
 	newline = find_newline(str);
 	if (newline != -1)
 	{
-		leftover = ft_substr(str, newline + 1, ft_strlen(str) - newline - 1);
+		leftover = gn_substr(str, newline + 1, gn_strlen(str) - newline - 1);
 		if (!leftover)
 			return (NULL);
 	}
@@ -93,10 +93,10 @@ static char				*fill_leftover(char *str)
 	return (leftover);
 }
 
-int						get_next_line(int fd, char **line)
+int						get_next_line_yusha(int fd, char **line)
 {
 	static char		*leftover;
-	t_gnl			gnl;
+	t_ynl			gnl;
 	int				ret;
 
 	if (fd < 0 || line == NULL)
@@ -106,7 +106,7 @@ int						get_next_line(int fd, char **line)
 	*line = gnl.line_read;
 	if (leftover)
 	{
-		gnl.line_read = ft_strdup(leftover);
+		gnl.line_read = gn_strdup(leftover);
 		free(leftover);
 		leftover = NULL;
 	}

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/26 17:47:45 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/28 15:21:08 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/28 17:09:01 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,23 @@
 int		open_fill_close_file(char *file, char *string,
 int nb, t_shell *shell)
 {
-	int     fd;
+	int		fd;
 
 	fd = 0;
 	errno = 0;
+	ft_printf("open fill closee [%i]\n", nb);
 	if (nb == 3)
 	{
 		nb = shell->oldnb;
-		fd = open(file, O_RDWR);
-		if (fd < 0)
+		shell->fd = open(file, O_RDWR);
+		ft_printf("file == [%s]\n", file);
+		if (shell->fd < 0)
 		{
 			ft_printf_err("Error\n%s\n", strerror(errno));
 			shell->exit_code = 1;
 			return (1);
 		}
-		//use file, use get_next_line
-		if (shell->fd != -1)
+		else
 		{
 			redirect_file(shell->fd, shell);
 			close(shell->fd);

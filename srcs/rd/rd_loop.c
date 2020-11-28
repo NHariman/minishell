@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/26 18:06:37 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/28 18:06:13 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,44 @@ int				rd_loop(t_struct_rd *rd, t_shell *shell)
 	rd->file = ft_strdup("");
 	while (rd->str[rd->i] && rd->str[rd->i] != '\n' && error == 0)
 	{
+		/*
+		use the rd->txt to get the right command
+
+		either turn string on
+		ingore string
+		string forbidden
+		string is eviorment variable
+
+		--
+		shell->echo is the string
+		first check the nb
+
+		if == 3
+
+		then use edirect
+		
+		else
+
+		open the file follwong the nb, save the fd, if fd == -1, then its new, if now
+		then close(fd);
+		then do the normal procedure
+		THE COMBINE THE SHELL->ECHO IN THE RD->STRING
+		free shell->echo
+		then get the string aif != after the file and place THAT in shell->echo and do this again
+
+		then strjoin string and echo again and place that in the fd thats in rd->fd
+		close (rd->fd)
+		end
+		*/
 		set_value_rd(rd);
 		error = rd_check_error_rd(rd);
 		if (error != 0)
 			return (error);
+		ft_printf("input string == [%s]\n", shell->echo);
+		// if (nb == 3)
+		// {
+		// 	printf
+		// }
 		cut_string_shell(rd, shell);
 		while (rd->str[rd->i] == ' ')
 			rd->i++;
@@ -101,6 +135,7 @@ int				rd_loop(t_struct_rd *rd, t_shell *shell)
 			rd->len = ft_len_string_rd(rd);
 		create_string(rd);
 	}
+	// shell->echo adding to the string
 	ft_file_input_string(rd, shell);
 	return (error);
 }

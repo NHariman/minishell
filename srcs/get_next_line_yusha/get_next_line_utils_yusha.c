@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_next_line_utils.c                              :+:    :+:            */
+/*   get_next_line_utils_yusha.c                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 16:41:21 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/07/03 11:11:42 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/28 15:55:40 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_yusha.h"
 
-char	*ft_substr(char const *s, int start, size_t len)
+char	*gn_substr(char const *s, int start, size_t len)
 {
 	size_t	count;
 	size_t	size;
@@ -21,9 +21,9 @@ char	*ft_substr(char const *s, int start, size_t len)
 	count = 0;
 	if (!s)
 		return (NULL);
-	if (ft_strlen(s) < start)
-		return (ft_strdup(""));
-	size = ft_strlen(s + start);
+	if (gn_strlen(s) < start)
+		return (gn_strdup(""));
+	size = gn_strlen(s + start);
 	if (size < len)
 		len = size;
 	tab = (char *)malloc((len + 1) * sizeof(char));
@@ -38,7 +38,7 @@ char	*ft_substr(char const *s, int start, size_t len)
 	return (tab);
 }
 
-int		ft_strlen(const char *s)
+int		gn_strlen(const char *s)
 {
 	int length;
 
@@ -48,13 +48,13 @@ int		ft_strlen(const char *s)
 	return (length);
 }
 
-char	*ft_strdup(const char *s1)
+char	*gn_strdup(const char *s1)
 {
 	int		len;
 	int		i;
 	char	*str;
 
-	len = ft_strlen(s1);
+	len = gn_strlen(s1);
 	i = 0;
 	str = (char *)malloc((len + 1) * sizeof(char));
 	if (!str)
@@ -68,7 +68,7 @@ char	*ft_strdup(const char *s1)
 	return (str);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*gn_strjoin(char *s1, char *s2)
 {
 	char		*strduo;
 	int			i;
@@ -76,18 +76,18 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	strduo = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	strduo = (char *)malloc((gn_strlen(s1) + gn_strlen(s2) + 1) * sizeof(char));
 	if (!strduo)
 	{
 		free(s1);
 		return (NULL);
 	}
-	while (s1 && i < ft_strlen(s1))
+	while (s1 && i < gn_strlen(s1))
 	{
 		strduo[i] = s1[i];
 		i++;
 	}
-	while (s2 && j < ft_strlen(s2))
+	while (s2 && j < gn_strlen(s2))
 	{
 		strduo[i + j] = s2[j];
 		j++;
