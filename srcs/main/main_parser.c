@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/27 08:41:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/28 22:11:23 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,41 @@
 ** unmodified.
 */
 
-static char	*get_cmd(char *str, int *i, t_shell *shell)
+static char		*get_cmd(char *str, int *i, t_shell *shell)
 {
 	char	*cmd;
 
 	cmd = ft_no_quotes_str(str, i, shell);
-	return (cmd);
+	while (ft_strchr(cmd, '=') != NULL)
+	{
+		free(cmd);
+		while (str[*i] == ' ')
+			*i = *i + 1;
+		cmd = ft_no_quotes_str(str, i, shell);
+	}
+	shell->cmd = ft_strdup(cmd);
+	free(cmd);
+	return (shell->cmd);
 }
 
-static void	ft_check_case(char *cmd, char *line, int *i, t_shell *shell)
+static void		ft_check_case(char *cmd, char *line, int *i, t_shell *shell)
 {
-	char *tmp;
-
-	tmp = ft_find_case_cmd(cmd);
-	if (!ft_strncmp(tmp, "echo", ft_strlen(tmp)))
+	if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
 		ft_echo_parser(line, i, shell);
-	else if (!ft_strncmp(tmp, "env", ft_strlen(tmp)))
+	else if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
 		ft_env_parser(line, i, shell);
-	else if (!ft_strncmp(tmp, "pwd", ft_strlen(tmp)))
+	else if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
 		ft_pwd_main(line, i, shell);
 	else
-		ft_execv_parser(tmp, line, i, shell);
+		ft_execv_parser(cmd, line, i, shell);
 }
 
-static void	ft_wordparser(char *line, int *i, t_shell *shell)
+static void		ft_wordparser(char *line, int *i, t_shell *shell)
 {
 	char	*cmd;
 
 	cmd = NULL;
-	if (line[*i] == '\n' || line[*i] == '\0')
+	if (line[*i] == '\0')
 		return ;
 	cmd = get_cmd(line, i, shell);
 	if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
@@ -63,22 +69,25 @@ static void	ft_wordparser(char *line, int *i, t_shell *shell)
 		ft_cd(line, i, shell);
 	else if (ft_strchr("eEpP", cmd[0]))
 		ft_check_case(cmd, line, i, shell);
-	else if (line[*i] != '\0')
+	else if (line[*i] == '\0')
 		ft_execv_parser(cmd, line, i, shell);
 	cmd = NULL;
 	free(cmd);
 }
 
-static void	function_dispatcher(char *line, t_shell *shell)
+static void		function_dispatcher(char *line, t_shell *shell)
 {
-	int	i;
+	int		i;
+	char	*cmd;
 
+	i = 0;
+	cmd = ft_no_quotes_str(line, &i, shell);
 	i = 0;
 	while (line[i] != '\0' && line[i] != '\n')
 	{
 		while (line[i] == ' ')
 			i++;
-		if (!ft_strchr("><;|\n\0", line[i]))
+		if (!ft_strchr("><;|\0", line[i]))
 			ft_wordparser(line, &i, shell);
 		if (line[i] == '>')
 			ft_rd_parser(line, &i, shell);
@@ -93,7 +102,7 @@ static void	function_dispatcher(char *line, t_shell *shell)
 	free(line);
 }
 
-void		minishell_parser(char *line, t_shell *shell)
+void			minishell_parser(char *line, t_shell *shell)
 {
 	t_qts		qts;
 

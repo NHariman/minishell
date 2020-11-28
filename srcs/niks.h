@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/27 08:41:41 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/28 20:58:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct	s_shell
 	int			exit_code;
 	int			fd;
 	int			oldnb;
+	char		*cmd;
 	char		*echo;
 	char		*pwd;
 	char		**argv;
@@ -107,6 +108,7 @@ char			*ft_doublequotes_str(char *str, int *i, t_shell *shell);
 char			*ft_no_quotes_str(char *str, int *i, t_shell *shell);
 char			*ft_singlequotes_str(char *str, int *i);
 int				ft_qt_check(char *line, int *i, int type, t_qts *qts);
+void			ft_skip_redirections(char *str, int *i, t_trim *trim);
 
 /*
 ** checks for correct input before parsing.
@@ -116,7 +118,6 @@ void			ft_set_qts(t_qts *qts);
 void			ft_qt_line(char *line, t_qts *qts, int *i);
 void			ft_qt_start(char *line, t_qts *qts);
 int				ft_backslash_check(char *line, int i);
-char			*ft_find_case_cmd(char *cmd);
 
 /*
 ** parsing functions, command specific functions.

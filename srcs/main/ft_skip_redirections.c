@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   detail_functions.c                                 :+:    :+:            */
+/*   ft_skip_redirections.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/14 18:50:43 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 20:44:44 by nhariman      ########   odam.nl         */
+/*   Created: 2020/11/28 20:57:25 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/11/28 21:32:53 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-** for improvement: copy the cmd word, lowercase it, compare it
-** to echo and pwd, if correct, return the lowercased word
-** else return the original.
-*/
-
-char		*ft_find_case_cmd(char *cmd)
+void			ft_skip_redirections(char *str, int *i, t_trim *trim)
 {
-	char *tmp;
-
-	tmp = NULL;
-	if (!ft_strcasecmp(cmd, "echo") || !ft_strcasecmp(cmd, "env") ||
-		!ft_strcasecmp(cmd, "pwd"))
-		tmp = ft_strlower(cmd);
-	else
-		tmp = ft_strdup(cmd);
-	free(cmd);
-	return (tmp);
+	if (trim->res == NULL)
+		trim->res = ft_substr(str, trim->start, *i - trim->start);
+	*i = *i + 1;
+	*i = *i + ft_iswhitespaces(str + *i);
+	while (str[*i] != ' ' && str[*i] != '\0')
+		*i = *i + 1;
+	*i = *i + ft_iswhitespaces(str + *i);
+	trim->start = *i;
 }
