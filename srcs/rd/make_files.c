@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/21 19:23:37 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/26 19:20:35 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/28 15:20:57 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int		open_close_file(char *str, int nb, t_shell *shell)
 	if (nb == 3)
 	{
 		fd = open(str, O_RDWR);
-		//use file, use get_next_line
+		redirect_file(rd, shell);
 		close(fd);
 		return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/26 17:47:45 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/26 19:25:33 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/28 15:21:08 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int nb, t_shell *shell)
 		//use file, use get_next_line
 		if (shell->fd != -1)
 		{
-			write(shell->fd, string, ft_strlen(string));
-			write(shell->fd, "\n", 1);
+			redirect_file(shell->fd, shell);
 			close(shell->fd);
 		}
 		return (0);

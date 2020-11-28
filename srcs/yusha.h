@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/26 18:03:54 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/28 15:23:19 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void		ft_file_input_string(t_struct_rd *rd, t_shell *shell);
 void		ft_rd_output(char *str, t_shell *shell);
 int			open_fill_close_file(char *file, char *string, 
 			int nb, t_shell *shell);
+void        redirect_file(int fd, t_shell *shell);
 
 //functions
 void		ft_trim_single_c(t_struct_m *echo);
