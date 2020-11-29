@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/11/29 03:44:31 by nhariman      ########   odam.nl          #
+#    Updated: 2020/11/29 20:28:53 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ MINISHELL =		main.c \
 				srcs/main/main_parser.c \
 				srcs/main/echo_parser.c \
 				srcs/main/rd_parser.c \
+				srcs/subparsers/ft_get_rdin.c \
 				srcs/subparsers/env_parser.c \
 				srcs/subparsers/execv_parser.c \
 				srcs/subparsers/ft_export_parser.c \

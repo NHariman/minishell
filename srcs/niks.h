@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/29 03:44:49 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/29 20:28:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct	s_shell
 	char		*echo;
 	char		*pwd;
 	char		**argv;
+	char		**rds;
 	char		**env;
 	char		*env_s;
 	char		*rd_r;
@@ -96,6 +97,7 @@ char			**ft_add_arr_back(char **arr, char *input);
 void			ft_free_array(char **arr, int len);
 char			**empty_array(char *cmd);
 void			ft_malloc_fail(void);
+char			**ft_get_rdin(char *str);
 
 /*
 ** quotes parsing.

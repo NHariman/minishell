@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/29 03:49:02 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/29 22:28:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static char		*get_cmd(char *str, int *i, t_shell *shell)
 	char	*cmd;
 
 	cmd = ft_no_quotes_str(str, i, shell);
+	if (cmd == NULL)
+		return (NULL);
 	while (ft_strchr(cmd, '=') != NULL)
 	{
 		free(cmd);
@@ -53,13 +55,14 @@ static void		ft_wordparser(char *line, int *i, t_shell *shell)
 {
 	char	*cmd;
 
-	cmd = NULL;
-	if (line[*i] == '\0')
+	if (shell->cmd == NULL)
 		return ;
-	cmd = get_cmd(line, i, shell);
-	if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
+	cmd = shell->cmd;
+	if (cmd[0] == '\0' || cmd == (char *)0 || shell->cmd == NULL)
+		return ;
+	else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
 		exit_minishell(line, i, shell);
-	else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
+	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
 		ft_export_parser(line, i, shell);
 	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
 		ft_unset_parser(line, i, shell);
@@ -84,19 +87,17 @@ static void		function_dispatcher(char *line, t_shell *shell)
 		shell->argv = empty_array(cmd);
 	else
 		shell->argv = ft_add_arr_front(tmp, cmd);
+	shell->rds = ft_get_rdin(line);
 	i = 0;
-	while (line[i] != '\0' && line[i] != '\n')
-	{
-		i = i + ft_iswhitespaces(line + i);
-		ft_wordparser(line, &i, shell);
-		if (line[i] == '>')
-			ft_rd_parser(line, &i, shell);
-		if (line[i] == '<')
-			ft_rd_parser(line, &i, shell);
-		if (line[i] == '|')
-			ft_printf("pipe function here, |, takes the shell struct\n");
-		i++;
-	}
+	i = i + ft_iswhitespaces(line + i);
+	ft_wordparser(line, &i, shell);
+	// if (line[i] == '>')
+	// 	ft_rd_parser(line, &i, shell);
+	// if (line[i] == '<')
+	// 	ft_rd_parser(line, &i, shell);
+	// if (line[i] == '|')
+	// 	ft_printf("pipe function here, |, takes the shell struct\n");
+
 }
 
 void			minishell_parser(char *line, t_shell *shell)
@@ -114,12 +115,6 @@ void			minishell_parser(char *line, t_shell *shell)
 	else
 	{
 		prompts = ft_get_prompts(line);
-		int k = 0;
-		while (prompts[k] != (char *)0)
-		{
-			ft_printf("prompts: %s\n", prompts[k]);
-			k++;
-		}
 		while (prompts[i] != (char *)0)
 		{
 			function_dispatcher(prompts[i], shell);

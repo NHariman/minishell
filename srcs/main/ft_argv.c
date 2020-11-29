@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/29 03:29:03 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/29 21:19:45 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,14 @@ void		ft_skip_quotes(char *str, int *i, int type)
 
 static void	ft_skip_through(char *str, int *i)
 {
-
-	while (str[*i] != '\0' && str[*i] != ' ' && str[*i] != '\n')
+	while ((str[*i] != ' ' && str[*i] != '\0'))
 	{
 		if (str[*i] == '\"' && ft_backslash_check(str, *i) % 2 == 0)
 			ft_skip_quotes(str, i, DQ);
 		else if (str[*i] == '\'' && ft_backslash_check(str, *i) % 2 == 0)
 			ft_skip_quotes(str, i, SQ);
+		else if (str[*i] == '\\' && ft_strchr(" \\\'\"", str[*i + 1]))
+			*i = *i + 2;
 		else
 			*i = *i + 1;
 	}
@@ -58,7 +59,7 @@ int		ft_count_arr(char *str)
 	{
 		if (ft_strchr("<>|", str[i]) && ft_backslash_check(str, i) % 2 == 0)
 			ft_skip_rd(str, &i);
-		else if (str[i] != ' ' && str[i] != '\n')
+		else if (str[i] != ' ')
 		{
 			ft_skip_through(str, &i);
 			count++;
@@ -78,7 +79,7 @@ static char	**ft_make_array(char **arr, char *str, t_shell *shell, int arr_len)
 	count = 0;
 	while (str[i] != '\0' && count < arr_len)
 	{
-		if (str[i] != ' ' && str[i] != '\n')
+		if (str[i] != ' ')
 		{
 			arr[count] = ft_no_quotes_str(str, &i, shell);
 			if (!arr[count])
