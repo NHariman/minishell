@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 20:43:14 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/29 03:29:03 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	ft_skip_quotes(char *str, int *i, int type)
+void		ft_skip_quotes(char *str, int *i, int type)
 {
 	*i = *i + 1;
 	if (type == SQ)
@@ -56,7 +56,9 @@ int		ft_count_arr(char *str)
 	count = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] != ' ' && str[i] != '\n')
+		if (ft_strchr("<>|", str[i]) && ft_backslash_check(str, i) % 2 == 0)
+			ft_skip_rd(str, &i);
+		else if (str[i] != ' ' && str[i] != '\n')
 		{
 			ft_skip_through(str, &i);
 			count++;
@@ -74,7 +76,7 @@ static char	**ft_make_array(char **arr, char *str, t_shell *shell, int arr_len)
 
 	i = 0;
 	count = 0;
-	while (str[i] != '\0')
+	while (str[i] != '\0' && count < arr_len)
 	{
 		if (str[i] != ' ' && str[i] != '\n')
 		{
@@ -82,13 +84,11 @@ static char	**ft_make_array(char **arr, char *str, t_shell *shell, int arr_len)
 			if (!arr[count])
 				return (NULL);
 			count++;
-			if (count + 1 == arr_len)
-				break ;
 		}
 		else
 			i++;
 	}
-	arr[count] = (char *)0;
+	arr[arr_len] = (char *)0;
 	return (arr);
 }
 
