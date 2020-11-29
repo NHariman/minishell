@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/28 17:05:27 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/29 13:44:10 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void		ft_split_variable(t_struct_tr *trim, t_shell *shell);
 void    	ft_add_variables_double(t_struct_m *echo, t_shell *shell);
 
 //redirect
-char		*rd_main(char *str, t_shell *shell);
+void		rd_main(char *str, t_shell *shell);
 void		set_value_rd(t_struct_rd *rd);
 int			start_rd(t_struct_rd *rd, t_shell *shell);
 int			rd_loop(t_struct_rd *rd, t_shell *shell);
@@ -115,7 +115,7 @@ int         error_sytax(t_struct_rd *rd);
 // char		*cut_string_shell(char *str, t_struct_rd *rd, t_shell *shell);
 // void		cut_string_shell_len(char *str, t_struct_rd *rd, t_shell *shell);
 void 		cut_string_shell_len(t_struct_rd *rd);
-void		cut_string_shell(t_struct_rd *rd, t_shell *shell);
+void		ft_get_file(t_struct_rd *rd, t_shell *shell);
 int         ft_len_string_rd(t_struct_rd *rd);
 void		ft_echo_string_rd(t_struct_rd *rd);
 void		ft_file_input_string(t_struct_rd *rd, t_shell *shell);

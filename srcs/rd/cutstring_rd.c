@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/15 12:02:13 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/26 15:10:11 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/29 13:38:42 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void 		cut_string_shell_len(t_struct_rd *rd)
 		rd->len--;
 }
 
-void		cut_string_shell(t_struct_rd *rd, t_shell *shell)
+void		ft_get_file(t_struct_rd *rd, t_shell *shell)
 {
 	int		i;
 	int		len;

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/28 18:06:13 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/29 13:38:32 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,8 @@ int				rd_loop(t_struct_rd *rd, t_shell *shell)
 		if (error != 0)
 			return (error);
 		ft_printf("input string == [%s]\n", shell->echo);
-		// if (nb == 3)
-		// {
-		// 	printf
-		// }
-		cut_string_shell(rd, shell);
+		ft_get_file(rd, shell);
+		ft_printf("input file == [%s]\n", rd->file);//have the file right here
 		while (rd->str[rd->i] == ' ')
 			rd->i++;
 		if (rd->str[rd->i] != '>' && rd->str[rd->i] != '\0' &&
