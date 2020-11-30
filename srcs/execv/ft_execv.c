@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 19:53:36 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/29 01:45:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void			ft_execute(char *cmd, char *str, char end, t_shell *shell)
 		tmp = ft_argv(str, shell);
 		argv = ft_add_arr_front(tmp, cmd);
 	}
-	if (ft_strchr("\n;\0", end))
+	if (ft_strchr(";\0", end))
 	{
 		if (ft_ispath(cmd))
 			ft_execve(argv, shell);

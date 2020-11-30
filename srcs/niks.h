@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/27 08:41:41 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/30 01:21:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ typedef struct	s_shell
 	int			exit_code;
 	int			fd;
 	int			oldnb;
+	char		*cmd;
 	char		*echo;
 	char		*pwd;
 	char		**argv;
+	char		*rds;
 	char		**env;
 	char		*env_s;
 	char		*rd_r;
@@ -79,7 +81,7 @@ typedef struct	s_shell
 /*
 ** general functions
 */
-
+char			**ft_get_prompts(char *str);
 char			*ft_rm_endline(char *str);
 char			*gnl_strjoin(char *s1, char *s2);
 char			*ft_strjointwo(char *s1, char *s2);
@@ -95,11 +97,13 @@ char			**ft_add_arr_back(char **arr, char *input);
 void			ft_free_array(char **arr, int len);
 char			**empty_array(char *cmd);
 void			ft_malloc_fail(void);
+char			*ft_get_rdin(char *str);
 
 /*
 ** quotes parsing.
 */
 
+void			ft_skip_quotes(char *str, int *i, int type);
 void			ft_strspecial(char *str, t_trim *trim, int *i, char c);
 void			ft_parse_dollar(char *str, int *i,
 							t_trim *trim, t_shell *shell);
@@ -107,6 +111,8 @@ char			*ft_doublequotes_str(char *str, int *i, t_shell *shell);
 char			*ft_no_quotes_str(char *str, int *i, t_shell *shell);
 char			*ft_singlequotes_str(char *str, int *i);
 int				ft_qt_check(char *line, int *i, int type, t_qts *qts);
+void			ft_skip_redirections(char *str, int *i, t_trim *trim);
+void			ft_skip_rd(char *str, int *i);
 
 /*
 ** checks for correct input before parsing.
@@ -116,7 +122,6 @@ void			ft_set_qts(t_qts *qts);
 void			ft_qt_line(char *line, t_qts *qts, int *i);
 void			ft_qt_start(char *line, t_qts *qts);
 int				ft_backslash_check(char *line, int i);
-char			*ft_find_case_cmd(char *cmd);
 
 /*
 ** parsing functions, command specific functions.
