@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/30 01:23:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/30 18:49:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,14 +99,10 @@ static void		function_dispatcher(char *line, t_shell *shell)
 	ft_printf("shell->rds: {%s}\n", shell->rds);
 	i = 0;
 	i = i + ft_iswhitespaces(line + i);
-	ft_wordparser(line, &i, shell);
-	// if (line[i] == '>')
-	// 	ft_rd_parser(line, &i, shell);
-	// if (line[i] == '<')
-	// 	ft_rd_parser(line, &i, shell);
-	// if (line[i] == '|')
-	// 	ft_printf("pipe function here, |, takes the shell struct\n");
-
+	if (!shell->rds)
+		ft_wordparser(line, &i, shell);
+	else
+		rd_main(shell->rds, shell);
 }
 
 void			minishell_parser(char *line, t_shell *shell)
