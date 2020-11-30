@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/29 18:24:20 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/29 22:04:47 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/30 01:23:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static char		*ft_make_str(char **arr)
 	}
 	if (i > 0)
 		new_str = ft_strdup(tmp);
-	ft_printf("new_str: {%s}\n", new_str);
 	return (new_str);
 }
 
@@ -69,7 +68,7 @@ static char		*ft_get_rd(char *str, int *i)
 	return (rdstr);
 }
 
-char			**ft_get_rdin(char *str)
+char			*ft_get_rdin(char *str)
 {
 	int		i;
 	int		len;
@@ -94,12 +93,7 @@ char			**ft_get_rdin(char *str)
 		else
 			i++;
 	}
-	int k = 0;
-	while (rdarr[k] != (char *)0)
-	{
-		ft_printf("rdarr[%i]: {%s}\n", k, rdarr[k]);
-		k++;
-	}
 	rdstr = ft_make_str(rdarr);
-	return (rdarr);
+	ft_free_array(rdarr, len);
+	return (rdstr);
 }

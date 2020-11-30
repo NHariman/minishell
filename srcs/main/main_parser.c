@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/29 22:28:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/30 01:23:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,15 @@ static void		ft_wordparser(char *line, int *i, t_shell *shell)
 {
 	char	*cmd;
 
-	if (shell->cmd == NULL)
+	if (shell->argv[0] == NULL)
 		return ;
-	cmd = shell->cmd;
-	if (cmd[0] == '\0' || cmd == (char *)0 || shell->cmd == NULL)
+	get_cmd(line, i, shell);
+	cmd = ft_strdup(shell->argv[0]);
+	if (cmd[0] == '\0' || cmd == (char *)0)
 		return ;
-	else if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
+	if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
 		exit_minishell(line, i, shell);
-	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
+	else if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
 		ft_export_parser(line, i, shell);
 	else if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
 		ft_unset_parser(line, i, shell);
@@ -82,12 +83,20 @@ static void		function_dispatcher(char *line, t_shell *shell)
 
 	i = 0;
 	cmd = get_cmd(line, &i, shell);
+	shell->cmd = cmd;
 	tmp = ft_argv(line + i, shell);
 	if (!tmp)
 		shell->argv = empty_array(cmd);
 	else
 		shell->argv = ft_add_arr_front(tmp, cmd);
+	int k = 0;
+	while (shell->argv[k] != (char *)0)
+	{
+		ft_printf("shell->argv[%i]: {%s}\n", k, shell->argv[k]);
+		k++;
+	}
 	shell->rds = ft_get_rdin(line);
+	ft_printf("shell->rds: {%s}\n", shell->rds);
 	i = 0;
 	i = i + ft_iswhitespaces(line + i);
 	ft_wordparser(line, &i, shell);

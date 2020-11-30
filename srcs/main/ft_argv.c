@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/29 21:19:45 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/30 00:44:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ char		**ft_argv(char *s, t_shell *shell)
 	if (!s)
 		return (NULL);
 	arr_len = ft_count_arr(s);
+	if (arr_len == 0)
+		return (NULL);
 	split = (char **)malloc((arr_len + 1) * sizeof(char *));
 	if (!split)
 		ft_malloc_fail();
