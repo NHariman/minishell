@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_clean_echo.c                                    :+:    :+:            */
+/*   re_direct.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/07 18:36:24 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/01 15:30:12 by anonymous     ########   odam.nl         */
+/*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
+/*   Updated: 2020/12/01 14:55:04 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-void		set_value_echo(t_struct_m *echo)
+void    rd_value_rd(t_struct_rd *rd)
 {
-	echo->n = 0;
-	echo->i = 0;
-}
-
-void		set_value_trim(t_struct_tr *trim)
-{
-	trim->begin = 0;
-	trim->end = 0;
-	trim->single = 0;
-	trim->doubble = 0;
-	trim->quote = 0;
-	trim->empty = 0;
-	trim->error = 0;
+    rd->nb = 0;
 }

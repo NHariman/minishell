@@ -1,63 +1,130 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   rd_loop.c                                          :+:    :+:            */
+/*   re_direct.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/29 16:05:38 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/12/01 14:57:49 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-/*
-file,rd,file,rd,file,rd;;string
-hello too many ' '
-*/
-
-void			ft_file_input_string(t_struct_rd *rd, t_shell *shell)
+int    rd_get_nb(t_struct_rd *rd)
 {
-	t_struct_m	*echo;
-
-	echo = ft_calloc(1, sizeof(t_struct_m));
-	rd->tmp = ft_strdup(echo_main(rd->string, echo, shell));
-	rd->string = ft_strdup(ft_strtrim(rd->tmp, "\n"));
-	free(rd->tmp);
-	free(echo->tmp);
-	free(echo->str);
-	free(echo);
-	rd->cache = ft_strjoin(rd->output, "\n");
-	free(rd->output);
-	rd->output = ft_strjoin(rd->cache, rd->string);
-	rd->string_save = ft_strdup(rd->output);
-	free(rd->cache);
-	free(rd->string);
-}
-
-int				rd_loop(t_struct_rd *rd, t_shell *shell)
-{
-	int			error;
-	t_struct_m	*echo;
-
-	echo = ft_calloc(1, sizeof(t_struct_m));
-	rd->i = 0;
-	rd->file = ft_strdup("");
-	while (rd->str[rd->i] && rd->str[rd->i] != '\n' && error == 0)
+	while (rd->str[rd->i] == ' ')
+		rd->i++;
+	if (rd->str[rd->i] != '<' && rd->str[rd->i] != '>')
+		return (1);
+	else if (rd->str[rd->i] == '<')
 	{
-		set_value_rd(rd);
-		error = rd_check_error_rd(rd);
-		if (error != 0)
-			return (error);
-		ft_get_file(rd, shell);
-		ft_printf("input file == [%s]\n", rd->file);//have the file right here
+		rd->nb = 3;
+		while (rd->str[rd->i] == '<' || rd->str[rd->i] == ' ')
+			rd->i++;
+		return (rd->error);
+	}
+	else
+	{
+		if (rd->str[rd->i] == '>')
+			rd->nb = 1;
+		rd->i++;
+		if (rd->str[rd->i] == '>')
+			rd->nb = 2;
 		while (rd->str[rd->i] == ' ')
 			rd->i++;
-		//make sure you stand after the file on the next chaarcter
-		//that should be > or >> or < or end of line/]n
 	}
-	// fill in the nb 3 and nb1/2 if open
-	return (error);
+	return (0);
+}
+
+void rd_get_file(t_struct_rd *rd, t_shell *shell, t_struct_m *echo)
+{
+	int     i;
+	int     len;
+	int     start;
+
+	i = 0;
+	start = rd->i;
+	while (rd->str[rd->i] != '\n' && rd->str[rd->i] != '\0' &&
+	rd->str[rd->i] != '<' && rd->str[rd->i] != '>')
+		rd->i++;
+	len = rd->i - start;
+	rd->i = start;
+	rd->cache = (char *)malloc(len * sizeof(char));
+	while (len > 0)
+	{
+		rd->cache[i] = rd->str[rd->i];
+		i++;
+		rd->i++;
+		len--;
+	}
+	rd->cache[i] = '\0';
+	rd->tmp = ft_strtrim(rd->cache, "\n");
+	free(rd->cache);
+	rd->cache = ft_strdup(echo_main(rd->tmp, echo, shell));
+	// free(rd->tmp);
+	rd->file = ft_strtrim(rd->cache, "\n");
+	free(rd->cache);
+	free(echo->tmp);
+	free(echo->str);
+}
+
+void    rd_open_file(t_struct_rd *rd)
+{
+	errno = 0;
+	if (rd->fd != -1)
+		close(rd->fd);
+	else if (rd->fd_rd != -1)
+		close(rd->fd_rd);
+	if (rd->nb == 1)
+	   rd->fd = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
+	else if (rd->nb == 2)
+		rd->fd = open(rd->file, O_WRONLY | O_APPEND | O_CREAT, 0666);
+	else if (rd->nb == 3)
+		rd->fd_rd = open(rd->file, O_RDWR);
+	if (rd->fd < 0 || rd->fd_r < 0)
+	{
+		ft_printf_err("Error\n%s\n", strerror(errno));
+		shell->exit_code = 1;
+	}
+}
+
+void    rd_open_file(t_struct_rd *rd, t_shell *shell)
+{
+	if (rd->fd != -1)
+	{
+		shell->fd = rd->fd;
+		close(rd->fd);
+	}
+	else if (rd->fd_rd != -1)
+	{
+		shell->fd_rd = rd->fd_rd
+		close(rd->fd_rd);
+	}
+}
+
+int     rd_loop(t_struct_rd *rd, t_shell *shell)
+{
+	t_struct_m	*echo;
+	echo = ft_calloc(1, sizeof(t_struct_m));
+	rd->i = 0;
+	rd->error = 0;
+	while (rd->str[rd->i] && rd->str[rd->i] != '\n' && rd->error == 0)
+	{
+		rd_value_rd(rd);
+		rd->error = rd_get_nb(rd);
+		if (rd->error > 0)
+		{
+			free(echo);
+			return (rd->error);
+		}
+		rd_get_file(rd, shell, echo);
+		ft_printf("file == [%s]\n", rd->file);
+		rd_open_file(rd);
+	}
+	rd_fill_file(rd, shell);
+	free(echo);
+	return (rd->error);
 }

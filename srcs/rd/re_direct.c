@@ -6,112 +6,29 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/29 16:00:35 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/12/01 15:35:20 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-static int		rd_check_error_rd_rd(t_struct_rd *rd)
-{
-	/*
-	bash-3.2$ echo hello <<< file1
-	hello
-	bash-3.2$ echo hello <<<< file1
-	bash: syntax error near unexpected token `<'
-	bash-3.2$ echo hello <<<<< file1
-	bash: syntax error near unexpected token `<<'
-	bash-3.2$ echo hello <<<<<< file1
-	bash: syntax error near unexpected token `<<<'
-	*/
-	rd->dir = 3;
-	while (rd->str[rd->i] == '<')
-		rd->i++;
-	//make error, too many <
-	return (0);
-}
-
-int				rd_check_error_rd(t_struct_rd *rd)
-{
-	int		error;
-
-	error = 0;
-	if (rd->str[rd->i] == '<')
-	{
-		return (rd_check_error_rd_rd(rd));
-	}
-	else
-	{
-		rd->redirect = 1;
-		if (rd->str[rd->i] == '>')
-		{
-			rd->dir++;
-			rd->i++;
-		}
-		if (rd->str[rd->i] == '>')
-		{
-			rd->dir++;
-			rd->i++;
-		}
-		if (rd->str[rd->i] == '>' && rd->str[rd->i + 1] == '>')
-			return (4);
-		else if (rd->str[rd->i] == '>')
-			return (3);
-	}
-	return (0);
-}
-
-char		*rd_save_echo(t_struct_rd *rd)
-{
-	int		len;
-	int		i;
-	char	*str;
-
-	len = rd->i;
-	i = 0;
-	while (rd->str[len] == '\n' || rd->str[len] || rd->str[len] == '>')
-		len++;
-	str = (char *)malloc((len + 1) * sizeof(char));
-	while (rd->i <= len)
-	{
-		str[i] = rd->str[rd->i];
-		i++;
-		rd->i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-int		start_rd(t_struct_rd *rd, t_shell *shell)
-{
-	int		error;
-
-	rd->i = 0;
-	error = 0;
-	// cut_string_shell(rd->s_str, rd, shell);//use to get the string out
-	error = ft_check_rd(rd, shell);
-	if (error == 0 || shell->exit_code == 0)
-		error = rd_loop(rd, shell);
-	return (error);
-}
-
 void		rd_main(char *str, t_shell *shell)
 {
-	int				error;
 	t_struct_rd		*rd;
 
-	shell->fd = -1;
-	shell->fd_r = -1;
 	rd = calloc(1, sizeof(t_struct_rd));
-	rd->redirect = 0;
-	rd->output = ft_strdup("");
-	rd->string = ft_strdup("");
+	rd->fd = -1;
+	rd->fd_rd = -1;
 	rd->i = 0;
-	set_value_rd(rd);
+	rd->error = 0;
+	rd_value_rd(rd);
 	rd->str = ft_strtrim(str, "\n");
 	free(str);
 	ft_printf("in == [%s][%i]\n", rd->str, rd->i);
-	error = rd_loop(rd, shell);
-	//if error, what happens here
+	if (rd_check_error_rd(rd, shell) > 0 || rd_loop(rd, shell) > 0)
+	{
+		shell->exit_code = -1;
+		//if error, what happens here
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/29 13:44:10 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/12/01 16:53:56 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,14 @@ typedef struct	s_struct_rd
 {
 	int			i;
 	int			error;
-	int			single;
-	int			doubble;
-	int			len;
-	int			rd_rd;
-	int			rd_fd;
+	int			fd;
+	int			fd_rd;
+	int			nb;
+
 	char		*cache;
-	char		*string;
+	char		*tmp;
 	char		*file;
 	char		*str;
-	char		*tmp;
-	char		*output;
-	char		*string_save;
-
-	int			echo;
-	int			variable;
-	int			txt;
-	int			dir;
-	int			redirect;
 }				t_struct_rd;
 
 //echo main
@@ -104,25 +94,35 @@ void    	ft_add_variables_double(t_struct_m *echo, t_shell *shell);
 
 //redirect
 void		rd_main(char *str, t_shell *shell);
-void		set_value_rd(t_struct_rd *rd);
-int			start_rd(t_struct_rd *rd, t_shell *shell);
-int			rd_loop(t_struct_rd *rd, t_shell *shell);
-char   		*ft_add_variables_rd(char *str, t_struct_rd *rd, t_shell *shell);
-int         rd_check_error_rd(t_struct_rd *rd);
-int			ft_check_rd(t_struct_rd *rd, t_shell *shell);
-int			ft_check_rd_echo(t_struct_rd *rd, t_shell *shell);
-int         error_sytax(t_struct_rd *rd);
-// char		*cut_string_shell(char *str, t_struct_rd *rd, t_shell *shell);
-// void		cut_string_shell_len(char *str, t_struct_rd *rd, t_shell *shell);
-void 		cut_string_shell_len(t_struct_rd *rd);
-void		ft_get_file(t_struct_rd *rd, t_shell *shell);
-int         ft_len_string_rd(t_struct_rd *rd);
-void		ft_echo_string_rd(t_struct_rd *rd);
-void		ft_file_input_string(t_struct_rd *rd, t_shell *shell);
-void		ft_rd_output(char *str, t_shell *shell);
-int			open_fill_close_file(char *file, char *string, 
-			int nb, t_shell *shell);
-void        redirect_file(int fd, t_shell *shell);
+void    	rd_value_rd(t_struct_rd *rd);
+int     	rd_loop(t_struct_rd *rd, t_shell *shell);
+int     	rd_get_nb(t_struct_rd *rd);
+void    	rd_open_file(t_struct_rd *rd);
+void		rd_open_file(t_struct_rd *rd, t_shell *shell);
+
+//rd check
+int			rd_check_error_rd(t_struct_rd *rd, t_shell *shell);
+void 		rd_get_file(t_struct_rd *rd, t_shell *shell, t_struct_m	*echo);
+
+// void		set_value_rd(t_struct_rd *rd);
+// int			start_rd(t_struct_rd *rd, t_shell *shell);
+// int			rd_loop(t_struct_rd *rd, t_shell *shell);
+// char   		*ft_add_variables_rd(char *str, t_struct_rd *rd, t_shell *shell);
+// int         rd_check_error_rd(t_struct_rd *rd);
+// int			ft_check_rd(t_struct_rd *rd, t_shell *shell);
+// int			ft_check_rd_echo(t_struct_rd *rd, t_shell *shell);
+// int         error_sytax(t_struct_rd *rd);
+// // char		*cut_string_shell(char *str, t_struct_rd *rd, t_shell *shell);
+// // void		cut_string_shell_len(char *str, t_struct_rd *rd, t_shell *shell);
+// void 		cut_string_shell_len(t_struct_rd *rd);
+// void		ft_get_file(t_struct_rd *rd, t_shell *shell);
+// int         ft_len_string_rd(t_struct_rd *rd);
+// void		ft_echo_string_rd(t_struct_rd *rd);
+// void		ft_file_input_string(t_struct_rd *rd, t_shell *shell);
+// void		ft_rd_output(char *str, t_shell *shell);
+// int			open_fill_close_file(char *file, char *string, 
+// 			int nb, t_shell *shell);
+// void        redirect_file(int fd, t_shell *shell);
 
 //functions
 void		ft_trim_single_c(t_struct_m *echo);
