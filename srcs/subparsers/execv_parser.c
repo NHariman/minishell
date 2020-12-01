@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/25 15:22:12 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/26 19:27:46 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/11/29 01:00:06 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void		ft_execv_parser(char *cmd, char *str, int *i, t_shell *shell)
 	substr = ft_substr(str, start, *i - start);
 	ft_execute(cmd, substr, str[*i], shell);
 	free(substr);
+	shell->check.exec = 1;
 	return ;
 }
