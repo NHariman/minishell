@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/29 14:32:02 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/29 16:00:35 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 
 static int		rd_check_error_rd_rd(t_struct_rd *rd)
 {
+	/*
+	bash-3.2$ echo hello <<< file1
+	hello
+	bash-3.2$ echo hello <<<< file1
+	bash: syntax error near unexpected token `<'
+	bash-3.2$ echo hello <<<<< file1
+	bash: syntax error near unexpected token `<<'
+	bash-3.2$ echo hello <<<<<< file1
+	bash: syntax error near unexpected token `<<<'
+	*/
 	rd->dir = 3;
 	while (rd->str[rd->i] == '<')
 		rd->i++;
@@ -92,7 +102,7 @@ void		rd_main(char *str, t_shell *shell)
 	t_struct_rd		*rd;
 
 	shell->fd = -1;
-	shell->oldnb = -1;
+	shell->fd_r = -1;
 	rd = calloc(1, sizeof(t_struct_rd));
 	rd->redirect = 0;
 	rd->output = ft_strdup("");
@@ -102,15 +112,6 @@ void		rd_main(char *str, t_shell *shell)
 	rd->str = ft_strtrim(str, "\n");
 	free(str);
 	ft_printf("in == [%s][%i]\n", rd->str, rd->i);
-	error = start_rd(rd, shell);
-	// str = ft_strdup(rd->output);
-	// free(rd->output);
-	// if (rd->redirect == 0 && shell->check.echo == 1 && rd->string_save != NULL)//so if there was no file, only redirect
-	// {
-	// 	write(1, rd->string_save, ft_strlen(rd->string_save));
-	// 	write(1, "\n", 1);
-	// }
-	// if (rd->string_save != NULL)
-	// 	free(rd->string_save);
-	// return (str);
+	error = rd_loop(rd, shell);
+	//if error, what happens here
 }
