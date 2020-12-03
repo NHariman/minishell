@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/30 01:21:57 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/03 18:58:45 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct	s_shell
 	int			exit_code;
 	int			fd;
 	int			oldnb;
-	char		*cmd;
+	char		*ret;
 	char		*echo;
 	char		*pwd;
 	char		**argv;
@@ -77,6 +77,17 @@ typedef struct	s_shell
 	char		*exprt;
 
 }				t_shell;
+
+/*
+** input checkers
+*/
+
+void			ft_set_qts(t_qts *qts);
+void			ft_qt_line(char *line, t_qts *qts, int *i);
+void			ft_qt_start(char *line, t_qts *qts);
+int				ft_backslash_check(char *line, int i);
+int				ft_invalid_pipe(char **arr);
+int				ft_invalid_line(char *str);
 
 /*
 ** general functions
@@ -108,48 +119,38 @@ void			ft_strspecial(char *str, t_trim *trim, int *i, char c);
 void			ft_parse_dollar(char *str, int *i,
 							t_trim *trim, t_shell *shell);
 char			*ft_doublequotes_str(char *str, int *i, t_shell *shell);
-char			*ft_no_quotes_str(char *str, int *i, t_shell *shell);
+char			*ft_no_quotes_str(
+					char *str, int *i, t_shell *shell, char *stop);
 char			*ft_singlequotes_str(char *str, int *i);
 int				ft_qt_check(char *line, int *i, int type, t_qts *qts);
 void			ft_skip_redirections(char *str, int *i, t_trim *trim);
 void			ft_skip_rd(char *str, int *i);
 
 /*
-** checks for correct input before parsing.
-*/
-
-void			ft_set_qts(t_qts *qts);
-void			ft_qt_line(char *line, t_qts *qts, int *i);
-void			ft_qt_start(char *line, t_qts *qts);
-int				ft_backslash_check(char *line, int i);
-
-/*
 ** parsing functions, command specific functions.
 */
 
 void			minishell_parser(char *line, t_shell *shell);
-int				ft_echo_parser(char *line, int *i, t_shell *shell);
-void			ft_cd(char *str, int *i, t_shell *shell);
-void			ft_pwd_main(char *str, int *i, t_shell *shell);
+void			ft_echo(t_shell *shell);
+void			ft_cd(t_shell *shell);
+void			ft_pwd_main(t_shell *shell);
 void			ft_rd_parser(char *str, int *i, t_shell *shell);
-void			ft_env_parser(char *str, int *i, t_shell *shell);
-void			ft_execv_parser(char *cmd, char *str, int *i, t_shell *shell);
 char			*ft_pwd(void);
-void			exit_minishell(char *str, int *i, t_shell *shell);
+void			ft_exit_minishell(char **arr, int len, t_shell *shell);
 
 /*
 ** execve/execute functions
 */
 
 char			**ft_path_array(char *str, char *cmd);
-void			ft_execute(char *cmd, char *str, char end, t_shell *shell);
+void			ft_execute(char *cmd, t_shell *shell);
 int				ft_execve(char **argv, t_shell *shell);
 
 /*
 ** export
 */
-void			ft_export_parser(char *str, int *i, t_shell *shell);
-int				ft_export(char *str, t_shell *shell);
+
+void			ft_export(t_shell *shell);
 int				*ft_order_env(char **env);
 void			ft_sort_env(int *order, char **env, int start);
 char			*ft_parse_env_str(int *order, char **env);
@@ -162,14 +163,13 @@ char			*ft_find_varname(char *str);
 ** unset
 */
 
-void			ft_unset_parser(char *str, int *i, t_shell *shell);
-void			ft_unset(char *str, t_shell *shell);
+void			ft_unset(t_shell *shell);
 
 /*
 ** env
 */
 
-int				env_main(char *str, t_shell *shell);
+void			ft_env(t_shell *shell);
 void			ft_add_env_back(t_shell *shell, char *input);
 int				ft_envlen(t_shell *shell);
 char			*ft_find_variable(char *str, int *i, t_shell *shell);

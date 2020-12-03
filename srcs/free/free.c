@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 21:15:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/28 15:36:40 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/03 19:02:37 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	ft_clear_shell(t_shell *shell)
 	shell->check.pwd = 0;
 	shell->fd = -1;
 	shell->oldnb = 0;
-	if (shell->cmd != (char *)0)
-		ft_free_shell(shell->cmd);
+	if (shell->ret != (char *)0)
+		ft_free_shell(shell->ret);
 	if (shell->echo != (char *)0)
 		ft_free_shell(shell->echo);
 	if (shell->pwd != (char *)0)

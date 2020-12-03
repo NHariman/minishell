@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/30 00:44:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/03 18:59:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static char	**ft_make_array(char **arr, char *str, t_shell *shell, int arr_len)
 	{
 		if (str[i] != ' ')
 		{
-			arr[count] = ft_no_quotes_str(str, &i, shell);
+			arr[count] = ft_no_quotes_str(str, &i, shell, " ");
 			if (!arr[count])
 				return (NULL);
 			count++;
