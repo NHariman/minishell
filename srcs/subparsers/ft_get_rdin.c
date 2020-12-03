@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/29 18:24:20 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/30 01:23:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/03 22:17:08 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,11 @@ static char		*ft_get_rd(char *str, int *i)
 	return (rdstr);
 }
 
-char			*ft_get_rdin(char *str)
+static char		**ft_fill_rdarr(char *str, char **rdarr, int len)
 {
 	int		i;
-	int		len;
 	int		count;
-	char	**rdarr;
-	char	*rdstr;
 
-	len = ft_count_rds(str);
-	if (len == 0)
-		return (NULL);
-	rdarr = (char **)malloc(sizeof(char *) * (len + 1));
-	rdarr[len] = (char *)0;
 	i = 0;
 	count = 0;
 	while (str[i] != '\0' && count < len)
@@ -93,6 +85,21 @@ char			*ft_get_rdin(char *str)
 		else
 			i++;
 	}
+	return (rdarr);
+}
+
+char			*ft_get_rdin(char *str)
+{
+	int		len;
+	char	**rdarr;
+	char	*rdstr;
+
+	len = ft_count_rds(str);
+	if (len == 0)
+		return (NULL);
+	rdarr = (char **)malloc(sizeof(char *) * (len + 1));
+	rdarr[len] = (char *)0;
+	rdarr = ft_fill_rdarr(str, rdarr, len);
 	rdstr = ft_make_str(rdarr);
 	ft_free_array(rdarr, len);
 	return (rdstr);

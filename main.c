@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/28 19:37:00 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/03 22:20:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int		main(int argc, char *argv[], char *envp[])
 	hold = argv;
 	shell = calloc(1, sizeof(t_shell));
 	shell->env = envp;
-	shell->fd = -1;
-	shell->oldnb = 0;
 	line = NULL;
 	while (i > 0)
 	{

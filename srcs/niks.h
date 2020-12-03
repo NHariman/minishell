@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 18:58:45 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/03 20:12:24 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void			ft_qt_line(char *line, t_qts *qts, int *i);
 void			ft_qt_start(char *line, t_qts *qts);
 int				ft_backslash_check(char *line, int i);
 int				ft_invalid_pipe(char **arr);
-int				ft_invalid_line(char *str);
+int				ft_invalid_line(char *str, t_shell *shell);
 
 /*
 ** general functions
