@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 19:01:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/03 22:33:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static char		*get_cmd(char *str, int *i, t_shell *shell)
 {
 	char	*cmd;
 
+	*i = *i + ft_iswhitespaces(str + *i);
 	cmd = ft_no_quotes_str(str, i, shell, " ");
 	if (cmd == NULL)
 		return (NULL);
@@ -47,7 +48,7 @@ static void		ft_check_case(char *cmd, t_shell *shell)
 		ft_env(shell);
 	else if (!ft_strcmp(cmd, "pwd"))
 		ft_pwd_main(shell);
-	else 
+	else
 		ft_execute(cmd, shell);
 }
 
@@ -108,7 +109,7 @@ void			minishell_parser(char *line, t_shell *shell)
 	char		**prompts;
 
 	i = 0;
-	if (line[0] == '\0')
+	if (line[0] == '\0' || ft_invalid_line(line, shell))
 		return ;
 	prompts = (char **)0;
 	ft_set_qts(&qts);
