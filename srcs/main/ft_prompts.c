@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/29 03:18:41 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 19:38:54 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/05 22:39:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_count_prompts(char *str)
 		else
 			i = i + 1;
 		if (str[i] == ';' && ft_backslash_check(str, i) % 2 == 0 &&
-		str[i + 1] != '\0')
+		str[i + 1 + ft_iswhitespaces(str + i + 1)] != '\0')
 			count++;
 	}
 	return (count);
@@ -52,14 +52,14 @@ static char	**ft_fill_prompts(char **prompts, char *str, int len)
 		else
 			i = i + 1;
 		if (str[i] == ';' && ft_backslash_check(str, i) % 2 == 0 &&
-		str[i + 1] != '\0')
+		str[i + 1 + ft_iswhitespaces(str + i + 1)] != '\0')
 		{
-			prompts[count] = ft_substr(str, start, i - start);
+			prompts[count] = ft_strtrim(ft_substr(str, start, i - start), ";");
 			start = i + 1;
 			count++;
 		}
 	}
-	prompts[count] = ft_substr(str, start, i - start);
+	prompts[count] = ft_strtrim(ft_substr(str, start, i - start), ";");
 	return (prompts);
 }
 

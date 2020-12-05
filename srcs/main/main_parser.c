@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 22:33:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/05 22:33:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void		ft_wordparser(t_shell *shell)
 		ft_execute(cmd, shell);
 }
 
-static void		function_dispatcher(char *line, t_shell *shell)
+void			function_dispatcher(char *line, t_shell *shell)
 {
 	int		i;
 	char	*cmd;
@@ -105,27 +105,14 @@ static void		function_dispatcher(char *line, t_shell *shell)
 void			minishell_parser(char *line, t_shell *shell)
 {
 	t_qts		qts;
-	int			i;
-	char		**prompts;
 
-	i = 0;
-	if (line[0] == '\0' || ft_invalid_line(line, shell))
+	if (line[0] == '\0' || ft_invalid_line(line, shell, ";|"))
 		return ;
-	prompts = (char **)0;
 	ft_set_qts(&qts);
 	ft_qt_start(line, &qts);
 	if (qts.dq % 2 != 0 || qts.sq % 2 != 0)
 		ft_printf_err("Error\nHanging quotes. Parsing failed.\n");
 	else
-	{
-		prompts = ft_get_prompts(line);
-		while (prompts[i] != (char *)0)
-		{
-			function_dispatcher(prompts[i], shell);
-			ft_clear_shell(shell);
-			i++;
-		}
-		ft_free_array(prompts, ft_arrlen(prompts));
-	}
+		ft_make_prompts(line, shell);
 	free(line);
 }
