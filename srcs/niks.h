@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 20:12:24 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/05 18:21:36 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct	s_shell
 	t_check		check;
 	int			exit_code;
 	int			fd;
+	int			fd_r;
 	int			oldnb;
 	char		*ret;
 	char		*echo;
