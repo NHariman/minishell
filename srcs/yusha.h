@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/21 20:09:04 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/12/05 18:17:35 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,20 @@ typedef struct	s_struct_rd
 {
 	int			i;
 	int			error;
+	int			fd;
+	int			fd_rd;
+	int			nb;
+	int			rdi;
 	int			single;
 	int			doubble;
-	int			len;
-	char		*cache;
-	char		*string;
-	char		*file;
-	char		*str;
-	char		*tmp;
-	char		*output;
-
 	int			echo;
 	int			variable;
-	int			txt;
 	int			dir;
+
+	char		*cache;
+	char		*tmp;
+	char		*file;
+	char		*str;
 }				t_struct_rd;
 
 //echo main
@@ -99,23 +99,39 @@ void		ft_split_variable(t_struct_tr *trim, t_shell *shell);
 void    	ft_add_variables_double(t_struct_m *echo, t_shell *shell);
 
 //redirect
-char		*rd_main(char *str, t_shell *shell);
-void		set_value_rd(t_struct_rd *rd);
-int			start_rd(t_struct_rd *rd, t_shell *shell);
-int			rd_loop(t_struct_rd *rd, t_shell *shell);
-char   		*ft_add_variables_rd(char *str, t_struct_rd *rd, t_shell *shell);
-int         rd_check_error_rd(t_struct_rd *rd);
-int			ft_check_rd(t_struct_rd *rd, t_shell *shell);
-int			ft_check_rd_echo(t_struct_rd *rd, t_shell *shell);
-int         error_sytax(t_struct_rd *rd);
-// char		*cut_string_shell(char *str, t_struct_rd *rd, t_shell *shell);
-// void		cut_string_shell_len(char *str, t_struct_rd *rd, t_shell *shell);
-void 		cut_string_shell_len(t_struct_rd *rd);
-void		cut_string_shell(t_struct_rd *rd, t_shell *shell);
-int         ft_len_string_rd(t_struct_rd *rd);
-void		ft_echo_string_rd(t_struct_rd *rd);
-void		ft_file_input_string(t_struct_rd *rd, t_shell *shell);
-void		ft_rd_output(char *str, t_shell *shell);
+void		rd_main(char *str, t_shell *shell);
+void    	rd_value_rd(t_struct_rd *rd);
+int     	rd_loop(t_struct_rd *rd, t_shell *shell);
+int     	rd_get_nb(t_struct_rd *rd);
+void    	rd_open_file(t_struct_rd *rd, t_shell *shell);
+void		rd_fill_file(t_struct_rd *rd, t_shell *shell);
+
+//rd check
+int			error_check_rd(t_struct_rd *rd, t_shell *shell);
+void		while_check_while(char *str, int *i, t_shell *shell);
+int			rd_check_error_out(t_struct_rd *rd, t_shell *shell);
+int			rd_check_error_in(t_struct_rd *rd, t_shell *shell);
+void 		rd_get_file(t_struct_rd *rd, t_shell *shell, t_struct_m	*echo);
+
+// void		set_value_rd(t_struct_rd *rd);
+// int			start_rd(t_struct_rd *rd, t_shell *shell);
+// int			rd_loop(t_struct_rd *rd, t_shell *shell);
+// char   		*ft_add_variables_rd(char *str, t_struct_rd *rd, t_shell *shell);
+// int         rd_check_error_rd(t_struct_rd *rd);
+// int			ft_check_rd(t_struct_rd *rd, t_shell *shell);
+// int			ft_check_rd_echo(t_struct_rd *rd, t_shell *shell);
+// int         error_sytax(t_struct_rd *rd);
+// // char		*cut_string_shell(char *str, t_struct_rd *rd, t_shell *shell);
+// // void		cut_string_shell_len(char *str, t_struct_rd *rd, t_shell *shell);
+// void 		cut_string_shell_len(t_struct_rd *rd);
+// void		ft_get_file(t_struct_rd *rd, t_shell *shell);
+// int         ft_len_string_rd(t_struct_rd *rd);
+// void		ft_echo_string_rd(t_struct_rd *rd);
+// void		ft_file_input_string(t_struct_rd *rd, t_shell *shell);
+// void		ft_rd_output(char *str, t_shell *shell);
+// int			open_fill_close_file(char *file, char *string, 
+// 			int nb, t_shell *shell);
+// void        redirect_file(int fd, t_shell *shell);
 
 //functions
 void		ft_trim_single_c(t_struct_m *echo);
