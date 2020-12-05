@@ -6,100 +6,128 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/21 19:08:36 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/12/03 18:01:31 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-/*
-file,rd,file,rd,file,rd;;string
-hello too many ' '
-*/
-
-void			ft_file_input_string(t_struct_rd *rd, t_shell *shell)
+int    rd_get_nb(t_struct_rd *rd)
 {
-	t_struct_m	*echo;
-
-	echo = ft_calloc(1, sizeof(t_struct_m));
-	rd->tmp = ft_strdup(echo_main(rd->string, echo, shell));
-	rd->string = ft_strdup(ft_strtrim(rd->tmp, "\n"));
-	free(rd->tmp);
-	free(echo->tmp);
-	free(echo->str);
-	free(echo);
-	rd->cache = ft_strjoin(rd->output, "\n");
-	free(rd->output);
-	rd->output = ft_strjoin(rd->cache, rd->string);
-	free(rd->cache);
-	free(rd->string);
-}
-
-static void		create_string(t_struct_rd *rd)
-{
-	rd->tmp = ft_strtrim(rd->file, "\n");
-	free(rd->file);
-	rd->file = ft_strdup(rd->tmp);
-	free(rd->tmp);
-	rd->cache = ft_strjoin(rd->output, rd->file);
-	free(rd->file);
-	free(rd->output);
-	rd->tmp = ft_strjoin(rd->cache, "\n");
-	free(rd->cache);
-	rd->output = ft_itoa(rd->dir);
-	rd->cache = ft_strjoin(rd->tmp, rd->output);
-	free(rd->tmp);
-	free(rd->output);
-	rd->output = ft_strjoin(rd->cache, "\n");
-	free(rd->cache);
-}
-
-static void		loop_if_one(t_struct_rd *rd)
-{
-	if (rd->str != NULL)
-	{
-		rd->cache = ft_strjoin(rd->string, " ");
-		free(rd->string);
-		rd->string = ft_strdup(rd->cache);
-		free(rd->cache);
-	}
 	while (rd->str[rd->i] == ' ')
 		rd->i++;
-	rd->len = ft_len_string_rd(rd);
-	ft_echo_string_rd(rd);
-	rd->tmp = ft_strjoin(rd->string, rd->cache);
-	free(rd->string);
-	free(rd->cache);
-	rd->string = ft_strtrim(rd->tmp, " ");
-	free(rd->tmp);
+	if (rd->str[rd->i] != '<' && rd->str[rd->i] != '>')
+		return (1);
+	else if (rd->str[rd->i] == '<')
+	{
+		rd->nb = 3;
+		while (rd->str[rd->i] == '<' || rd->str[rd->i] == ' ')
+			rd->i++;
+		return (rd->error);
+	}
+	else
+	{
+		if (rd->str[rd->i] == '>')
+			rd->nb = 1;
+		rd->i++;
+		if (rd->str[rd->i] == '>')
+			rd->nb = 2;
+		while (rd->str[rd->i] == ' ')
+			rd->i++;
+	}
+	return (0);
 }
 
-int				rd_loop(t_struct_rd *rd, t_shell *shell)
+void rd_get_file(t_struct_rd *rd, t_shell *shell, t_struct_m *echo)
 {
-	int			error;
+	int     i;
+	int     len;
+	int     start;
+
+	i = 0;
+	start = rd->i;
+	while (rd->str[rd->i] != '\n' && rd->str[rd->i] != '\0' &&
+	rd->str[rd->i] != '<' && rd->str[rd->i] != '>')
+		rd->i++;
+	len = rd->i - start;
+	rd->i = start;
+	rd->cache = (char *)malloc(len * sizeof(char));
+	while (len > 0)
+	{
+		rd->cache[i] = rd->str[rd->i];
+		i++;
+		rd->i++;
+		len--;
+	}
+	rd->cache[i] = '\0';
+	rd->tmp = ft_strtrim(rd->cache, "\n");
+	free(rd->cache);
+	rd->cache = ft_strdup(echo_main(rd->tmp, echo, shell));
+	// free(rd->tmp);
+	rd->file = ft_strtrim(rd->cache, "\n");
+	free(rd->cache);
+	free(echo->tmp);
+	free(echo->str);
+}
+
+void    rd_open_file(t_struct_rd *rd, t_shell *shell)
+{
+	errno = 0;
+	if (rd->fd != -1)
+		close(rd->fd);
+	else if (rd->fd_rd != -1)
+		close(rd->fd_rd);
+	if (rd->nb == 1)
+	   rd->fd = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
+	else if (rd->nb == 2)
+		rd->fd = open(rd->file, O_WRONLY | O_APPEND | O_CREAT, 0666);
+	else if (rd->nb == 3)
+		rd->fd_rd = open(rd->file, O_RDWR);
+	// printf("fd == [%i] rd == [%i]\n", rd->fd_rd, rd->fd);
+	if ((rd->fd < 0 && rd->nb > 0) || (rd->fd_rd < 0 && rd->nb == 3))
+	{
+		ft_printf_err("Error\n%s\n", strerror(errno));
+		shell->exit_code = 1;
+	}
+	rd->nb = 0;
+}
+
+void    rd_fill_file(t_struct_rd *rd, t_shell *shell)
+{
+	if (rd->fd != -1)
+	{
+		shell->fd = rd->fd;
+		close(rd->fd);
+	}
+	else if (rd->fd_rd != -1)
+	{
+		shell->fd_r = rd->fd_rd;
+		close(rd->fd_rd);
+	}
+}
+
+int     rd_loop(t_struct_rd *rd, t_shell *shell)
+{
 	t_struct_m	*echo;
 
 	echo = ft_calloc(1, sizeof(t_struct_m));
 	rd->i = 0;
-	rd->file = ft_strdup("");
-	while (rd->str[rd->i] && rd->str[rd->i] != '\n' && error == 0)
+	rd->error = 0;
+	while (rd->str[rd->i] && rd->str[rd->i] != '\n' && rd->error == 0)
 	{
-		set_value_rd(rd);
-		error = rd_check_error_rd(rd);
-		if (error != 0)
-			return (error);
-		cut_string_shell(rd, shell);
-		while (rd->str[rd->i] == ' ')
-			rd->i++;
-		if (rd->str[rd->i] != '>' && rd->str[rd->i] != '\0' &&
-		rd->str[rd->i] != '\n' && rd->txt == 0)
-			loop_if_one(rd);
-		else if (rd->str[rd->i] != '>' && rd->str[rd->i] != '\0' &&
-		rd->str[rd->i] != '\n' && rd->txt == 1)
-			rd->len = ft_len_string_rd(rd);
-		create_string(rd);
+		rd_value_rd(rd);
+		rd->error = rd_get_nb(rd);
+		if (rd->error > 0)
+		{
+			free(echo);
+			return (rd->error);
+		}
+		rd_get_file(rd, shell, echo);
+		ft_printf("file == [%s]\n", rd->file);
+		rd_open_file(rd, shell);
 	}
-	ft_file_input_string(rd, shell);
-	return (error);
+	rd_fill_file(rd, shell);
+	free(echo);
+	return (rd->error);
 }

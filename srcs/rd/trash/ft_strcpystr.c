@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   re_direct.c                                        :+:    :+:            */
+/*   ft_strcpystr.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/03 14:15:10 by ybakker       ########   odam.nl         */
+/*   Created: 2020/11/21 19:10:53 by ybakker       #+#    #+#                 */
+/*   Updated: 2020/11/21 19:40:11 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-void		rd_main(char *str, t_shell *shell)
+char    *ft_strcpystr(int start, char *str, char c)
 {
-	t_struct_rd		*rd;
+	int		i;
+	char	*string;
 
-	rd = calloc(1, sizeof(t_struct_rd));
-	rd->fd = -1;
-	rd->fd_rd = -1;
-	rd->i = 0;
-	rd->error = 0;
-	rd_value_rd(rd);
-	rd->str = ft_strtrim(str, "\n");
-	free(str);
-	ft_printf("in == [%s][%i]\n", rd->str, rd->i);
-	if (error_check_rd(rd, shell) > 0 || rd_loop(rd, shell) > 0)
+	i = start;
+	while (str[i] != c)
+		i++;
+	string = (char *)malloc((i - start + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	while (str[start] != c)
 	{
-		shell->exit_code = -1;
-		//if error, what happens here
+		string[i] = str[start];
+		i++;
+		start++;
 	}
+	string[i] = '\0';
+	return (string);
 }
