@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/06 18:40:57 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/06 20:49:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void			ft_qt_line(char *line, t_qts *qts, int *i);
 void			ft_qt_start(char *line, t_qts *qts);
 int				ft_backslash_check(char *line, int i);
 int				ft_invalid_line(char *str, t_shell *shell, char token);
+char			**ft_fill_prompts(char **prompts, char *str, int len, char token);
 void			ft_make_prompts(char *str, t_shell *shell);
 void			ft_pipe_splitter(char *str, t_shell *shell);
 void			function_dispatcher(char *line, t_shell *shell);
@@ -117,7 +118,7 @@ char			*ft_get_rdin(char *str);
 ** quotes parsing.
 */
 
-void			ft_skip_quotes(char *str, int *i, int type);
+void			ft_skip_quotes(char *str, int *i, char type);
 void			ft_strspecial(char *str, t_trim *trim, int *i, char c);
 void			ft_parse_dollar(char *str, int *i,
 							t_trim *trim, t_shell *shell);
