@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 18:59:16 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/06 00:29:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		ft_count_arr(char *str)
 	count = 0;
 	while (str[i] != '\0')
 	{
-		if (ft_strchr("<>|", str[i]) && ft_backslash_check(str, i) % 2 == 0)
+		if (ft_strchr("<>", str[i]) && ft_backslash_check(str, i) % 2 == 0)
 			ft_skip_rd(str, &i);
 		else if (str[i] != ' ')
 		{
