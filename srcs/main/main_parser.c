@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/06 02:30:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/06 18:21:22 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ void			minishell_parser(char *line, t_shell *shell)
 {
 	t_qts		qts;
 
-	if (line[0] == '\0' || ft_invalid_line(line, shell, ";"))
+	if (line[0] == '\0' || ft_invalid_line(line, shell, ';') ||
+	ft_invalid_line(line, shell, '|'))
 		return ;
 	ft_set_qts(&qts);
 	ft_qt_start(line, &qts);

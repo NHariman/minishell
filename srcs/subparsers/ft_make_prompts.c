@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 20:18:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/06 02:35:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/06 18:28:23 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,18 @@ static int		ft_not_valid_prompt(char *str)
 		return (0);
 }
 
-static int		ft_is_open_pipe(char *str)
-{
-	int len;
-
-	len = ft_strlen(str) - 1;
-	while (str[len] == ' ')
-		len--;
-	if (str[len] == '|')
-		return (ft_printf_err("minishell: multiline pipes not supported\n"));
-	return (0);
-}
-
 static int		ft_valid_prompt(char **prompts, t_shell *shell)
 {
 	int i;
 
 	i = 0;
-	while (prompts[i + 1] != (char *)0)
+	while (prompts[i] != (char *)0)
 	{
 		if (ft_not_valid_prompt(prompts[i]) ||
-		ft_invalid_line(prompts[i], shell, ";"))
-			return (0);
-		if (ft_invalid_pipe(prompts[i], shell))
+		ft_invalid_line(prompts[i], shell, '|'))
 			return (0);
 		i++;
 	}
-	if (ft_is_open_pipe(prompts[i]))
-		return (0);
 	return (1);
 }
 

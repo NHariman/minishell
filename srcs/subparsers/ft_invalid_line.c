@@ -6,47 +6,58 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/03 19:44:11 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/05 22:32:53 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/06 18:40:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	ft_find_input(char **tmp, char *str, int *i, t_shell *shell)
+static void			ft_skip_cmd(int *check, char *str, int *i, int token)
 {
-	*tmp = ft_no_quotes_str(str, i, shell, " ;");
-	*i = *i + ft_iswhitespaces(str + *i);
-	if (str[*i] == ';' && str[*i + ft_iswhitespaces(str + *i + 1)] != '\0')
+	*check = 1;
+	while (str[*i] != token && str[*i] != '\0')
 	{
-		*i = *i + 1;
-		*tmp = NULL;
-		free(*tmp);
+		if (str[*i] == '\"' && ft_backslash_check(str, *i) % 2 == 0)
+			ft_skip_quotes(str, i, DQ);
+		else if (str[*i] == '\'' && ft_backslash_check(str, *i) % 2 == 0)
+			ft_skip_quotes(str, i, SQ);
+		else if (str[*i] == '\\')
+			*i = *i + 2;
+		else
+			*i = *i + 1;
 	}
+	if (str[*i + 1 + ft_iswhitespaces(str + *i + 1)] == token ||
+	str[*i + 1 + ft_iswhitespaces(str + *i + 1)] == '\0')
+	{
+		if (token == '|')
+			*check = -1;
+	}
+	else
+		*i = *i + 1;
 }
 
-int			ft_invalid_line(char *str, t_shell *shell, char *token)
+int					ft_invalid_line(char *str, t_shell *shell, char token)
 {
-	int		i;
-	char	*tmp;
+	int			i;
+	int			check;
 
 	i = 0;
-	tmp = NULL;
+	check = -1;
 	while (str[i] != '\0')
 	{
 		i = i + ft_iswhitespaces(str + i);
-		if (ft_strchr(token, str[i]) && tmp == NULL)
+		if (check == -1 && str[i] == token)
 		{
 			shell->exit_code = 258;
 			return (ft_printf_err(
-			"minishell: syntax error near unexpected token `%c'\n"), str[i]);
+			"minishell: syntax error near unexpected token `%c'\n", token));
 		}
 		else if (str[i] != ' ' &&
 			str[i + 1 + ft_iswhitespaces(str + i + 1)] != '\0' &&
-			!ft_strchr(token, str[i]))
-			ft_find_input(&tmp, str, &i, shell);
+			str[i] != token)
+			ft_skip_cmd(&check, str, &i, token);
 		else
 			i++;
 	}
-	free(tmp);
 	return (0);
 }
