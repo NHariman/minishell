@@ -39,16 +39,15 @@ BASIC INTERFACE
 [x] Show prompt when waiting for a new command
 
 EXECV (EXECUTE PROGRAMS)
-[N] search and launch the right executable (based on the PATH variable or by using
-relative or absolute path) like in bash
+[XN] search and launch the right executable (based on the PATH variable or by using relative or absolute path) like in bash
 
 BUILT-INS
 [xY] echo with '-n'
 	[Y] -n implementation, echos without newline at the end.
 [N] cd with relative and absolute path
 [N] pwd without any options
-[ ] export without any options
-[ ] unset without any options
+[XN] export without any options
+[XN] unset without any options
 [N] env without any options and any arguments
 [xN] exit without any options
 
@@ -81,12 +80,12 @@ PIPE COMMANDS
 	ie. command1 | command2
 	output: command1 is executed and its output it sent to command2.
 ENVIRONMENT VARIABLES
-[N] environment variables ($ followed by characters) should work like in bash.
-	[ ] make new env variables
-	[N] call env variables
+[XN] environment variables ($ followed by characters) should work like in bash.
+	[XN] make new env variables
+	[XN] call env variables
 
 DOLLAR QUESTION MARK ($?)
-[N] $? (EXIT STATUS OF LAST EXECUTED COMMAND) should work like in bash
+[XNS] $? (EXIT STATUS OF LAST EXECUTED COMMAND) should work like in bash
 	output: returns 0 if last executed command is true
 			returns 1 if last executed command is false
 

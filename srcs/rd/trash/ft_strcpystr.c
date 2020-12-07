@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_strcpystr.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/03 22:20:59 by nhariman      ########   odam.nl         */
+/*   Created: 2020/11/21 19:10:53 by ybakker       #+#    #+#                 */
+/*   Updated: 2020/11/21 19:40:11 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "srcs/minishell.h"
+#include "../minishell.h"
 #include <stdio.h>
 
-int		main(int argc, char *argv[], char *envp[])
+char    *ft_strcpystr(int start, char *str, char c)
 {
 	int		i;
-	char	*line;
-	char	**hold;
-	t_shell	*shell;
+	char	*string;
 
-	i = argc;
-	hold = argv;
-	shell = calloc(1, sizeof(t_shell));
-	shell->env = envp;
-	line = NULL;
-	while (i > 0)
+	i = start;
+	while (str[i] != c)
+		i++;
+	string = (char *)malloc((i - start + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	while (str[start] != c)
 	{
-		ft_printf("\033[1;36m");
-		ft_printf("minishell> ");
-		ft_printf("\033[0m");
-		i = get_next_line(0, &line);
-		minishell_parser(line, shell);
-		line = NULL;
-		free(line);
+		string[i] = str[start];
+		i++;
+		start++;
 	}
-	return (0);
+	string[i] = '\0';
+	return (string);
 }

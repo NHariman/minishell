@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   re_direct.c                                        :+:    :+:            */
+/*   rd_check.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/01 14:52:17 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/12/07 10:52:47 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,47 +20,72 @@ check >>>>
 check <<<<
 */
 
-int				rd_check_error_rd(t_struct_rd *rd, t_shell *shell)
+int				rd_check_error_out(t_struct_rd *rd, t_shell *shell)
 {
-    int     len;
-    int     i;
+	int		len;
 
-    len = 0;
-    i = rd->i;
-	if (rd->str[i] == '<')
+	len = 0;
+	while (rd->str[rd->rdi] == '>')
 	{
-        while (rd->str[i] == '<')
-        {
-            i++;
-            len++;   
-        }
-        if (len == 1)
-            return (0);
-        else if (len >= 2 && len < 4)
-            ft_printf("bash: syntax error near unexpected token `<'\n");
-        else if (len == 5)
-            ft_printf("bash: syntax error near unexpected token `<<'\n");
-        else if (len >= 6)
-            ft_printf("bash: syntax error near unexpected token `<<<'\n");
+		rd->rdi++;
+		len++;
 	}
-	else if (rd->str[i] == '>')
-	{
-		while (rd->str[i] == '>')
-        {
-            i++;
-            len++;
-        }
-        if (len == 1)
-            return (0);
-        else if (len == 2)
-            ft_printf("bash: syntax error near unexpected token `>'\n");
-        else if (len > 2)
-            ft_printf("bash: syntax error near unexpected token `>>'\n");
-	}
-    else
-    {
-        printf("there is no redirect?\n");
-    }
-    shell->exit_code = 1;
+	if (len == 1)
+		return (0);
+	else if (len == 2)
+		ft_printf("bash: syntax error near unexpected token `>'\n");
+	else if (len > 2)
+		ft_printf("bash: syntax error near unexpected token `>>'\n");
+	shell->exit_code = 1;
 	return (shell->exit_code = 1);
+}
+
+int				rd_check_error_in(t_struct_rd *rd, t_shell *shell)
+{
+	int		len;
+
+	len = 0;
+	while (rd->str[rd->rdi] == '<')
+	{
+		rd->rdi++;
+		len++;
+	}
+	if (len == 1)
+		return (0);
+	else if (len >= 2 && len < 4)
+		ft_printf("bash: syntax error near unexpected token `<'\n");
+	else if (len == 5)
+		ft_printf("bash: syntax error near unexpected token `<<'\n");
+	else if (len >= 6)
+		ft_printf("bash: syntax error near unexpected token `<<<'\n");
+	shell->exit_code = 1;
+	return (shell->exit_code = 1);
+}
+
+int		error_check_rd(t_struct_rd *rd, t_shell *shell)
+{
+	// printf("[%s]string\n", rd->str);
+	// rd->rdi++;
+	// while (rd->str[rd->rdi] == ' ')
+	// 	rd->rdi++;
+	// ft_printf("%s\n", rd->str + rd->rdi, shell);
+	// ft_printf("no quotes %s\n", ft_no_quotes_str(rd->str, &rd->rdi, shell, "<>"));
+	while (rd->str[rd->rdi] || rd->str[rd->rdi] != '\0')
+	{
+		if (rd->str[rd->rdi] == '>')
+		{
+			if (rd_check_error_out(rd, shell) > 0)
+				return (1);
+		}
+		else if (rd->str[rd->rdi] == '<')
+		{
+			if (rd_check_error_in(rd, shell))
+				return (1);
+		}
+		rd->rdi++;
+		while (rd->str[rd->rdi] == ' ')
+			rd->rdi++;
+		ft_printf("%s\n", ft_no_quotes_str(rd->str, &rd->rdi, shell, "<>"));
+	}
+	return (0);
 }

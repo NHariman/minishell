@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/29 01:45:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/03 18:50:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int				ft_execve(char **argv, t_shell *shell)
 	if (child_pid == 0)
 	{
 		execve(argv[0], argv, shell->env);
-		ft_printf_err("minishell: %s: %s\n", argv[0],
+		ft_printf_err("omiishell: %s: %s\n", argv[0],
 		strerror(errno));
 		exit(1);
 	}
@@ -100,30 +100,12 @@ int				ft_execve(char **argv, t_shell *shell)
 	return (0);
 }
 
-void			ft_execute(char *cmd, char *str, char end, t_shell *shell)
+void			ft_execute(char *cmd, t_shell *shell)
 {
-	char	**argv;
-	int		len;
-	char	**tmp;
-
 	shell->exit_code = 0;
-	len = ft_count_arr(str);
-	if (len == 0)
-		argv = empty_array(cmd);
+	if (ft_ispath(cmd))
+		ft_execve(shell->argv, shell);
 	else
-	{
-		tmp = ft_argv(str, shell);
-		argv = ft_add_arr_front(tmp, cmd);
-	}
-	if (ft_strchr(";\0", end))
-	{
-		if (ft_ispath(cmd))
-			ft_execve(argv, shell);
-		else
-			ft_execve_path(cmd, argv, shell);
-		ft_free_array(argv, len);
-	}
-	else
-		shell->argv = argv;
+		ft_execve_path(cmd, shell->argv, shell);
 	return ;
 }

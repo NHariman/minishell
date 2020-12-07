@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   re_direct.c                                        :+:    :+:            */
+/*   rd_loop.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/01 14:57:49 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/12/07 10:52:55 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int     rd_loop(t_struct_rd *rd, t_shell *shell)
 		ft_printf("file == [%s]\n", rd->file);
 		rd_open_file(rd);
 	}
-	rd_fill_file(rd, shell);
+	rd_open_file_fill(rd, shell);
 	free(echo);
 	return (rd->error);
 }

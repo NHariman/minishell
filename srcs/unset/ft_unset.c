@@ -6,12 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/27 08:55:33 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/03 18:56:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 static void		ft_delete_env(t_shell *shell, char *var)
 {
 	int		i;
@@ -44,13 +43,13 @@ static void		ft_remove_env(char **argv, t_shell *shell)
 {
 	int		i;
 
-	i = 0;
+	i = 1;
 	while (argv[i] != (char *)0)
 	{
 		if (ft_valid_envvar(argv[i]) == -1)
 		{
 			ft_printf_err(
-				"minishell: export: `%s': not a valid identifier\n", argv[i]);
+				"omiishell: export: `%s': not a valid identifier\n", argv[i]);
 		}
 		else if (ft_find_envvar(argv[i], shell) != NULL)
 			ft_delete_env(shell, argv[i]);
@@ -58,19 +57,10 @@ static void		ft_remove_env(char **argv, t_shell *shell)
 	}
 }
 
-void			ft_unset(char *str, t_shell *shell)
+void			ft_unset(t_shell *shell)
 {
-	char	**argv;
-	int		len;
-	int		i;
-
-	i = 0;
-	len = ft_count_arr(str);
-	if (len == 0)
+	if (ft_arrlen(shell->argv) == 1)
 		return ;
-	argv = ft_argv(str, shell);
-	if (!argv)
-		return ;
-	ft_remove_env(argv, shell);
+	ft_remove_env(shell->argv, shell);
 	return ;
 }

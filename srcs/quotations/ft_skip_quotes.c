@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   execv_parser.c                                     :+:    :+:            */
+/*   ft_skip_quotes.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/25 15:22:12 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/29 01:00:06 by nhariman      ########   odam.nl         */
+/*   Created: 2020/12/06 20:32:54 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/12/06 20:51:28 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void		ft_execv_parser(char *cmd, char *str, int *i, t_shell *shell)
+void		ft_skip_quotes(char *str, int *i, char type)
 {
-	int		start;
-	t_qts	qts;
-	char	*substr;
-
-	start = *i;
-	ft_set_qts(&qts);
-	ft_qt_line(str, &qts, i);
-	substr = ft_substr(str, start, *i - start);
-	ft_execute(cmd, substr, str[*i], shell);
-	free(substr);
-	shell->check.exec = 1;
-	return ;
+	*i = *i + 1;
+	if (type == '\'')
+	{
+		while (str[*i] != '\'' && str[*i] != '\0')
+			*i = *i + 1;
+	}
+	else if (type == '\"')
+	{
+		while (str[*i] != '\"' && str[*i] != '\0')
+		{
+			if (str[*i] == '\\' && ft_strchr("\\\"", str[*i + 1]))
+				*i = *i + 2;
+			else
+				*i = *i + 1;
+		}
+	}
+	*i = *i + 1;
 }

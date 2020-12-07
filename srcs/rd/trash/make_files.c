@@ -6,13 +6,12 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/21 19:23:37 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/28 15:44:55 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/11/26 15:11:38 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
-
 //what happened if you go back and make a file in someone elses folder on Codam, what happens?
 //echo "hi" > /exam/file1
 
@@ -32,30 +31,62 @@ static int		open_close_file(char *str, int nb, t_shell *shell)
 {
 	int		fd;
 
-	fd = 0;
 	errno = 0;
-	if (shell->fd != -1 && nb != 3)
-	{
-		close(shell->fd);
-	}
-	ft_printf("open closee [%s]\n", str);
-	if (nb == 3)
-	{
-		fd = open(str, O_RDWR);
-		redirect_file(fd, shell);
-		close(fd);
-		return (0);
-	}
-	else
-		shell->fd = open(str, O_RDWR | O_CREAT, 0666);
-	if (shell->fd < 0)
+	ft_printf("open closee\n");
+	fd = open(str, O_EXCL | O_CREAT, 0666);
+	if (fd < 0)
 	{
 		ft_printf_err("Error\n%s\n", strerror(errno));
 		shell->exit_code = 1;
 		return (1);
 	}
-	shell->oldnb = nb;
+	close(fd);
 	nb = 0;
+	return (0);
+}
+
+static int		open_fill_close_file(char *file, char *string,
+int nb, t_shell *shell)
+{
+	int		fd;
+
+	errno = 0;
+	fd = 0;
+	if (nb == 1)
+	{
+		fd = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0666);
+		if (fd < 0)
+		{
+			ft_printf_err("Error\n%s\n", strerror(errno));
+			shell->exit_code = 1;
+			return (1);
+		}
+		write(fd, string, ft_strlen(string));
+		write(fd, "\n", 1);
+		return (0);
+	}
+	if (nb == 2)
+	{
+		fd = open(file, O_WRONLY | O_APPEND | O_CREAT, 0666);
+		if (fd < 0)
+		{
+			ft_printf_err("Error\n%s\n", strerror(errno));
+			shell->exit_code = 1;
+			return (1);
+		}
+		write(fd, string, ft_strlen(string));
+		write(fd, "\n", 1);
+		return (0);
+	}
+	nb = 0;
+	// if (shell->check.shell == 1)
+	// {
+	// 	dup2(fd, 255);
+	//	dup(fd, 1);
+	// 	//shell;
+	// 	close(fd);
+	// }
+	close(fd);//if shell is on, do this after shell is done
 	return (0);
 }
 
@@ -97,5 +128,4 @@ void	ft_rd_output(char *str, t_shell *shell)
 		}
 		free(file);
 	}
-	close(shell->fd);
 }

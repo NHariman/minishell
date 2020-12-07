@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 03:52:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/22 18:29:19 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/05 20:13:52 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_rm_endline(char *str)
+char					*ft_rm_endline(char *str)
 {
 	int		len;
 	char	*new;
