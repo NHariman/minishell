@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/06 20:49:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/07 10:50:42 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct	s_shell
 	char		*rds;
 	char		**env;
 	char		*env_s;
-	char		*rd_r;
+	// char		*rd_r;
 	char		*err;
 	char		*exprt;
 

@@ -68,10 +68,10 @@ REDIRECTIONS
 [ ] < (REDIRECT INPUT) should work like in bash except for the file descriptor aggregation
 	ie. cat < file.txt
 	output: whatever's in file.txt gets cat'd.
-[*] > (REDIRECT OUTPUT) should work like in bash except for the file descriptor aggregation
+[Y] > (REDIRECT OUTPUT) should work like in bash except for the file descriptor aggregation
 	ie. echo "hello > file.txt
 	output: the word "hello" is placed in file.txt
-[ ] >> (APPEND OUTPUT TO END OF FILE) should work like in bash except for the file descriptor aggregation
+[Y] >> (APPEND OUTPUT TO END OF FILE) should work like in bash except for the file descriptor aggregation
 	ie. echo "world!" >> file.txt
 	output: "world!" gets added to the end of file.txt
 

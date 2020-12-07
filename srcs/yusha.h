@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/05 18:17:35 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/12/07 11:01:46 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,6 @@ typedef struct	s_struct_rd
 	int			fd_rd;
 	int			nb;
 	int			rdi;
-	int			single;
-	int			doubble;
-	int			echo;
-	int			variable;
-	int			dir;
 
 	char		*cache;
 	char		*tmp;
@@ -103,14 +98,11 @@ void		rd_main(char *str, t_shell *shell);
 void    	rd_value_rd(t_struct_rd *rd);
 int     	rd_loop(t_struct_rd *rd, t_shell *shell);
 int     	rd_get_nb(t_struct_rd *rd);
-void    	rd_open_file(t_struct_rd *rd, t_shell *shell);
-void		rd_fill_file(t_struct_rd *rd, t_shell *shell);
+void    	rd_open_file_fill(t_struct_rd *rd, t_shell *shell);
+void		rd_open_file(t_struct_rd *rd, t_shell *shell);
 
 //rd check
 int			error_check_rd(t_struct_rd *rd, t_shell *shell);
-void		while_check_while(char *str, int *i, t_shell *shell);
-int			rd_check_error_out(t_struct_rd *rd, t_shell *shell);
-int			rd_check_error_in(t_struct_rd *rd, t_shell *shell);
 void 		rd_get_file(t_struct_rd *rd, t_shell *shell, t_struct_m	*echo);
 
 // void		set_value_rd(t_struct_rd *rd);

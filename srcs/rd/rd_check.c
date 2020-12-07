@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/03 17:52:12 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/12/07 11:00:14 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int		error_check_rd(t_struct_rd *rd, t_shell *shell)
 	// 	rd->rdi++;
 	// ft_printf("%s\n", rd->str + rd->rdi, shell);
 	// ft_printf("no quotes %s\n", ft_no_quotes_str(rd->str, &rd->rdi, shell, "<>"));
+	rd->rdi = rd->i;
 	while (rd->str[rd->rdi] || rd->str[rd->rdi] != '\0')
 	{
 		if (rd->str[rd->rdi] == '>')

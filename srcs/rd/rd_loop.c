@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/03 18:01:31 by ybakker       ########   odam.nl         */
+/*   Updated: 2020/12/07 11:03:07 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,17 @@ void    rd_open_file(t_struct_rd *rd, t_shell *shell)
 	if (rd->nb == 1)
 	   rd->fd = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
 	else if (rd->nb == 2)
-		rd->fd = open(rd->file, O_WRONLY | O_APPEND | O_CREAT, 0666);
+		rd->fd = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
 	else if (rd->nb == 3)
 		rd->fd_rd = open(rd->file, O_RDWR);
-	// printf("fd == [%i] rd == [%i]\n", rd->fd_rd, rd->fd);
-	if ((rd->fd < 0 && rd->nb > 0) || (rd->fd_rd < 0 && rd->nb == 3))
+	if (rd->fd < 0 || rd->fd_rd < 0)
 	{
 		ft_printf_err("Error\n%s\n", strerror(errno));
 		shell->exit_code = 1;
 	}
-	rd->nb = 0;
 }
 
-void    rd_fill_file(t_struct_rd *rd, t_shell *shell)
+void    rd_open_file_fill(t_struct_rd *rd, t_shell *shell)
 {
 	if (rd->fd != -1)
 	{
@@ -110,7 +108,6 @@ void    rd_fill_file(t_struct_rd *rd, t_shell *shell)
 int     rd_loop(t_struct_rd *rd, t_shell *shell)
 {
 	t_struct_m	*echo;
-
 	echo = ft_calloc(1, sizeof(t_struct_m));
 	rd->i = 0;
 	rd->error = 0;
@@ -127,7 +124,7 @@ int     rd_loop(t_struct_rd *rd, t_shell *shell)
 		ft_printf("file == [%s]\n", rd->file);
 		rd_open_file(rd, shell);
 	}
-	rd_fill_file(rd, shell);
+	rd_open_file_fill(rd, shell);
 	free(echo);
 	return (rd->error);
 }
