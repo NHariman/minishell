@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/01 16:53:56 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/12/07 10:43:58 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		rd_main(char *str, t_shell *shell);
 void    	rd_value_rd(t_struct_rd *rd);
 int     	rd_loop(t_struct_rd *rd, t_shell *shell);
 int     	rd_get_nb(t_struct_rd *rd);
-void    	rd_open_file(t_struct_rd *rd);
+void    	rd_open_file_fill(t_struct_rd *rd, t_shell *shell);
 void		rd_open_file(t_struct_rd *rd, t_shell *shell);
 
 //rd check

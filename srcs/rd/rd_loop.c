@@ -71,7 +71,7 @@ void rd_get_file(t_struct_rd *rd, t_shell *shell, t_struct_m *echo)
 	free(echo->str);
 }
 
-void    rd_open_file(t_struct_rd *rd)
+void    rd_open_file(t_struct_rd *rd, t_shell *shell)
 {
 	errno = 0;
 	if (rd->fd != -1)
@@ -79,11 +79,11 @@ void    rd_open_file(t_struct_rd *rd)
 	else if (rd->fd_rd != -1)
 		close(rd->fd_rd);
 	if (rd->nb == 1)
-	   rd->fd = open(rd->file, O_WRONLY | O_TRUNC | O_CREAT, 0666);
+	   rd->fd = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
 	else if (rd->nb == 2)
-		rd->fd = open(rd->file, O_WRONLY | O_APPEND | O_CREAT, 0666);
+		rd->fd = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
 	else if (rd->nb == 3)
-		rd->fd_rd = open(rd->file, O_WRONLY);
+		rd->fd_rd = open(rd->file, O_RDWR);
 	if (rd->fd < 0 || rd->fd_r < 0)
 	{
 		ft_printf_err("Error\n%s\n", strerror(errno));
@@ -91,7 +91,7 @@ void    rd_open_file(t_struct_rd *rd)
 	}
 }
 
-void    rd_open_file(t_struct_rd *rd, t_shell *shell)
+void    rd_open_file_fill(t_struct_rd *rd, t_shell *shell)
 {
 	if (rd->fd != -1)
 	{
