@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/07 10:52:55 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/12/07 11:03:07 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void    rd_open_file(t_struct_rd *rd, t_shell *shell)
 		rd->fd = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
 	else if (rd->nb == 3)
 		rd->fd_rd = open(rd->file, O_RDWR);
-	if (rd->fd < 0 || rd->fd_r < 0)
+	if (rd->fd < 0 || rd->fd_rd < 0)
 	{
 		ft_printf_err("Error\n%s\n", strerror(errno));
 		shell->exit_code = 1;
@@ -100,7 +100,7 @@ void    rd_open_file_fill(t_struct_rd *rd, t_shell *shell)
 	}
 	else if (rd->fd_rd != -1)
 	{
-		shell->fd_rd = rd->fd_rd
+		shell->fd_r = rd->fd_rd;
 		close(rd->fd_rd);
 	}
 }
@@ -122,7 +122,7 @@ int     rd_loop(t_struct_rd *rd, t_shell *shell)
 		}
 		rd_get_file(rd, shell, echo);
 		ft_printf("file == [%s]\n", rd->file);
-		rd_open_file(rd);
+		rd_open_file(rd, shell);
 	}
 	rd_open_file_fill(rd, shell);
 	free(echo);

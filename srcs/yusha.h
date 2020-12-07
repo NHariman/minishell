@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/07 10:47:32 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/12/07 11:01:46 by anonymous     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct	s_struct_rd
 	int			fd;
 	int			fd_rd;
 	int			nb;
+	int			rdi;
 
 	char		*cache;
 	char		*tmp;
@@ -101,7 +102,7 @@ void    	rd_open_file_fill(t_struct_rd *rd, t_shell *shell);
 void		rd_open_file(t_struct_rd *rd, t_shell *shell);
 
 //rd check
-int			rd_check_error_rd(t_struct_rd *rd, t_shell *shell);
+int			error_check_rd(t_struct_rd *rd, t_shell *shell);
 void 		rd_get_file(t_struct_rd *rd, t_shell *shell, t_struct_m	*echo);
 
 // void		set_value_rd(t_struct_rd *rd);
