@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 20:52:54 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/23 18:10:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/08 17:35:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,11 @@ void			ft_strspecial(char *str, t_trim *trim, int *i, char c)
 		new_str = ft_strjoin(trim->res, ft_charjoin(old_str, c));
 	else
 		new_str = ft_strjoin(old_str, ft_make_single_char_str(c));
-	trim->res = new_str;
+	trim->res = ft_strdup(new_str);
 	*i = *i + 2;
 	trim->start = *i;
+	free(old_str);
+	free(new_str);
 }
 
 static char		*ft_insert_output(char *str, int i, t_trim *trim)
@@ -82,9 +84,10 @@ static char		*ft_insert_output(char *str, int i, t_trim *trim)
 		output = ft_substr(str, trim->start, i - trim->start - 1);
 	else
 	{
-		old_str = trim->res;
+		old_str = ft_strdup(trim->res);
 		output = ft_strjoin(old_str,
 			ft_substr(str, trim->start, i - trim->start - 1));
+		free(old_str);
 	}
 	return (output);
 }

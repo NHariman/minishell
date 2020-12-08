@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 18:56:33 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/08 17:37:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void		ft_delete_env(t_shell *shell, char *var)
 		}
 		i++;
 	}
+	ft_free_array(shell->env, ft_arrlen(shell->env));
+	free(env);
 	shell->env = newenv;
 }
 

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 13:44:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/05 22:06:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/08 17:26:24 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static	void	ft_nqts_sq_strjoin(char *str, int *i, t_trim *trim)
 	*i = *i + 1;
 	tmp = trim->res;
 	trim->res = gnl_strjoin(tmp, new_str);
+	free(new_str);
 	trim->start = *i;
 }
 
@@ -75,6 +76,7 @@ static void		ft_nqts_nqts_strjoin(char *str, int *i, t_trim *trim)
 	new_str = ft_substr(str, start, *i - start);
 	tmp = trim->res;
 	trim->res = gnl_strjoin(tmp, new_str);
+	free(new_str);
 	trim->start = *i;
 }
 

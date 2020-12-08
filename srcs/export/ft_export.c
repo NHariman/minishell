@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 18:53:24 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/08 22:55:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static char		*ft_make_export_str(char **env)
 	order = ft_order_env(env);
 	ft_sort_env(order, env, 1);
 	export_str = ft_parse_env_str(order, env);
+	free(order);
 	return (export_str);
 }
 
@@ -55,7 +56,7 @@ static void		ft_add_to_env(char **argv, t_shell *shell)
 		else if (valid == -1)
 		{
 			ft_printf_err(
-				"omiishell: export: `%s': not a valid identifier\n", argv[i]);
+				"minishell: export: `%s': not a valid identifier\n", argv[i]);
 			shell->exit_code = 1;
 		}
 		i++;
@@ -69,6 +70,7 @@ void			ft_export(t_shell *shell)
 	{
 		shell->ret = ft_make_export_str(shell->env);
 		ft_printf("%s\n", shell->ret);
+		free(shell->ret);
 	}
 	else
 		ft_add_to_env(shell->argv, shell);

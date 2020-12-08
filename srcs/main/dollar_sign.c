@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 18:59:08 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/08 17:45:43 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char			*ft_find_env_variable(char *var, t_shell *shell)
 		return (NULL);
 	if (!ft_strncmp(var, "?", ft_strlen(var)))
 		return (ft_itoa(shell->exit_code));
-	tmp = gnl_strjoin(var, "=");
+	tmp = ft_strjoin(var, "=");
 	while (shell->env[i])
 	{
 		if (!ft_strncmp(shell->env[i], tmp, ft_strlen(tmp)))
@@ -77,6 +77,7 @@ char	*ft_find_variable(char *str, int *i, t_shell *shell)
 	else if (ft_isalpha(str[*i]))
 		var = ft_no_quotes_str(str, i, shell, " ");
 	output = ft_find_env_variable(var, shell);
+	free(var);
 	if (output == NULL)
 		output = ft_strdup("");
 	return (output);

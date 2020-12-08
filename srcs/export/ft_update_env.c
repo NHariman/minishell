@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 04:53:31 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/27 06:47:02 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/08 17:09:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char			*ft_find_varname(char *str)
 	while (str[i] != '\0' && str[i] != '=')
 		i++;
 	if (str[i] == '\0')
-		name = str;
+		name = ft_strdup(str);
 	else
 		name = ft_substr(str, 0, i);
 	return (name);
@@ -38,11 +38,13 @@ static void		ft_update_shell(t_shell *shell, char *str, char *var)
 		name = ft_find_varname(shell->env[i]);
 		if (ft_strcmp(name, var) == 0)
 		{
+			free(shell->env[i]);
 			shell->env[i] = ft_strdup(str);
 			return ;
 		}
 		i++;
 	}
+	free(name);
 }
 
 void			ft_update_env(t_shell *shell, char *str)
@@ -58,4 +60,5 @@ void			ft_update_env(t_shell *shell, char *str)
 	}
 	else
 		ft_update_shell(shell, str, var);
+	free(var);
 }

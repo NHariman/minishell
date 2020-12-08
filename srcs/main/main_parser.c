@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/06 18:21:22 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/08 22:04:15 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static void		ft_wordparser(t_shell *shell)
 		ft_check_case(cmd, shell);
 	else
 		ft_execute(cmd, shell);
+	free(cmd);
 }
 
 void			function_dispatcher(char *line, t_shell *shell)
@@ -99,7 +100,10 @@ void			function_dispatcher(char *line, t_shell *shell)
 	if (!shell->rds)
 		ft_wordparser(shell);
 	else if (shell->rds)
+	{	
 		rd_main(shell->rds, shell);
+		free(shell->rds);
+	}
 }
 
 void			minishell_parser(char *line, t_shell *shell)
@@ -115,5 +119,4 @@ void			minishell_parser(char *line, t_shell *shell)
 		ft_printf_err("Error\nHanging quotes. Parsing failed.\n");
 	else
 		ft_make_prompts(line, shell);
-	free(line);
 }

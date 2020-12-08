@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 19:02:18 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/08 22:07:10 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*ft_get_path(t_shell *shell)
 	if (shell->argv[1] == (char *)0)
 		newdir = ft_find_envvar("HOME", shell);
 	else
-		newdir = ft_strdup(shell->argv[1]);
+		newdir = shell->argv[1];
 	return (newdir);
 }
 
@@ -73,6 +73,5 @@ void		ft_cd(t_shell *shell)
 	}
 	else
 		ft_update_env_cd(shell, olddir, ft_pwd());
-	free(newdir);
 	return ;
 }

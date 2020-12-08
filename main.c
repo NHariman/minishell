@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/03 22:20:59 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/08 19:52:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		main(int argc, char *argv[], char *envp[])
 		ft_printf("\033[0m");
 		i = get_next_line(0, &line);
 		minishell_parser(line, shell);
-		line = NULL;
 		free(line);
 	}
 	return (0);
