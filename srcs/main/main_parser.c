@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/08 22:04:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/09 00:03:29 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,40 +40,34 @@ static char		*get_cmd(char *str, int *i, t_shell *shell)
 	return (cmd);
 }
 
-static void		ft_check_case(char *cmd, t_shell *shell)
+static void		ft_check_case(t_shell *shell)
 {
-	if (!ft_strcmp(cmd, "echo"))
+	if (!ft_strcmp(shell->argv[0], "echo"))
 		ft_echo(shell);
-	else if (!ft_strcmp(cmd, "env"))
+	else if (!ft_strcmp(shell->argv[0], "env"))
 		ft_env(shell);
-	else if (!ft_strcmp(cmd, "pwd"))
+	else if (!ft_strcmp(shell->argv[0], "pwd"))
 		ft_pwd_main(shell);
 	else
-		ft_execute(cmd, shell);
+		ft_execute(shell->argv[0], shell);
 }
 
 static void		ft_wordparser(t_shell *shell)
 {
-	char	*cmd;
-
 	if (shell->argv[0] == NULL)
 		return ;
-	cmd = ft_strdup(shell->argv[0]);
-	if (cmd[0] == '\0' || cmd == (char *)0)
-		return ;
-	if (!ft_strcmp(cmd, "exit"))
+	if (!ft_strcmp(shell->argv[0], "exit"))
 		ft_exit_minishell(shell->argv, ft_arrlen(shell->argv), shell);
-	else if (!ft_strcmp(cmd, "export"))
+	else if (!ft_strcmp(shell->argv[0], "export"))
 		ft_export(shell);
-	else if (!ft_strcmp(cmd, "unset"))
+	else if (!ft_strcmp(shell->argv[0], "unset"))
 		ft_unset(shell);
-	else if (!ft_strcmp(cmd, "cd"))
+	else if (!ft_strcmp(shell->argv[0], "cd"))
 		ft_cd(shell);
-	else if (ft_strchr("eEpP", cmd[0]))
-		ft_check_case(cmd, shell);
+	else if (ft_strchr("eEpP", shell->argv[0][0]))
+		ft_check_case(shell);
 	else
-		ft_execute(cmd, shell);
-	free(cmd);
+		ft_execute(shell->argv[0], shell);
 }
 
 void			function_dispatcher(char *line, t_shell *shell)

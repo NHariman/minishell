@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   echo_parser.c                                      :+:    :+:            */
+/*   ft_echo.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 23:38:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 19:03:22 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/08 23:43:53 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void				ft_echo(t_shell *shell)
 	i = 0;
 	check = 0;
 	if (ft_arrlen(shell->argv) == 1)
-		tmp = ft_strdup("");
+		tmp = NULL;
 	else
 	{
 		i = ft_skip_flags(shell->argv, &check);

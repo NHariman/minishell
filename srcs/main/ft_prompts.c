@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/29 03:18:41 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/08 17:24:17 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/09 01:00:38 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char		*ft_fill_single_prompt(char *str, int i, int *start,
 {
 	char	*prompt;
 
-	prompt = ft_strtrim(ft_substr(str, *start, i - *start), str_token);
+	prompt = ft_strtrimfree(ft_substr(str, *start, i - *start), str_token);
 	*start = i + 1;
 	return (prompt);
 }
@@ -67,7 +67,7 @@ char			**ft_fill_prompts(char **prompts, char *str, int len,
 			count++;
 		}
 	}
-	prompts[count] = ft_strtrim(ft_substr(str, start, i - start), str_token);
+	prompts[count] = ft_strtrimfree(ft_substr(str, start, i - start), str_token);
 	free(str_token);
 	return (prompts);
 }

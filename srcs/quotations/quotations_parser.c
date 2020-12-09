@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 20:52:54 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/08 17:35:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/09 15:00:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,18 @@ void			ft_parse_dollar(char *str, int *i,
 	{
 		new_str = ft_substr(str, trim->start, *i - trim->start);
 		tmp = ft_find_variable(str, i, shell);
-		trim->res = ft_strjoin(old_str, ft_strjoin(new_str, tmp));
+		trim->res = ft_strjoin(old_str, gnl_strjoin(new_str, tmp));
 		trim->start = *i;
 		free(tmp);
 	}
 	else
 	{
 		new_str = ft_substr(str, trim->start, *i - trim->start - 1);
-		trim->res = ft_strjoin(old_str, new_str);
+		trim->res = ft_strjointwo(old_str, new_str);
 		trim->start = *i;
 		*i = *i + 1;
 	}
 	free(old_str);
-	free(new_str);
 }
 
 void			ft_strspecial(char *str, t_trim *trim, int *i, char c)
@@ -67,7 +66,7 @@ void			ft_strspecial(char *str, t_trim *trim, int *i, char c)
 	if (trim->res)
 		new_str = ft_strjoin(trim->res, ft_charjoin(old_str, c));
 	else
-		new_str = ft_strjoin(old_str, ft_make_single_char_str(c));
+		new_str = ft_strjointwo(old_str, ft_make_single_char_str(c));
 	trim->res = ft_strdup(new_str);
 	*i = *i + 2;
 	trim->start = *i;
@@ -85,7 +84,7 @@ static char		*ft_insert_output(char *str, int i, t_trim *trim)
 	else
 	{
 		old_str = ft_strdup(trim->res);
-		output = ft_strjoin(old_str,
+		output = ft_strjointwo(old_str,
 			ft_substr(str, trim->start, i - trim->start - 1));
 		free(old_str);
 	}

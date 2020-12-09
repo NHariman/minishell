@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/08 17:45:43 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/09 19:48:08 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char			*ft_find_env_variable(char *var, t_shell *shell)
 		return (NULL);
 	if (!ft_strncmp(var, "?", ft_strlen(var)))
 		return (ft_itoa(shell->exit_code));
-	tmp = ft_strjoin(var, "=");
+	tmp = gnl_strjoin(var, "=");
 	while (shell->env[i])
 	{
 		if (!ft_strncmp(shell->env[i], tmp, ft_strlen(tmp)))
@@ -44,19 +44,20 @@ static char			*ft_find_env_variable(char *var, t_shell *shell)
 		}
 		i++;
 	}
+	free(tmp);
 	return (NULL);
 }
 
-char	*ft_make_single_char_str(char c)
+static char	*ft_get_var(char *str, int *i)
 {
-	char *num;
+	char	*var;
+	int		start;
 
-	num = (char *)malloc(sizeof(char) * 2);
-	if (!num)
-		return (NULL);
-	num[0] = c;
-	num[1] = '\0';
-	return (num);
+	start = *i;
+	while (!ft_isspecial(str[*i]) && str[*i] != '\0')
+		*i = *i + 1;
+	var = ft_substr(str, start, *i - start);
+	return (var);
 }
 
 char	*ft_find_variable(char *str, int *i, t_shell *shell)
@@ -75,9 +76,8 @@ char	*ft_find_variable(char *str, int *i, t_shell *shell)
 		*i = *i + 1;
 	}
 	else if (ft_isalpha(str[*i]))
-		var = ft_no_quotes_str(str, i, shell, " ");
+		var = ft_get_var(str, i);
 	output = ft_find_env_variable(var, shell);
-	free(var);
 	if (output == NULL)
 		output = ft_strdup("");
 	return (output);
