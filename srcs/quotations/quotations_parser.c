@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 20:52:54 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/09 15:00:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/17 20:08:47 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,23 @@ void			ft_parse_dollar(char *str, int *i,
 	char	*new_str;
 	char	*old_str;
 
-	old_str = trim->res;
 	if (ft_backslash_check(str, *i) % 2 == 0)
 	{
 		new_str = ft_substr(str, trim->start, *i - trim->start);
 		tmp = ft_find_variable(str, i, shell);
-		trim->res = ft_strjoin(old_str, gnl_strjoin(new_str, tmp));
+		old_str = gnl_strjoin(new_str, tmp);
+		trim->res = gnl_strjoin(trim->res, old_str);
 		trim->start = *i;
 		free(tmp);
+		free(old_str);
 	}
 	else
 	{
 		new_str = ft_substr(str, trim->start, *i - trim->start - 1);
-		trim->res = ft_strjointwo(old_str, new_str);
+		trim->res = ft_strjointwo(trim->res, new_str);
 		trim->start = *i;
 		*i = *i + 1;
 	}
-	free(old_str);
 }
 
 void			ft_strspecial(char *str, t_trim *trim, int *i, char c)
@@ -64,14 +64,20 @@ void			ft_strspecial(char *str, t_trim *trim, int *i, char c)
 
 	old_str = ft_substr(str, trim->start, *i - trim->start);
 	if (trim->res)
-		new_str = ft_strjoin(trim->res, ft_charjoin(old_str, c));
+	{
+		new_str = ft_charjoin(old_str, c);
+		free(old_str);
+		old_str = trim->res;
+		trim->res = ft_strjointwo(old_str, new_str);
+	}
 	else
-		new_str = ft_strjointwo(old_str, ft_make_single_char_str(c));
-	trim->res = ft_strdup(new_str);
+	{
+		new_str = ft_make_single_char_str(c);
+		trim->res = ft_strjointwo(old_str, new_str);
+	}
 	*i = *i + 2;
 	trim->start = *i;
 	free(old_str);
-	free(new_str);
 }
 
 static char		*ft_insert_output(char *str, int i, t_trim *trim)
@@ -79,14 +85,12 @@ static char		*ft_insert_output(char *str, int i, t_trim *trim)
 	char *old_str;
 	char *output;
 
-	if (trim->res == '\0')
+	if (trim->res == NULL)
 		output = ft_substr(str, trim->start, i - trim->start - 1);
 	else
 	{
-		old_str = ft_strdup(trim->res);
-		output = ft_strjointwo(old_str,
-			ft_substr(str, trim->start, i - trim->start - 1));
-		free(old_str);
+		old_str = ft_substr(str, trim->start, i - trim->start - 1);
+		output = ft_strjointwo(trim->res, old_str);
 	}
 	return (output);
 }
@@ -96,7 +100,7 @@ char			*ft_doublequotes_str(char *str, int *i, t_shell *shell)
 	t_trim		trim;
 	char		*output;
 
-	trim.res = calloc(1, sizeof(char *));
+	trim.res = NULL;
 	trim.start = *i + 1;
 	*i = *i + 1;
 	output = NULL;

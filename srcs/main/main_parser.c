@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/09 00:03:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/17 19:07:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void			function_dispatcher(char *line, t_shell *shell)
 
 	i = 0;
 	cmd = get_cmd(line, &i, shell);
-	tmp = ft_argv(line + i, shell);
+	tmp = ft_argv(line + i +
+		ft_iswhitespaces(line + i + 1), shell);
 	if (!tmp)
 		shell->argv = empty_array(cmd);
 	else
