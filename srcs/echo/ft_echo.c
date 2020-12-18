@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 23:38:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/08 23:43:53 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/18 18:26:39 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,14 @@ static char			*ft_make_echo_str(char **argv, int i)
 {
 	char *tmp;
 	char *echo_str;
+	char *newstr;
 
 	tmp = ft_strdup(argv[i]);
 	while (argv[i + 1] != (char *)0)
 	{
-		echo_str = gnl_strjoin(ft_charjoin(tmp, ' '), argv[i + 1]);
+		newstr = ft_charjoin(tmp, ' ');
+		free(tmp);
+		echo_str = gnl_strjoin(newstr, argv[i + 1]);
 		tmp = echo_str;
 		i++;
 	}
@@ -85,11 +88,11 @@ void				ft_echo(t_shell *shell)
 		else
 			tmp = ft_make_echo_str(shell->argv, i);
 	}
-	shell->ret = ft_strdup(tmp);
+	shell->ret = tmp;
 	if (check == 1)
 		ft_printf("%s", shell->ret);
 	else
 		ft_printf("%s\n", shell->ret);
-	free(tmp);
+	free(shell->ret);
 	return ;
 }

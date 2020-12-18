@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/09 19:48:08 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/18 23:55:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,10 @@ char			*ft_find_envvar(char *var, t_shell *shell)
 	if (var == NULL)
 		return (NULL);
 	tmp = ft_strjoin(var, "=");
-	while (shell->env[i])
+	while (shell->env[i] != (char *)0)
 	{
-		if (!ft_strncmp(shell->env[i], tmp, ft_strlen(tmp)))
+		if (!ft_strncmp(shell->env[i], tmp, ft_strlen(tmp)) || !ft_strncmp(shell->env[i], var, ft_strlen(var))
+		)
 		{
 			env_var = ft_substr(shell->env[i], ft_strlen(tmp),
 									ft_strlen(shell->env[i]));

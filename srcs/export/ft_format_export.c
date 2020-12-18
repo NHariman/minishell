@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 01:46:55 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/08 22:52:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/18 23:47:29 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char		*ft_format_export(char *str)
 	if (equal > 0)
 		name = ft_substr(str, 0, equal + 1);
 	else
-		name = str;
+		name = ft_strdup(str);
 	newstr = ft_strjointwo("declare -x ", name);
 	if (equal > 0)
 	{

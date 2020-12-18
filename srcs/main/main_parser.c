@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/17 19:07:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/18 16:58:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void			function_dispatcher(char *line, t_shell *shell)
 		ft_wordparser(shell);
 	else if (shell->rds)
 	{	
-		rd_main(shell->rds, shell);
+		//rd_main(shell->rds, shell);
 		free(shell->rds);
 	}
 }

@@ -6,12 +6,32 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/09 00:54:22 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/18 23:32:58 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "srcs/minishell.h"
 #include <stdio.h>
+
+char	**ft_arrdup(char **arr)
+{
+	int		len;
+	char	**newarr;
+	int		i;
+
+	i = 0;
+	len = ft_arrlen(arr);
+	newarr = (char **)malloc(sizeof(char *) * (len + 1));
+	if (!newarr)
+		ft_malloc_fail();
+	while (arr[i] != (char *)0)
+	{
+		newarr[i] = ft_strdup(arr[i]);
+		i++;
+	}
+	newarr[i] = (char *)0;
+	return (newarr);
+}
 
 int		main(int argc, char *argv[], char *envp[])
 {
@@ -22,7 +42,9 @@ int		main(int argc, char *argv[], char *envp[])
 
 	i = argc;
 	hold = argv;
-	shell.env = envp;
+	if (argc > 1)
+		ft_printf_err("Too many arguments.\n");
+	shell.env = ft_arrdup(envp);
 	while (i == 1)
 	{
 		ft_printf("\033[1;36m");

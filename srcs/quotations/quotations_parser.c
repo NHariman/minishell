@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 20:52:54 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/17 20:08:47 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/18 17:38:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,13 @@ void			ft_parse_dollar(char *str, int *i,
 		new_str = ft_substr(str, trim->start, *i - trim->start);
 		tmp = ft_find_variable(str, i, shell);
 		old_str = gnl_strjoin(new_str, tmp);
-		trim->res = gnl_strjoin(trim->res, old_str);
+		if (trim->res == NULL)
+			trim->res = ft_strdup(old_str);
+		else
+			trim->res = gnl_strjoin(trim->res, old_str);
 		trim->start = *i;
 		free(tmp);
 		free(old_str);
-	}
-	else
-	{
-		new_str = ft_substr(str, trim->start, *i - trim->start - 1);
-		trim->res = ft_strjointwo(trim->res, new_str);
-		trim->start = *i;
-		*i = *i + 1;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/25 21:41:05 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/17 19:26:37 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/18 23:34:14 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,18 @@ char			**ft_add_arr_back(char **arr, char *input)
 	int		len;
 	int		i;
 
-	len = ft_arrlen(arr);
+	len = ft_arrlen(arr) + 1;
 	i = 0;
-	new_argv = (char **)malloc(sizeof(char *) * (len + 2));
+	new_argv = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!new_argv)
 		ft_malloc_fail();
-	new_argv[len] = ft_strdup(input);
-	new_argv[len + 1] = (char *)0;
-	while (i < len)
+	while (arr[i] != (char *)0)
 	{
 		new_argv[i] = ft_strdup(arr[i]);
 		i++;
 	}
+	new_argv[i] = ft_strdup(input);
+	new_argv[len] = (char *)0;
 	return (new_argv);
 }
 
