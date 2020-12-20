@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 22:09:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/18 16:50:12 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/20 19:19:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void			ft_pipe_splitter(char *str, t_shell *shell)
 	pipes = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!pipes)
 		ft_malloc_fail();
-	pipes[len] = (char *)0;
 	pipes = ft_fill_prompts(pipes, str, len, '|');
+	pipes[len] = (char *)0;
 	int k = 0;
 	while (pipes[k] != (char *)0)
 	{

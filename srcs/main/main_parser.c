@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/18 16:58:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/20 16:49:56 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@ static char		*get_cmd(char *str, int *i, t_shell *shell)
 	cmd = ft_no_quotes_str(str, i, shell, " ");
 	if (cmd == NULL)
 		return (NULL);
-	while (ft_strchr(cmd, '=') != NULL)
+	while (cmd != NULL && ft_strchr(cmd, '=') != NULL)
 	{
 		free(cmd);
+		cmd = NULL;
 		while (str[*i] == ' ')
 			*i = *i + 1;
-		cmd = ft_no_quotes_str(str, i, shell, " ");
+		if (str[*i] != '\0')
+			cmd = ft_no_quotes_str(str, i, shell, " ");
 	}
 	return (cmd);
 }

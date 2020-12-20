@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/09 01:07:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/20 17:37:23 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,6 @@ void			ft_unset(t_shell *shell);
 */
 
 void			ft_env(t_shell *shell);
-void			ft_add_env_back(t_shell *shell, char *input);
-int				ft_envlen(t_shell *shell);
 char			*ft_find_variable(char *str, int *i, t_shell *shell);
 char			*ft_find_envvar(char *var, t_shell *shell);
 
