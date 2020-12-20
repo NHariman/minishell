@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 22:09:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/06 21:41:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/20 19:19:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		ft_count_pipes(char *str)
 	int		count;
 
 	i = 0;
-	count = 0;
+	count = 1;
 	while (str[i] != '\0')
 	{
 		if (ft_strchr("\'\"", str[i]) && ft_backslash_check(str, i) % 2 == 0)
@@ -41,12 +41,12 @@ void			ft_pipe_splitter(char *str, t_shell *shell)
 	char	**pipes;
 	int		len;
 
-	len = ft_count_pipes(str) + 1;
+	len = ft_count_pipes(str);
 	pipes = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!pipes)
 		ft_malloc_fail();
-	pipes[len] = (char *)0;
 	pipes = ft_fill_prompts(pipes, str, len, '|');
+	pipes[len] = (char *)0;
 	int k = 0;
 	while (pipes[k] != (char *)0)
 	{
@@ -62,4 +62,5 @@ void			ft_pipe_splitter(char *str, t_shell *shell)
 	// 	k++;
 	// }
 	ft_printf("and now the string:\n{%s}\n", str);
+	ft_free_array(pipes, ft_arrlen(pipes));
 }

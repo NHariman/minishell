@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 20:18:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/06 22:01:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/09 00:02:39 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ void			ft_make_prompts(char *str, t_shell *shell)
 		shell->exit_code = 258;
 		ft_free_array(prompts, ft_arrlen(prompts));
 		return ;
+	}
+	int k = 0;
+	while (prompts[k] != (char *)0)
+	{
+		ft_printf("prompts[%i]: {%s}\n", k, prompts[k]);
+		k++;
 	}
 	while (prompts[i] != (char *)0)
 	{

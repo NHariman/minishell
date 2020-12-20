@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/06 18:21:22 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/20 16:49:56 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,49 +30,46 @@ static char		*get_cmd(char *str, int *i, t_shell *shell)
 	cmd = ft_no_quotes_str(str, i, shell, " ");
 	if (cmd == NULL)
 		return (NULL);
-	while (ft_strchr(cmd, '=') != NULL)
+	while (cmd != NULL && ft_strchr(cmd, '=') != NULL)
 	{
 		free(cmd);
+		cmd = NULL;
 		while (str[*i] == ' ')
 			*i = *i + 1;
-		cmd = ft_no_quotes_str(str, i, shell, " ");
+		if (str[*i] != '\0')
+			cmd = ft_no_quotes_str(str, i, shell, " ");
 	}
 	return (cmd);
 }
 
-static void		ft_check_case(char *cmd, t_shell *shell)
+static void		ft_check_case(t_shell *shell)
 {
-	if (!ft_strcmp(cmd, "echo"))
+	if (!ft_strcmp(shell->argv[0], "echo"))
 		ft_echo(shell);
-	else if (!ft_strcmp(cmd, "env"))
+	else if (!ft_strcmp(shell->argv[0], "env"))
 		ft_env(shell);
-	else if (!ft_strcmp(cmd, "pwd"))
+	else if (!ft_strcmp(shell->argv[0], "pwd"))
 		ft_pwd_main(shell);
 	else
-		ft_execute(cmd, shell);
+		ft_execute(shell->argv[0], shell);
 }
 
 static void		ft_wordparser(t_shell *shell)
 {
-	char	*cmd;
-
 	if (shell->argv[0] == NULL)
 		return ;
-	cmd = ft_strdup(shell->argv[0]);
-	if (cmd[0] == '\0' || cmd == (char *)0)
-		return ;
-	if (!ft_strcmp(cmd, "exit"))
+	if (!ft_strcmp(shell->argv[0], "exit"))
 		ft_exit_minishell(shell->argv, ft_arrlen(shell->argv), shell);
-	else if (!ft_strcmp(cmd, "export"))
+	else if (!ft_strcmp(shell->argv[0], "export"))
 		ft_export(shell);
-	else if (!ft_strcmp(cmd, "unset"))
+	else if (!ft_strcmp(shell->argv[0], "unset"))
 		ft_unset(shell);
-	else if (!ft_strcmp(cmd, "cd"))
+	else if (!ft_strcmp(shell->argv[0], "cd"))
 		ft_cd(shell);
-	else if (ft_strchr("eEpP", cmd[0]))
-		ft_check_case(cmd, shell);
+	else if (ft_strchr("eEpP", shell->argv[0][0]))
+		ft_check_case(shell);
 	else
-		ft_execute(cmd, shell);
+		ft_execute(shell->argv[0], shell);
 }
 
 void			function_dispatcher(char *line, t_shell *shell)
@@ -83,7 +80,8 @@ void			function_dispatcher(char *line, t_shell *shell)
 
 	i = 0;
 	cmd = get_cmd(line, &i, shell);
-	tmp = ft_argv(line + i, shell);
+	tmp = ft_argv(line + i +
+		ft_iswhitespaces(line + i + 1), shell);
 	if (!tmp)
 		shell->argv = empty_array(cmd);
 	else
@@ -99,7 +97,10 @@ void			function_dispatcher(char *line, t_shell *shell)
 	if (!shell->rds)
 		ft_wordparser(shell);
 	else if (shell->rds)
-		rd_main(shell->rds, shell);
+	{	
+		//rd_main(shell->rds, shell);
+		free(shell->rds);
+	}
 }
 
 void			minishell_parser(char *line, t_shell *shell)
@@ -115,5 +116,4 @@ void			minishell_parser(char *line, t_shell *shell)
 		ft_printf_err("Error\nHanging quotes. Parsing failed.\n");
 	else
 		ft_make_prompts(line, shell);
-	free(line);
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 18:50:44 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/08 20:35:56 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static int		ft_execve_path(char *cmd, char **argv, t_shell *shell)
 	child_status = ft_execute_path(pathcmd, argv, shell);
 	if (child_status != 0)
 		shell->exit_code = 127;
+	ft_free_array(pathcmd, ft_arrlen(pathcmd));
 	return (0);
 }
 
@@ -86,7 +87,7 @@ int				ft_execve(char **argv, t_shell *shell)
 	if (child_pid == 0)
 	{
 		execve(argv[0], argv, shell->env);
-		ft_printf_err("omiishell: %s: %s\n", argv[0],
+		ft_printf_err("minishell: %s: %s\n", argv[0],
 		strerror(errno));
 		exit(1);
 	}

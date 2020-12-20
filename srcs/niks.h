@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/07 10:50:42 by anonymous     ########   odam.nl         */
+/*   Updated: 2020/12/20 17:37:23 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct	s_gnl
 	int				bytes_read;
 	int				fd;
 	char			*line_read;
+	int				newline;
 }				t_gnl;
 
 typedef	struct	s_trim
@@ -96,11 +97,10 @@ void			function_dispatcher(char *line, t_shell *shell);
 /*
 ** general functions
 */
+char			*ft_strtrimfree(char *s1, char const *set);
 char			**ft_get_prompts(char *str);
-char			*ft_rm_endline(char *str);
 char			*gnl_strjoin(char *s1, char *s2);
 char			*ft_strjointwo(char *s1, char *s2);
-void			ft_find_arg(char *str, int *i);
 int				get_next_line(int fd, char **line);
 char			*ft_charjoin(char *str, char c);
 char			*ft_make_single_char_str(char c);
@@ -174,8 +174,6 @@ void			ft_unset(t_shell *shell);
 */
 
 void			ft_env(t_shell *shell);
-void			ft_add_env_back(t_shell *shell, char *input);
-int				ft_envlen(t_shell *shell);
 char			*ft_find_variable(char *str, int *i, t_shell *shell);
 char			*ft_find_envvar(char *var, t_shell *shell);
 

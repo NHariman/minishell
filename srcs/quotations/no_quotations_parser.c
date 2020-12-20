@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 13:44:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/05 22:06:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/17 15:40:53 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static	void	ft_nqts_dq_strjoin(char *str, int *i,
 	new_str = ft_doublequotes_str(str, i, shell);
 	tmp = trim->res;
 	trim->res = gnl_strjoin(tmp, new_str);
+	free(new_str);
 	trim->start = *i;
 }
 
@@ -54,27 +55,23 @@ static	void	ft_nqts_sq_strjoin(char *str, int *i, t_trim *trim)
 	*i = *i + 1;
 	tmp = trim->res;
 	trim->res = gnl_strjoin(tmp, new_str);
+	free(new_str);
 	trim->start = *i;
 }
 
 static void		ft_nqts_nqts_strjoin(char *str, int *i, t_trim *trim)
 {
-	char	*tmp;
 	char	*new_str;
 	int		start;
 
 	if (trim->res == NULL)
 		trim->res = ft_substr(str, trim->start, *i - trim->start);
 	start = *i;
-	while (!ft_strchr("\"\'>< ", str[*i]) && str[*i] != '\0')
-	{
-		if (str[*i] == '\\')
-			*i = *i + 1;
+	while (!ft_strchr("\\$\"\'>< ", str[*i]) && str[*i] != '\0')
 		*i = *i + 1;
-	}
 	new_str = ft_substr(str, start, *i - start);
-	tmp = trim->res;
-	trim->res = gnl_strjoin(tmp, new_str);
+	trim->res = gnl_strjoin(trim->res, new_str);
+	free(new_str);
 	trim->start = *i;
 }
 

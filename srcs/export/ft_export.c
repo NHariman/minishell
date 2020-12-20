@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/03 18:53:24 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/19 01:06:21 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static char		*ft_make_export_str(char **env)
 	order = ft_order_env(env);
 	ft_sort_env(order, env, 1);
 	export_str = ft_parse_env_str(order, env);
+	free(order);
 	return (export_str);
 }
 
@@ -41,21 +42,21 @@ int				ft_valid_envvar(char *str)
 	return (0);
 }
 
-static void		ft_add_to_env(char **argv, t_shell *shell)
+static void		ft_add_to_env(t_shell *shell)
 {
 	int		i;
 	int		valid;
 
 	i = 1;
-	while (argv[i] != (char *)0)
+	while (shell->argv[i] != (char *)0)
 	{
-		valid = ft_valid_envvar(argv[i]);
+		valid = ft_valid_envvar(shell->argv[i]);
 		if (valid == 1 || valid == 0)
-			ft_update_env(shell, argv[i]);
+			ft_update_env(shell, shell->argv[i]);
 		else if (valid == -1)
 		{
 			ft_printf_err(
-				"omiishell: export: `%s': not a valid identifier\n", argv[i]);
+				"minishell: export: `%s': not a valid identifier\n", shell->argv[i]);
 			shell->exit_code = 1;
 		}
 		i++;
@@ -69,7 +70,8 @@ void			ft_export(t_shell *shell)
 	{
 		shell->ret = ft_make_export_str(shell->env);
 		ft_printf("%s\n", shell->ret);
+		free(shell->ret);
 	}
 	else
-		ft_add_to_env(shell->argv, shell);
+		ft_add_to_env(shell);
 }
