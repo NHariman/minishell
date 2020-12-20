@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2020/12/20 17:39:29 by nhariman      ########   odam.nl          #
+#    Updated: 2020/12/20 21:58:07 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ MINISHELL =		main.c \
 				srcs/exit/exit.c \
 				srcs/free/free.c \
 				srcs/execv/ft_execv.c \
+				srcs/execv/ft_is_directory.c \
 				srcs/execv/ft_make_array.c \
 				srcs/execv/ft_preprocessor.c \
 				srcs/export/ft_export.c \

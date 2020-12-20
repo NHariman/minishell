@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/20 17:37:23 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/20 22:00:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void			ft_exit_minishell(char **arr, int len, t_shell *shell);
 ** execve/execute functions
 */
 
+int				ft_is_directory(char *cmd, t_shell *shell);
 char			**ft_path_array(char *str, char *cmd);
 void			ft_execute(char *cmd, t_shell *shell);
 int				ft_execve(char **argv, t_shell *shell);
