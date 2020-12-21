@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/21 16:01:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/21 19:12:09 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ char			*ft_charjoin(char *str, char c);
 char			*ft_make_single_char_str(char c);
 char			**ft_argv(char *str, t_shell *shell);
 int				ft_count_arr(char *str);
+char			**ft_arrdup(char **arr);
 int				ft_arrlen(char **arr);
 char			**ft_add_arr_front(char **arr, char *input);
 char			**ft_add_arr_back(char **arr, char *input);
