@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/19 01:06:21 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/21 16:53:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int				ft_valid_envvar(char *str)
 		return (-1);
 	while (str[i] != '\0')
 	{
-		if (str[i] == ' ' || str[i] == '/')
+		if (ft_isspecial(str[i]) && str[i] != '_' && str[i] != '=' && str[i] != ' ')
 			return (-1);
 		else if (str[i] == '=')
 			return (1);

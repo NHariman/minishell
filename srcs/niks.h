@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/20 22:00:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/21 16:01:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void			function_dispatcher(char *line, t_shell *shell);
 /*
 ** general functions
 */
+int				ft_isspecial(int c);
 char			*ft_strtrimfree(char *s1, char const *set);
 char			**ft_get_prompts(char *str);
 char			*gnl_strjoin(char *s1, char *s2);

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/20 19:13:09 by nhariman      ########   odam.nl         */
+/*   Updated: 2020/12/21 16:33:47 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				ft_isspecial(int c)
 {
-	if ((c > 32 && c < 48) || (c > 57 && c < 65) ||
+	if ((c > 31 && c < 48) || (c > 57 && c < 65) ||
 	(c > 90 && c < 97) || (c > 122 && c < 127))
 		return (1);
 	else
@@ -54,7 +54,8 @@ static char	*ft_get_var(char *str, int *i)
 	int		start;
 
 	start = *i;
-	while (!ft_isspecial(str[*i]) && str[*i] != ' ' && str[*i] != '\0')
+	while ((!ft_isspecial(str[*i]) || str[*i] != '_')
+		&& str[*i] != ' ' && str[*i] != '\0')
 		*i = *i + 1;
 	var = ft_substr(str, start, *i - start);
 	return (var);
