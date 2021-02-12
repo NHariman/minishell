@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlower.c                                      :+:    :+:            */
+/*   ft_make_single_char_str.c                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/17 15:55:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 19:04:21 by nhariman      ########   odam.nl         */
+/*   Created: 2020/12/21 18:31:04 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/12/21 19:29:39 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strlower(char *str)
+char	*ft_make_single_char_str(char c)
 {
-	int		start;
-	char	*newstr;
+	char *num;
 
-	start = 0;
-	newstr = (char *)malloc((ft_strlen(str) + 1 * sizeof(char)));
-	if (!newstr)
+	num = (char *)malloc(sizeof(char) * 2);
+	if (!num)
 		return (NULL);
-	while (str[start] != '\0')
-	{
-		if (ft_isalpha(str[start]))
-			newstr[start] = ft_tolower(str[start]);
-		start++;
-	}
-	newstr[start] = '\0';
-	return (newstr);
+	num[0] = c;
+	num[1] = '\0';
+	return (num);
 }

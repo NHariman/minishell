@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlower.c                                      :+:    :+:            */
+/*   ft_charjoin.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/17 15:55:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 19:04:21 by nhariman      ########   odam.nl         */
+/*   Created: 2020/12/21 18:42:05 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/12/21 18:42:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strlower(char *str)
+char			*ft_charjoin(char *str, char c)
 {
-	int		start;
+	int		len;
 	char	*newstr;
+	int		i;
 
-	start = 0;
-	newstr = (char *)malloc((ft_strlen(str) + 1 * sizeof(char)));
-	if (!newstr)
-		return (NULL);
-	while (str[start] != '\0')
+	len = ft_strlen(str) + 2;
+	newstr = (char *)malloc(sizeof(char) * len);
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (ft_isalpha(str[start]))
-			newstr[start] = ft_tolower(str[start]);
-		start++;
+		newstr[i] = str[i];
+		i++;
 	}
-	newstr[start] = '\0';
+	newstr[i] = c;
+	newstr[i + 1] = '\0';
 	return (newstr);
 }

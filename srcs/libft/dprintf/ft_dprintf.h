@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlower.c                                      :+:    :+:            */
+/*   ft_dprintf.h                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/17 15:55:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 19:04:21 by nhariman      ########   odam.nl         */
+/*   Created: 2020/02/28 19:40:22 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/12/21 18:11:25 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_DPRINTF_H
+# define FT_DPRINTF_H
 
-char	*ft_strlower(char *str)
-{
-	int		start;
-	char	*newstr;
+# include <stdarg.h>
 
-	start = 0;
-	newstr = (char *)malloc((ft_strlen(str) + 1 * sizeof(char)));
-	if (!newstr)
-		return (NULL);
-	while (str[start] != '\0')
-	{
-		if (ft_isalpha(str[start]))
-			newstr[start] = ft_tolower(str[start]);
-		start++;
-	}
-	newstr[start] = '\0';
-	return (newstr);
-}
+int				ft_dprintf(int fd, const char *format, ...);
+
+#endif

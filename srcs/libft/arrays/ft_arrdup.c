@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlower.c                                      :+:    :+:            */
+/*   ft_arrdup.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/17 15:55:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 19:04:21 by nhariman      ########   odam.nl         */
+/*   Created: 2020/12/21 19:08:10 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/12/21 19:08:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-char	*ft_strlower(char *str)
+char	**ft_arrdup(char **arr)
 {
-	int		start;
-	char	*newstr;
+	int		len;
+	char	**newarr;
+	int		i;
 
-	start = 0;
-	newstr = (char *)malloc((ft_strlen(str) + 1 * sizeof(char)));
-	if (!newstr)
+	i = 0;
+	len = ft_arrlen(arr);
+	newarr = (char **)malloc(sizeof(char *) * (len + 1));
+	if (!newarr)
 		return (NULL);
-	while (str[start] != '\0')
+	while (arr[i] != (char *)0)
 	{
-		if (ft_isalpha(str[start]))
-			newstr[start] = ft_tolower(str[start]);
-		start++;
+		newarr[i] = ft_strdup(arr[i]);
+		i++;
 	}
-	newstr[start] = '\0';
-	return (newstr);
+	newarr[i] = (char *)0;
+	return (newarr);
 }

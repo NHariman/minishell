@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlower.c                                      :+:    :+:            */
+/*   ft_arr_to_str.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/17 15:55:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 19:04:21 by nhariman      ########   odam.nl         */
+/*   Created: 2020/12/21 18:50:41 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/12/21 18:50:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-char	*ft_strlower(char *str)
+char			*ft_make_str(char **arr)
 {
-	int		start;
-	char	*newstr;
+	int		i;
+	char	*new_str;
+	char	*tmp;
 
-	start = 0;
-	newstr = (char *)malloc((ft_strlen(str) + 1 * sizeof(char)));
-	if (!newstr)
-		return (NULL);
-	while (str[start] != '\0')
+	i = 0;
+	new_str = ft_strdup(arr[0]);
+	while (arr[i + 1] != (char *)0)
 	{
-		if (ft_isalpha(str[start]))
-			newstr[start] = ft_tolower(str[start]);
-		start++;
+		tmp = gnl_strjoin(new_str, arr[i + 1]);
+		new_str = tmp;
+		i++;
 	}
-	newstr[start] = '\0';
-	return (newstr);
+	if (i > 0)
+		new_str = tmp;
+	return (new_str);
 }

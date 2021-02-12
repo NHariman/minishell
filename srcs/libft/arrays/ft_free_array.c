@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlower.c                                      :+:    :+:            */
+/*   ft_free_array.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/17 15:55:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 19:04:21 by nhariman      ########   odam.nl         */
+/*   Created: 2020/12/21 18:39:28 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/12/21 18:39:37 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-char	*ft_strlower(char *str)
+void	ft_free_array(char **arr, int len)
 {
-	int		start;
-	char	*newstr;
+	int i;
 
-	start = 0;
-	newstr = (char *)malloc((ft_strlen(str) + 1 * sizeof(char)));
-	if (!newstr)
-		return (NULL);
-	while (str[start] != '\0')
+	i = 0;
+	while (i < len)
 	{
-		if (ft_isalpha(str[start]))
-			newstr[start] = ft_tolower(str[start]);
-		start++;
+		free(arr[i]);
+		i++;
 	}
-	newstr[start] = '\0';
-	return (newstr);
+	free(arr);
+	arr = NULL;
 }

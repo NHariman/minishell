@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlower.c                                      :+:    :+:            */
+/*   ft_arr_to_str_sp.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/17 15:55:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 19:04:21 by nhariman      ########   odam.nl         */
+/*   Created: 2020/12/21 18:54:07 by nhariman      #+#    #+#                 */
+/*   Updated: 2021/02/12 19:01:21 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-char	*ft_strlower(char *str)
+char		*ft_arr_to_str_sp(char **arr)
 {
-	int		start;
-	char	*newstr;
+	int		i;
+	char	*new_str;
+	char	*tmp;
+	char	*output;
 
-	start = 0;
-	newstr = (char *)malloc((ft_strlen(str) + 1 * sizeof(char)));
-	if (!newstr)
-		return (NULL);
-	while (str[start] != '\0')
+	new_str = ft_charjoin(arr[0], ' ');
+	i = 1;
+	while (arr[i] != (char *)0)
 	{
-		if (ft_isalpha(str[start]))
-			newstr[start] = ft_tolower(str[start]);
-		start++;
+		output = ft_charjoin(arr[i], ' ');
+		tmp = gnl_strjoin(new_str, output);
+		free(output);
+		new_str = tmp;
+		i++;
 	}
-	newstr[start] = '\0';
-	return (newstr);
+	return (new_str);
 }

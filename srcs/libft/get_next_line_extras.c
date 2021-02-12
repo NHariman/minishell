@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlower.c                                      :+:    :+:            */
+/*   get_next_line_extras.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/17 15:55:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 19:04:21 by nhariman      ########   odam.nl         */
+/*   Created: 2021/02/12 18:08:27 by nhariman      #+#    #+#                 */
+/*   Updated: 2021/02/12 18:57:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strlower(char *str)
+void		gnl_fill_line(t_gnl gnl, char *tmp)
 {
-	int		start;
-	char	*newstr;
+	if (!tmp)
+		gnl.line_read = NULL;
+	else
+		ft_strdup(tmp);
+}
 
-	start = 0;
-	newstr = (char *)malloc((ft_strlen(str) + 1 * sizeof(char)));
-	if (!newstr)
-		return (NULL);
-	while (str[start] != '\0')
-	{
-		if (ft_isalpha(str[start]))
-			newstr[start] = ft_tolower(str[start]);
-		start++;
-	}
-	newstr[start] = '\0';
-	return (newstr);
+int			ret_fill_line(int newline, size_t remainder)
+{
+	if (newline != -1 && remainder == 0)
+		return (1);
+	else
+		return (0);
+}
+
+int			ret_gnl(int newline, char *leftover, int ret)
+{
+	if (newline != -1 && leftover == NULL)
+		return (-1);
+	else
+		return (ret);
 }

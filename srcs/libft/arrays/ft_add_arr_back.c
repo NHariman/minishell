@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlower.c                                      :+:    :+:            */
+/*   ft_add_arr_back.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/17 15:55:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 19:04:21 by nhariman      ########   odam.nl         */
+/*   Created: 2020/12/21 18:35:17 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/12/21 19:08:45 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-char	*ft_strlower(char *str)
+char			**ft_add_arr_back(char **arr, char *input)
 {
-	int		start;
-	char	*newstr;
+	char	**new_argv;
+	int		len;
+	int		i;
 
-	start = 0;
-	newstr = (char *)malloc((ft_strlen(str) + 1 * sizeof(char)));
-	if (!newstr)
+	len = ft_arrlen(arr) + 1;
+	i = 0;
+	new_argv = (char **)malloc(sizeof(char *) * (len + 1));
+	if (!new_argv)
 		return (NULL);
-	while (str[start] != '\0')
+	while (arr[i] != (char *)0)
 	{
-		if (ft_isalpha(str[start]))
-			newstr[start] = ft_tolower(str[start]);
-		start++;
+		new_argv[i] = ft_strdup(arr[i]);
+		i++;
 	}
-	newstr[start] = '\0';
-	return (newstr);
+	new_argv[i] = ft_strdup(input);
+	new_argv[len] = (char *)0;
+	return (new_argv);
 }

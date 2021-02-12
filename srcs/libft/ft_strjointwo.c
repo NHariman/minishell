@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlower.c                                      :+:    :+:            */
+/*   ft_strjointwo.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/17 15:55:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 19:04:21 by nhariman      ########   odam.nl         */
+/*   Created: 2020/12/21 18:29:30 by nhariman      #+#    #+#                 */
+/*   Updated: 2020/12/21 18:29:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strlower(char *str)
+char					*ft_strjointwo(char *s1, char *s2)
 {
-	int		start;
-	char	*newstr;
+	char		*strduo;
+	size_t		i;
+	size_t		j;
 
-	start = 0;
-	newstr = (char *)malloc((ft_strlen(str) + 1 * sizeof(char)));
-	if (!newstr)
-		return (NULL);
-	while (str[start] != '\0')
+	i = 0;
+	j = 0;
+	strduo = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!strduo)
 	{
-		if (ft_isalpha(str[start]))
-			newstr[start] = ft_tolower(str[start]);
-		start++;
+		free(s2);
+		return (NULL);
 	}
-	newstr[start] = '\0';
-	return (newstr);
+	while (s1 && i < ft_strlen(s1))
+	{
+		strduo[i] = s1[i];
+		i++;
+	}
+	while (s2 && j < ft_strlen(s2))
+	{
+		strduo[i + j] = s2[j];
+		j++;
+	}
+	strduo[i + j] = '\0';
+	free(s2);
+	return (strduo);
 }
