@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/04 11:01:52 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/04 12:46:23 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void			function_dispatcher(char *line, t_shell *shell)
 	ft_printf("shell->rds: {%s}\n", shell->rds);
 	if (!shell->rds)
 		ft_wordparser(shell);
-	else if (shell->rds)
+	else
 	{	
 		rd_main(shell->rds, shell);
 		free(shell->rds);
