@@ -8,6 +8,8 @@ ctrl-C
 ctrl-D
 ctrl-\ 
 https://unix.stackexchange.com/questions/110240/why-does-ctrl-d-eof-exit-the-shell
+https://www.geeksforgeeks.org/signals-c-language/
+
 
 [-] | ; < > << \ (syntax errors)
 void			minishell_parser(char *line, t_shell *shell)

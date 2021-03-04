@@ -6,18 +6,19 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 11:02:15 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/04 14:13:00 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/04 14:24:41 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 // ft_printf("bash: syntax error near unexpected token `<'\n");
 
-#include "srcs/minishell.h"
+#include "../minishell.h"
 
-int		ft_semicol_err()
+int		ft_semicol_err(t_shell *shell)
 {
 	ft_printf("minishell: syntax error near unexpected token `;'\n");
+	shell->exit_code = 1;
 	return (1);
 }
 
@@ -35,14 +36,14 @@ int     check_end(char *line, t_shell *shell)
 
 	i = 0;
 	if (line[0] == ';')
-		return (ft_semicol_err());
+		return (ft_semicol_err(shell));
 	while (line[i] != '\0')
 	{
 		if (line[i] == ';')
 		{
 			i = i + ft_iswhitespaces(line + i);
 			if (is_token(line[i]))
-				return (ft_semicol_err());
+				return (ft_semicol_err(shell));
 		}
 		i++;
 	}

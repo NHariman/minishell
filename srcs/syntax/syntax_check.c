@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 08:12:33 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/04 12:54:47 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/04 14:22:30 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int check_bs(char *line, t_shell *shell)
 
 int     syntax_check(char *line, t_shell *shell)
 {
-    if (check_red_1(line, shell) || check_red_2(line, shell) || check_bs(line, shell))
+    if (check_end(line, shell) || check_red_1(line, shell) || check_red_2(line, shell) || check_bs(line, shell))
     {
         ft_printf("an error has occured\n");
         return (shell->exit_code);
