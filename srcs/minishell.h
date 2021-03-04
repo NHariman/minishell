@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:18:06 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/05 16:31:28 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/04 16:15:01 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,12 @@
 # include "yusha.h"
 # include "niks.h"
 # include "libft/libft.h"
+
+#define SIGHUP  1   /* Hangup the process */ 
+#define SIGINT  2   /* Interrupt the process */ 
+#define SIGQUIT 3   /* Quit the process */ 
+#define SIGILL  4   /* Illegal instruction. */ 
+#define SIGTRAP 5   /* Trace trap. */ 
+#define SIGABRT 6   /* Abort. */
 
 #endif
