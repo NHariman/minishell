@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/04 16:14:50 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/04 17:51:12 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ int		main(int argc, char *argv[], char *envp[])
 	}
 	else
 	{
+		signal(SIGHUP, handle_hangup);
+		signal(SIGINT, handle_interrupt);
+		signal(SIGQUIT, handle_quitp);
 		while(tpid != child_pid)
 		{
 			tpid = wait(&child_status);	
