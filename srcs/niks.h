@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/21 19:12:09 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/04 10:47:24 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,6 @@
 # define DQ 2
 # define NQ 3
 
-typedef struct	s_gnl
-{
-	int				bytes_read;
-	int				fd;
-	char			*line_read;
-	int				newline;
-}				t_gnl;
 
 typedef	struct	s_trim
 {
