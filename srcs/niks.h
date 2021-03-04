@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/04 10:47:24 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/04 10:52:08 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,4 +177,5 @@ char			*ft_find_envvar(char *var, t_shell *shell);
 ** clear shell struct
 */
 void			ft_clear_shell(t_shell *shell);
+void			ft_wordparser(t_shell *shell);
 #endif

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/20 19:35:40 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/04 11:01:52 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void		ft_check_case(t_shell *shell)
 		ft_execute(shell->argv[0], shell);
 }
 
-static void		ft_wordparser(t_shell *shell)
+void		ft_wordparser(t_shell *shell)
 {
 	if (shell->argv[0] == NULL)
 		return ;
@@ -107,8 +107,7 @@ void			minishell_parser(char *line, t_shell *shell)
 {
 	t_qts		qts;
 
-	if (line[0] == '\0' || ft_invalid_line(line, shell, ';') ||
-	ft_invalid_line(line, shell, '|'))
+	if (line[0] == '\0' || syntax_check(line, shell))
 		return ;
 	ft_set_qts(&qts);
 	ft_qt_start(line, &qts);
