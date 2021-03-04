@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/04 08:03:46 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/04 11:55:36 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void    rd_open_file(t_struct_rd *rd, t_shell *shell)
 		rd->fd = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
 	else if (rd->nb == 3)
 		rd->fd_rd = open(rd->file, O_RDWR);
+	printf("error check\n");
 	if (rd->fd < 0 || rd->fd_rd < 0)
 	{
 		ft_printf_err("Error\n%s\n", strerror(errno));
@@ -98,11 +99,14 @@ void    rd_open_file_fill(t_struct_rd *rd, t_shell *shell)
 	{
 		printf("---> or >>---\n");
 		shell->fd = rd->fd;
+		dup2(rd->fd, 1);
 		ft_wordparser(shell);
 		//is er een error
 		//stdin 1 eruit lezen
+		
 		//leeg maken
 		//weet neit of het leeg meot
+		//we now have just cose it after wordparser
 		//put that in de file
 		close(rd->fd);
 	}
@@ -112,6 +116,7 @@ void    rd_open_file_fill(t_struct_rd *rd, t_shell *shell)
 		shell->fd_r = rd->fd_rd;
 		//stdin 0 in stoppen
 		//put that in de file
+		dup2(1, rd->fd);
 		ft_wordparser(shell);
 		//is er een error
 		close(rd->fd_rd);
