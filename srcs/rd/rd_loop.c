@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/04 14:42:54 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/04 15:00:58 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,15 +163,11 @@ void    rd_open_file_fill(t_struct_rd *rd, t_shell *shell)
 {
 	if (rd->fd != -1)
 	{
-		printf("---> or >>---\n");
 		rd_one(rd, shell);
-		printf("---< or <<---\n");
 	}
 	else if (rd->fd_rd != -1)
 	{
-		printf("---<---\n");
 		rd_two(rd, shell);
-		printf("--->---\n");
 	}
 }
 
@@ -192,7 +188,7 @@ int     rd_loop(t_struct_rd *rd, t_shell *shell)
 			return (rd->error);
 		}
 		rd_get_file(rd, shell, echo);
-		ft_printf("file == [%s]\n", rd->file);
+		// ft_printf("file == [%s]\n", rd->file);
 		rd_open_file(rd, shell);
 	}
 	rd_open_file_fill(rd, shell);
