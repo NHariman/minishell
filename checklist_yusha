@@ -1,0 +1,33 @@
+[X]ft_execute testen
+[ ]impliment de get to file for out
+use dup2 to change the fd, so 0 becomes 1, and 1 becomes 0
+[ ]redirect parser (ft_invalid_rd()
+finish rd checker that its correct and gives the right error
+[ ]controls
+ctrl-C
+ctrl-D
+ctrl-\ 
+https://unix.stackexchange.com/questions/110240/why-does-ctrl-d-eof-exit-the-shell
+
+[-] | ; < > << \ (syntax errors)
+void			minishell_parser(char *line, t_shell *shell)
+{
+	t_qts		qts;
+	if (line[0] == '\0' || JOUW_FUNCTIE_HIEr)
+		return ;
+	ft_set_qts(&qts);
+	ft_qt_start(line, &qts);
+	if (qts.dq % 2 != 0 || qts.sq % 2 != 0)
+		ft_printf_err("Error\nHanging quotes. Parsing failed.\n");
+	else
+		ft_make_prompts(line, shell);
+}
+
+[ ]test pipes checken
+[ ]voor pipes, put the stuff in the stdou in the stdin
+https://www.google.com/search?q=capture+stdout&oq=capture+stdout&aqs=chrome..69i57j0l7.4323j0j9&sourceid=chrome&ie=UTF-8
+capture
+
+[ ] > check if you need to empty 1
+[ ] < moet het leeg
+[ ] ok je kan het testen door het in minishell_parser() te zetten en te kijken met verschillende strings of het werkt

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/07 11:03:07 by anonymous     ########   odam.nl         */
+/*   Updated: 2021/03/04 08:03:46 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void    rd_open_file(t_struct_rd *rd, t_shell *shell)
 	errno = 0;
 	if (rd->fd != -1)
 		close(rd->fd);
-	else if (rd->fd_rd != -1)
+	else if (rd->fd_rd != -1 && rd->nb == 3)
 		close(rd->fd_rd);
 	if (rd->nb == 1)
 	   rd->fd = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
@@ -89,18 +89,31 @@ void    rd_open_file(t_struct_rd *rd, t_shell *shell)
 		ft_printf_err("Error\n%s\n", strerror(errno));
 		shell->exit_code = 1;
 	}
+	//altijd error, zorg dat hij ook chck of die nb wel aanstaat
 }
 
 void    rd_open_file_fill(t_struct_rd *rd, t_shell *shell)
 {
 	if (rd->fd != -1)
 	{
+		printf("---> or >>---\n");
 		shell->fd = rd->fd;
+		ft_wordparser(shell);
+		//is er een error
+		//stdin 1 eruit lezen
+		//leeg maken
+		//weet neit of het leeg meot
+		//put that in de file
 		close(rd->fd);
 	}
 	else if (rd->fd_rd != -1)
 	{
+		printf("---<---\n");
 		shell->fd_r = rd->fd_rd;
+		//stdin 0 in stoppen
+		//put that in de file
+		ft_wordparser(shell);
+		//is er een error
 		close(rd->fd_rd);
 	}
 }
@@ -108,6 +121,7 @@ void    rd_open_file_fill(t_struct_rd *rd, t_shell *shell)
 int     rd_loop(t_struct_rd *rd, t_shell *shell)
 {
 	t_struct_m	*echo;
+
 	echo = ft_calloc(1, sizeof(t_struct_m));
 	rd->i = 0;
 	rd->error = 0;

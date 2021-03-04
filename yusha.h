@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/04 10:06:31 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/04 10:05:20 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,8 @@ void		rd_open_file(t_struct_rd *rd, t_shell *shell);
 int			error_check_rd(t_struct_rd *rd, t_shell *shell);
 void 		rd_get_file(t_struct_rd *rd, t_shell *shell, t_struct_m	*echo);
 
-
 //functions
 void		ft_trim_single_c(t_struct_m *echo);
 char		*ft_strcpystr(int start, char *str, char c);
 
-
-//synax
-int     	syntax_check(char *line, t_shell *shell);
 #endif

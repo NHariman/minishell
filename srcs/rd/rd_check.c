@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/07 11:00:14 by anonymous     ########   odam.nl         */
+/*   Updated: 2021/03/04 08:03:39 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,12 @@ int		error_check_rd(t_struct_rd *rd, t_shell *shell)
 	rd->rdi = rd->i;
 	while (rd->str[rd->rdi] || rd->str[rd->rdi] != '\0')
 	{
-		if (rd->str[rd->rdi] == '>')
+		if (rd->str[rd->rdi] == '\\')//if backslash, error
+		{
+			if (rd_check_error_out(rd, shell) > 0)
+				return (1);
+		}
+		else if (rd->str[rd->rdi] == '>')
 		{
 			if (rd_check_error_out(rd, shell) > 0)
 				return (1);

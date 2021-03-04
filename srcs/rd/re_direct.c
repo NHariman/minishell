@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/07 10:59:52 by anonymous     ########   odam.nl         */
+/*   Updated: 2021/03/04 08:03:49 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void		rd_main(char *str, t_shell *shell)
 	rd->error = 0;
 	rd_value_rd(rd);
 	rd->str = ft_strtrim(str, "\n");
-	free(str);
 	ft_printf("in == [%s][%i]\n", rd->str, rd->i);
 	if (error_check_rd(rd, shell) > 0 || rd_loop(rd, shell) > 0)
 	{
