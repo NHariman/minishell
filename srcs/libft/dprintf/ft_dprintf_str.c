@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_printf_str.c                                    :+:    :+:            */
+/*   ft_dprintf_str.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:04 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/04 11:14:33 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/04 11:13:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ void			pft_putstr_fd(char *s, int fd, int *count)
 	}
 }
 
-void			ft_print_char(const char c, int *count, t_flag *flags)
+void			ft_dprint_char(const char c, int *count, t_dflag *flags)
 {
 	if (!flags->dash && !flags->zero)
-		ft_pad(flags->pad - 1, count);
+		ft_dpad(flags->pad - 1, count, flags);
 	if (flags->zero && !flags->dash)
-		ft_padzero(flags->pad - 1, count);
-	pft_putchar_fd(c, 1, count);
+		ft_dpadzero(flags->pad - 1, count, flags);
+	pft_putchar_fd(c, flags->fd, count);
 	if (*count < 0)
 		return ;
 	*count = *count + 1;
 	if (flags->dash)
-		ft_pad(flags->pad - 1, count);
+		ft_dpad(flags->pad - 1, count, flags);
 }
 
 /*
@@ -61,7 +61,7 @@ void			ft_print_char(const char c, int *count, t_flag *flags)
 ** that's what the real printf does.
 */
 
-static size_t	set_strlen(t_flag *flags, const char *str)
+static size_t	set_strlen(t_dflag *flags, const char *str)
 {
 	if ((size_t)flags->pre < ft_strlen(str))
 		return ((size_t)flags->pre);
@@ -69,7 +69,7 @@ static size_t	set_strlen(t_flag *flags, const char *str)
 		return (ft_strlen(str));
 }
 
-void			ft_print_str(const char *str, int *count, t_flag *flags)
+void			ft_dprint_str(const char *str, int *count, t_dflag *flags)
 {
 	size_t		i;
 	size_t		strlen;
@@ -79,17 +79,17 @@ void			ft_print_str(const char *str, int *count, t_flag *flags)
 	i = 0;
 	strlen = set_strlen(flags, str);
 	if (!flags->dash && !flags->zero && flags->pad > 0)
-		ft_pad(flags->pad - strlen, count);
+		ft_dpad(flags->pad - strlen, count, flags);
 	if (flags->zero && !flags->dash)
-		ft_padzero(flags->pad - strlen, count);
+		ft_dpadzero(flags->pad - strlen, count, flags);
 	while (i < strlen)
 	{
-		pft_putchar_fd(str[i], 1, count);
+		pft_putchar_fd(str[i], flags->fd, count);
 		if (*count < 0)
 			return ;
 		i++;
 	}
 	*count = *count + strlen;
 	if (flags->dash)
-		ft_pad(flags->pad - strlen, count);
+		ft_dpad(flags->pad - strlen, count, flags);
 }
