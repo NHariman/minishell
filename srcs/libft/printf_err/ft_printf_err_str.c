@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:04 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 18:58:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/04 11:14:45 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void			ft_print_char(const char c, int *count, t_flag *flags)
 ** that's what the real printf does.
 */
 
-static size_t	set_strlen(t_flag *flags, char *str)
+static size_t	set_strlen(t_flag *flags, const char *str)
 {
 	if ((size_t)flags->pre < ft_strlen(str))
 		return ((size_t)flags->pre);
