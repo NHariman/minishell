@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/04 12:40:53 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/04 13:22:05 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int    rd_get_nb(t_struct_rd *rd)
 			rd->nb = 1;
 		rd->i++;
 		if (rd->str[rd->i] == '>')
+		{
 			rd->nb = 2;
+			rd->i++;
+		}
 		while (rd->str[rd->i] == ' ')
 			rd->i++;
 	}
@@ -80,15 +83,16 @@ void    rd_open_file(t_struct_rd *rd, t_shell *shell)
 		close(rd->fd_rd);
 	if (rd->nb == 1)
 	   rd->fd = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
+	else if (rd->nb == 2)
+		rd->fd = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
 	else if (rd->nb == 3)
 		rd->fd_rd = open(rd->file, O_RDWR);
-	printf("error check\n");
+	printf("--error check--\n");
 	if (rd->fd < 0 && rd->fd_rd < 0)
 	{
 		ft_printf_err("Error\n%s\n", strerror(errno));
 		shell->exit_code = 1;
 	}
-	//altijd error, zorg dat hij ook chck of die nb wel aanstaat
 }
 
 void    rd_open_file_fill(t_struct_rd *rd, t_shell *shell)
@@ -106,7 +110,6 @@ void    rd_open_file_fill(t_struct_rd *rd, t_shell *shell)
 		{
 			shell->fd = rd->fd;
 			dup2(rd->fd, 1);
-			write(1, "hello", ft_strlen("hello"));
 			ft_wordparser(shell);
 			//is er een error
 			//stdin 1 eruit lezen
