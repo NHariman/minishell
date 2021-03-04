@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/17 18:33:36 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/04 14:59:39 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,18 @@ int			ft_count_arr(char *str)
 	return (count);
 }
 
+static void ft_skip_rds(char *str, int *i, t_shell *shell)
+{
+	char *res;
+
+	while (str[*i] == '>')
+		*i = *i + 1;
+	*i = *i + ft_iswhitespaces(str + *i);
+	res = ft_no_quotes_str(str, i, shell, " ");
+	*i = *i + 1;
+	free(res);
+}
+
 static char	**ft_make_array(char **arr, char *str, t_shell *shell, int arr_len)
 {
 	int i;
@@ -58,6 +70,8 @@ static char	**ft_make_array(char **arr, char *str, t_shell *shell, int arr_len)
 	{
 		if (str[i] != ' ')
 		{
+			if (str[i] == '<' || str[i] == '>')
+				ft_skip_rds(str, &i, shell);
 			arr[count] = ft_no_quotes_str(str, &i, shell, " ");
 			if (!arr[count])
 				return (NULL);

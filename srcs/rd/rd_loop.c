@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/04 08:03:46 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/04 15:00:58 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int    rd_get_nb(t_struct_rd *rd)
 			rd->nb = 1;
 		rd->i++;
 		if (rd->str[rd->i] == '>')
+		{
 			rd->nb = 2;
+			rd->i++;
+		}
 		while (rd->str[rd->i] == ' ')
 			rd->i++;
 	}
@@ -84,37 +87,87 @@ void    rd_open_file(t_struct_rd *rd, t_shell *shell)
 		rd->fd = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
 	else if (rd->nb == 3)
 		rd->fd_rd = open(rd->file, O_RDWR);
-	if (rd->fd < 0 || rd->fd_rd < 0)
+	printf("--error check--\n");
+	if (rd->fd < 0 && rd->fd_rd < 0)
 	{
 		ft_printf_err("Error\n%s\n", strerror(errno));
 		shell->exit_code = 1;
 	}
-	//altijd error, zorg dat hij ook chck of die nb wel aanstaat
+}
+
+void	rd_one(t_struct_rd *rd, t_shell *shell)
+{
+	pid_t	child_pid;
+	pid_t	tpid;
+	int		child_status;
+
+	tpid = 0;
+	shell->fd = rd->fd;
+	child_pid = fork();
+	if (child_pid == 0)
+	{
+		dup2(rd->fd, 1);
+		ft_wordparser(shell);
+		close(1);
+		close(rd->fd);
+		exit(0);
+		//is er een error
+		//stdin 1 eruit lezen
+		
+		//leeg maken
+		//weet neit of het leeg meot
+		//we now have just cose it after wordparser
+		//put that in de file
+	}
+	else
+	{
+		while (tpid != child_pid)
+		{
+			tpid = wait(&child_status);
+		}
+		ft_printf("exit\n");
+	}
+}
+
+void	rd_two(t_struct_rd *rd, t_shell *shell)
+{
+	pid_t	child_pid;
+	pid_t	tpid;
+	int		child_status;
+
+	tpid = 0;
+	shell->fd_r = rd->fd_rd;
+	child_pid = fork();
+	if (child_pid == 0)
+	{
+		printf("---<---\n");
+		dup2(rd->fd_rd, 0);
+		ft_wordparser(shell);
+		//stdin 0 in stoppen
+		//put that in de file
+		//is er een error
+		close(0);
+		close(rd->fd_rd);
+		exit(0);
+	}
+	else
+	{
+		while (tpid != child_pid)
+		{
+			tpid = wait(&child_status);
+		}
+	}
 }
 
 void    rd_open_file_fill(t_struct_rd *rd, t_shell *shell)
 {
 	if (rd->fd != -1)
 	{
-		printf("---> or >>---\n");
-		shell->fd = rd->fd;
-		ft_wordparser(shell);
-		//is er een error
-		//stdin 1 eruit lezen
-		//leeg maken
-		//weet neit of het leeg meot
-		//put that in de file
-		close(rd->fd);
+		rd_one(rd, shell);
 	}
 	else if (rd->fd_rd != -1)
 	{
-		printf("---<---\n");
-		shell->fd_r = rd->fd_rd;
-		//stdin 0 in stoppen
-		//put that in de file
-		ft_wordparser(shell);
-		//is er een error
-		close(rd->fd_rd);
+		rd_two(rd, shell);
 	}
 }
 
@@ -135,7 +188,7 @@ int     rd_loop(t_struct_rd *rd, t_shell *shell)
 			return (rd->error);
 		}
 		rd_get_file(rd, shell, echo);
-		ft_printf("file == [%s]\n", rd->file);
+		// ft_printf("file == [%s]\n", rd->file);
 		rd_open_file(rd, shell);
 	}
 	rd_open_file_fill(rd, shell);

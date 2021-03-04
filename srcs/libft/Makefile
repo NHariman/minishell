@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2021/02/12 18:08:23 by nhariman      ########   odam.nl          #
+#    Updated: 2021/03/04 11:10:20 by ybakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,12 +69,6 @@ CFILES = 	ft_atoi.c \
 			arrays/ft_arrlen.c \
 			arrays/ft_empty_array.c \
 			arrays/ft_free_array.c \
-			dprintf/ft_dprintf.c \
-			dprintf/ft_dprintf_flags.c \
-			dprintf/ft_dprintf_hexflags.c \
-			dprintf/ft_dprintf_numflags.c \
-			dprintf/ft_dprintf_num.c \
-			dprintf/ft_dprintf_str.c \
 			printf/ft_printf.c \
 			printf/ft_printf_flags.c \
 			printf/ft_printf_hexflags.c \
