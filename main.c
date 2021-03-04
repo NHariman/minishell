@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/12/20 19:16:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/04 15:37:43 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,49 @@ char	**ft_arrdup(char **arr)
 	return (newarr);
 }
 
-int		main(int argc, char *argv[], char *envp[])
+static void		main_start(t_shell *shell, int i, char *envp[])
 {
-	int		i;
 	char	*line;
-	char	**hold;
-	t_shell	shell;
 
-	i = argc;
-	hold = argv;
-	if (argc > 1)
-		ft_printf_err("Too many arguments.\n");
-	shell.env = ft_arrdup(envp);
-	shell.exit_code = 0;
+	shell->env = ft_arrdup(envp);
+	shell->exit_code = 0;
 	while (i == 1)
 	{
 		ft_printf("\033[1;36m");
 		ft_printf("minishell> ");
 		ft_printf("\033[0m");
 		i = get_next_line(0, &line);
-		minishell_parser(line, &shell);
+		minishell_parser(line, shell);
 		free(line);
+	}
+}
+
+int		main(int argc, char *argv[], char *envp[])
+{
+	pid_t	child_pid;
+	pid_t	tpid;
+	int		child_status;
+	int		i;
+	char	**hold;
+	t_shell	shell;
+	
+	i = argc;
+	hold = argv;
+	if (argc > 1)
+		ft_printf_err("Too many arguments.\n");
+	tpid = 0;
+	child_pid = fork();
+	if (child_pid == 0)
+	{
+		main_start(&shell, i, envp);
+		exit(1);
+	}
+	else
+	{
+		while(tpid != child_pid)
+		{
+			tpid = wait(&child_status);	
+		}
 	}
 	return (0);
 }
