@@ -114,4 +114,6 @@ char		*ft_strcpystr(int start, char *str, char c);
 //synax
 int     	syntax_check(char *line, t_shell *shell);
 
+//signals
+void    	handle_hangup(int sign);
 #endif

@@ -11,64 +11,26 @@
 /* ************************************************************************** */
 
 #include "srcs/minishell.h"
-#include <stdio.h>
 
-char	**ft_arrdup(char **arr)
-{
-	int		len;
-	char	**newarr;
-	int		i;
-
-	i = 0;
-	len = ft_arrlen(arr);
-	newarr = (char **)malloc(sizeof(char *) * (len + 1));
-	if (!newarr)
-		ft_malloc_fail();
-	while (arr[i] != (char *)0)
-	{
-		newarr[i] = ft_strdup(arr[i]);
-		i++;
-	}
-	newarr[i] = (char *)0;
-	return (newarr);
-}
-
-static void		main_start(t_shell *shell, int i, char *envp[])
-{
-	char	*line;
-
-	shell->env = ft_arrdup(envp);
-	shell->exit_code = 0;
-	while (i == 1)
-	{
-		ft_printf("\033[1;36m");
-		ft_printf("minishell> ");
-		ft_printf("\033[0m");
-		i = get_next_line(0, &line);
-		minishell_parser(line, shell);
-		free(line);
-	}
-}
-
-int		main(int argc, char *argv[], char *envp[])
+void    handle_hangup(int sign)
 {
 	pid_t	child_pid;
 	pid_t	tpid;
 	int		child_status;
-	int		i;
-	char	**hold;
-	t_shell	shell;
-	
-	i = argc;
-	hold = argv;
-	if (argc > 1)
-		ft_printf_err("Too many arguments.\n");
+
 	tpid = 0;
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		main_start(&shell, i, envp);
-		exit(1);
+		signal(SIGHUP, handle_hangup);
+		exit(tpid, SIGINT);
+		// signal(SIGINT, handle_interrupt);
+		kill(tpid, SIGQUIT);
+		// signal(SIGQUIT, handle_quitp);
+		while(tpid != child_pid)
+		{
+			tpid = wait(&child_status);	
+		}
 	}
 	else
 	{
@@ -82,5 +44,19 @@ int		main(int argc, char *argv[], char *envp[])
 			tpid = wait(&child_status);	
 		}
 	}
-	return (0);
+ //hangup is done by making another fork and wait until hangup is done agian, then go back
+  //meaning you make another singals call. this time when you hang up, you go back again
+  //interrupt is double. you stop the entire program
 }
+
+// void handle_interrupt(int sign)
+// {
+// //stopping the program
+//     exit(0);
+// }
+
+// void handle_quitp(int sign)
+// {
+// //force stopign the rpogram
+//     kill(0);
+// }
