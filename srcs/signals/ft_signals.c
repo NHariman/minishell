@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/11 12:36:09 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/11 14:41:11 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,16 @@ void    handle_hangup(int sign)
 	tpid = 0;
 	child_pid = fork();
 	sign = 0;
+	ft_printf("pause\n");
 	if (child_pid == 0)
 	{
-		signal(SIGHUP, handle_hangup);
-		// exit(tpid, SIGINT);
-		signal(SIGINT, handle_interrupt);
-		// kill(tpid, SIGQUIT);
-		// signal(SIGQUIT, handle_quitp);
-		while(tpid != child_pid)
-		{
-			tpid = wait(&child_status);	
-		}
+		sign = 0;
+		exit(0);
 	}
 	else
 	{
-		signal(SIGHUP, handle_hangup);
-		// exit(tpid, SIGINT);
-		signal(SIGINT, handle_interrupt);
-		// kill(tpid, SIGQUIT);
-		// signal(SIGQUIT, handle_quitp);
+		signal(SIGINT, handle_hangup);
+		signal(SIGQUIT, handle_interrupt);
 		while(tpid != child_pid)
 		{
 			tpid = wait(&child_status);	
@@ -53,35 +44,13 @@ void    handle_hangup(int sign)
 void handle_interrupt(int sign)
 {
 //stopping the program
+	ft_printf("exit\n");
 	sign = 0;
-    exit(0);
+    kill(2);
 }
 
-void handle_quitp(int sign)
+void handle_interrupt_two(int sign)
 {
-	pid_t	child_pid;
-	pid_t	tpid;
-	int		child_status;
-
-	tpid = 0;
-	child_pid = fork();
-	sign = 0;
-	if (child_pid == 0)
-	{
-		ft_printf("kill process\n");
-		kill(tpid, SIGKILL);
-		while(tpid != child_pid)
-		{
-			tpid = wait(&child_status);	
-		}
-	}
-	else
-	{
-		ft_printf("kill process2\n");
-		kill(tpid, SIGKILL);
-		while(tpid != child_pid)
-		{
-			tpid = wait(&child_status);	
-		}
-	}
+	main_child_process(&shell, i, envp);
+	kill(2);
 }

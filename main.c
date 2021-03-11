@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/11 12:33:44 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/11 14:41:59 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,28 @@ static void		main_start(t_shell *shell, int i, char *envp[])
 	}
 }
 
+static void		main_child_process(t_shell *shell, int i, char *envp[])
+{
+	pid_t	child_pid;
+	pid_t	tpid;
+	int		child_status;
+	tpid = 0;
+	child_pid = fork();
+	if(child_pid == 0)
+	{
+		main_start(&shell, i, envp);
+		exit(1);
+	}
+	else
+	{
+		signal(SIGQUIT, handle_interrupt);
+		while(tpid != child_pid)
+		{
+			tpid = wait(&child_status);	
+		}
+	}
+}
+	
 int		main(int argc, char *argv[], char *envp[])
 {
 	pid_t	child_pid;
@@ -57,6 +79,7 @@ int		main(int argc, char *argv[], char *envp[])
 	int		child_status;
 	int		i;
 	char	**hold;
+	char	**store = NULL;
 	t_shell	shell;
 	
 	i = argc;
@@ -65,18 +88,19 @@ int		main(int argc, char *argv[], char *envp[])
 		ft_printf_err("Too many arguments.\n");
 	tpid = 0;
 	child_pid = fork();
-	if (child_pid == 0)
+	if(child_pid == 0)
 	{
-		main_start(&shell, i, envp);
-		exit(1);
+		main_child_process(&shell, i, envp);
+		kill(2);
 	}
 	else
 	{
-		signal(SIGHUP, handle_hangup);
-		// exit(tpid, SIGINT);
-		signal(SIGINT, handle_interrupt);
-		// kill(tpid, SIGKILL);
-		signal(SIGKILL, handle_quitp);
+		signal(SIGINT, handle_hangup);
+		signal(SIGQUIT, handle_interrupt_two);//backslash
+		if (get_next_line(0, store) == 0)
+		{
+			signal(SIGINT, handle_hangup);
+		}
 		while(tpid != child_pid)
 		{
 			tpid = wait(&child_status);	
