@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:18:06 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/04 16:15:01 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/11 12:31:35 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@
 #define SIGILL  4   /* Illegal instruction. */ 
 #define SIGTRAP 5   /* Trace trap. */ 
 #define SIGABRT 6   /* Abort. */
+#define SIGKILL 9
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/04 17:51:12 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/11 12:33:44 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ int		main(int argc, char *argv[], char *envp[])
 	else
 	{
 		signal(SIGHUP, handle_hangup);
-		exit(tpid, SIGINT);
-		// signal(SIGINT, handle_interrupt);
-		kill(tpid, SIGQUIT);
-		// signal(SIGQUIT, handle_quitp);
+		// exit(tpid, SIGINT);
+		signal(SIGINT, handle_interrupt);
+		// kill(tpid, SIGKILL);
+		signal(SIGKILL, handle_quitp);
 		while(tpid != child_pid)
 		{
 			tpid = wait(&child_status);	
