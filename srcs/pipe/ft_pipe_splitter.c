@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 22:09:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/20 19:19:57 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/12 17:22:21 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,38 @@ static int		ft_count_pipes(char *str)
 	return (count);
 }
 
+void			loop_pipe(char **pipes, t_shell *shell)
+{
+	int		p[2];
+	pid_t	pid;
+	int		fd_in;
+	int		i;
+
+	i = 0;
+	while (pipes[i] != (char *)0)
+	{
+		pipe(p);
+		if ((pid = fork()) == -1)
+			exit(1);
+		else if (pid == 0)
+		{
+			dup2(fd_in, 0);
+			if (pipes[i + 1] != (char *)0)
+				dup2(p[1], 1);
+			close(p[0]);
+			function_dispatcher(pipes[i], shell);
+			exit(0);
+		}
+		else
+		{
+			wait(NULL);
+			close(p[1]);
+			fd_in = p[0];
+			i++;
+		}
+	}
+}
+
 void			ft_pipe_splitter(char *str, t_shell *shell)
 {
 	char	**pipes;
@@ -53,14 +85,5 @@ void			ft_pipe_splitter(char *str, t_shell *shell)
 		ft_printf("pipes[%i]: {%s}\n", k, pipes[k]);
 		k++;
 	}
-	ft_printf("lol pipes, what's in shell?\n");
-	ft_printf("shell->env[0]: %s\n", shell->env[0]);
-	// int k = 0;
-	// while (shell->env[k] != (char *)0)
-	// {
-	// 	ft_printf("shell->env[%i]: {%s}\n", k, shell->env[k]);
-	// 	k++;
-	// }
-	ft_printf("and now the string:\n{%s}\n", str);
-	ft_free_array(pipes, ft_arrlen(pipes));
+	loop_pipe(pipes, shell);
 }
