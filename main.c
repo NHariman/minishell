@@ -72,6 +72,43 @@ static void		main_child_process(t_shell *shell, int i, char *envp[])
 	}
 }
 	
+// int		main(int argc, char *argv[], char *envp[])
+// {
+// 	pid_t	child_pid;
+// 	pid_t	tpid;
+// 	int		child_status;
+// 	int		i;
+// 	char	**hold;
+// 	char	**store = NULL;
+// 	t_shell	shell;
+	
+// 	i = argc;
+// 	hold = argv;
+// 	if (argc > 1)
+// 		ft_printf_err("Too many arguments.\n");
+// 	tpid = 0;
+// 	child_pid = fork();
+// 	if(child_pid == 0)
+// 	{
+// 		main_child_process(&shell, i, envp);
+// 		kill(2);
+// 	}
+// 	else
+// 	{
+// 		signal(SIGINT, handle_hangup);
+// 		signal(SIGQUIT, handle_interrupt_two);//backslash
+// 		if (get_next_line(0, store) == 0)
+// 		{
+// 			signal(SIGINT, handle_hangup);
+// 		}
+// 		while(tpid != child_pid)
+// 		{
+// 			tpid = wait(&child_status);	
+// 		}
+// 	}
+// 	return (0);
+// }
+
 int		main(int argc, char *argv[], char *envp[])
 {
 	pid_t	child_pid;
@@ -79,7 +116,6 @@ int		main(int argc, char *argv[], char *envp[])
 	int		child_status;
 	int		i;
 	char	**hold;
-	char	**store = NULL;
 	t_shell	shell;
 	
 	i = argc;
@@ -88,19 +124,15 @@ int		main(int argc, char *argv[], char *envp[])
 		ft_printf_err("Too many arguments.\n");
 	tpid = 0;
 	child_pid = fork();
-	if(child_pid == 0)
+	if (child_pid == 0)
 	{
-		main_child_process(&shell, i, envp);
-		kill(2);
+		signal(SIGINT, handle_hangup);
+		signal(SIGQUIT, handle_interrupt_two);
+		main_start(&shell, i, envp);
+		exit(1);
 	}
 	else
 	{
-		signal(SIGINT, handle_hangup);
-		signal(SIGQUIT, handle_interrupt_two);//backslash
-		if (get_next_line(0, store) == 0)
-		{
-			signal(SIGINT, handle_hangup);
-		}
 		while(tpid != child_pid)
 		{
 			tpid = wait(&child_status);	
