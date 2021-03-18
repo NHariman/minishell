@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/11 14:36:41 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 11:00:27 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,5 @@ int     	syntax_check(char *line, t_shell *shell);
 //signals
 void    	handle_hangup(int sign);
 void 		handle_interrupt(int sign);
-void 		handle_interrupt_two(int sign);
-// void 		handle_quitp(int sign);
-void 		handle_quitp(int sign);
+void		ft_signals_control(void);
 #endif
