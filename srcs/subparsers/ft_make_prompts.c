@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 20:18:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 17:44:00 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 17:46:58 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int		ft_not_valid_prompt(char *str)
+static int ft_not_valid_prompt(char *str)
 {
 	int len;
 
@@ -41,7 +41,7 @@ static int		ft_valid_prompt(char **prompts)
 	return (1);
 }
 
-static int		ft_has_pipe(char *str)
+static int ft_has_pipe(char *str)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ static int		ft_has_pipe(char *str)
 	return (0);
 }
 
-static char		*ft_rm_spaces(char *str)
+static char *ft_rm_spaces(char *str)
 {
 	int			len;
 	char		*trim;
@@ -72,7 +72,7 @@ static char		*ft_rm_spaces(char *str)
 	return (trim);
 }
 
-void			ft_make_prompts(char *str)
+void ft_make_prompts(char *str)
 {
 	int		i;
 	char	**prompts;
