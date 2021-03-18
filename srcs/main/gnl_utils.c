@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   rd_parser_1811.c                                   :+:    :+:            */
+/*   gnl_utils.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/15 18:26:39 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 13:07:08 by nhariman      ########   odam.nl         */
+/*   Created: 2021/03/18 15:33:26 by nhariman      #+#    #+#                 */
+/*   Updated: 2021/03/18 16:14:53 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	fake_rd_main(char *str, )
+char		*get_line_read(char *tmp)
 {
-	t_shell *sholl;
+	char *out;
 
-	sholl = shell;
-	ft_printf("redirect str: {%s}\n", str);
+	if (!tmp)
+		return (NULL);
+	out = ft_strdup(tmp);
+	return(out);
 }
 
-void		ft_rd_parser(char *str, int *i, )
+int			get_fill_line_ret(int newline, size_t remainder)
 {
-	int		start;
-	char	*rd_str;
+	if (newline != -1 && remainder)
+		return (1);
+	return (0);
+}
 
-	start = *i;
-	while (str[*i] != '\n' && str[*i] != '\0' && !ft_strchr("|;", str[*i]))
-		*i = *i + 1;
-	if (start == *i || *i == 0)
-		rd_str = ft_strdup("\n");
-	else
-		rd_str = ft_substr(str, start, *i - start);
-	fake_rd_main(rd_str, shell);
+int			get_gnl_ret(int newline, char *leftover, int ret)
+{
+	if (newline != -1 && !leftover)
+		return (-1);
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 20:52:54 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/20 18:55:31 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 13:31:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ char			*ft_charjoin(char *str, char c)
 	return (newstr);
 }
 
-void			ft_parse_dollar(char *str, int *i,
-						t_trim *trim, t_shell *shell)
+void			ft_parse_dollar(char *str, int *i, t_trim *trim)
 {
 	char	*tmp;
 	char	*new_str;
@@ -41,7 +40,7 @@ void			ft_parse_dollar(char *str, int *i,
 	if (ft_backslash_check(str, *i) % 2 == 0)
 	{
 		new_str = ft_substr(str, trim->start, *i - trim->start);
-		tmp = ft_find_variable(str, i, shell);
+		tmp = ft_find_variable(str, i);
 		old_str = gnl_strjoin(new_str, tmp);
 		if (trim->res == NULL)
 			trim->res = ft_strdup(old_str);
@@ -91,7 +90,7 @@ static char		*ft_insert_output(char *str, int i, t_trim *trim)
 	return (output);
 }
 
-char			*ft_doublequotes_str(char *str, int *i, t_shell *shell)
+char			*ft_doublequotes_str(char *str, int *i)
 {
 	t_trim		trim;
 	char		*output;
@@ -103,7 +102,7 @@ char			*ft_doublequotes_str(char *str, int *i, t_shell *shell)
 	while ((str[*i] != '\"' && str[*i] != '\n' && str[*i] != '\0'))
 	{
 		if (str[*i] == '$' && !ft_strchr("\\\"", str[*i + 1]))
-			ft_parse_dollar(str, i, &trim, shell);
+			ft_parse_dollar(str, i, &trim);
 		else if (str[*i] == '\\' && ft_strchr("\\\"", str[*i + 1]))
 			ft_strspecial(str, &trim, i, str[*i + 1]);
 		else

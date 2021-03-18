@@ -6,27 +6,34 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 11:37:43 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 15:30:35 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    handle_hangup(int sign)
+void    handle_signals(int sign)
 {
+	write(1, "\b\b  ", 4);
 	if (sign == 2)
-		sign = 0;
+	{
+		write(1, "\n", 1);
+		prompt();
+		shell.exit_code = 1;
+	}
+	else if (sign == 3)
+		write(1, "\b\b", 2);
 }
 
-void handle_interrupt(int sign)
+void		ignore_signal(int sign)
 {
-	if (sign == 3)
-		sign = 0;
+	(void)sign;
+	write(1, "\n", 1);
 }
 
 void		ft_signals_control(void)
 {
-	signal(SIGINT, handle_hangup);
-	signal(SIGQUIT, handle_interrupt);
+	signal(SIGINT, handle_signals);
+	signal(SIGQUIT, handle_signals);
 	return ;
 }

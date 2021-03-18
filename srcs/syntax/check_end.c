@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 11:02:15 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/04 16:23:13 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 13:42:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 #include "../minishell.h"
 
-int		ft_semicol_err(t_shell *shell)
+int		ft_semicol_err()
 {
 	ft_printf("minishell: syntax error near unexpected token `;'\n");
-	shell->exit_code = 1;
+	shell.exit_code = 1;
 	return (1);
 }
 
@@ -30,20 +30,20 @@ int		is_token(char c)
 }
 
 
-int     check_end(char *line, t_shell *shell)
+int     check_end(char *line)
 {
     int i;
 
 	i = 0;
 	if (line[0] == ';')
-		return (ft_semicol_err(shell));
+		return (ft_semicol_err());
 	while (line[i] != '\0')
 	{
 		if (line[i] == ';')
 		{
 			i = i + ft_iswhitespaces(line + i + 1) + 1;
 			if (is_token(line[i]))
-				return (ft_semicol_err(shell));
+				return (ft_semicol_err());
 		}
 		i++;
 	}

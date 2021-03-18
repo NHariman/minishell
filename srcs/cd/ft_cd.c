@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/18 18:17:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 17:31:14 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char		*ft_singlequotes_str(char *str, int *i)
+char	*ft_singlequotes_str(char *str, int *i)
 {
 	int		start;
 	char	*new_str;
@@ -26,34 +26,34 @@ char		*ft_singlequotes_str(char *str, int *i)
 	return (new_str);
 }
 
-static char	*ft_get_path(t_shell *shell)
+static char	*ft_get_path(void)
 {
 	char	*newdir;
 
 	newdir = NULL;
-	if (shell->argv[1] == (char *)0)
-		newdir = ft_find_envvar("HOME", shell);
+	if (shell.argv[1] == (char *) 0)
+		newdir = ft_find_envvar("HOME");
 	else
-		newdir = shell->argv[1];
+		newdir = shell.argv[1];
 	return (newdir);
 }
 
-static void	ft_update_env_cd(t_shell *shell, char *olddir, char *newdir)
+static void	ft_update_env_cd(char *olddir, char *newdir)
 {
 	int		i;
 
 	i = 0;
-	while (shell->env[i] != (char *)0)
+	while (shell.env[i] != (char *) 0)
 	{
-		if (!ft_strncmp(shell->env[i], "OLDPWD=", ft_strlen("OLDPWD=")))
-			shell->env[i] = ft_strjoin("OLDPWD=", olddir);
-		else if (!ft_strncmp(shell->env[i], "PWD=", ft_strlen("PWD=")))
-			shell->env[i] = ft_strjoin("PWD=", newdir);
+		if (!ft_strncmp(shell.env[i], "OLDPWD=", ft_strlen("OLDPWD=")))
+			shell.env[i] = ft_strjoin("OLDPWD=", olddir);
+		else if (!ft_strncmp(shell.env[i], "PWD=", ft_strlen("PWD=")))
+			shell.env[i] = ft_strjoin("PWD=", newdir);
 		i++;
 	}
 }
 
-void		ft_cd(t_shell *shell)
+void	ft_cd(void)
 {
 	char	*newdir;
 	int		check;
@@ -61,19 +61,19 @@ void		ft_cd(t_shell *shell)
 
 	olddir = ft_pwd();
 	errno = 0;
-	newdir = ft_get_path(shell);
+	newdir = ft_get_path();
 	check = chdir(newdir);
 	if (check == -1)
 	{
 		ft_printf_err("minishell: cd: %s: %s\n",
 			newdir, strerror(errno));
-		shell->exit_code = 1;
+		shell.exit_code = 1;
 	}
 	else
 	{
 		newdir = ft_pwd();
-		ft_update_env_cd(shell, olddir, newdir);
-		shell->exit_code = 0;
+		ft_update_env_cd(olddir, newdir);
+		shell.exit_code = 0;
 	}
 	return ;
 }

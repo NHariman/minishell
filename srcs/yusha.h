@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 11:00:27 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 15:17:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct	s_struct_rd
 }				t_struct_rd;
 
 //echo main
-char       *echo_main(char *str, t_struct_m *echo, t_shell *shell);
+char       *echo_main(char *str, t_struct_m *echo);
 int			skip_character(char *str, int i, char c);
 int			check_flag_n(t_struct_m *echo);
 void        set_value_echo(t_struct_m *echo);
@@ -88,22 +88,22 @@ void        set_value_echo(t_struct_m *echo);
 void        set_value_trim(t_struct_tr *trim);
 
 //variables
-void    	ft_add_variables(t_struct_m *echo, t_shell *shell);
-void		ft_get_variable(t_struct_tr *trim, t_shell *shell);
-void		ft_split_variable(t_struct_tr *trim, t_shell *shell);
-void    	ft_add_variables_double(t_struct_m *echo, t_shell *shell);
+void    	ft_add_variables(t_struct_m *echo);
+void		ft_get_variable(t_struct_tr *trim);
+void		ft_split_variable(t_struct_tr *trim);
+void    	ft_add_variables_double(t_struct_m *echo);
 
 //redirect
-void		rd_main(char *str, t_shell *shell);
+void		rd_main(char *str);
 void    	rd_value_rd(t_struct_rd *rd);
-int     	rd_loop(t_struct_rd *rd, t_shell *shell);
+int     	rd_loop(t_struct_rd *rd);
 int     	rd_get_nb(t_struct_rd *rd);
-void    	rd_open_file_fill(t_struct_rd *rd, t_shell *shell);
-void		rd_open_file(t_struct_rd *rd, t_shell *shell);
+void    	rd_open_file_fill(t_struct_rd *rd);
+void		rd_open_file(t_struct_rd *rd);
 
 //rd check
-int			error_check_rd(t_struct_rd *rd, t_shell *shell);
-void 		rd_get_file(t_struct_rd *rd, t_shell *shell, t_struct_m	*echo);
+int			error_check_rd(t_struct_rd *rd);
+void 		rd_get_file(t_struct_rd *rd, t_struct_m	*echo);
 
 
 //functions
@@ -112,10 +112,10 @@ char		*ft_strcpystr(int start, char *str, char c);
 
 
 //synax
-int     	syntax_check(char *line, t_shell *shell);
+int     	syntax_check(char *line);
 
 //signals
-void    	handle_hangup(int sign);
-void 		handle_interrupt(int sign);
+void    	handle_signals(int sign);
+void		ignore_signal(int sign);
 void		ft_signals_control(void);
 #endif

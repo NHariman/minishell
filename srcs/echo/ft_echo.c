@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 23:38:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/18 18:26:39 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 17:38:36 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char			*ft_make_echo_str(char **argv, int i)
 	return (tmp);
 }
 
-void				ft_echo(t_shell *shell)
+void				ft_echo()
 {
 	int		i;
 	int		check;
@@ -78,21 +78,22 @@ void				ft_echo(t_shell *shell)
 
 	i = 0;
 	check = 0;
-	if (ft_arrlen(shell->argv) == 1)
+	if (ft_arrlen(shell.argv) == 1)
 		tmp = NULL;
 	else
 	{
-		i = ft_skip_flags(shell->argv, &check);
-		if (shell->argv[i] == (char *)0)
+		i = ft_skip_flags(shell.argv, &check);
+		if (shell.argv[i] == (char *)0)
 			tmp = ft_strdup("");
 		else
-			tmp = ft_make_echo_str(shell->argv, i);
+			tmp = ft_make_echo_str(shell.argv, i);
 	}
-	shell->ret = tmp;
+	shell.ret = tmp;
 	if (check == 1)
-		ft_printf("%s", shell->ret);
+		ft_printf("%s", shell.ret);
 	else
-		ft_printf("%s\n", shell->ret);
-	free(shell->ret);
+		ft_printf("%s\n", shell.ret);
+	free(shell.ret);
+	shell.exit_code = 0;
 	return ;
 }

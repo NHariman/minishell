@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_add_enviorment.c                                :+:    :+:            */
+/*   rd_add_environment.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/19 14:58:45 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 13:54:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ static void   ft_split_end(t_struct_tr *trim)
 	trim->s_end[len] = '\0';
 }
 
-void		ft_split_variable(t_struct_tr *trim, t_shell *shell)
+void		ft_split_variable(t_struct_tr *trim)
 {
 	ft_split_begin(trim);
-	ft_get_variable(trim, shell);
+	ft_get_variable(trim);
 	ft_split_end(trim);
     trim->s_cache = ft_strjoin(trim->s_begin, trim->s_variable);
     free(trim->s_begin);
@@ -71,7 +71,7 @@ void		ft_split_variable(t_struct_tr *trim, t_shell *shell)
 
 //take a look on hwo to combine these last three
 
-void    ft_add_variables(t_struct_m *echo, t_shell *shell)
+void    ft_add_variables(t_struct_m *echo)
 {
 	t_struct_tr trim;
 
@@ -82,13 +82,13 @@ void    ft_add_variables(t_struct_m *echo, t_shell *shell)
 	free(echo->str);
 	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
 		trim.empty = 1;
-	ft_split_variable(&trim, shell);
+	ft_split_variable(&trim);
 	echo->str = ft_strdup(trim.s_str);
 	echo->flag = trim.flag;
 	free(trim.s_str);
 }
 
-void    ft_add_variables_double(t_struct_m *echo, t_shell *shell)
+void    ft_add_variables_double(t_struct_m *echo)
 {
 	t_struct_tr trim;
 
@@ -99,12 +99,12 @@ void    ft_add_variables_double(t_struct_m *echo, t_shell *shell)
 	free(echo->str);
 	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
 		trim.empty = 1;
-	ft_split_variable(&trim, shell);
+	ft_split_variable(&trim);
 	echo->str = ft_strdup(trim.s_str);
 	free(trim.s_str);
 }
 
-char   *ft_add_variables_rd(char *str, t_struct_rd *rd, t_shell *shell)
+char   *ft_add_variables_rd(char *str, t_struct_rd *rd)
 {
 	t_struct_tr trim;
 
@@ -115,7 +115,7 @@ char   *ft_add_variables_rd(char *str, t_struct_rd *rd, t_shell *shell)
 	free(str);
 	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
 		trim.empty = 1;
-	ft_split_variable(&trim, shell);
+	ft_split_variable(&trim);
 	str = ft_strdup(trim.s_str);
 	free(trim.s_str);
 	return (str);

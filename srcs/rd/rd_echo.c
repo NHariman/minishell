@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   echo.c                                             :+:    :+:            */
+/*   rd_echo.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/26 12:14:40 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 14:01:17 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		ft_trim_single_c(t_struct_m *echo)
 	free(cache);
 }
 
-void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
+void		ft_handle_echo(t_struct_m *echo)
 {
 	while (echo->str[echo->i] && echo->str[echo->i] != '\n')
 	{
@@ -67,7 +67,7 @@ void		ft_handle_echo(t_struct_m *echo, t_shell *shell)
 		(echo->str[echo->i + 1] == '\'' || echo->str[echo->i + 1] == '\"'))
 			ft_trim_single_c(echo);
 		else if (echo->str[echo->i] == '$')
-			ft_add_variables(echo, shell);
+			ft_add_variables(echo);
 		else if (echo->str[echo->i] == '\"')
 			ft_trim_single_c(echo);
 		else if (echo->str[echo->i] == '\'')
@@ -103,7 +103,7 @@ static void		get_echo_str(t_struct_m *echo)
 	free(str);
 }
 
-char			*echo_main(char *str, t_struct_m *echo, t_shell *shell)
+char			*echo_main(char *str, t_struct_m *echo)
 {
 	set_value_echo(echo);
 	echo->str = ft_strdup(str);
@@ -113,7 +113,7 @@ char			*echo_main(char *str, t_struct_m *echo, t_shell *shell)
 	if (echo->flag != 1)
 		echo->i = check_flag_n(echo);
 	get_echo_str(echo);
-	ft_handle_echo(echo, shell);
+	ft_handle_echo(echo);
 	ft_strtrim(echo->str, "\n");
 	if (echo->n == 0 && echo->flag != 1)
 	{

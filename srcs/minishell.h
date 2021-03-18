@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:18:06 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/11 12:31:35 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 13:15:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include "yusha.h"
 # include "niks.h"
 # include "libft/libft.h"
+
+t_shell	shell;
 
 #define SIGHUP  1   /* Hangup the process */ 
 #define SIGINT  2   /* Interrupt the process */ 
