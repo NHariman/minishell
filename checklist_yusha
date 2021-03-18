@@ -1,9 +1,9 @@
 [X]ft_execute testen
-[ ]impliment de get to file for out
+[X]impliment de get to file for out
 use dup2 to change the fd, so 0 becomes 1, and 1 becomes 0
-[ ]redirect parser (ft_invalid_rd()
+[X]redirect parser (ft_invalid_rd()
 finish rd checker that its correct and gives the right error
-[ ]controls
+[X]controls
 ctrl-C
 ctrl-D
 ctrl-\ 
@@ -11,7 +11,7 @@ https://unix.stackexchange.com/questions/110240/why-does-ctrl-d-eof-exit-the-she
 https://www.geeksforgeeks.org/signals-c-language/
 
 
-[-] | ; < > << \ (syntax errors)
+[X] | ; < > << \ (syntax errors)
 void			minishell_parser(char *line, t_shell *shell)
 {
 	t_qts		qts;
@@ -30,6 +30,10 @@ void			minishell_parser(char *line, t_shell *shell)
 https://www.google.com/search?q=capture+stdout&oq=capture+stdout&aqs=chrome..69i57j0l7.4323j0j9&sourceid=chrome&ie=UTF-8
 capture
 
-[ ] > check if you need to empty 1
-[ ] < moet het leeg
-[ ] ok je kan het testen door het in minishell_parser() te zetten en te kijken met verschillende strings of het werkt
+[X] > check if you need to empty 1
+[X] < moet het leeg
+[X] ok je kan het testen door het in minishell_parser() te zetten en te kijken met verschillende strings of het werkt
+
+isatty, ttyname, ttyslot, ioctl,
+getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
+tgetnum, tgetstr, tgoto, tputs
