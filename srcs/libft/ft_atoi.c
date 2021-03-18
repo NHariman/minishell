@@ -6,13 +6,13 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/28 15:55:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/07/18 00:07:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:55:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	long	number;
 	int		negative;

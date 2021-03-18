@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 23:38:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 17:38:36 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:14:35 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 ** test string, bad: echo "test >" '<       "test | " < test
 */
 
-static int			ft_isflag(char *str)
+static int	ft_isflag(char *str)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	if (str[0] != '-')
@@ -37,12 +37,12 @@ static int			ft_isflag(char *str)
 	return (1);
 }
 
-static int			ft_skip_flags(char **arr, int *check)
+static int	ft_skip_flags(char **arr, int *check)
 {
-	int i;
+	int	i;
 
 	i = 1;
-	while (arr[i] != (char *)0)
+	while (arr[i] != (char *) 0)
 	{
 		if (!ft_isflag(arr[i]))
 			return (i);
@@ -52,14 +52,14 @@ static int			ft_skip_flags(char **arr, int *check)
 	return (i);
 }
 
-static char			*ft_make_echo_str(char **argv, int i)
+static char	*ft_make_echo_str(char **argv, int i)
 {
-	char *tmp;
-	char *echo_str;
-	char *newstr;
+	char	*tmp;
+	char	*echo_str;
+	char	*newstr;
 
 	tmp = ft_strdup(argv[i]);
-	while (argv[i + 1] != (char *)0)
+	while (argv[i + 1] != (char *) 0)
 	{
 		newstr = ft_charjoin(tmp, ' ');
 		free(tmp);
@@ -70,7 +70,7 @@ static char			*ft_make_echo_str(char **argv, int i)
 	return (tmp);
 }
 
-void				ft_echo()
+void	ft_echo(void)
 {
 	int		i;
 	int		check;
@@ -83,7 +83,7 @@ void				ft_echo()
 	else
 	{
 		i = ft_skip_flags(shell.argv, &check);
-		if (shell.argv[i] == (char *)0)
+		if (shell.argv[i] == (char *) 0)
 			tmp = ft_strdup("");
 		else
 			tmp = ft_make_echo_str(shell.argv, i);

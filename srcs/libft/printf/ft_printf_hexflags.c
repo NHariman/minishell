@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 18:38:45 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/21 18:19:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:50:14 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static long			ft_hexlen(unsigned long n)
+static long	ft_hexlen(unsigned long n)
 {
 	long		len;
 
@@ -25,7 +25,7 @@ static long			ft_hexlen(unsigned long n)
 	return (len);
 }
 
-static void			ft_hexpadlen(unsigned long n, long *padlen, t_flag *flags)
+static void	ft_hexpadlen(unsigned long n, long *padlen, t_flag *flags)
 {
 	if (flags->dot && flags->pre < 0)
 	{
@@ -52,14 +52,14 @@ static void			ft_hexpadlen(unsigned long n, long *padlen, t_flag *flags)
 		*padlen = flags->pad - ft_hexlen(n);
 }
 
-void				ft_hex(char c, unsigned long n, int *count, t_flag *flags)
+void	ft_hex(char c, unsigned long n, int *count, t_flag *flags)
 {
 	long	padlen;
 
 	padlen = 0;
 	ft_hexpadlen(n, &padlen, flags);
-	if ((!flags->dash && !flags->zero) ||
-		(!flags->dash && flags->zero && flags->dot))
+	if ((!flags->dash && !flags->zero)
+		|| (!flags->dash && flags->zero && flags->dot))
 		ft_pad(padlen, count);
 	if (flags->zero && !flags->dash && flags->pre == -1)
 		ft_padzero(padlen, count);
@@ -73,14 +73,14 @@ void				ft_hex(char c, unsigned long n, int *count, t_flag *flags)
 		ft_pad(padlen, count);
 }
 
-void				ft_ptr(unsigned long n, int *count, t_flag *flags)
+void	ft_ptr(unsigned long n, int *count, t_flag *flags)
 {
 	long	padlen;
 
 	padlen = 0;
 	ft_hexpadlen(n, &padlen, flags);
-	if ((!flags->dash && !flags->zero) ||
-		(!flags->dash && flags->zero && flags->dot))
+	if ((!flags->dash && !flags->zero)
+		|| (!flags->dash && flags->zero && flags->dot))
 		ft_pad(padlen - 2, count);
 	if (flags->zero && !flags->dash && flags->pre == -1)
 		ft_padzero(padlen, count);

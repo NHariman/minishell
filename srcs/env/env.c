@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/18 17:45:23 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 13:42:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:15:22 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 ** the redirection or pipe.
 */
 
-static char	*ft_make_env_str()
+static char	*ft_make_env_str(void)
 {
 	int		i;
 	char	*new_str;
@@ -37,7 +37,7 @@ static char	*ft_make_env_str()
 
 	new_str = ft_charjoin(shell.env[0], '\n');
 	i = 1;
-	while (shell.env[i] != (char *)0)
+	while (shell.env[i] != (char *) 0)
 	{
 		output = ft_charjoin(shell.env[i], '\n');
 		tmp = gnl_strjoin(new_str, output);
@@ -48,7 +48,7 @@ static char	*ft_make_env_str()
 	return (new_str);
 }
 
-void		ft_env()
+void	ft_env(void)
 {
 	if (ft_arrlen(shell.argv) == 1)
 	{

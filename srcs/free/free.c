@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 21:15:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 13:07:08 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:45:52 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void		ft_malloc_fail(void)
+void	ft_malloc_fail(void)
 {
 	ft_printf_err("Error\nMalloc failed. Exiting program.\n");
 	exit(1);
@@ -20,7 +20,7 @@ void		ft_malloc_fail(void)
 
 void	ft_free_array(char **arr, int len)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < len)
@@ -38,7 +38,7 @@ static void	ft_free_shell(char *str)
 	free(str);
 }
 
-void	ft_clear_shell()
+void	ft_clear_shell(void)
 {
 	shell.check.echo = 0;
 	shell.check.env = 0;
@@ -50,16 +50,16 @@ void	ft_clear_shell()
 	shell.oldnb = 0;
 	if (shell.argv != NULL)
 		ft_free_array(shell.argv, ft_arrlen(shell.argv));
-	if (shell.ret != (char *)0)
+	if (shell.ret != (char *) 0)
 		ft_free_shell(shell.ret);
-	if (shell.echo != (char *)0)
+	if (shell.echo != (char *) 0)
 		ft_free_shell(shell.echo);
-	if (shell.pwd != (char *)0)
+	if (shell.pwd != (char *) 0)
 		ft_free_shell(shell.pwd);
-	if (shell.env_s != (char *)0)
+	if (shell.env_s != (char *) 0)
 		ft_free_shell(shell.env_s);
 	if (shell.exprt != NULL)
 		ft_free_shell(shell.exprt);
-	if (shell.err != (char *)0)
+	if (shell.err != (char *) 0)
 		ft_free_shell(shell.err);
 }

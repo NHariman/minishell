@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 03:52:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/09 19:44:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:32:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_make_single_char_str(char c)
 {
-	char *num;
+	char	*num;
 
 	num = (char *)malloc(sizeof(char) * 2);
 	if (!num)
@@ -24,7 +24,7 @@ char	*ft_make_single_char_str(char c)
 	return (num);
 }
 
-char		*ft_strtrimfree(char *s1, char const *set)
+char	*ft_strtrimfree(char *s1, char const *set)
 {
 	size_t	start;
 	size_t	end;
@@ -47,7 +47,7 @@ char		*ft_strtrimfree(char *s1, char const *set)
 	return (trim);
 }
 
-char					*gnl_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	char		*strduo;
 	size_t		i;
@@ -76,7 +76,7 @@ char					*gnl_strjoin(char *s1, char *s2)
 	return (strduo);
 }
 
-char					*ft_strjointwo(char *s1, char *s2)
+char	*ft_strjointwo(char *s1, char *s2)
 {
 	char		*strduo;
 	size_t		i;

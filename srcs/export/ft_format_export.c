@@ -6,15 +6,15 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 01:46:55 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/19 01:05:14 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:43:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int		ft_find_equal(char *str)
+static int	ft_find_equal(char *str)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -26,7 +26,7 @@ static int		ft_find_equal(char *str)
 	return (0);
 }
 
-static char		*ft_format_export(char *str)
+static char	*ft_format_export(char *str)
 {
 	char	*newstr;
 	int		equal;
@@ -50,7 +50,7 @@ static char		*ft_format_export(char *str)
 	return (newstr);
 }
 
-static char		*join_export_str(char **arr)
+static char	*join_export_str(char **arr)
 {
 	char	*res;
 	char	*tmp;
@@ -59,7 +59,7 @@ static char		*join_export_str(char **arr)
 
 	res = ft_charjoin(arr[0], '\n');
 	i = 1;
-	while (arr[i + 1] != (char *)0)
+	while (arr[i + 1] != (char *) 0)
 	{
 		if (ft_strncmp("declare -x _=", arr[i],
 				ft_strlen("declare -x _=")) != 0)
@@ -76,7 +76,7 @@ static char		*join_export_str(char **arr)
 	return (output);
 }
 
-char			*ft_parse_env_str(int *order, char **env)
+char	*ft_parse_env_str(int *order, char **env)
 {
 	int		len;
 	int		i;
@@ -93,7 +93,7 @@ char			*ft_parse_env_str(int *order, char **env)
 		new_env[i] = ft_format_export(env[order[i]]);
 		i++;
 	}
-	new_env[i] = (char *)0;
+	new_env[i] = (char *) 0;
 	ret = join_export_str(new_env);
 	return (ret);
 }

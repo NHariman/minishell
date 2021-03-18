@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/21 18:30:29 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/21 18:30:40 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:07:03 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char					*gnl_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	char		*strduo;
 	size_t		i;

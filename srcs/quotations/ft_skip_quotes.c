@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/06 20:32:54 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/06 20:51:28 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:38:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void		ft_skip_quotes(char *str, int *i, char type)
+void	ft_skip_quotes(char *str, int *i, char type)
 {
 	*i = *i + 1;
 	if (type == '\'')

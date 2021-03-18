@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/21 18:31:04 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/21 19:29:39 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:58:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_make_single_char_str(char c)
 {
-	char *num;
+	char	*num;
 
 	num = (char *)malloc(sizeof(char) * 2);
 	if (!num)

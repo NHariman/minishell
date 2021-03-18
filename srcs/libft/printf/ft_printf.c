@@ -6,13 +6,13 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/13 12:22:05 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/21 18:20:21 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:52:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static void			ft_format(const char c, va_list argp,
+static void	ft_format(const char c, va_list argp,
 								int *count, t_flag *flags)
 {
 	if (c == '\0')
@@ -33,7 +33,7 @@ static void			ft_format(const char c, va_list argp,
 		ft_hex(c, (unsigned int)va_arg(argp, int), count, flags);
 }
 
-static void			ft_reset_flags(t_flag *flags)
+static void	ft_reset_flags(t_flag *flags)
 {
 	flags->dash = 0;
 	flags->zero = 0;
@@ -42,7 +42,7 @@ static void			ft_reset_flags(t_flag *flags)
 	flags->pad = -1;
 }
 
-static void			ft_vprintf(const char *format, va_list argp, int *count)
+static void	ft_vprintf(const char *format, va_list argp, int *count)
 {
 	int			i;
 	t_flag		flags;
@@ -69,7 +69,7 @@ static void			ft_vprintf(const char *format, va_list argp, int *count)
 	}
 }
 
-int					ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
 	va_list		argp;
 	int			count;

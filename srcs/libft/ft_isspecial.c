@@ -6,16 +6,16 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/21 18:27:03 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/21 18:31:40 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:57:18 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int				ft_isspecial(int c)
+int	ft_isspecial(int c)
 {
-	if ((c > 31 && c < 48) || (c > 57 && c < 65) ||
-	(c > 90 && c < 97) || (c > 122 && c < 127))
+	if ((c > 31 && c < 48) || (c > 57 && c < 65)
+		|| (c > 90 && c < 97) || (c > 122 && c < 127))
 		return (1);
 	else
 		return (0);

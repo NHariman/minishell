@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 22:09:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 17:40:49 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:37:05 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int		ft_count_pipes(char *str)
+static int	ft_count_pipes(char *str)
 {
 	int		i;
 	int		count;
@@ -36,7 +36,7 @@ static int		ft_count_pipes(char *str)
 	return (count);
 }
 
-void			loop_pipe(char **pipes)
+void	loop_pipe(char **pipes)
 {
 	int		p[2];
 	pid_t	pid;
@@ -45,10 +45,11 @@ void			loop_pipe(char **pipes)
 
 	i = 0;
 	fd_in = 0;
-	while (pipes[i] != (char *)0)
+	while (pipes[i] != (char *) 0)
 	{
 		pipe(p);
-		if ((pid = fork()) == -1)
+		pid = fork();
+		if (pid == -1)
 			exit(1);
 		else if (pid == 0)
 			pipe_child(p, pipes, i, fd_in);
@@ -57,7 +58,7 @@ void			loop_pipe(char **pipes)
 	}
 }
 
-void			ft_pipe_splitter(char *str)
+void	ft_pipe_splitter(char *str)
 {
 	char	**pipes;
 	int		len;
@@ -67,6 +68,6 @@ void			ft_pipe_splitter(char *str)
 	if (!pipes)
 		ft_malloc_fail();
 	pipes = ft_fill_prompts(pipes, str, len, '|');
-	pipes[len] = (char *)0;
+	pipes[len] = (char *) 0;
 	loop_pipe(pipes);
 }

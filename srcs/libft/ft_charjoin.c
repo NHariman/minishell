@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/21 18:42:05 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/21 18:42:12 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:55:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_charjoin(char *str, char c)
+char	*ft_charjoin(char *str, char c)
 {
 	int		len;
 	char	*newstr;

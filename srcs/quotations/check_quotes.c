@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_arrlen.c                                        :+:    :+:            */
+/*   check_quotes.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/12/21 18:37:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 18:47:14 by nhariman      ########   odam.nl         */
+/*   Created: 2021/03/18 19:43:53 by nhariman      #+#    #+#                 */
+/*   Updated: 2021/03/18 19:46:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../minishell.h"
 
-int	ft_arrlen(char **arr)
+void	check_quotes(char *str, int *i, t_trim *trim)
 {
-	int	i;
-
-	i = 0;
-	while (arr[i] != (char *) 0)
-		i++;
-	return (i);
+	if (str[*i] == '\"' && ft_backslash_check(str, *i) % 2 == 0)
+		ft_nqts_dq_strjoin(str, *i, trim);
+	else if (str[*i] == '\'' && ft_backslash_check(str, *i) % 2 == 0)
+		ft_nqts_sq_strjoin(str, *i, trim);
 }

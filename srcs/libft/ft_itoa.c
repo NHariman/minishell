@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/08 13:36:19 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/06/10 18:53:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:57:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static size_t	ft_size(int n)
 	return (count);
 }
 
-static char		*ft_fillnum(int n, char *num, size_t size)
+static char	*ft_fillnum(int n, char *num, size_t size)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (n < 0)
@@ -51,7 +51,7 @@ static char		*ft_fillnum(int n, char *num, size_t size)
 	return (num);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*number;
 	size_t	size;

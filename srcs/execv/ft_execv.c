@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 15:20:17 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:17:10 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 ** returns 127 if the executable was not found in the $PATH variable.
 */
 
-static int		ft_ispath(char *cmd)
+static int	ft_ispath(char *cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cmd[i] != '\0')
@@ -31,7 +31,7 @@ static int		ft_ispath(char *cmd)
 	return (0);
 }
 
-static int		ft_execute_path(char **pathcmd, char **argv)
+static int	ft_execute_path(char **pathcmd, char **argv)
 {
 	pid_t	child_pid;
 	pid_t	tpid;
@@ -43,13 +43,13 @@ static int		ft_execute_path(char **pathcmd, char **argv)
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		while (pathcmd[i] != (char *)0)
+		while (pathcmd[i] != (char *) 0)
 		{
 			execve(pathcmd[i], argv, shell.env);
 			i++;
 		}
 		ft_printf_err("minishell: %s: command not found\n", argv[0],
-		strerror(errno));
+			strerror(errno));
 		exit(1);
 	}
 	else
@@ -60,7 +60,7 @@ static int		ft_execute_path(char **pathcmd, char **argv)
 	return (child_status);
 }
 
-static int		ft_execve_path(char *cmd, char **argv)
+static int	ft_execve_path(char *cmd, char **argv)
 {
 	int		child_status;
 	char	**pathcmd;
@@ -75,7 +75,7 @@ static int		ft_execve_path(char *cmd, char **argv)
 	return (0);
 }
 
-int				ft_execve(char **argv)
+int	ft_execve(char **argv)
 {
 	pid_t	child_pid;
 	pid_t	tpid;
@@ -88,7 +88,7 @@ int				ft_execve(char **argv)
 	{
 		execve(argv[0], argv, shell.env);
 		ft_printf_err("minishell: %s: %s\n", argv[0],
-		strerror(errno));
+			strerror(errno));
 		exit(1);
 	}
 	else
@@ -101,7 +101,7 @@ int				ft_execve(char **argv)
 	return (0);
 }
 
-void			ft_execute(char *cmd)
+void	ft_execute(char *cmd)
 {
 	shell.exit_code = 0;
 	signal(SIGINT, ignore_signal);

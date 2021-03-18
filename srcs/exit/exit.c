@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 18:29:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 13:16:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:39:38 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 */
 
 /*
-** exit code: 255 for if a numeric value is found but it contains alpha chars, also use the first arg found as error message. but still exit.
+** exit code: 255 for if a numeric value is found but it contains alpha chars, 
+** also use the first arg found as error message. but still exit.
 ** ie. exit hello 12cab
 ** program exits with exit code 255, hello is used as arg.
 ** for exit 123 abc
@@ -28,24 +29,24 @@
 ** the program WILL exit with exit code 123
 */
 
-static int		ft_read_array_input(char *str)
+static int	ft_read_array_input(char *str)
 {
-	int check;
-	int i;
-	int len;
+	int	check;
+	int	i;
+	int	len;
 
 	check = -1;
 	i = 0;
 	if (!str)
 		return (0);
 	len = ft_strlen(str);
-	while (!ft_isdigit(str[i]) && str[i] != '\0' &&
-				str[i] != '-' && str[i] != '+')
+	while (!ft_isdigit(str[i]) && str[i] != '\0'
+		&& str[i] != '-' && str[i] != '+')
 		i++;
 	if (ft_isdigit(str[i]) || str[i] == '-' || str[i] == '+')
 	{
 		if ((str[i] == '-' && !ft_isdigit(str[i + 1])) || (str[i] == '+'
-			&& !ft_isdigit(str[i + 1])))
+				&& !ft_isdigit(str[i + 1])))
 			return (-1);
 		check = ft_atoi(str + i);
 		while (ft_isdigit(str[i]) && str[i] != '\0')
@@ -56,9 +57,9 @@ static int		ft_read_array_input(char *str)
 	return (check);
 }
 
-void			ft_exit_minishell(char **arr, int len)
+void	ft_exit_minishell(char **arr, int len)
 {
-	int check;
+	int	check;
 
 	ft_printf("exit\n");
 	check = ft_read_array_input(arr[1]);
@@ -73,7 +74,7 @@ void			ft_exit_minishell(char **arr, int len)
 	{
 		ft_printf_err(
 			"minihell: exit: %s: numeric argument required\n", arr[1]);
-			exit(255);
+		exit(255);
 	}
 	shell.exit_code = 1;
 	return ;

@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/29 16:45:38 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 19:00:02 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:09:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** get next line struct
 */
 
-typedef struct		s_gnl
+typedef struct s_gnl
 {
 	int				bytes_read;
 	int				fd;
@@ -33,7 +33,7 @@ typedef struct		s_gnl
 ** linked list
 */
 
-typedef struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
@@ -43,7 +43,7 @@ typedef struct		s_list
 ** flags for ft_printf and ft_printf_err, print to stdout and stderr
 */
 
-typedef struct		s_flag
+typedef struct s_flag
 {
 	size_t			dash;
 	size_t			zero;
@@ -56,7 +56,7 @@ typedef struct		s_flag
 ** flags for ft_dprintf, print to file descriptor
 */
 
-typedef struct		s_dflag
+typedef struct s_dflag
 {
 	size_t			dash;
 	size_t			zero;
@@ -124,7 +124,7 @@ int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strnstr(const char *haystack, const char *needle,
-					size_t len);
+						size_t len);
 size_t				ft_strlen(const char *s);
 
 /*
@@ -178,7 +178,7 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
-					void (*del)(void *));
+						void (*del)(void *));
 
 /*
 ** the first layer, checks for flags, width, precision (-0.)
@@ -187,14 +187,14 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 void				ft_flags(const char *format, int *i, t_flag *flags);
 void				ft_width(const char *format, int *i,
-								va_list argp, t_flag *flags);
+						va_list argp, t_flag *flags);
 void				ft_precision(const char *format, int *i,
-							va_list argp, t_flag *flag);
+						va_list argp, t_flag *flag);
 void				ft_dflags(const char *format, int *i, t_dflag *flags);
 void				ft_dwidth(const char *format, int *i,
-								va_list argp, t_dflag *flags);
+						va_list argp, t_dflag *flags);
 void				ft_dprecision(const char *format, int *i,
-							va_list argp, t_dflag *flag);
+						va_list argp, t_dflag *flag);
 
 /*
 ** second layer, comes from ft_format, which checks for pdiuxX%
@@ -206,12 +206,12 @@ void				ft_dprecision(const char *format, int *i,
 */
 
 void				ft_hex(const char c, unsigned long n, int *count,
-								t_flag *flags);
+						t_flag *flags);
 void				ft_ptr(unsigned long n, int *count, t_flag *flags);
 void				ft_signed(long n, int *count, t_flag *flags);
 void				ft_unsigned(unsigned long n, int *count, t_flag *flags);
 void				ft_dhex(const char c, unsigned long n, int *count,
-								t_dflag *flags);
+						t_dflag *flags);
 void				ft_dptr(unsigned long n, int *count, t_dflag *flags);
 void				ft_dsigned(long n, int *count, t_dflag *flags);
 void				ft_dunsigned(unsigned long n, int *count, t_dflag *flags);
@@ -234,7 +234,7 @@ void				ft_dprint_str(const char *str, int *count, t_dflag *flags);
 void				ft_print_hex(const char c, unsigned long nb, int *count);
 void				ft_print_decimal(unsigned long n, int *count);
 void				ft_dprint_hex(const char c, unsigned long nb, int *count,
-					t_dflag *flags);
+						t_dflag *flags);
 void				ft_dprint_decimal(
 						unsigned long n, int *count, t_dflag *flags);
 

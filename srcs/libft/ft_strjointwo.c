@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/21 18:29:30 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/21 18:29:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:07:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char					*ft_strjointwo(char *s1, char *s2)
+char	*ft_strjointwo(char *s1, char *s2)
 {
 	char		*strduo;
 	size_t		i;

@@ -6,16 +6,16 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 11:31:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 17:37:11 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:37:52 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void pipe_child(int *p, char **pipes, int i, int fd_in)
+void	pipe_child(int *p, char **pipes, int i, int fd_in)
 {
 	dup2(fd_in, 0);
-	if (pipes[i + 1] != (char *)0)
+	if (pipes[i + 1] != (char *) 0)
 		dup2(p[1], 1);
 	close(p[0]);
 	function_dispatcher(pipes[i]);
@@ -25,15 +25,15 @@ void pipe_child(int *p, char **pipes, int i, int fd_in)
 static int	get_exit_code(int status)
 {
 	if (WIFEXITED(status))
-		return(WEXITSTATUS(status));
+		return (WEXITSTATUS(status));
 	if (WIFSIGNALED(status))
-		return(WTERMSIG(status) + 128);
+		return (WTERMSIG(status) + 128);
 	return (0);
 }
 
-void pipe_parent(int *fd_in, int *i, int *p, char **pipes)
+void	pipe_parent(int *fd_in, int *i, int *p, char **pipes)
 {
-	int status;
+	int	status;
 
 	wait(&status);
 	close(p[1]);

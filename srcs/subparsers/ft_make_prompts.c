@@ -6,15 +6,15 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 20:18:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 17:46:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:53:03 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int ft_not_valid_prompt(char *str)
+static int	ft_not_valid_prompt(char *str)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(str) - 1;
 	while (str[len] == ' ')
@@ -26,22 +26,22 @@ static int ft_not_valid_prompt(char *str)
 		return (0);
 }
 
-static int		ft_valid_prompt(char **prompts)
+static int	ft_valid_prompt(char **prompts)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (prompts[i] != (char *)0)
+	while (prompts[i] != (char *) 0)
 	{
-		if (ft_not_valid_prompt(prompts[i]) ||
-		ft_invalid_line(prompts[i], '|'))
+		if (ft_not_valid_prompt(prompts[i])
+			|| ft_invalid_line(prompts[i], '|'))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-static int ft_has_pipe(char *str)
+static int	ft_has_pipe(char *str)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ static int ft_has_pipe(char *str)
 	return (0);
 }
 
-static char *ft_rm_spaces(char *str)
+static char	*ft_rm_spaces(char *str)
 {
 	int			len;
 	char		*trim;
@@ -72,7 +72,7 @@ static char *ft_rm_spaces(char *str)
 	return (trim);
 }
 
-void ft_make_prompts(char *str)
+void	ft_make_prompts(char *str)
 {
 	int		i;
 	char	**prompts;
@@ -88,7 +88,7 @@ void ft_make_prompts(char *str)
 		ft_free_array(prompts, ft_arrlen(prompts));
 		return ;
 	}
-	while (prompts[i] != (char *)0)
+	while (prompts[i] != (char *) 0)
 	{
 		if (ft_has_pipe(prompts[i]))
 			ft_pipe_splitter(prompts[i]);
