@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:58 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 13:07:08 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:38:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char		*ft_pwd(void)
+char	*ft_pwd(void)
 {
 	char	cwd[1024];
 	char	*cwd_res;
@@ -27,7 +27,7 @@ char		*ft_pwd(void)
 	return (cwd_res);
 }
 
-void		ft_pwd_main()
+void	ft_pwd_main(void)
 {
 	char	cwd[1024];
 	char	*cwd_res;

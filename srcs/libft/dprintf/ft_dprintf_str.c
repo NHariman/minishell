@@ -6,15 +6,15 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:04 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/04 11:13:59 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:48:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void			pft_putchar_fd(char c, int fd, int *count)
+void	pft_putchar_fd(char c, int fd, int *count)
 {
-	ssize_t output;
+	ssize_t	output;
 
 	output = 0;
 	if (*count < 0)
@@ -24,7 +24,7 @@ void			pft_putchar_fd(char c, int fd, int *count)
 		*count = -1;
 }
 
-void			pft_putstr_fd(char *s, int fd, int *count)
+void	pft_putstr_fd(char *s, int fd, int *count)
 {
 	int		length;
 	ssize_t	output;
@@ -41,7 +41,7 @@ void			pft_putstr_fd(char *s, int fd, int *count)
 	}
 }
 
-void			ft_dprint_char(const char c, int *count, t_dflag *flags)
+void	ft_dprint_char(const char c, int *count, t_dflag *flags)
 {
 	if (!flags->dash && !flags->zero)
 		ft_dpad(flags->pad - 1, count, flags);
@@ -69,7 +69,7 @@ static size_t	set_strlen(t_dflag *flags, const char *str)
 		return (ft_strlen(str));
 }
 
-void			ft_dprint_str(const char *str, int *count, t_dflag *flags)
+void	ft_dprint_str(const char *str, int *count, t_dflag *flags)
 {
 	size_t		i;
 	size_t		strlen;

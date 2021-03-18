@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/21 18:30:06 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/21 18:30:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:07:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strtrimfree(char *s1, char const *set)
+char	*ft_strtrimfree(char *s1, char const *set)
 {
 	size_t	start;
 	size_t	end;

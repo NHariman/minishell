@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/03 19:44:11 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 13:21:39 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:51:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void			ft_skip_cmd(int *check, char *str, int *i, int token)
+static void	ft_skip_cmd(int *check, char *str, int *i, int token)
 {
 	*check = 1;
 	while (str[*i] != token && str[*i] != '\0')
@@ -21,8 +21,8 @@ static void			ft_skip_cmd(int *check, char *str, int *i, int token)
 			ft_skip_quotes(str, i, str[*i]);
 		else if (str[*i] == '\\')
 			*i = *i + 2;
-		else if (ft_strchr("<>", str[*i]) &&
-		str[*i + 1 + ft_iswhitespaces(str + *i + 1)] == token)
+		else if (ft_strchr("<>", str[*i])
+			&& str[*i + 1 + ft_iswhitespaces(str + *i + 1)] == token)
 		{
 			*check = -1;
 			*i = *i + 1;
@@ -30,18 +30,18 @@ static void			ft_skip_cmd(int *check, char *str, int *i, int token)
 		else
 			*i = *i + 1;
 	}
-	if (str[*i + 1 + ft_iswhitespaces(str + *i + 1)] == token ||
-	str[*i + 1 + ft_iswhitespaces(str + *i + 1)] == '\0')
+	if (str[*i + 1 + ft_iswhitespaces(str + *i + 1)] == token
+		|| str[*i + 1 + ft_iswhitespaces(str + *i + 1)] == '\0')
 	{
-		if ((str[*i + 1 + ft_iswhitespaces(str + *i + 1)] == token &&
-		token == ';') || token == '|')
+		if ((str[*i + 1 + ft_iswhitespaces(str + *i + 1)] == token
+				&& token == ';') || token == '|')
 			*check = -1;
 	}
 	else if (*check != -1)
 		*i = *i + 1;
 }
 
-int					ft_invalid_line(char *str, char token)
+int	ft_invalid_line(char *str, char token)
 {
 	int			i;
 	int			check;
@@ -55,11 +55,12 @@ int					ft_invalid_line(char *str, char token)
 		{
 			shell.exit_code = 258;
 			return (ft_printf_err(
-			"minishell: syntax error near unexpected token `%c'\n", token));
+					"minishell: syntax error near unexpected token `%c'\n",
+					token));
 		}
-		else if (str[i] != ' ' &&
-			str[i + 1 + ft_iswhitespaces(str + i + 1)] != '\0' &&
-			str[i] != token)
+		else if (str[i] != ' '
+			&& str[i + 1 + ft_iswhitespaces(str + i + 1)] != '\0'
+			&& str[i] != token)
 			ft_skip_cmd(&check, str, &i, token);
 		else
 			i++;

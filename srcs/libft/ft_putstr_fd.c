@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/30 21:10:10 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/06/10 18:54:57 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:02:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int length;
+	int	length;
 
 	if (s)
 	{

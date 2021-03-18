@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 02:42:17 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/08 22:40:22 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:39:58 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void			ft_add_backslash(t_trim *trim, char *str, int *i)
+void	ft_add_backslash(t_trim *trim, char *str, int *i)
 {
 	char	*newstr;
 	char	*tmp;
@@ -32,7 +32,7 @@ void			ft_add_backslash(t_trim *trim, char *str, int *i)
 	free(tmp);
 }
 
-static char		*ft_add_output(char *str, int i, t_trim *trim)
+static char	*ft_add_output(char *str, int i, t_trim *trim)
 {
 	char	*output;
 	char	*old_str;
@@ -52,7 +52,7 @@ static char		*ft_add_output(char *str, int i, t_trim *trim)
 	return (output);
 }
 
-static char		*ft_parse_value(char *str)
+static char	*ft_parse_value(char *str)
 {
 	t_trim	trim;
 	int		i;
@@ -74,7 +74,7 @@ static char		*ft_parse_value(char *str)
 	return (output);
 }
 
-char			*ft_add_quotations(char *str, int start)
+char	*ft_add_quotations(char *str, int start)
 {
 	char	*tmp;
 	char	*value;

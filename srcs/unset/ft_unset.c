@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 17:40:23 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:48:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char		**ft_delete_arr_entry(char **arr, char *var)
+static char	**ft_delete_arr_entry(char **arr, char *var)
 {
 	int		i;
 	int		j;
@@ -26,7 +26,7 @@ static char		**ft_delete_arr_entry(char **arr, char *var)
 	newenv = (char **)malloc(sizeof(char *) * len);
 	if (!newenv)
 		ft_malloc_fail();
-	newenv[len - 1] = (char *)0;
+	newenv[len - 1] = (char *) 0;
 	while (arr[i])
 	{
 		env = ft_find_varname(arr[i]);
@@ -41,23 +41,23 @@ static char		**ft_delete_arr_entry(char **arr, char *var)
 	return (newenv);
 }
 
-static void		ft_delete_env(char *input)
+static void	ft_delete_env(char *input)
 {
-	char **newenvp;
+	char	**newenvp;
 
 	newenvp = ft_delete_arr_entry(shell.env, input);
 	ft_free_array(shell.env, ft_arrlen(shell.env));
 	shell.env = newenvp;
 }
 
-static void		ft_remove_env(char **argv)
+static void	ft_remove_env(char **argv)
 {
 	int		i;
 	char	*envvar;
 
 	i = 1;
 	envvar = NULL;
-	while (argv[i] != (char *)0)
+	while (argv[i] != (char *) 0)
 	{
 		envvar = ft_find_envvar(argv[i]);
 		if (ft_valid_envvar(argv[i]) == -1)
@@ -73,7 +73,7 @@ static void		ft_remove_env(char **argv)
 	}
 }
 
-void			ft_unset()
+void	ft_unset(void)
 {
 	if (ft_arrlen(shell.argv) == 1)
 		return ;

@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/29 18:24:20 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/04 12:44:26 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 19:49:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char		*ft_make_str(char **arr)
+static char	*ft_make_str(char **arr)
 {
 	int		i;
 	char	*new_str;
@@ -20,7 +20,7 @@ static char		*ft_make_str(char **arr)
 
 	i = 0;
 	new_str = ft_strdup(arr[0]);
-	while (arr[i + 1] != (char *)0)
+	while (arr[i + 1] != (char *) 0)
 	{
 		tmp = gnl_strjoin(new_str, arr[i + 1]);
 		new_str = tmp;
@@ -31,7 +31,7 @@ static char		*ft_make_str(char **arr)
 	return (new_str);
 }
 
-static int		ft_count_rds(char *str)
+static int	ft_count_rds(char *str)
 {
 	int		i;
 	int		count;
@@ -51,7 +51,7 @@ static int		ft_count_rds(char *str)
 	return (count);
 }
 
-static char		*ft_get_rd(char *str, int *i)
+static char	*ft_get_rd(char *str, int *i)
 {
 	int		start;
 	char	*rdstr;
@@ -61,14 +61,14 @@ static char		*ft_get_rd(char *str, int *i)
 		*i = *i + 1;
 	while (str[*i] == ' ')
 		*i = *i + 1;
-	while (!ft_strchr(" ><", str[*i]) ||
-		!(ft_strchr(" ><", str[*i]) && ft_backslash_check(str, *i) % 2 == 0))
+	while (!ft_strchr(" ><", str[*i])
+		|| !(ft_strchr(" ><", str[*i]) && ft_backslash_check(str, *i) % 2 == 0))
 		*i = *i + 1;
 	rdstr = ft_substr(str, start, *i - start);
 	return (rdstr);
 }
 
-static char		**ft_fill_rdarr(char *str, char **rdarr, int len)
+static char	**ft_fill_rdarr(char *str, char **rdarr, int len)
 {
 	int		i;
 	int		count;
@@ -85,11 +85,11 @@ static char		**ft_fill_rdarr(char *str, char **rdarr, int len)
 		else
 			i++;
 	}
-	rdarr[count] = (char *)0;
+	rdarr[count] = (char *) 0;
 	return (rdarr);
 }
 
-char			*ft_get_rdin(char *str)
+char	*ft_get_rdin(char *str)
 {
 	int		len;
 	char	**rdarr;

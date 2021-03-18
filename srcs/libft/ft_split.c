@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/08 13:36:05 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/06/10 18:55:00 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:20:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,46 @@ static char	**ft_deletearray(char **array, size_t len)
 	return (NULL);
 }
 
+static char	*fill_array(size_t *i, char const *s, char c)
+{
+	size_t	len;
+	char *str;
+
+	len = 0;
+	while (s[*i] != c && s[*i])
+	{
+		*i = *i + 1;
+		len++;
+	}
+	str = ft_substr(s, *i - len, len);
+	if (!str)
+		return (NULL);
+	return (str);
+}
+
 static char	**ft_createarray(char **array, char const *s, char c)
 {
 	size_t		i;
-	size_t		len;
 	size_t		j;
 
 	i = 0;
 	j = 0;
 	while (s[i])
+	{
 		if (s[i] != c)
 		{
-			len = 0;
-			while (s[i] != c && s[i])
-			{
-				i++;
-				len++;
-			}
-			array[j] = ft_substr(s, i - len, len);
-			if (!array[j])
+			array[j] = fill_array(&i, s, c);
+			if (!array)
 				return (ft_deletearray(array, j));
-			j++;
 		}
 		else
 			i++;
+	}
 	array[j] = 0;
 	return (array);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char		**split;
 

@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 20:52:54 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 13:31:57 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:43:09 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char			*ft_charjoin(char *str, char c)
+char	*ft_charjoin(char *str, char c)
 {
 	int		len;
 	char	*newstr;
@@ -31,7 +31,7 @@ char			*ft_charjoin(char *str, char c)
 	return (newstr);
 }
 
-void			ft_parse_dollar(char *str, int *i, t_trim *trim)
+void	ft_parse_dollar(char *str, int *i, t_trim *trim)
 {
 	char	*tmp;
 	char	*new_str;
@@ -52,7 +52,7 @@ void			ft_parse_dollar(char *str, int *i, t_trim *trim)
 	}
 }
 
-void			ft_strspecial(char *str, t_trim *trim, int *i, char c)
+void	ft_strspecial(char *str, t_trim *trim, int *i, char c)
 {
 	char	*new_str;
 	char	*old_str;
@@ -75,10 +75,10 @@ void			ft_strspecial(char *str, t_trim *trim, int *i, char c)
 	free(old_str);
 }
 
-static char		*ft_insert_output(char *str, int i, t_trim *trim)
+static char	*ft_insert_output(char *str, int i, t_trim *trim)
 {
-	char *old_str;
-	char *output;
+	char	*old_str;
+	char	*output;
 
 	if (trim->res == NULL)
 		output = ft_substr(str, trim->start, i - trim->start - 1);
@@ -90,7 +90,7 @@ static char		*ft_insert_output(char *str, int i, t_trim *trim)
 	return (output);
 }
 
-char			*ft_doublequotes_str(char *str, int *i)
+char	*ft_doublequotes_str(char *str, int *i)
 {
 	t_trim		trim;
 	char		*output;

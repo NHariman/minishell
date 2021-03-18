@@ -6,22 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 13:30:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:24:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int				ft_isspecial(int c)
-{
-	if ((c > 31 && c < 48) || (c > 57 && c < 65) ||
-	(c > 90 && c < 97) || (c > 122 && c < 127))
-		return (1);
-	else
-		return (0);
-}
-
-static char			*ft_find_env_variable(char *var)
+static char	*ft_find_env_variable(char *var)
 {
 	char	*env_var;
 	int		i;
@@ -38,7 +29,7 @@ static char			*ft_find_env_variable(char *var)
 		if (!ft_strncmp(shell.env[i], tmp, ft_strlen(tmp)))
 		{
 			env_var = ft_substr(shell.env[i], ft_strlen(tmp),
-									ft_strlen(shell.env[i]));
+					ft_strlen(shell.env[i]));
 			free(tmp);
 			return (env_var);
 		}
@@ -72,8 +63,8 @@ char	*ft_find_variable(char *str, int *i)
 	start = *i + 1;
 	*i = *i + 1;
 	var = NULL;
-	if (ft_isdigit(str[*i]) ||
-		(ft_isspecial(str[*i]) && !ft_strchr("\\\'\"", str[*i])))
+	if (ft_isdigit(str[*i])
+		|| (ft_isspecial(str[*i]) && !ft_strchr("\\\'\"", str[*i])))
 	{
 		var = ft_make_single_char_str(str[*i]);
 		*i = *i + 1;
@@ -86,7 +77,7 @@ char	*ft_find_variable(char *str, int *i)
 	return (output);
 }
 
-char			*ft_find_envvar(char *var)
+char	*ft_find_envvar(char *var)
 {
 	char	*env_var;
 	int		i;
@@ -96,13 +87,13 @@ char			*ft_find_envvar(char *var)
 	if (var == NULL)
 		return (NULL);
 	tmp = ft_strjoin(var, "=");
-	while (shell.env[i] != (char *)0)
+	while (shell.env[i] != (char *) 0)
 	{
-		if (!ft_strncmp(shell.env[i], tmp, ft_strlen(tmp)) || !ft_strncmp(shell.env[i], var, ft_strlen(var))
-		)
+		if (!ft_strncmp(shell.env[i], tmp, ft_strlen(tmp))
+			|| !ft_strncmp(shell.env[i], var, ft_strlen(var)))
 		{
 			env_var = ft_substr(shell.env[i], ft_strlen(tmp),
-									ft_strlen(shell.env[i]));
+					ft_strlen(shell.env[i]));
 			free(tmp);
 			return (env_var);
 		}

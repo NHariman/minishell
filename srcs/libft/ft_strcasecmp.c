@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/17 15:46:02 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/11/17 16:58:16 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:07:58 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_strcasecmp(char *s1, char *s2)
+int	ft_strcasecmp(char *s1, char *s2)
 {
 	char	*str1;
 	char	*str2;

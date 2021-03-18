@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 04:53:31 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 13:30:18 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:45:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char			*ft_find_varname(char *str)
+char	*ft_find_varname(char *str)
 {
 	int		i;
 	char	*name;
@@ -27,7 +27,7 @@ char			*ft_find_varname(char *str)
 	return (name);
 }
 
-static void		ft_update_shell(char *str, char *var)
+static void	ft_update_shell(char *str, char *var)
 {
 	int		i;
 	char	*name;
@@ -48,10 +48,9 @@ static void		ft_update_shell(char *str, char *var)
 			free(name);
 		i++;
 	}
-	
 }
 
-void			ft_update_env(char *str)
+void	ft_update_env(char *str)
 {
 	char	*var;
 	char	**newenv;

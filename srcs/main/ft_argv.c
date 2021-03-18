@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 13:39:52 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:25:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_skip_through(char *str, int *i)
 	}
 }
 
-int			ft_count_arr(char *str)
+int	ft_count_arr(char *str)
 {
 	int		i;
 	int		count;
@@ -47,9 +47,9 @@ int			ft_count_arr(char *str)
 	return (count);
 }
 
-static void ft_skip_rds(char *str, int *i)
+static void	ft_skip_rds(char *str, int *i)
 {
-	char *res;
+	char	*res;
 
 	while (str[*i] == '>')
 		*i = *i + 1;
@@ -61,8 +61,8 @@ static void ft_skip_rds(char *str, int *i)
 
 static char	**ft_make_array(char **arr, char *str, int arr_len)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -80,11 +80,11 @@ static char	**ft_make_array(char **arr, char *str, int arr_len)
 		else
 			i++;
 	}
-	arr[count] = (char *)0;
+	arr[count] = (char *) 0;
 	return (arr);
 }
 
-char		**ft_argv(char *s)
+char	**ft_argv(char *s)
 {
 	char	**split;
 	int		arr_len;

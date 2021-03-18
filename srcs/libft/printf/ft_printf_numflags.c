@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 17:34:50 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/21 18:20:09 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:51:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static long			ft_numlen(long n)
+static long	ft_numlen(long n)
 {
 	long	len;
 
@@ -30,7 +30,7 @@ static long			ft_numlen(long n)
 	return (len);
 }
 
-static void			ft_padlen(long n, long *padlen, t_flag *flags)
+static void	ft_padlen(long n, long *padlen, t_flag *flags)
 {
 	if (flags->dot && flags->pre < 0)
 	{
@@ -57,7 +57,7 @@ static void			ft_padlen(long n, long *padlen, t_flag *flags)
 		*padlen = flags->pad - ft_numlen(n);
 }
 
-static	void		ft_print_negative(long *n, int *count)
+static	void	ft_print_negative(long *n, int *count)
 {
 	if (*n < 0)
 	{
@@ -68,14 +68,14 @@ static	void		ft_print_negative(long *n, int *count)
 	}
 }
 
-void				ft_signed(long n, int *count, t_flag *flags)
+void	ft_signed(long n, int *count, t_flag *flags)
 {
-	long padlen;
+	long	padlen;
 
 	padlen = 0;
 	ft_padlen(n, &padlen, flags);
-	if ((!flags->dash && !flags->zero) ||
-		(!flags->dash && flags->zero && flags->dot))
+	if ((!flags->dash && !flags->zero)
+		|| (!flags->dash && flags->zero && flags->dot))
 		ft_pad(padlen, count);
 	ft_print_negative(&n, count);
 	if (flags->zero && !flags->dash && flags->pre == -1)
@@ -90,7 +90,7 @@ void				ft_signed(long n, int *count, t_flag *flags)
 		ft_pad(padlen, count);
 }
 
-void				ft_unsigned(unsigned long n, int *count, t_flag *flags)
+void	ft_unsigned(unsigned long n, int *count, t_flag *flags)
 {
 	long	padlen;
 
@@ -98,8 +98,8 @@ void				ft_unsigned(unsigned long n, int *count, t_flag *flags)
 	if (*count < 0)
 		return ;
 	ft_padlen(n, &padlen, flags);
-	if ((!flags->dash && !flags->zero) ||
-		(!flags->dash && flags->zero && flags->dot))
+	if ((!flags->dash && !flags->zero)
+		|| (!flags->dash && flags->zero && flags->dot))
 		ft_pad(padlen, count);
 	if (flags->zero && !flags->dash && flags->pre == -1)
 		ft_padzero(padlen, count);

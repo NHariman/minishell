@@ -6,15 +6,15 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 17:14:10 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 19:00:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:07:15 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int				find_newline(char *str)
+static int	find_newline(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -28,7 +28,7 @@ static int				find_newline(char *str)
 	return (-1);
 }
 
-static char				*read_line(t_gnl gnl)
+static char	*read_line(t_gnl gnl)
 {
 	char		buf[1000 + 1];
 	char		*tmp;
@@ -56,7 +56,7 @@ static char				*read_line(t_gnl gnl)
 	return (gnl.line_read);
 }
 
-static int				fill_line(t_gnl gnl, char **line)
+static int	fill_line(t_gnl gnl, char **line)
 {
 	int		newline;
 	size_t	remainder;
@@ -78,7 +78,7 @@ static int				fill_line(t_gnl gnl, char **line)
 	return (ret_fill_line(newline, remainder));
 }
 
-static char				*fill_leftover(char *str)
+static char	*fill_leftover(char *str)
 {
 	int		newline;
 	char	*leftover;
@@ -95,7 +95,7 @@ static char				*fill_leftover(char *str)
 	return (leftover);
 }
 
-int						get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char		*leftover;
 	t_gnl			gnl;

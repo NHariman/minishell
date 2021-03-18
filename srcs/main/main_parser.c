@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 13:39:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:35:29 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 ** unmodified.
 */
 
-static char		*get_cmd(char *str, int *i)
+static char	*get_cmd(char *str, int *i)
 {
 	char	*cmd;
 
@@ -47,7 +47,7 @@ static char		*get_cmd(char *str, int *i)
 	return (cmd);
 }
 
-static void		ft_check_case()
+static void	ft_check_case(void)
 {
 	if (!ft_strcmp(shell.argv[0], "echo"))
 		ft_echo();
@@ -59,7 +59,7 @@ static void		ft_check_case()
 		ft_execute(shell.argv[0]);
 }
 
-void		ft_wordparser()
+void	ft_wordparser(void)
 {
 	if (shell.argv[0] == NULL)
 		return ;
@@ -77,7 +77,7 @@ void		ft_wordparser()
 		ft_execute(shell.argv[0]);
 }
 
-void			function_dispatcher(char *line)
+void	function_dispatcher(char *line)
 {
 	int		i;
 	char	*cmd;
@@ -85,20 +85,13 @@ void			function_dispatcher(char *line)
 
 	i = 0;
 	cmd = get_cmd(line, &i);
-	tmp = ft_argv(line + i +
-		ft_iswhitespaces(line + i + 1));
+	tmp = ft_argv(line + i
+			+ ft_iswhitespaces(line + i + 1));
 	if (!tmp)
 		shell.argv = empty_array(cmd);
 	else
 		shell.argv = ft_add_arr_front(tmp, cmd);
-	int k = 0;
-	while (shell.argv[k] != (char *)0)
-	{
-		ft_printf("shell.argv[%i]: {%s}\n", k, shell.argv[k]);
-		k++;
-	}
 	shell.rds = ft_get_rdin(line);
-	ft_printf("shell.rds: {%s}\n", shell.rds);
 	if (!shell.rds)
 		ft_wordparser();
 	else
@@ -108,7 +101,7 @@ void			function_dispatcher(char *line)
 	}
 }
 
-void			minishell_parser(char *line)
+void	minishell_parser(char *line)
 {
 	t_qts		qts;
 

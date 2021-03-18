@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/25 18:22:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/21 18:19:54 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:48:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void					ft_flags(const char *format, int *i, t_flag *flags)
+void	ft_flags(const char *format, int *i, t_flag *flags)
 {
 	while (ft_strchr("0- ", format[*i]))
 	{
@@ -24,7 +24,7 @@ void					ft_flags(const char *format, int *i, t_flag *flags)
 	}
 }
 
-void					ft_width(const char *format, int *i,
+void	ft_width(const char *format, int *i,
 								va_list argp, t_flag *flags)
 {
 	if (format[*i] == '*')
@@ -49,7 +49,7 @@ void					ft_width(const char *format, int *i,
 	}
 }
 
-void					ft_precision(const char *format, int *i,
+void	ft_precision(const char *format, int *i,
 									va_list argp, t_flag *flags)
 {
 	if (format[*i] != '.')

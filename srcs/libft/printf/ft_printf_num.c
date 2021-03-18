@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/02/12 18:01:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 18:50:35 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static void		ft_print_x(int nb, const char c, int *count)
+static void	ft_print_x(int nb, const char c, int *count)
 {
 	if (c == 'X')
 		pft_putchar_fd(nb + 55, 2, count);
@@ -20,7 +20,7 @@ static void		ft_print_x(int nb, const char c, int *count)
 		pft_putchar_fd(nb + 87, 2, count);
 }
 
-void			ft_print_hex(const char c, unsigned long nb, int *count)
+void	ft_print_hex(const char c, unsigned long nb, int *count)
 {
 	if (*count < 0)
 		return ;
@@ -45,7 +45,7 @@ void			ft_print_hex(const char c, unsigned long nb, int *count)
 	}
 }
 
-void			ft_print_decimal(unsigned long n, int *count)
+void	ft_print_decimal(unsigned long n, int *count)
 {
 	if (*count < 0)
 		return ;
@@ -63,7 +63,7 @@ void			ft_print_decimal(unsigned long n, int *count)
 	}
 }
 
-void			ft_pad(int n, int *count)
+void	ft_pad(int n, int *count)
 {
 	int		i;
 
@@ -80,7 +80,7 @@ void			ft_pad(int n, int *count)
 	*count = *count + n;
 }
 
-void			ft_padzero(int n, int *count)
+void	ft_padzero(int n, int *count)
 {
 	int		i;
 
