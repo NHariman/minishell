@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/12 18:38:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 13:30:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int				ft_isspecial(int c)
 		return (0);
 }
 
-static char			*ft_find_env_variable(char *var, t_shell *shell)
+static char			*ft_find_env_variable(char *var)
 {
 	char	*env_var;
 	int		i;
@@ -31,14 +31,14 @@ static char			*ft_find_env_variable(char *var, t_shell *shell)
 	if (var == NULL)
 		return (NULL);
 	if (!ft_strncmp(var, "?", ft_strlen(var)))
-		return (ft_itoa(shell->exit_code));
+		return (ft_itoa(shell.exit_code));
 	tmp = gnl_strjoin(var, "=");
-	while (shell->env[i])
+	while (shell.env[i])
 	{
-		if (!ft_strncmp(shell->env[i], tmp, ft_strlen(tmp)))
+		if (!ft_strncmp(shell.env[i], tmp, ft_strlen(tmp)))
 		{
-			env_var = ft_substr(shell->env[i], ft_strlen(tmp),
-									ft_strlen(shell->env[i]));
+			env_var = ft_substr(shell.env[i], ft_strlen(tmp),
+									ft_strlen(shell.env[i]));
 			free(tmp);
 			return (env_var);
 		}
@@ -63,7 +63,7 @@ static char	*ft_get_var(char *str, int *i)
 	return (var);
 }
 
-char	*ft_find_variable(char *str, int *i, t_shell *shell)
+char	*ft_find_variable(char *str, int *i)
 {
 	int		start;
 	char	*var;
@@ -80,13 +80,13 @@ char	*ft_find_variable(char *str, int *i, t_shell *shell)
 	}
 	else if (ft_isalpha(str[*i]))
 		var = ft_get_var(str, i);
-	output = ft_find_env_variable(var, shell);
+	output = ft_find_env_variable(var);
 	if (output == NULL)
 		output = ft_strdup("");
 	return (output);
 }
 
-char			*ft_find_envvar(char *var, t_shell *shell)
+char			*ft_find_envvar(char *var)
 {
 	char	*env_var;
 	int		i;
@@ -96,13 +96,13 @@ char			*ft_find_envvar(char *var, t_shell *shell)
 	if (var == NULL)
 		return (NULL);
 	tmp = ft_strjoin(var, "=");
-	while (shell->env[i] != (char *)0)
+	while (shell.env[i] != (char *)0)
 	{
-		if (!ft_strncmp(shell->env[i], tmp, ft_strlen(tmp)) || !ft_strncmp(shell->env[i], var, ft_strlen(var))
+		if (!ft_strncmp(shell.env[i], tmp, ft_strlen(tmp)) || !ft_strncmp(shell.env[i], var, ft_strlen(var))
 		)
 		{
-			env_var = ft_substr(shell->env[i], ft_strlen(tmp),
-									ft_strlen(shell->env[i]));
+			env_var = ft_substr(shell.env[i], ft_strlen(tmp),
+									ft_strlen(shell.env[i]));
 			free(tmp);
 			return (env_var);
 		}

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/04 14:59:39 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 13:39:52 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,19 @@ int			ft_count_arr(char *str)
 	return (count);
 }
 
-static void ft_skip_rds(char *str, int *i, t_shell *shell)
+static void ft_skip_rds(char *str, int *i)
 {
 	char *res;
 
 	while (str[*i] == '>')
 		*i = *i + 1;
 	*i = *i + ft_iswhitespaces(str + *i);
-	res = ft_no_quotes_str(str, i, shell, " ");
+	res = ft_no_quotes_str(str, i, " ");
 	*i = *i + 1;
 	free(res);
 }
 
-static char	**ft_make_array(char **arr, char *str, t_shell *shell, int arr_len)
+static char	**ft_make_array(char **arr, char *str, int arr_len)
 {
 	int i;
 	int count;
@@ -71,8 +71,8 @@ static char	**ft_make_array(char **arr, char *str, t_shell *shell, int arr_len)
 		if (str[i] != ' ')
 		{
 			if (str[i] == '<' || str[i] == '>')
-				ft_skip_rds(str, &i, shell);
-			arr[count] = ft_no_quotes_str(str, &i, shell, " ");
+				ft_skip_rds(str, &i);
+			arr[count] = ft_no_quotes_str(str, &i, " ");
 			if (!arr[count])
 				return (NULL);
 			count++;
@@ -84,7 +84,7 @@ static char	**ft_make_array(char **arr, char *str, t_shell *shell, int arr_len)
 	return (arr);
 }
 
-char		**ft_argv(char *s, t_shell *shell)
+char		**ft_argv(char *s)
 {
 	char	**split;
 	int		arr_len;
@@ -99,7 +99,7 @@ char		**ft_argv(char *s, t_shell *shell)
 	split = (char **)malloc((arr_len + 2) * sizeof(char *));
 	if (!split)
 		ft_malloc_fail();
-	split = ft_make_array(split, s, shell, arr_len);
+	split = ft_make_array(split, s, arr_len);
 	if (!split)
 		ft_malloc_fail();
 	return (split);

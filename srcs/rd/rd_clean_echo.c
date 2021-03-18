@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_skip_character.c                                :+:    :+:            */
+/*   rd_clean_echo.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/26 12:14:33 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/26 12:14:43 by ybakker       ########   odam.nl         */
+/*   Created: 2020/11/07 18:36:24 by ybakker       #+#    #+#                 */
+/*   Updated: 2021/03/18 13:55:10 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-int		skip_character(char *str, int i, char c)
+void		set_value_echo(t_struct_m *echo)
 {
-	while (str[i] == c && (str[i]))
-	{
-		i++;
-	}
-	return (i);
+	echo->n = 0;
+	echo->i = 0;
+}
+
+void		set_value_trim(t_struct_tr *trim)
+{
+	trim->begin = 0;
+	trim->end = 0;
+	trim->single = 0;
+	trim->doubble = 0;
+	trim->quote = 0;
+	trim->empty = 0;
+	trim->error = 0;
 }

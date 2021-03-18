@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 08:12:33 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/04 14:22:30 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 13:33:39 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //| ; < > << \ (syntax errors)
 
-int				check_red_1(char *line, t_shell *shell)
+int				check_red_1(char *line)
 {
     int     i;
     int len;
@@ -33,13 +33,13 @@ int				check_red_1(char *line, t_shell *shell)
             if (len == 3)
             {
                 ft_printf("bash: syntax error near unexpected token `>'\n");
-                shell->exit_code = 1;
+                shell.exit_code = 1;
                 return (-1);
             }
             else if (len > 3)
             {
                 ft_printf("bash: syntax error near unexpected token `>>'\n");
-                shell->exit_code = 1;
+                shell.exit_code = 1;
                 return (-1);
             }
         }
@@ -49,7 +49,7 @@ int				check_red_1(char *line, t_shell *shell)
     return (0);
 }
 
-int				check_red_2(char *line, t_shell *shell)
+int				check_red_2(char *line)
 {
     int     i;
     int len;
@@ -73,7 +73,7 @@ int				check_red_2(char *line, t_shell *shell)
                 ft_printf("bash: syntax error near unexpected token `<<'\n");
             else if (len >= 6)
                 ft_printf("bash: syntax error near unexpected token `<<<'\n");
-            shell->exit_code = 1;
+            shell.exit_code = 1;
             return (-1);
         }
 		i++;
@@ -82,33 +82,7 @@ int				check_red_2(char *line, t_shell *shell)
     return (0);
 }
 
-// int     check_pipe(char *line, t_shell *shell)
-// {
-//     int i;
-//     int len;
-    
-//     len = 0;
-//     i = 0;
-//     while (line[i])
-//     {
-//         if (line[i] == '|')
-//         {
-//             while (line[i] || line[i] != ';')
-//             {
-//                 if (line[i] == '|'
-//                     len++;
-//                 i++;
-//             }
-//         }
-//         if (line[i])
-//             return (0);
-//         i++;
-//         len = 0;
-//     }
-//     return (0);
-// }
-
-int check_bs(char *line, t_shell *shell)
+int check_bs(char *line)
 {
     int i;
 
@@ -119,7 +93,7 @@ int check_bs(char *line, t_shell *shell)
         if (line[i] == '\\')
         {
             ft_printf("minishell: syntax error near unexpected token '\'\n");
-            shell->exit_code = 1;
+            shell.exit_code = 1;
             return (-1);
         }
         i++;
@@ -127,12 +101,12 @@ int check_bs(char *line, t_shell *shell)
     return (0);
 }
 
-int     syntax_check(char *line, t_shell *shell)
+int     syntax_check(char *line)
 {
-    if (check_end(line, shell) || check_red_1(line, shell) || check_red_2(line, shell) || check_bs(line, shell))
+    if (check_end(line) || check_red_1(line) || check_red_2(line) || check_bs(line))
     {
         ft_printf("an error has occured\n");
-        return (shell->exit_code);
+        return (shell.exit_code);
     }
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/11 09:52:51 by anonymous     ########   odam.nl         */
+/*   Updated: 2021/03/18 13:05:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		main(int argc, char *argv[], char *envp[])
 	hold = argv;
 	shell = calloc(1, sizeof(t_shell));
 	echo = calloc(1, sizeof(t_struct_m));
-	shell->env = envp;
+	shell.env = envp;
 	while (i > 0)
 	{
 		ft_printf("minishell> ");

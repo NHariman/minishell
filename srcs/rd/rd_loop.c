@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/04 15:00:58 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 13:59:38 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int    rd_get_nb(t_struct_rd *rd)
 	return (0);
 }
 
-void rd_get_file(t_struct_rd *rd, t_shell *shell, t_struct_m *echo)
+void rd_get_file(t_struct_rd *rd, t_struct_m *echo)
 {
 	int     i;
 	int     len;
@@ -66,7 +66,7 @@ void rd_get_file(t_struct_rd *rd, t_shell *shell, t_struct_m *echo)
 	rd->cache[i] = '\0';
 	rd->tmp = ft_strtrim(rd->cache, "\n");
 	free(rd->cache);
-	rd->cache = ft_strdup(echo_main(rd->tmp, echo, shell));
+	rd->cache = ft_strdup(echo_main(rd->tmp, echo));
 	// free(rd->tmp);
 	rd->file = ft_strtrim(rd->cache, "\n");
 	free(rd->cache);
@@ -74,7 +74,7 @@ void rd_get_file(t_struct_rd *rd, t_shell *shell, t_struct_m *echo)
 	free(echo->str);
 }
 
-void    rd_open_file(t_struct_rd *rd, t_shell *shell)
+void    rd_open_file(t_struct_rd *rd)
 {
 	errno = 0;
 	if (rd->fd != -1)
@@ -91,33 +91,26 @@ void    rd_open_file(t_struct_rd *rd, t_shell *shell)
 	if (rd->fd < 0 && rd->fd_rd < 0)
 	{
 		ft_printf_err("Error\n%s\n", strerror(errno));
-		shell->exit_code = 1;
+		shell.exit_code = 1;
 	}
 }
 
-void	rd_one(t_struct_rd *rd, t_shell *shell)
+void	rd_one(t_struct_rd *rd)
 {
 	pid_t	child_pid;
 	pid_t	tpid;
 	int		child_status;
 
 	tpid = 0;
-	shell->fd = rd->fd;
+	shell.fd = rd->fd;
 	child_pid = fork();
 	if (child_pid == 0)
 	{
 		dup2(rd->fd, 1);
-		ft_wordparser(shell);
+		ft_wordparser();
 		close(1);
 		close(rd->fd);
 		exit(0);
-		//is er een error
-		//stdin 1 eruit lezen
-		
-		//leeg maken
-		//weet neit of het leeg meot
-		//we now have just cose it after wordparser
-		//put that in de file
 	}
 	else
 	{
@@ -129,23 +122,20 @@ void	rd_one(t_struct_rd *rd, t_shell *shell)
 	}
 }
 
-void	rd_two(t_struct_rd *rd, t_shell *shell)
+void	rd_two(t_struct_rd *rd)
 {
 	pid_t	child_pid;
 	pid_t	tpid;
 	int		child_status;
 
 	tpid = 0;
-	shell->fd_r = rd->fd_rd;
+	shell.fd_r = rd->fd_rd;
 	child_pid = fork();
 	if (child_pid == 0)
 	{
 		printf("---<---\n");
 		dup2(rd->fd_rd, 0);
-		ft_wordparser(shell);
-		//stdin 0 in stoppen
-		//put that in de file
-		//is er een error
+		ft_wordparser();
 		close(0);
 		close(rd->fd_rd);
 		exit(0);
@@ -159,19 +149,19 @@ void	rd_two(t_struct_rd *rd, t_shell *shell)
 	}
 }
 
-void    rd_open_file_fill(t_struct_rd *rd, t_shell *shell)
+void    rd_open_file_fill(t_struct_rd *rd)
 {
 	if (rd->fd != -1)
 	{
-		rd_one(rd, shell);
+		rd_one(rd);
 	}
 	else if (rd->fd_rd != -1)
 	{
-		rd_two(rd, shell);
+		rd_two(rd);
 	}
 }
 
-int     rd_loop(t_struct_rd *rd, t_shell *shell)
+int     rd_loop(t_struct_rd *rd)
 {
 	t_struct_m	*echo;
 
@@ -187,11 +177,10 @@ int     rd_loop(t_struct_rd *rd, t_shell *shell)
 			free(echo);
 			return (rd->error);
 		}
-		rd_get_file(rd, shell, echo);
-		// ft_printf("file == [%s]\n", rd->file);
-		rd_open_file(rd, shell);
+		rd_get_file(rd, echo);
+		rd_open_file(rd);
 	}
-	rd_open_file_fill(rd, shell);
+	rd_open_file_fill(rd);
 	free(echo);
 	return (rd->error);
 }

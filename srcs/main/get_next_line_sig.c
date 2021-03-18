@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_next_line.c                                    :+:    :+:            */
+/*   get_next_line_sig.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 17:14:10 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/09 00:52:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 16:55:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static char				*read_line(t_gnl gnl)
 	gnl.bytes_read = 1;
 	while (gnl.bytes_read > 0)
 	{
+		write(1, "  \b\b", 4);
 		gnl.bytes_read = read(gnl.fd, buf, 1000);
 		if (gnl.bytes_read < 0)
 			return (NULL);
@@ -44,7 +45,7 @@ static char				*read_line(t_gnl gnl)
 		else
 		{
 			tmp = gnl_strjoin(gnl.line_read, buf);
-			gnl.line_read = (!tmp ? NULL : ft_strdup(tmp));
+			gnl.line_read = get_line_read(tmp);
 			free(tmp);
 		}
 		if (!gnl.line_read)
@@ -74,7 +75,7 @@ static int				fill_line(t_gnl gnl, char **line)
 		*line = ft_strdup(gnl.line_read);
 	if (!*line)
 		return (-1);
-	return (newline != -1 && remainder ? 1 : 0);
+	return (get_fill_line_ret(newline, remainder));
 }
 
 static char				*fill_leftover(char *str)
@@ -94,7 +95,7 @@ static char				*fill_leftover(char *str)
 	return (leftover);
 }
 
-int						get_next_line(int fd, char **line)
+int						get_next_line_sig(int fd, char **line)
 {
 	static char		*leftover;
 	t_gnl			gnl;
@@ -120,5 +121,5 @@ int						get_next_line(int fd, char **line)
 	if (gnl.newline != -1)
 		leftover = fill_leftover(gnl.line_read);
 	free(gnl.line_read);
-	return ((gnl.newline != -1 && !leftover) ? -1 : ret);
+	return (get_gnl_ret(gnl.newline, leftover, ret));
 }

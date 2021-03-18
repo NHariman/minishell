@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 18:29:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/12 17:03:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 13:16:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int		ft_read_array_input(char *str)
 	return (check);
 }
 
-void			ft_exit_minishell(char **arr, int len, t_shell *shell)
+void			ft_exit_minishell(char **arr, int len)
 {
 	int check;
 
@@ -75,6 +75,6 @@ void			ft_exit_minishell(char **arr, int len, t_shell *shell)
 			"minihell: exit: %s: numeric argument required\n", arr[1]);
 			exit(255);
 	}
-	shell->exit_code = 1;
+	shell.exit_code = 1;
 	return ;
 }

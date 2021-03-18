@@ -12,7 +12,7 @@ https://www.geeksforgeeks.org/signals-c-language/
 
 
 [X] | ; < > << \ (syntax errors)
-void			minishell_parser(char *line, t_shell *shell)
+void			minishell_parser(char *line, )
 {
 	t_qts		qts;
 	if (line[0] == '\0' || JOUW_FUNCTIE_HIEr)

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2020/12/20 18:37:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 17:40:23 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ static char		**ft_delete_arr_entry(char **arr, char *var)
 	return (newenv);
 }
 
-static void		ft_delete_env(t_shell *shell, char *input)
+static void		ft_delete_env(char *input)
 {
 	char **newenvp;
 
-	newenvp = ft_delete_arr_entry(shell->env, input);
-	ft_free_array(shell->env, ft_arrlen(shell->env));
-	shell->env = newenvp;
+	newenvp = ft_delete_arr_entry(shell.env, input);
+	ft_free_array(shell.env, ft_arrlen(shell.env));
+	shell.env = newenvp;
 }
 
-static void		ft_remove_env(char **argv, t_shell *shell)
+static void		ft_remove_env(char **argv)
 {
 	int		i;
 	char	*envvar;
@@ -59,24 +59,25 @@ static void		ft_remove_env(char **argv, t_shell *shell)
 	envvar = NULL;
 	while (argv[i] != (char *)0)
 	{
-		envvar = ft_find_envvar(argv[i], shell);
+		envvar = ft_find_envvar(argv[i]);
 		if (ft_valid_envvar(argv[i]) == -1)
 		{
 			ft_printf_err(
 				"minishell: export: `%s': not a valid identifier\n", argv[i]);
 		}
 		else if (envvar != NULL)
-			ft_delete_env(shell, argv[i]);
+			ft_delete_env(argv[i]);
 		if (envvar)
 			free(envvar);
 		i++;
 	}
 }
 
-void			ft_unset(t_shell *shell)
+void			ft_unset()
 {
-	if (ft_arrlen(shell->argv) == 1)
+	if (ft_arrlen(shell.argv) == 1)
 		return ;
-	ft_remove_env(shell->argv, shell);
+	ft_remove_env(shell.argv);
+	shell.exit_code = 0;
 	return ;
 }

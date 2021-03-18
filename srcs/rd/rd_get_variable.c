@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_get_variable.c                                  :+:    :+:            */
+/*   rd_get_variable.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2020/11/19 15:02:59 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 13:59:23 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void		ft_cut_env(t_struct_tr *trim, char *str, int i)
 	trim->s_variable[len] = '\0';
 }
 
-static void     ft_check_variable(t_struct_tr *trim, t_shell *shell)
+static void     ft_check_variable(t_struct_tr *trim)
 {
 	//get the elgnth of the check
 	//compare that FIRST with the lghts in env until =
@@ -86,12 +86,12 @@ static void     ft_check_variable(t_struct_tr *trim, t_shell *shell)
 
 	check = ft_strlen(trim->e_check);
 	i = 0;
-	while (shell->env[i] != NULL)
+	while (shell.env[i] != NULL)
 	{
-		vari = ft_isleng(shell->env[i], '=');//get the len until =
-		if (check == vari && ft_strncmp(trim->e_check, shell->env[i], check) == 0)
+		vari = ft_isleng(shell.env[i], '=');//get the len until =
+		if (check == vari && ft_strncmp(trim->e_check, shell.env[i], check) == 0)
 		{
-			ft_cut_env(trim, shell->env[i], vari);
+			ft_cut_env(trim, shell.env[i], vari);
 			if (trim->flag == 3)
 			{
 				ft_printf("\nbash: %s: Is a directory\n", trim->s_variable);
@@ -105,11 +105,11 @@ static void     ft_check_variable(t_struct_tr *trim, t_shell *shell)
 	trim->s_variable = ft_strdup("");
 }
 
-void		    ft_get_variable(t_struct_tr *trim, t_shell *shell)
+void		    ft_get_variable(t_struct_tr *trim)
 {
 	trim->begin++;//now its after &
 	ft_save_f(trim);
-	ft_check_variable(trim, shell);
+	ft_check_variable(trim);
 	if (trim->s_str[trim->end] == ' ' && trim->empty == 1 && trim->error == 1)
 		trim->end++;
 	trim->error = 0;

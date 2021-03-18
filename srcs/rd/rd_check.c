@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/04 12:56:29 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/18 13:32:33 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ check >>>>
 check <<<<
 */
 
-int				rd_check_error_out(t_struct_rd *rd, t_shell *shell)
+int				rd_check_error_out(t_struct_rd *rd)
 {
 	int		len;
 
@@ -36,11 +36,11 @@ int				rd_check_error_out(t_struct_rd *rd, t_shell *shell)
 		ft_printf("bash: syntax error near unexpected token `>'\n");
 	else if (len > 3)
 		ft_printf("bash: syntax error near unexpected token `>>'\n");
-	shell->exit_code = 1;
-	return (shell->exit_code);
+	shell.exit_code = 1;
+	return (shell.exit_code);
 }
 
-int				rd_check_error_in(t_struct_rd *rd, t_shell *shell)
+int				rd_check_error_in(t_struct_rd *rd)
 {
 	int		len;
 
@@ -58,40 +58,34 @@ int				rd_check_error_in(t_struct_rd *rd, t_shell *shell)
 		ft_printf("bash: syntax error near unexpected token `<<'\n");
 	else if (len >= 6)
 		ft_printf("bash: syntax error near unexpected token `<<<'\n");
-	shell->exit_code = 1;
-	return (shell->exit_code);
+	shell.exit_code = 1;
+	return (shell.exit_code);
 }
 
-int		error_check_rd(t_struct_rd *rd, t_shell *shell)
+int		error_check_rd(t_struct_rd *rd)
 {
-	// printf("[%s]string\n", rd->str);
-	// rd->rdi++;
-	// while (rd->str[rd->rdi] == ' ')
-	// 	rd->rdi++;
-	// ft_printf("%s\n", rd->str + rd->rdi, shell);
-	// ft_printf("no quotes %s\n", ft_no_quotes_str(rd->str, &rd->rdi, shell, "<>"));
 	rd->rdi = rd->i;
 	while (rd->str[rd->rdi] || rd->str[rd->rdi] != '\0')
 	{
-		if (rd->str[rd->rdi] == '\\')//if backslash, error
+		if (rd->str[rd->rdi] == '\\')
 		{
-			if (rd_check_error_out(rd, shell) > 0)
+			if (rd_check_error_out(rd) > 0)
 				return (1);
 		}
 		else if (rd->str[rd->rdi] == '>')
 		{
-			if (rd_check_error_out(rd, shell) > 0)
+			if (rd_check_error_out(rd) > 0)
 				return (1);
 		}
 		else if (rd->str[rd->rdi] == '<')
 		{
-			if (rd_check_error_in(rd, shell))
+			if (rd_check_error_in(rd))
 				return (1);
 		}
 		rd->rdi++;
 		while (rd->str[rd->rdi] == ' ')
 			rd->rdi++;
-		ft_printf("%s\n", ft_no_quotes_str(rd->str, &rd->rdi, shell, "<>"));
+		ft_printf("%s\n", ft_no_quotes_str(rd->str, &rd->rdi, "<>"));
 	}
 	return (0);
 }
