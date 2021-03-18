@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 13:44:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 19:46:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/18 19:58:47 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	*ft_insert_nqt_output(t_trim *trim)
+char	*ft_insert_nqt_output(t_trim *trim)
 {
 	char		*output;
 
@@ -24,7 +24,7 @@ static char	*ft_insert_nqt_output(t_trim *trim)
 	return (output);
 }
 
-static	void	ft_nqts_dq_strjoin(char *str, int *i, t_trim *trim)
+void	ft_nqts_dq_strjoin(char *str, int *i, t_trim *trim)
 {
 	char	*tmp;
 	char	*new_str;
@@ -38,7 +38,7 @@ static	void	ft_nqts_dq_strjoin(char *str, int *i, t_trim *trim)
 	trim->start = *i;
 }
 
-static	void	ft_nqts_sq_strjoin(char *str, int *i, t_trim *trim)
+void	ft_nqts_sq_strjoin(char *str, int *i, t_trim *trim)
 {
 	char	*tmp;
 	char	*new_str;
@@ -58,7 +58,7 @@ static	void	ft_nqts_sq_strjoin(char *str, int *i, t_trim *trim)
 	trim->start = *i;
 }
 
-static void	ft_nqts_nqts_strjoin(char *str, int *i, t_trim *trim)
+void	ft_nqts_nqts_strjoin(char *str, int *i, t_trim *trim)
 {
 	char	*new_str;
 	int		start;
@@ -91,7 +91,7 @@ char	*ft_no_quotes_str(char *str, int *i, char *stop)
 			ft_parse_dollar(str, i, &trim);
 		else if (str[*i] == '\\')
 			ft_strspecial(str, &trim, i, str[*i + 1]);
-		else if (ft_strchr("\'\"" && ft_backslash_check(str, *i) % 2 == 0))
+		else if (ft_strchr("\'\"", str[*i]) && ft_backslash_check(str, *i) % 2 == 0)
 			check_quotes(str, i, &trim);
 		else if (ft_strchr("><", str[*i])
 			&& ft_backslash_check(str, *i) % 2 == 0)
