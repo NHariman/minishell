@@ -6,16 +6,16 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 13:33:00 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/23 17:48:47 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-void		rd_main(char *str)
+void	rd_main(char *str)
 {
-	t_struct_rd		*rd;
+	t_struct_rd	*rd;
 
 	rd = calloc(1, sizeof(t_struct_rd));
 	rd->fd = -1;
@@ -28,6 +28,5 @@ void		rd_main(char *str)
 	if (error_check_rd(rd) > 0 || rd_loop(rd) > 0)
 	{
 		shell.exit_code = -1;
-		//if error, what happens here
 	}
 }

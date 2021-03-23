@@ -6,20 +6,20 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:36:24 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 13:55:10 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/23 17:32:16 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-void		set_value_echo(t_struct_m *echo)
+void	set_value_echo(t_struct_m *echo)
 {
 	echo->n = 0;
 	echo->i = 0;
 }
 
-void		set_value_trim(t_struct_tr *trim)
+void	set_value_trim(t_struct_tr *trim)
 {
 	trim->begin = 0;
 	trim->end = 0;

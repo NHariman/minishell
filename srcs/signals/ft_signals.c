@@ -6,13 +6,13 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 15:30:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/23 17:50:19 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    handle_signals(int sign)
+void	handle_signals(int sign)
 {
 	write(1, "\b\b  ", 4);
 	if (sign == 2)
@@ -25,13 +25,13 @@ void    handle_signals(int sign)
 		write(1, "\b\b", 2);
 }
 
-void		ignore_signal(int sign)
+void	ignore_signal(int sign)
 {
 	(void)sign;
 	write(1, "\n", 1);
 }
 
-void		ft_signals_control(void)
+void	ft_signals_control(void)
 {
 	signal(SIGINT, handle_signals);
 	signal(SIGQUIT, handle_signals);

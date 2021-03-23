@@ -6,14 +6,14 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/26 12:14:33 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 13:57:18 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/23 17:48:16 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-int		skip_character(char *str, int i, char c)
+int	skip_character(char *str, int i, char c)
 {
 	while (str[i] == c && (str[i]))
 	{
