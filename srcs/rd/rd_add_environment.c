@@ -6,14 +6,14 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 13:54:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/23 17:19:54 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-static void   ft_split_begin(t_struct_tr *trim)
+static void	ft_split_begin(t_struct_tr *trim)
 {
 	int		i;
 
@@ -32,7 +32,7 @@ static void   ft_split_begin(t_struct_tr *trim)
 	}	
 }
 
-static void   ft_split_end(t_struct_tr *trim)
+static void	ft_split_end(t_struct_tr *trim)
 {
 	int		i;
 	int		len;
@@ -55,7 +55,7 @@ static void   ft_split_end(t_struct_tr *trim)
 	trim->s_end[len] = '\0';
 }
 
-void		ft_split_variable(t_struct_tr *trim)
+void	ft_split_variable(t_struct_tr *trim)
 {
 	ft_split_begin(trim);
 	ft_get_variable(trim);
@@ -69,9 +69,7 @@ void		ft_split_variable(t_struct_tr *trim)
     free(trim->s_end);
 }
 
-//take a look on hwo to combine these last three
-
-void    ft_add_variables(t_struct_m *echo)
+void	ft_add_variables(t_struct_m *echo)
 {
 	t_struct_tr trim;
 
@@ -88,7 +86,7 @@ void    ft_add_variables(t_struct_m *echo)
 	free(trim.s_str);
 }
 
-void    ft_add_variables_double(t_struct_m *echo)
+void	ft_add_variables_double(t_struct_m *echo)
 {
 	t_struct_tr trim;
 
@@ -104,7 +102,7 @@ void    ft_add_variables_double(t_struct_m *echo)
 	free(trim.s_str);
 }
 
-char   *ft_add_variables_rd(char *str, t_struct_rd *rd)
+char	*ft_add_variables_rd(char *str, t_struct_rd *rd)
 {
 	t_struct_tr trim;
 
