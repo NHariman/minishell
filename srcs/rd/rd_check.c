@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 15:34:07 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ int	rd_check_error_in(t_struct_rd *rd)
 	{
 		rd->rdi++;
 		len++;
+		while (rd->str[rd->rdi] == ' ')
+			rd->rdi++;
 	}
-	if (len == 1)
+	rd->rdi--;
+	if (len == 1 || len == 3)
 		return (0);
 	else if (len >= 2 && len < 4)
 		ft_printf("bash: syntax error near unexpected token `<'\n");

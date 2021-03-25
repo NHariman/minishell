@@ -6,14 +6,9 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2021/03/25 13:53:47 by nhariman      ########   odam.nl          #
+#    Updated: 2021/03/25 15:26:45 by ybakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
-
-COMPILE = gcc
-# COMPILE = clang
-
-FLAGS = -Wall -Werror -Wextra
 
 COMPILE = gcc
 # COMPILE = clang
@@ -69,6 +64,7 @@ ECHO =          srcs/rd/rd_add_environment.c \
                 srcs/syntax/syntax_check.c\
                 srcs/syntax/check_end.c \
                 srcs/syntax/check_red.c \
+                srcs/syntax/rd_syntax_error_add.c \
                 srcs/signals/ft_signals.c
 
 

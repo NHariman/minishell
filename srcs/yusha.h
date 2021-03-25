@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 12:38:47 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/25 15:47:58 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,9 @@ char	*ft_strcpystr(int start, char *str, char c);
 int		syntax_check(char *line);
 int		check_red_1(char *line);
 int		check_red_2(char *line);
+int		rd_syntax_error(char *line, int i, int len);
+int		rd_syntax_error_left(char *line, int i);
+int		rd_syntax_error_right(char *line, int i);
 
 //signals
 void	handle_signals(int sign);

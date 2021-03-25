@@ -1,0 +1,17 @@
+echo rd_test
+echo hello <<< <<< file1
+echo hello <<< file1
+echo hello < file1
+echo hello << file1
+echo hello <<<<<< file1
+
+echo hello <<< >>> file1
+echo hello >>> file1
+echo hello >> > file1
+echo hello > > file1
+
+
+echo "update execve function to up the shell level before executing and then lowering it before exiting the parent"
+
+echo "exit code checken"
+
