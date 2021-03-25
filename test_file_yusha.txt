@@ -4,3 +4,8 @@ echo hello <<< file1
 echo hello < file1
 echo hello << file1
 echo hello <<<<<< file1
+
+echo hello <<< >>> file1
+echo hello >>> file1
+echo hello >> > file1
+echo hello > > file1
