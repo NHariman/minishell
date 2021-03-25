@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/03 19:44:11 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 19:51:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_invalid_line(char *str, char token)
 		i = i + ft_iswhitespaces(str + i);
 		if (str[i] == token && check == -1)
 		{
-			shell.exit_code = 258;
+			g_shell.exit_code = 258;
 			return (ft_printf_err(
 					"minishell: syntax error near unexpected token `%c'\n",
 					token));

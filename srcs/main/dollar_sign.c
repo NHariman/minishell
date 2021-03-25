@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 19:24:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static char	*ft_find_env_variable(char *var)
 	if (var == NULL)
 		return (NULL);
 	if (!ft_strncmp(var, "?", ft_strlen(var)))
-		return (ft_itoa(shell.exit_code));
+		return (ft_itoa(g_shell.exit_code));
 	tmp = gnl_strjoin(var, "=");
-	while (shell.env[i])
+	while (g_shell.env[i])
 	{
-		if (!ft_strncmp(shell.env[i], tmp, ft_strlen(tmp)))
+		if (!ft_strncmp(g_shell.env[i], tmp, ft_strlen(tmp)))
 		{
-			env_var = ft_substr(shell.env[i], ft_strlen(tmp),
-					ft_strlen(shell.env[i]));
+			env_var = ft_substr(g_shell.env[i], ft_strlen(tmp),
+					ft_strlen(g_shell.env[i]));
 			free(tmp);
 			return (env_var);
 		}
@@ -87,13 +87,13 @@ char	*ft_find_envvar(char *var)
 	if (var == NULL)
 		return (NULL);
 	tmp = ft_strjoin(var, "=");
-	while (shell.env[i] != (char *) 0)
+	while (g_shell.env[i] != (char *) 0)
 	{
-		if (!ft_strncmp(shell.env[i], tmp, ft_strlen(tmp))
-			|| !ft_strncmp(shell.env[i], var, ft_strlen(var)))
+		if (!ft_strncmp(g_shell.env[i], tmp, ft_strlen(tmp))
+			|| !ft_strncmp(g_shell.env[i], var, ft_strlen(var)))
 		{
-			env_var = ft_substr(shell.env[i], ft_strlen(tmp),
-					ft_strlen(shell.env[i]));
+			env_var = ft_substr(g_shell.env[i], ft_strlen(tmp),
+					ft_strlen(g_shell.env[i]));
 			free(tmp);
 			return (env_var);
 		}

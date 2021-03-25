@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 18:29:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 18:39:38 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ void	ft_exit_minishell(char **arr, int len)
 			"minihell: exit: %s: numeric argument required\n", arr[1]);
 		exit(255);
 	}
-	shell.exit_code = 1;
+	g_shell.exit_code = 1;
 	return ;
 }

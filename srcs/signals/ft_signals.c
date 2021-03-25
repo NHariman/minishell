@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/23 17:50:19 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	handle_signals(int sign)
 	{
 		write(1, "\n", 1);
 		prompt();
-		shell.exit_code = 1;
+		g_shell.exit_code = 1;
 	}
 	else if (sign == 3)
 		write(1, "\b\b", 2);

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 12:14:37 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	rd_one(t_struct_rd *rd)
 	int		child_status;
 
 	tpid = 0;
-	shell.fd = rd->fd;
+	g_shell.fd = rd->fd;
 	child_pid = fork();
 	if (child_pid == 0)
 	{
@@ -76,7 +76,7 @@ void	rd_two(t_struct_rd *rd)
 	int		child_status;
 
 	tpid = 0;
-	shell.fd_r = rd->fd_rd;
+	g_shell.fd_r = rd->fd_rd;
 	child_pid = fork();
 	if (child_pid == 0)
 	{

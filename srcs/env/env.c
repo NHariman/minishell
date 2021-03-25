@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/18 17:45:23 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 18:15:22 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** every other argument thereafter is part of an argv that should be passed
 ** into the executable.
 ** use execv, this will return 0 if succesful, and -1 if error.
-** shell.exit_err set to 126 for unable to execute. (unless you use a fork?)
+** g_shell.exit_err set to 126 for unable to execute. (unless you use a fork?)
 */
 
 /*
@@ -35,11 +35,11 @@ static char	*ft_make_env_str(void)
 	char	*tmp;
 	char	*output;
 
-	new_str = ft_charjoin(shell.env[0], '\n');
+	new_str = ft_charjoin(g_shell.env[0], '\n');
 	i = 1;
-	while (shell.env[i] != (char *) 0)
+	while (g_shell.env[i] != (char *) 0)
 	{
-		output = ft_charjoin(shell.env[i], '\n');
+		output = ft_charjoin(g_shell.env[i], '\n');
 		tmp = gnl_strjoin(new_str, output);
 		free(output);
 		new_str = tmp;
@@ -50,17 +50,17 @@ static char	*ft_make_env_str(void)
 
 void	ft_env(void)
 {
-	if (ft_arrlen(shell.argv) == 1)
+	if (ft_arrlen(g_shell.argv) == 1)
 	{
-		shell.ret = ft_make_env_str();
-		ft_printf("%s", shell.ret);
-		free(shell.ret);
-		shell.exit_code = 0;
+		g_shell.ret = ft_make_env_str();
+		ft_printf("%s", g_shell.ret);
+		free(g_shell.ret);
+		g_shell.exit_code = 0;
 	}
 	else
 	{
 		ft_printf_err("minishell: env: too many arguments.\n");
-		shell.exit_code = 1;
+		g_shell.exit_code = 1;
 	}
 	return ;
 }

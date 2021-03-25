@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:58 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 19:38:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	ft_pwd_main(void)
 		ft_printf_err("Error\n%s\n", strerror(errno));
 		return ;
 	}
-	shell.ret = cwd_res;
-	shell.exit_code = 0;
+	g_shell.ret = cwd_res;
+	g_shell.exit_code = 0;
 	if (errno != 0)
-		shell.exit_code = 1;
-	ft_printf("%s\n", shell.ret);
+		g_shell.exit_code = 1;
+	ft_printf("%s\n", g_shell.ret);
 	return ;
 }

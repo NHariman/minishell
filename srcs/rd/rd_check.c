@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/23 17:30:54 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	rd_check_error_out(t_struct_rd *rd)
 		ft_printf("bash: syntax error near unexpected token `>'\n");
 	else if (len > 3)
 		ft_printf("bash: syntax error near unexpected token `>>'\n");
-	shell.exit_code = 1;
-	return (shell.exit_code);
+	g_shell.exit_code = 1;
+	return (g_shell.exit_code);
 }
 
 int	rd_check_error_in(t_struct_rd *rd)
@@ -51,8 +51,8 @@ int	rd_check_error_in(t_struct_rd *rd)
 		ft_printf("bash: syntax error near unexpected token `<<'\n");
 	else if (len >= 6)
 		ft_printf("bash: syntax error near unexpected token `<<<'\n");
-	shell.exit_code = 1;
-	return (shell.exit_code);
+	g_shell.exit_code = 1;
+	return (g_shell.exit_code);
 }
 
 int	error_check_rd(t_struct_rd *rd)

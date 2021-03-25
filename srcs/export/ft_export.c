@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 18:41:19 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ static void	ft_add_to_env(void)
 	int		valid;
 
 	i = 1;
-	while (shell.argv[i] != (char *) 0)
+	while (g_shell.argv[i] != (char *) 0)
 	{
-		valid = ft_valid_envvar(shell.argv[i]);
+		valid = ft_valid_envvar(g_shell.argv[i]);
 		if (valid == 1 || valid == 0)
-			ft_update_env(shell.argv[i]);
+			ft_update_env(g_shell.argv[i]);
 		else if (valid == -1)
 		{
 			ft_printf_err(
 				"minishell: export: `%s': not a valid identifier\n",
-				shell.argv[i]);
-			shell.exit_code = 1;
+				g_shell.argv[i]);
+			g_shell.exit_code = 1;
 		}
 		i++;
 	}
@@ -67,12 +67,12 @@ static void	ft_add_to_env(void)
 
 void	ft_export(void)
 {
-	shell.exit_code = 0;
-	if (ft_arrlen(shell.argv) == 1)
+	g_shell.exit_code = 0;
+	if (ft_arrlen(g_shell.argv) == 1)
 	{
-		shell.ret = ft_make_export_str(shell.env);
-		ft_printf("%s\n", shell.ret);
-		free(shell.ret);
+		g_shell.ret = ft_make_export_str(g_shell.env);
+		ft_printf("%s\n", g_shell.ret);
+		free(g_shell.ret);
 	}
 	else
 		ft_add_to_env();

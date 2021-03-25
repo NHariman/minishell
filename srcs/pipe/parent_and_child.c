@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 11:31:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 19:37:52 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ void	pipe_parent(int *fd_in, int *i, int *p, char **pipes)
 	*fd_in = p[0];
 	*i = *i + 1;
 	if (pipes[*i + 1] == (char *) 0)
-		shell.exit_code = get_exit_code(status);
+		g_shell.exit_code = get_exit_code(status);
 }

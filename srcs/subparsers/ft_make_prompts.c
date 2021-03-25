@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 20:18:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 19:53:03 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_make_prompts(char *str)
 	free(newstr);
 	if (!ft_valid_prompt(prompts))
 	{
-		shell.exit_code = 258;
+		g_shell.exit_code = 258;
 		ft_free_array(prompts, ft_arrlen(prompts));
 		return ;
 	}

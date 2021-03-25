@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 19:48:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static void	ft_delete_env(char *input)
 {
 	char	**newenvp;
 
-	newenvp = ft_delete_arr_entry(shell.env, input);
-	ft_free_array(shell.env, ft_arrlen(shell.env));
-	shell.env = newenvp;
+	newenvp = ft_delete_arr_entry(g_shell.env, input);
+	ft_free_array(g_shell.env, ft_arrlen(g_shell.env));
+	g_shell.env = newenvp;
 }
 
 static void	ft_remove_env(char **argv)
@@ -75,9 +75,9 @@ static void	ft_remove_env(char **argv)
 
 void	ft_unset(void)
 {
-	if (ft_arrlen(shell.argv) == 1)
+	if (ft_arrlen(g_shell.argv) == 1)
 		return ;
-	ft_remove_env(shell.argv);
-	shell.exit_code = 0;
+	ft_remove_env(g_shell.argv);
+	g_shell.exit_code = 0;
 	return ;
 }

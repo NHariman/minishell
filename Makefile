@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2021/03/18 19:46:48 by nhariman      ########   odam.nl          #
+#    Updated: 2021/03/25 13:53:47 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,18 +54,21 @@ MINISHELL =     main.c \
                 srcs/export/ft_update_env.c \
                 srcs/unset/ft_unset.c 
 
-ECHO =          srcs/rd/rd_check.c \
+ECHO =          srcs/rd/rd_add_environment.c \
+                srcs/rd/rd_add_variable.c \
+                srcs/rd/rd_check_nflag.c \
+                srcs/rd/rd_check.c \
+                srcs/rd/rd_clean_echo.c \
+                srcs/rd/rd_echo.c \
+                srcs/rd/rd_files.c \
+                srcs/rd/rd_get_variable.c \
+                srcs/rd/rd_loop.c\
                 srcs/rd/rd_set_value.c\
                 srcs/rd/re_direct.c\
-                srcs/rd/rd_loop.c\
-                srcs/rd/rd_echo.c \
-                srcs/rd/rd_add_environment.c \
-                srcs/rd/rd_check_nflag.c \
-                srcs/rd/rd_clean_echo.c \
-                srcs/rd/rd_get_variable.c \
                 srcs/rd/rd_skip_character.c \
                 srcs/syntax/syntax_check.c\
                 srcs/syntax/check_end.c \
+                srcs/syntax/check_red.c \
                 srcs/signals/ft_signals.c
 
 

@@ -6,24 +6,24 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/25 12:26:27 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 13:08:48 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/25 13:57:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	int	check_red_1_while(int i, int len, char *line)
+static	int	check_red_1_while(int len)
 {
 	if (len == 3)
 	{
 		ft_printf("bash: syntax error near unexpected token `>'\n");
-		shell.exit_code = 1;
+		g_shell.exit_code = 1;
 		return (-1);
 	}
 	else if (len > 3)
 	{
 		ft_printf("bash: syntax error near unexpected token `>>'\n");
-		shell.exit_code = 1;
+		g_shell.exit_code = 1;
 		return (-1);
 	}
 	return (0);
@@ -45,7 +45,7 @@ int	check_red_1(char *line)
 				len++;
 				i++;
 			}
-			if (check_red_1_while == -1)
+			if (check_red_1_while(len) == -1)
 				return (-1);
 		}
 		i++;
@@ -68,7 +68,7 @@ static	int	check_red_2_error(int len)
 		ft_printf("bash: syntax error near unexpected token `<<'\n");
 	else if (len >= 6)
 		ft_printf("bash: syntax error near unexpected token `<<<'\n");
-	shell.exit_code = 1;
+	g_shell.exit_code = 1;
 	return (0);
 }
 

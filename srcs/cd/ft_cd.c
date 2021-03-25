@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 17:31:14 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static char	*ft_get_path(void)
 	char	*newdir;
 
 	newdir = NULL;
-	if (shell.argv[1] == (char *) 0)
+	if (g_shell.argv[1] == (char *) 0)
 		newdir = ft_find_envvar("HOME");
 	else
-		newdir = shell.argv[1];
+		newdir = g_shell.argv[1];
 	return (newdir);
 }
 
@@ -43,12 +43,12 @@ static void	ft_update_env_cd(char *olddir, char *newdir)
 	int		i;
 
 	i = 0;
-	while (shell.env[i] != (char *) 0)
+	while (g_shell.env[i] != (char *) 0)
 	{
-		if (!ft_strncmp(shell.env[i], "OLDPWD=", ft_strlen("OLDPWD=")))
-			shell.env[i] = ft_strjoin("OLDPWD=", olddir);
-		else if (!ft_strncmp(shell.env[i], "PWD=", ft_strlen("PWD=")))
-			shell.env[i] = ft_strjoin("PWD=", newdir);
+		if (!ft_strncmp(g_shell.env[i], "OLDPWD=", ft_strlen("OLDPWD=")))
+			g_shell.env[i] = ft_strjoin("OLDPWD=", olddir);
+		else if (!ft_strncmp(g_shell.env[i], "PWD=", ft_strlen("PWD=")))
+			g_shell.env[i] = ft_strjoin("PWD=", newdir);
 		i++;
 	}
 }
@@ -67,13 +67,13 @@ void	ft_cd(void)
 	{
 		ft_printf_err("minishell: cd: %s: %s\n",
 			newdir, strerror(errno));
-		shell.exit_code = 1;
+		g_shell.exit_code = 1;
 	}
 	else
 	{
 		newdir = ft_pwd();
 		ft_update_env_cd(olddir, newdir);
-		shell.exit_code = 0;
+		g_shell.exit_code = 0;
 	}
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 19:35:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,32 +49,32 @@ static char	*get_cmd(char *str, int *i)
 
 static void	ft_check_case(void)
 {
-	if (!ft_strcmp(shell.argv[0], "echo"))
+	if (!ft_strcmp(g_shell.argv[0], "echo"))
 		ft_echo();
-	else if (!ft_strcmp(shell.argv[0], "env"))
+	else if (!ft_strcmp(g_shell.argv[0], "env"))
 		ft_env();
-	else if (!ft_strcmp(shell.argv[0], "pwd"))
+	else if (!ft_strcmp(g_shell.argv[0], "pwd"))
 		ft_pwd_main();
 	else
-		ft_execute(shell.argv[0]);
+		ft_execute(g_shell.argv[0]);
 }
 
 void	ft_wordparser(void)
 {
-	if (shell.argv[0] == NULL)
+	if (g_shell.argv[0] == NULL)
 		return ;
-	if (!ft_strcmp(shell.argv[0], "exit"))
-		ft_exit_minishell(shell.argv, ft_arrlen(shell.argv));
-	else if (!ft_strcmp(shell.argv[0], "export"))
+	if (!ft_strcmp(g_shell.argv[0], "exit"))
+		ft_exit_minishell(g_shell.argv, ft_arrlen(g_shell.argv));
+	else if (!ft_strcmp(g_shell.argv[0], "export"))
 		ft_export();
-	else if (!ft_strcmp(shell.argv[0], "unset"))
+	else if (!ft_strcmp(g_shell.argv[0], "unset"))
 		ft_unset();
-	else if (!ft_strcmp(shell.argv[0], "cd"))
+	else if (!ft_strcmp(g_shell.argv[0], "cd"))
 		ft_cd();
-	else if (ft_strchr("eEpP", shell.argv[0][0]))
+	else if (ft_strchr("eEpP", g_shell.argv[0][0]))
 		ft_check_case();
 	else
-		ft_execute(shell.argv[0]);
+		ft_execute(g_shell.argv[0]);
 }
 
 void	function_dispatcher(char *line)
@@ -88,16 +88,16 @@ void	function_dispatcher(char *line)
 	tmp = ft_argv(line + i
 			+ ft_iswhitespaces(line + i + 1));
 	if (!tmp)
-		shell.argv = empty_array(cmd);
+		g_shell.argv = empty_array(cmd);
 	else
-		shell.argv = ft_add_arr_front(tmp, cmd);
-	shell.rds = ft_get_rdin(line);
-	if (!shell.rds)
+		g_shell.argv = ft_add_arr_front(tmp, cmd);
+	g_shell.rds = ft_get_rdin(line);
+	if (!g_shell.rds)
 		ft_wordparser();
 	else
 	{	
-		rd_main(shell.rds);
-		free(shell.rds);
+		rd_main(g_shell.rds);
+		free(g_shell.rds);
 	}
 }
 

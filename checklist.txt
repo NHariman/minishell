@@ -91,7 +91,7 @@ DOLLAR QUESTION MARK ($?)
 
 THE CONTROLS. (CRTL-*)
 [ ] CTRL-C terminates program, sends a SIGINT signal (kill -INT 888 or forcekill: kill -9 888 with 888 as your process ID)
-[ ] CTRL-D ending a file (EßOF), closes the connection/closes the bash shell.
+[ ] CTRL-D ending a file (EßOF), closes the connection/closes the bash g_shell.
 [ ] CTRL-\ quit command, causes program to terminate and dump core
 
 REFERENCES:

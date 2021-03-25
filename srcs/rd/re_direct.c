@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/23 17:48:47 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	rd_main(char *str)
 	ft_printf("in == [%s][%i]\n", rd->str, rd->i);
 	if (error_check_rd(rd) > 0 || rd_loop(rd) > 0)
 	{
-		shell.exit_code = -1;
+		g_shell.exit_code = -1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/23 17:42:36 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ static void	ft_check_variable(t_struct_tr *trim)
 
 	check = ft_strlen(trim->e_check);
 	i = 0;
-	while (shell.env[i] != NULL)
+	while (g_shell.env[i] != NULL)
 	{
-		vari = ft_isleng(shell.env[i], '=');
+		vari = ft_isleng(g_shell.env[i], '=');
 		if (check == vari
-			&& ft_strncmp(trim->e_check, shell.env[i], check) == 0)
+			&& ft_strncmp(trim->e_check, g_shell.env[i], check) == 0)
 		{
-			ft_cut_env(trim, shell.env[i], vari);
+			ft_cut_env(trim, g_shell.env[i], vari);
 			if (trim->flag == 3)
 			{
 				ft_printf("\nbash: %s: Is a directory\n", trim->s_variable);

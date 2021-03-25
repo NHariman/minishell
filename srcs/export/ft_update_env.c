@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 04:53:31 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 18:45:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static void	ft_update_shell(char *str, char *var)
 
 	i = 0;
 	name = NULL;
-	while (shell.env[i])
+	while (g_shell.env[i])
 	{
-		name = ft_find_varname(shell.env[i]);
+		name = ft_find_varname(g_shell.env[i]);
 		if (ft_strcmp(name, var) == 0)
 		{
-			free(shell.env[i]);
-			shell.env[i] = ft_strdup(str);
+			free(g_shell.env[i]);
+			g_shell.env[i] = ft_strdup(str);
 			free(name);
 			return ;
 		}
@@ -60,9 +60,9 @@ void	ft_update_env(char *str)
 	findenv = ft_find_envvar(var);
 	if (findenv == NULL)
 	{
-		newenv = ft_add_arr_back(shell.env, str);
-		ft_free_array(shell.env, ft_arrlen(shell.env));
-		shell.env = newenv;
+		newenv = ft_add_arr_back(g_shell.env, str);
+		ft_free_array(g_shell.env, ft_arrlen(g_shell.env));
+		g_shell.env = newenv;
 	}
 	else
 		ft_update_shell(str, var);

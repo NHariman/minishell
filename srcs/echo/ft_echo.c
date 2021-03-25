@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 23:38:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 18:14:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,22 +78,22 @@ void	ft_echo(void)
 
 	i = 0;
 	check = 0;
-	if (ft_arrlen(shell.argv) == 1)
+	if (ft_arrlen(g_shell.argv) == 1)
 		tmp = NULL;
 	else
 	{
-		i = ft_skip_flags(shell.argv, &check);
-		if (shell.argv[i] == (char *) 0)
+		i = ft_skip_flags(g_shell.argv, &check);
+		if (g_shell.argv[i] == (char *) 0)
 			tmp = ft_strdup("");
 		else
-			tmp = ft_make_echo_str(shell.argv, i);
+			tmp = ft_make_echo_str(g_shell.argv, i);
 	}
-	shell.ret = tmp;
+	g_shell.ret = tmp;
 	if (check == 1)
-		ft_printf("%s", shell.ret);
+		ft_printf("%s", g_shell.ret);
 	else
-		ft_printf("%s\n", shell.ret);
-	free(shell.ret);
-	shell.exit_code = 0;
+		ft_printf("%s\n", g_shell.ret);
+	free(g_shell.ret);
+	g_shell.exit_code = 0;
 	return ;
 }

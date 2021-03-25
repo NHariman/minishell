@@ -27,4 +27,4 @@ A simplified shell program that follows the rules of bash.</p>
 <code>make</code></p>
 <p>Run the executable:<br>
 <code>./minishell</code></p>
-<p>A prompt will show up that will allow you to use minishell as your current shell.</p>
+<p>A prompt will show up that will allow you to use minishell as your current g_shell.</p>

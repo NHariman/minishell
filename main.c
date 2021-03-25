@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 16:59:00 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	main(int argc, char **argv, char **envp)
 	hold = argv;
 	if (argc > 1)
 		ft_printf_err("Too many arguments.\n");
-	shell.env = ft_arrdup(envp);
-	shell.exit_code = 0;
+	g_shell.env = ft_arrdup(envp);
+	g_shell.exit_code = 0;
 	while (i == 1)
 	{
 		prompt();
