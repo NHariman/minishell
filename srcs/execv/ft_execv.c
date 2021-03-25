@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 18:44:45 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,19 @@
 ** returns 127 if the executable was not found in the $PATH variable.
 */
 
-static int	ft_ispath(char *cmd)
+static int	ft_run_path(char **pathcmd, char **argv)
 {
 	int	i;
 
 	i = 0;
-	while (cmd[i] != '\0')
+	while (pathcmd[i] != (char *) 0)
 	{
-		if (cmd[i] == '/')
-			return (1);
+		execve(pathcmd[i], argv, g_shell.env);
 		i++;
 	}
-	return (0);
+	ft_printf_err("minishell: %s: command not found\n", argv[0],
+		strerror(errno));
+	exit(1);
 }
 
 static int	ft_execute_path(char **pathcmd, char **argv)
@@ -41,17 +42,9 @@ static int	ft_execute_path(char **pathcmd, char **argv)
 	i = 0;
 	tpid = 0;
 	child_pid = fork();
+	child_status = 0;
 	if (child_pid == 0)
-	{
-		while (pathcmd[i] != (char *) 0)
-		{
-			execve(pathcmd[i], argv, g_shell.env);
-			i++;
-		}
-		ft_printf_err("minishell: %s: command not found\n", argv[0],
-			strerror(errno));
-		exit(1);
-	}
+		ft_run_path(pathcmd, argv);
 	else
 	{
 		while (tpid != child_pid)

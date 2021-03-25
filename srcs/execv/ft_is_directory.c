@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/20 21:54:48 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 18:19:06 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@ int	ft_is_directory(char *cmd)
 		g_shell.exit_code = 126;
 		return (ft_printf_err("minishell: %s: is a directory\n",
 				g_shell.argv[0]));
+	}
+	return (0);
+}
+
+int	ft_ispath(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i] != '\0')
+	{
+		if (cmd[i] == '/')
+			return (1);
+		i++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 11:05:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 18:59:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # define SQ 1
 # define DQ 2
-# define NQ 3
 
 typedef struct s_trim
 {
@@ -34,40 +33,14 @@ typedef struct s_qts
 	int			sq;
 }				t_qts;
 
-/*
-**	int			echo;	- echo command was used
-**	int			env;	- env command was used
-**	int			exec;	- exec command was used
-**	int			exp;	- export command was used
-**	int			pwd;	- pwd was used
-*/
-typedef struct s_check
-{
-	int			echo;
-	int			env;
-	int			exp;
-	int			exec;
-	int			err;
-	int			pwd;
-	int			rd;
-}				t_check;
-
 typedef struct s_shell
 {
-	t_check		check;
 	int			exit_code;
 	int			fd;
 	int			fd_r;
-	int			oldnb;
-	char		*ret;
-	char		*echo;
-	char		*pwd;
 	char		**argv;
 	char		*rds;
 	char		**env;
-	char		*env_s;
-	char		*err;
-	char		*exprt;
 }				t_shell;
 
 /*
@@ -115,6 +88,7 @@ char			*ft_get_rdin(char *str);
 /*
 ** quotes parsing.
 */
+void			ft_tilde_expansion(t_trim *trim, int *i, char *str);
 void			check_quotes(char *str, int *i, t_trim *trim);
 char			*ft_insert_nqt_output(t_trim *trim);
 void			ft_nqts_dq_strjoin(char *str, int *i, t_trim *trim);
@@ -155,6 +129,8 @@ char			*ft_find_envvar(char *var);
 */
 
 int				ft_is_directory(char *cmd);
+int				ft_ispath(char *cmd);
+void			increase_shlvl(void);
 char			**ft_path_array(char *str, char *cmd);
 void			ft_execute(char *cmd);
 int				ft_execve(char **argv);
