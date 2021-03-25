@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/08 12:54:04 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 13:51:05 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/23 17:29:59 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	is_flag_ok(char	*str, int i)
 	return (0);
 }
 
-int			check_flag_n(t_struct_m *echo)
+int	check_flag_n(t_struct_m *echo)
 {
 	echo->s = 0;
 	echo->i = skip_character(echo->str, echo->i, ' ');

@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   re_direct.c                                        :+:    :+:            */
+/*   rd_add_variable.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/23 17:48:47 by ybakker       ########   odam.nl         */
+/*   Created: 2021/03/25 12:13:18 by ybakker       #+#    #+#                 */
+/*   Updated: 2021/03/25 12:13:40 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-void	rd_main(char *str)
+void	ft_add_variables_double(t_struct_m *echo)
 {
-	t_struct_rd	*rd;
+	t_struct_tr	trim;
 
-	rd = calloc(1, sizeof(t_struct_rd));
-	rd->fd = -1;
-	rd->fd_rd = -1;
-	rd->i = 0;
-	rd->error = 0;
-	rd_value_rd(rd);
-	rd->str = ft_strtrim(str, "\n");
-	ft_printf("in == [%s][%i]\n", rd->str, rd->i);
-	if (error_check_rd(rd) > 0 || rd_loop(rd) > 0)
-	{
-		shell.exit_code = -1;
-	}
+	set_value_trim(&trim);
+	trim.flag = 0;
+	trim.s_str = ft_strdup(echo->str);
+	trim.begin = echo->i;
+	free(echo->str);
+	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
+		trim.empty = 1;
+	ft_split_variable(&trim);
+	echo->str = ft_strdup(trim.s_str);
+	free(trim.s_str);
 }

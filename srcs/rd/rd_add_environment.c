@@ -6,14 +6,14 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 13:54:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 12:13:26 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-static void   ft_split_begin(t_struct_tr *trim)
+static void	ft_split_begin(t_struct_tr *trim)
 {
 	int		i;
 
@@ -28,11 +28,11 @@ static void   ft_split_begin(t_struct_tr *trim)
 			trim->s_begin[i] = trim->s_str[i];
 			i++;
 		}
-		trim->s_begin[i] = '\0';		
+		trim->s_begin[i] = '\0';
 	}	
 }
 
-static void   ft_split_end(t_struct_tr *trim)
+static void	ft_split_end(t_struct_tr *trim)
 {
 	int		i;
 	int		len;
@@ -41,7 +41,7 @@ static void   ft_split_end(t_struct_tr *trim)
 	len = 0;
 	while (trim->s_str[trim->end] && trim->s_str[trim->end] != '\n')
 	{
-        trim->end++;
+		trim->end++;
 		len++;
 	}
 	trim->s_end = (char *)malloc((len + 1) * sizeof(char));
@@ -55,25 +55,23 @@ static void   ft_split_end(t_struct_tr *trim)
 	trim->s_end[len] = '\0';
 }
 
-void		ft_split_variable(t_struct_tr *trim)
+void	ft_split_variable(t_struct_tr *trim)
 {
 	ft_split_begin(trim);
 	ft_get_variable(trim);
 	ft_split_end(trim);
-    trim->s_cache = ft_strjoin(trim->s_begin, trim->s_variable);
-    free(trim->s_begin);
-    free(trim->s_variable);
-    trim->begin = ft_strlen(trim->s_cache);
-    trim->s_str = ft_strjoin(trim->s_cache, trim->s_end);
-    free(trim->s_cache);
-    free(trim->s_end);
+	trim->s_cache = ft_strjoin(trim->s_begin, trim->s_variable);
+	free(trim->s_begin);
+	free(trim->s_variable);
+	trim->begin = ft_strlen(trim->s_cache);
+	trim->s_str = ft_strjoin(trim->s_cache, trim->s_end);
+	free(trim->s_cache);
+	free(trim->s_end);
 }
 
-//take a look on hwo to combine these last three
-
-void    ft_add_variables(t_struct_m *echo)
+void	ft_add_variables(t_struct_m *echo)
 {
-	t_struct_tr trim;
+	t_struct_tr	trim;
 
 	set_value_trim(&trim);
 	trim.flag = echo->flag;
@@ -88,25 +86,9 @@ void    ft_add_variables(t_struct_m *echo)
 	free(trim.s_str);
 }
 
-void    ft_add_variables_double(t_struct_m *echo)
+char	*ft_add_variables_rd(char *str, t_struct_rd *rd)
 {
-	t_struct_tr trim;
-
-	set_value_trim(&trim);
-	trim.flag = 0;
-	trim.s_str = ft_strdup(echo->str);
-	trim.begin = echo->i;
-	free(echo->str);
-	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
-		trim.empty = 1;
-	ft_split_variable(&trim);
-	echo->str = ft_strdup(trim.s_str);
-	free(trim.s_str);
-}
-
-char   *ft_add_variables_rd(char *str, t_struct_rd *rd)
-{
-	t_struct_tr trim;
+	t_struct_tr	trim;
 
 	set_value_trim(&trim);
 	trim.flag = 0;

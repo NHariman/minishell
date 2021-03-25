@@ -6,21 +6,14 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 13:32:33 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/23 17:30:54 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-/*
-check > > >
-if no file inbetween, then fail
-check >>>>
-check <<<<
-*/
-
-int				rd_check_error_out(t_struct_rd *rd)
+int	rd_check_error_out(t_struct_rd *rd)
 {
 	int		len;
 
@@ -40,7 +33,7 @@ int				rd_check_error_out(t_struct_rd *rd)
 	return (shell.exit_code);
 }
 
-int				rd_check_error_in(t_struct_rd *rd)
+int	rd_check_error_in(t_struct_rd *rd)
 {
 	int		len;
 
@@ -62,7 +55,7 @@ int				rd_check_error_in(t_struct_rd *rd)
 	return (shell.exit_code);
 }
 
-int		error_check_rd(t_struct_rd *rd)
+int	error_check_rd(t_struct_rd *rd)
 {
 	rd->rdi = rd->i;
 	while (rd->str[rd->rdi] || rd->str[rd->rdi] != '\0')

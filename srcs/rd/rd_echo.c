@@ -6,14 +6,14 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 21:21:07 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 14:01:17 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/23 17:37:45 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-static void		ft_handle_quote(t_struct_m *echo)
+static void	ft_handle_quote(t_struct_m *echo)
 {
 	ft_trim_single_c(echo);
 	while (echo->str[echo->i] != '\'')
@@ -21,7 +21,7 @@ static void		ft_handle_quote(t_struct_m *echo)
 	ft_trim_single_c(echo);
 }
 
-void		ft_trim_single_c(t_struct_m *echo)
+void	ft_trim_single_c(t_struct_m *echo)
 {
 	int		i;
 	char	*cache;
@@ -50,21 +50,22 @@ void		ft_trim_single_c(t_struct_m *echo)
 	free(cache);
 }
 
-void		ft_handle_echo(t_struct_m *echo)
+void	ft_handle_echo(t_struct_m *echo)
 {
 	while (echo->str[echo->i] && echo->str[echo->i] != '\n')
 	{
 		if (echo->str[echo->i] == '\\' && (echo->str[echo->i + 1] == '\''
-		|| echo->str[echo->i + 1] == '\"' || echo->str[echo->i + 1] == '$'
-		|| echo->str[echo->i + 1] == '>'))
+				|| echo->str[echo->i + 1] == '\"'
+				|| echo->str[echo->i + 1] == '$'
+				|| echo->str[echo->i + 1] == '>'))
 		{
 			ft_trim_single_c(echo);
 			echo->i++;
 		}
 		else if (echo->str[echo->i] == '\\' && echo->str[echo->i + 1] == '\\')
 			ft_trim_single_c(echo);
-		else if (echo->str[echo->i] == '$' &&
-		(echo->str[echo->i + 1] == '\'' || echo->str[echo->i + 1] == '\"'))
+		else if (echo->str[echo->i] == '$'
+			&& (echo->str[echo->i + 1] == '\'' || echo->str[echo->i + 1] == '\"'))
 			ft_trim_single_c(echo);
 		else if (echo->str[echo->i] == '$')
 			ft_add_variables(echo);
@@ -77,7 +78,7 @@ void		ft_handle_echo(t_struct_m *echo)
 	}
 }
 
-static void		get_echo_str(t_struct_m *echo)
+static void	get_echo_str(t_struct_m *echo)
 {
 	int		len;
 	char	*str;
@@ -103,7 +104,7 @@ static void		get_echo_str(t_struct_m *echo)
 	free(str);
 }
 
-char			*echo_main(char *str, t_struct_m *echo)
+char	*echo_main(char *str, t_struct_m *echo)
 {
 	set_value_echo(echo);
 	echo->str = ft_strdup(str);

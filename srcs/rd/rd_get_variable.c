@@ -6,24 +6,24 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 13:59:23 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/23 17:42:36 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-static void		ft_save_f(t_struct_tr *trim)
+static void	ft_save_f(t_struct_tr *trim)
 {
-	int     i;
-	int     len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = 0;
 	trim->end = trim->begin;
-	while (trim->s_str[trim->end] && trim->s_str[trim->end] != ' ' &&
-	trim->s_str[trim->end] != '\n' && trim->s_str[trim->end] != '\"'
-	&& trim->s_str[trim->end] != '\'')
+	while (trim->s_str[trim->end] && trim->s_str[trim->end] != ' '
+		&& trim->s_str[trim->end] != '\n' && trim->s_str[trim->end] != '\"'
+		&& trim->s_str[trim->end] != '\'')
 	{
 		trim->end++;
 		i++;
@@ -38,7 +38,7 @@ static void		ft_save_f(t_struct_tr *trim)
 	trim->e_check[len] = '\0';
 }
 
-static int		ft_isleng(char *str, char c)
+static int	ft_isleng(char *str, char c)
 {
 	int		i;
 
@@ -50,13 +50,13 @@ static int		ft_isleng(char *str, char c)
 	return (i);
 }
 
-static void		ft_cut_env(t_struct_tr *trim, char *str, int i)
+static void	ft_cut_env(t_struct_tr *trim, char *str, int i)
 {
 	int		start;
 	int		len;
 
 	len = 0;
-	i++;//no after =
+	i++;
 	start = i;
 	while (str[start])
 	{
@@ -75,21 +75,19 @@ static void		ft_cut_env(t_struct_tr *trim, char *str, int i)
 	trim->s_variable[len] = '\0';
 }
 
-static void     ft_check_variable(t_struct_tr *trim)
+static void	ft_check_variable(t_struct_tr *trim)
 {
-	//get the elgnth of the check
-	//compare that FIRST with the lghts in env until =
-	//so make a islenght
-	int     check;
-	int     i;
-	int     vari;
+	int	check;
+	int	i;
+	int	vari;
 
 	check = ft_strlen(trim->e_check);
 	i = 0;
 	while (shell.env[i] != NULL)
 	{
-		vari = ft_isleng(shell.env[i], '=');//get the len until =
-		if (check == vari && ft_strncmp(trim->e_check, shell.env[i], check) == 0)
+		vari = ft_isleng(shell.env[i], '=');
+		if (check == vari
+			&& ft_strncmp(trim->e_check, shell.env[i], check) == 0)
 		{
 			ft_cut_env(trim, shell.env[i], vari);
 			if (trim->flag == 3)
@@ -105,9 +103,9 @@ static void     ft_check_variable(t_struct_tr *trim)
 	trim->s_variable = ft_strdup("");
 }
 
-void		    ft_get_variable(t_struct_tr *trim)
+void	ft_get_variable(t_struct_tr *trim)
 {
-	trim->begin++;//now its after &
+	trim->begin++;
 	ft_save_f(trim);
 	ft_check_variable(trim);
 	if (trim->s_str[trim->end] == ' ' && trim->empty == 1 && trim->error == 1)

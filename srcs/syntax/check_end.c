@@ -6,33 +6,29 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 11:02:15 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 13:42:57 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/23 18:00:37 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-// ft_printf("bash: syntax error near unexpected token `<'\n");
-
 #include "../minishell.h"
 
-int		ft_semicol_err()
+int	ft_semicol_err(void)
 {
 	ft_printf("minishell: syntax error near unexpected token `;'\n");
 	shell.exit_code = 1;
 	return (1);
 }
 
-int		is_token(char c)
+int	is_token(char c)
 {
 	if (c == '|' || c == ';' || c == '>' || c == '<')
 		return (1);
 	return (0);
 }
 
-
-int     check_end(char *line)
+int	check_end(char *line)
 {
-    int i;
+	int	i;
 
 	i = 0;
 	if (line[0] == ';')
