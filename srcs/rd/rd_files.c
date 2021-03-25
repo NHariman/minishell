@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/25 12:14:19 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 14:56:38 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	rd_open_file(t_struct_rd *rd)
 		rd->fd = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
 	else if (rd->nb == 3)
 		rd->fd_rd = open(rd->file, O_RDWR);
-	printf("--error check--\n");
 	if (rd->fd < 0 && rd->fd_rd < 0)
 	{
 		ft_printf_err("Error\n%s\n", strerror(errno));

@@ -1,0 +1,6 @@
+echo rd_test
+echo hello <<< <<< file1
+echo hello <<< file1
+echo hello < file1
+echo hello << file1
+echo hello <<<<<< file1

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 14:56:52 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	rd_two(t_struct_rd *rd)
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		printf("---<---\n");
 		dup2(rd->fd_rd, 0);
 		ft_wordparser();
 		close(0);
