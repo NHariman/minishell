@@ -6,40 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 20:18:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 17:14:08 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static int	ft_not_valid_prompt(char *str)
-{
-	int	len;
-
-	len = ft_strlen(str) - 1;
-	while (str[len] == ' ')
-		len--;
-	if (ft_strchr("<>|", str[len]))
-		return (ft_printf_err(
-				"minishell: syntax error near unexpected token `;'\n"));
-	else
-		return (0);
-}
-
-static int	ft_valid_prompt(char **prompts)
-{
-	int	i;
-
-	i = 0;
-	while (prompts[i] != (char *) 0)
-	{
-		if (ft_not_valid_prompt(prompts[i])
-			|| ft_invalid_line(prompts[i], '|'))
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 static int	ft_has_pipe(char *str)
 {
@@ -82,12 +53,6 @@ void	ft_make_prompts(char *str)
 	newstr = ft_rm_spaces(str);
 	prompts = ft_get_prompts(newstr);
 	free(newstr);
-	if (!ft_valid_prompt(prompts))
-	{
-		g_shell.exit_code = 258;
-		ft_free_array(prompts, ft_arrlen(prompts));
-		return ;
-	}
 	while (prompts[i] != (char *) 0)
 	{
 		if (ft_has_pipe(prompts[i]))
