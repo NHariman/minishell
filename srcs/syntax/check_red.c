@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/25 12:26:27 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 15:39:05 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/25 15:48:15 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ int	check_red_1(char *line)
 		len = 0;
 	}
 	if (i == -1)
-	{
 		return (-1);
-	}
 	return (0);
 }
 

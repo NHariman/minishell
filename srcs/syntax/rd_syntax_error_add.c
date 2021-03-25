@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/25 15:02:41 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 15:37:30 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/25 15:48:57 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	rd_syntax_error(char *line, int i, int len)
 	if (len == 0)
 		return (0);
 	if (rd_syntax_error_right(line, i) == -1
-			|| rd_syntax_error_left(line, i) == -1)
+		|| rd_syntax_error_left(line, i) == -1)
 		return (-1);
 	return (0);
 }
 
 int	rd_syntax_error_left(char *line, int i)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (line[i] == ' ')
@@ -50,7 +50,7 @@ int	rd_syntax_error_left(char *line, int i)
 
 int	rd_syntax_error_right(char *line, int i)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (line[i] == ' ')
