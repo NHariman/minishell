@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   syntax_check.c                                     :+:    :+:            */
+/*   rd_add_variable.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/04 08:12:33 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 12:26:40 by ybakker       ########   odam.nl         */
+/*   Created: 2021/03/25 12:13:18 by ybakker       #+#    #+#                 */
+/*   Updated: 2021/03/25 12:13:40 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
-int	check_bs(char *line)
+void	ft_add_variables_double(t_struct_m *echo)
 {
-	int	i;
+	t_struct_tr	trim;
 
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '\\')
-		{
-			ft_printf("minishell: syntax error near unexpected token '\'\n");
-			shell.exit_code = 1;
-			return (-1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	syntax_check(char *line)
-{
-	if (check_end(line) || check_red_1(line)
-		|| check_red_2(line) || check_bs(line))
-	{
-		ft_printf("an error has occured\n");
-		return (shell.exit_code);
-	}
-	return (0);
+	set_value_trim(&trim);
+	trim.flag = 0;
+	trim.s_str = ft_strdup(echo->str);
+	trim.begin = echo->i;
+	free(echo->str);
+	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
+		trim.empty = 1;
+	ft_split_variable(&trim);
+	echo->str = ft_strdup(trim.s_str);
+	free(trim.s_str);
 }

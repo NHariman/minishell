@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/23 18:01:50 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/25 12:13:26 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,6 @@ void	ft_add_variables(t_struct_m *echo)
 	ft_split_variable(&trim);
 	echo->str = ft_strdup(trim.s_str);
 	echo->flag = trim.flag;
-	free(trim.s_str);
-}
-
-void	ft_add_variables_double(t_struct_m *echo)
-{
-	t_struct_tr	trim;
-
-	set_value_trim(&trim);
-	trim.flag = 0;
-	trim.s_str = ft_strdup(echo->str);
-	trim.begin = echo->i;
-	free(echo->str);
-	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
-		trim.empty = 1;
-	ft_split_variable(&trim);
-	echo->str = ft_strdup(trim.s_str);
 	free(trim.s_str);
 }
 

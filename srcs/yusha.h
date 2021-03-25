@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/18 15:17:16 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 12:38:47 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "niks.h"
 
-typedef struct	s_struct_m
+typedef struct s_struct_m
 {
 	char		*str;
 	char		*cache;
@@ -26,7 +26,7 @@ typedef struct	s_struct_m
 	int			s;
 }				t_struct_m;
 
-typedef struct	s_struct_tr
+typedef struct s_struct_tr
 {
 	int			begin;
 	int			end;
@@ -45,7 +45,7 @@ typedef struct	s_struct_tr
 	char		*e_check;
 }				t_struct_tr;
 
-typedef struct	s_struct_e
+typedef struct s_struct_e
 {
 	int			begin;
 	int			end;
@@ -58,7 +58,7 @@ typedef struct	s_struct_e
 	char		*s_end;
 }				t_struct_e;
 
-typedef struct	s_struct_rd
+typedef struct s_struct_rd
 {
 	int			i;
 	int			error;
@@ -74,48 +74,48 @@ typedef struct	s_struct_rd
 }				t_struct_rd;
 
 //echo main
-char       *echo_main(char *str, t_struct_m *echo);
-int			skip_character(char *str, int i, char c);
-int			check_flag_n(t_struct_m *echo);
-void        set_value_echo(t_struct_m *echo);
-void		ft_trim_backslash(t_struct_m *echo);
+char	*echo_main(char *str, t_struct_m *echo);
+int		skip_character(char *str, int i, char c);
+int		check_flag_n(t_struct_m *echo);
+void	set_value_echo(t_struct_m *echo);
+void	ft_trim_backslash(t_struct_m *echo);
 
 //handle quotes
-void        ft_handle_quotes(t_struct_m *echo);
+void	ft_handle_quotes(t_struct_m *echo);
 
 //struct clean
-void        set_value_echo(t_struct_m *echo);
-void        set_value_trim(t_struct_tr *trim);
+void	set_value_echo(t_struct_m *echo);
+void	set_value_trim(t_struct_tr *trim);
 
 //variables
-void    	ft_add_variables(t_struct_m *echo);
-void		ft_get_variable(t_struct_tr *trim);
-void		ft_split_variable(t_struct_tr *trim);
-void    	ft_add_variables_double(t_struct_m *echo);
+void	ft_add_variables(t_struct_m *echo);
+void	ft_get_variable(t_struct_tr *trim);
+void	ft_split_variable(t_struct_tr *trim);
+void	ft_add_variables_double(t_struct_m *echo);
 
 //redirect
-void		rd_main(char *str);
-void    	rd_value_rd(t_struct_rd *rd);
-int     	rd_loop(t_struct_rd *rd);
-int     	rd_get_nb(t_struct_rd *rd);
-void    	rd_open_file_fill(t_struct_rd *rd);
-void		rd_open_file(t_struct_rd *rd);
+void	rd_main(char *str);
+void	rd_value_rd(t_struct_rd *rd);
+int		rd_loop(t_struct_rd *rd);
+int		rd_get_nb(t_struct_rd *rd);
+void	rd_open_file_fill(t_struct_rd *rd);
+void	rd_open_file(t_struct_rd *rd);
 
 //rd check
-int			error_check_rd(t_struct_rd *rd);
-void 		rd_get_file(t_struct_rd *rd, t_struct_m	*echo);
-
+int		error_check_rd(t_struct_rd *rd);
+void	rd_get_file(t_struct_rd *rd, t_struct_m	*echo);
 
 //functions
-void		ft_trim_single_c(t_struct_m *echo);
-char		*ft_strcpystr(int start, char *str, char c);
-
+void	ft_trim_single_c(t_struct_m *echo);
+char	*ft_strcpystr(int start, char *str, char c);
 
 //synax
-int     	syntax_check(char *line);
+int		syntax_check(char *line);
+int		check_red_1(char *line);
+int		check_red_2(char *line);
 
 //signals
-void    	handle_signals(int sign);
-void		ignore_signal(int sign);
-void		ft_signals_control(void);
+void	handle_signals(int sign);
+void	ignore_signal(int sign);
+void	ft_signals_control(void);
 #endif

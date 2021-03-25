@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/23 17:46:01 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/25 12:14:37 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,58 +40,6 @@ int	rd_get_nb(t_struct_rd *rd)
 			rd->i++;
 	}
 	return (0);
-}
-
-void	rd_get_file(t_struct_rd *rd, t_struct_m *echo)
-{
-	int	i;
-	int	len;
-	int	start;
-
-	i = 0;
-	start = rd->i;
-	while (rd->str[rd->i] != '\n' && rd->str[rd->i] != '\0'
-		&& rd->str[rd->i] != '<' && rd->str[rd->i] != '>')
-		rd->i++;
-	len = rd->i - start;
-	rd->i = start;
-	rd->cache = (char *)malloc(len * sizeof(char));
-	while (len > 0)
-	{
-		rd->cache[i] = rd->str[rd->i];
-		i++;
-		rd->i++;
-		len--;
-	}
-	rd->cache[i] = '\0';
-	rd->tmp = ft_strtrim(rd->cache, "\n");
-	free(rd->cache);
-	rd->cache = ft_strdup(echo_main(rd->tmp, echo));
-	rd->file = ft_strtrim(rd->cache, "\n");
-	free(rd->cache);
-	free(echo->tmp);
-	free(echo->str);
-}
-
-void	rd_open_file(t_struct_rd *rd)
-{
-	errno = 0;
-	if (rd->fd != -1)
-		close(rd->fd);
-	else if (rd->fd_rd != -1 && rd->nb == 3)
-		close(rd->fd_rd);
-	if (rd->nb == 1)
-		rd->fd = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
-	else if (rd->nb == 2)
-		rd->fd = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
-	else if (rd->nb == 3)
-		rd->fd_rd = open(rd->file, O_RDWR);
-	printf("--error check--\n");
-	if (rd->fd < 0 && rd->fd_rd < 0)
-	{
-		ft_printf_err("Error\n%s\n", strerror(errno));
-		shell.exit_code = 1;
-	}
 }
 
 void	rd_one(t_struct_rd *rd)
