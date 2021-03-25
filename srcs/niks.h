@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 19:59:12 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 11:05:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 # define DQ 2
 # define NQ 3
 
-
-typedef	struct	s_trim
+typedef struct s_trim
 {
 	int			start;
 	char		*res;
@@ -29,7 +28,7 @@ typedef	struct	s_trim
 ** sq: checks for equal amount of single quotes ' '
 */
 
-typedef struct	s_qts
+typedef struct s_qts
 {
 	int			dq;
 	int			sq;
@@ -42,7 +41,7 @@ typedef struct	s_qts
 **	int			exp;	- export command was used
 **	int			pwd;	- pwd was used
 */
-typedef struct	s_check
+typedef struct s_check
 {
 	int			echo;
 	int			env;
@@ -53,7 +52,7 @@ typedef struct	s_check
 	int			rd;
 }				t_check;
 
-typedef struct	s_shell
+typedef struct s_shell
 {
 	t_check		check;
 	int			exit_code;
@@ -82,7 +81,8 @@ void			ft_qt_start(char *line, t_qts *qts);
 int				ft_backslash_check(char *line, int i);
 int				ft_invalid_line(char *str, char token);
 int				check_end(char *line);
-char			**ft_fill_prompts(char **prompts, char *str, int len, char token);
+char			**ft_fill_prompts(char **prompts, char *str,
+					int len, char token);
 void			ft_make_prompts(char *str);
 void			ft_pipe_splitter(char *str);
 void			function_dispatcher(char *line);
@@ -177,7 +177,7 @@ char			*ft_find_varname(char *str);
 */
 
 void			pipe_child(int *p, char **pipes, int i, int fd_in);
-void 			pipe_parent(int *fd_in, int *i, int *p, char **pipes);
+void			pipe_parent(int *fd_in, int *i, int *p, char **pipes);
 
 /*
 ** unset

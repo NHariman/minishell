@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/08 13:36:05 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 19:20:33 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/25 11:09:39 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	**ft_deletearray(char **array, size_t len)
 static char	*fill_array(size_t *i, char const *s, char c)
 {
 	size_t	len;
-	char *str;
+	char	*str;
 
 	len = 0;
 	while (s[*i] != c && s[*i])
