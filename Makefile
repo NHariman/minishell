@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-COMPILE = gcc
-# COMPILE = clang
-FLAGS = -Wall -Werror -Wextra
+# COMPILE = gcc
+COMPILE = clang
+# FLAGS = -Wall -Werror -Wextra
 MINISHELL =     main.c \
                 srcs/main/gnl_utils.c \
                 srcs/main/get_next_line_sig.c \
@@ -42,6 +42,7 @@ MINISHELL =     main.c \
                 srcs/execv/ft_is_directory.c \
                 srcs/execv/ft_make_array.c \
                 srcs/execv/ft_preprocessor.c \
+                srcs/execv/ft_shlvl.c \
                 srcs/export/ft_export.c \
                 srcs/export/ft_add_backslash.c \
                 srcs/export/ft_format_export.c \
