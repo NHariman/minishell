@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/25 12:14:19 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 14:56:38 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/03/26 16:23:14 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	rd_open_file(t_struct_rd *rd)
 		rd->fd_rd = open(rd->file, O_RDWR);
 	if (rd->fd < 0 && rd->fd_rd < 0)
 	{
-		ft_printf_err("Error\n%s\n", strerror(errno));
+		ft_printf_err("bash: %s: %s\n", rd->file, strerror(errno));
 		g_shell.exit_code = 1;
 	}
 }
