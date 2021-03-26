@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 11:02:15 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/03/26 20:24:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_semicol_err(void)
 {
 	ft_printf("minishell: syntax error near unexpected token `;'\n");
-	g_shell.exit_code = 1;
+	g_shell.exit_code = 258;
 	return (1);
 }
 
