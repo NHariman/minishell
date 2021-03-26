@@ -103,7 +103,6 @@ char	*ft_get_rdin(char *str)
 		ft_malloc_fail();
 	rdarr = ft_fill_rdarr(str, rdarr, len);
 	rdstr = ft_make_str(rdarr);
-	ft_printf("rd string: %s\n", rdstr);
 	ft_free_array(rdarr, ft_arrlen(rdarr));
 	return (rdstr);
 }
