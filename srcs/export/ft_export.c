@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 18:56:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 11:26:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	ft_add_to_env(void)
 
 void	ft_export(void)
 {
-	char *tmp;
+	char	*tmp;
 
 	g_shell.exit_code = 0;
 	if (ft_arrlen(g_shell.argv) == 1)

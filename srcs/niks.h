@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 18:59:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 13:14:06 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_shell
 	int			exit_code;
 	int			fd;
 	int			fd_r;
+	int			argc;
 	char		**argv;
 	char		*rds;
 	char		**env;
@@ -58,6 +59,7 @@ char			**ft_fill_prompts(char **prompts, char *str,
 					int len, char token);
 void			ft_make_prompts(char *str);
 void			ft_pipe_splitter(char *str);
+char			*get_cmd(char *str, int *i);
 void			function_dispatcher(char *line);
 
 /*
@@ -74,6 +76,7 @@ int				get_gnl_ret(int newline, char *leftover, int ret);
 char			*get_line_read(char *tmp);
 char			*ft_charjoin(char *str, char c);
 char			*ft_make_single_char_str(char c);
+int				make_argv_rd(char *line);
 char			**ft_argv(char *str);
 int				ft_count_arr(char *str);
 char			**ft_arrdup(char **arr);
