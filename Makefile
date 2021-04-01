@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2021/04/01 14:56:10 by ybakker       ########   odam.nl          #
+#    Updated: 2021/04/01 16:28:46 by ybakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ ECHO =          srcs/rd_new/check_redirect.c \
 				srcs/rd_new/rd_get_nb.c \
 				srcs/rd_new/rd_loop.c \
 				srcs/rd_new/rd_main.c \
+				srcs/rd_new/rd_open_file.c \
 				srcs/syntax/syntax_check.c\
 				srcs/syntax/check_end.c \
 				srcs/syntax/check_red.c \

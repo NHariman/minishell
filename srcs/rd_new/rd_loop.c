@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:48:53 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/01 15:01:57 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/01 16:32:50 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@ int	rd_loop(t_struct_rd *rd)
 	rd->error = 0;
 	while (rd->str[rd->i] && rd->str[rd->i] != '\n' && rd->error == 0)
 	{
+		free(rd->file);
 		rd->nb = 0;
 		rd->error = rd_get_nb(rd);
-        printf("nb == [%i]\n", rd->nb);
 		if (rd->error > 0)
 			return (rd->error);
-        
-		// rd_get_file(rd);
+		rd_get_file_name(rd);
+		if (rd->file)
+			printf("hello\n");
+		rd_open_file(rd);
 	}
 	rd_open_file_fill(rd);
+	free(rd->file);
 	return (rd->error);
 }

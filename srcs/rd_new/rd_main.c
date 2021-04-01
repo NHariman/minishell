@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:24:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/01 14:55:22 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/01 16:26:30 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	rd_main(char *str)
 	rd->i = 0;
 	rd->error = 0;
 	rd->str = ft_strtrim(str, "\n");
+	rd->file = ft_strdup("");
 	printf("string == [%s]\n", rd->str);	
 	if (get_check_redirect(rd) > 0)
 		g_shell.exit_code = -1;
