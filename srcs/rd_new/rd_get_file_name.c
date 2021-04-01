@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:52:00 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/01 16:34:48 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/01 16:44:52 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	rd_get_file_name(t_struct_rd *rd)
 {
-    if (rd->str[rd->i] == '\0' || rd->str[rd->i] == ';')
-        rd->file = ft_strdup("");
+    if (rd->str[rd->i] == '\0')
+        rd->file= ft_strdup("");
     else
         rd->file = ft_no_quotes_str(rd->str, &rd->i, "<> \n");
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 11:02:15 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/26 20:24:12 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 16:52:39 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_end(char *line)
 	{
 		if (line[i] == ';')
 		{
-			i = i + ft_iswhitespaces(line + i + 1) + 1;
+			i = i + ft_iswhitespaces(line + i + 1);
 			if (is_token(line[i]))
 				return (ft_semicol_err());
 		}
