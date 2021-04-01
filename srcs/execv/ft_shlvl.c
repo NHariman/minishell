@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/25 18:30:19 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 18:42:16 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 12:07:35 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	update_env_shlvl(int level)
 			free(g_shell.env[i]);
 			g_shell.env[i] = ft_strdup(new_str);
 			free(new_str);
+			free(name);
 			return ;
 		}
 		if (name)

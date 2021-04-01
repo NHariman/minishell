@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/06 23:38:16 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 18:55:41 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 16:52:08 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ void	ft_echo(void)
 		else
 			tmp = ft_make_echo_str(g_shell.argv, i);
 	}
-	if (check == 1)
-		ft_printf("%s", tmp);
-	else
-		ft_printf("%s\n", tmp);
+	if (tmp)
+		write(1, tmp, ft_strlen(tmp));
+	if (check != 1)
+		write(1, "\n", 1);
 	free(tmp);
 	g_shell.exit_code = 0;
 	return ;

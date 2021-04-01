@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 12:32:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ static void	ft_skip_rds(char *str, int *i)
 	free(res);
 }
 
-static char	**ft_make_array(char **arr, char *str, int arr_len)
+static char	**ft_make_array(char **arr, char *str)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (str[i] != '\0' && count < arr_len)
+	while (str[i] != '\0' && count < g_shell.argc)
 	{
 		if (str[i] != ' ')
 		{
@@ -87,19 +87,18 @@ static char	**ft_make_array(char **arr, char *str, int arr_len)
 char	**ft_argv(char *s)
 {
 	char	**split;
-	int		arr_len;
 	int		i;
 
 	i = 0;
 	if (!s)
 		return (NULL);
-	arr_len = ft_count_arr(s);
-	if (arr_len == 0)
+	g_shell.argc = ft_count_arr(s);
+	if (g_shell.argc == 0)
 		return (NULL);
-	split = (char **)malloc((arr_len + 2) * sizeof(char *));
+	split = (char **)malloc((g_shell.argc + 2) * sizeof(char *));
 	if (!split)
 		ft_malloc_fail();
-	split = ft_make_array(split, s, arr_len);
+	split = ft_make_array(split, s);
 	if (!split)
 		ft_malloc_fail();
 	return (split);

@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2021/03/25 18:41:10 by nhariman      ########   odam.nl          #
+#    Updated: 2021/04/01 12:18:36 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ MINISHELL =     main.c \
                 srcs/main/get_next_line_sig.c \
                 srcs/main/main_parser.c \
                 srcs/main/gen_functions.c \
+                srcs/main/ft_argv_env.c \
                 srcs/main/ft_argv.c \
                 srcs/main/ft_prompts.c \
                 srcs/main/dollar_sign.c \
@@ -67,6 +68,7 @@ ECHO =          srcs/rd/rd_add_environment.c \
                 srcs/rd/rd_set_value.c\
                 srcs/rd/re_direct.c\
                 srcs/rd/rd_skip_character.c \
+                srcs/syntax/rd_syntax_error_add.c \
                 srcs/syntax/syntax_check.c\
                 srcs/syntax/check_end.c \
                 srcs/syntax/check_red.c \
