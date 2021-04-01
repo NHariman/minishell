@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   rd_set_value.c                                     :+:    :+:            */
+/*   rd_main.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Created: 2021/04/01 14:24:14 by ybakker       #+#    #+#                 */
+/*   Updated: 2021/04/01 14:55:22 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-void	rd_value_rd(t_struct_rd *rd)
+void	rd_main(char *str)
 {
-	rd->nb = 0;
+	t_struct_rd	*rd;
+
+	rd = calloc(1, sizeof(t_struct_rd));
+	rd->fd = -1;
+	rd->fd_rd = -1;
+	rd->i = 0;
+	rd->error = 0;
+	rd->str = ft_strtrim(str, "\n");
+	printf("string == [%s]\n", rd->str);	
+	if (get_check_redirect(rd) > 0)
+		g_shell.exit_code = -1;
+	else if (rd_loop(rd) > 0)
+		g_shell.exit_code = -1;
+	free(rd->str);
+	free(rd);
 }

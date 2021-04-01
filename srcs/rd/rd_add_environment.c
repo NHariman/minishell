@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 14:21:06 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,21 +84,5 @@ void	ft_add_variables(t_struct_m *echo)
 	echo->str = ft_strdup(trim.s_str);
 	echo->flag = trim.flag;
 	free(trim.s_str);
-}
-
-char	*ft_add_variables_rd(char *str, t_struct_rd *rd)
-{
-	t_struct_tr	trim;
-
-	set_value_trim(&trim);
-	trim.flag = 0;
-	trim.s_str = ft_strdup(str);
-	trim.begin = rd->i;
-	free(str);
-	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
-		trim.empty = 1;
-	ft_split_variable(&trim);
-	str = ft_strdup(trim.s_str);
-	free(trim.s_str);
-	return (str);
+	printf("trim string == [%s][%s][%s][%s][%s][%s][%s]\n", trim.s_str, trim.s_tmp, trim.s_cache, trim.s_begin, trim.s_end, trim.s_variable, trim.e_check);
 }

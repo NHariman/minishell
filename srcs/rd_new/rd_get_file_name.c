@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   re_direct.c                                        :+:    :+:            */
+/*   rd_get_file_name.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/01 14:28:18 by ybakker       ########   odam.nl         */
+/*   Created: 2021/04/01 14:52:00 by ybakker       #+#    #+#                 */
+/*   Updated: 2021/04/01 14:59:01 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-// void	rd_main(char *str)
-// {
-// 	t_struct_rd	*rd;
-
-// 	rd = calloc(1, sizeof(t_struct_rd));
-// 	rd->fd = -1;
-// 	rd->fd_rd = -1;
-// 	rd->i = 0;
-// 	rd->error = 0;
-// 	rd_value_rd(rd);
-// 	rd->str = ft_strtrim(str, "\n");
-// 	if (error_check_rd(rd) > 0 || rd_loop(rd) > 0)
-// 	{
-// 		g_shell.exit_code = -1;
-// 	}
-// 	free(rd);
-// }
+void	rd_get_file(t_struct_rd *rd)
+{
+	int	i;
+	int	len;
+	int	start;
+    i = rd->i;
+    len = 0;
+    start = 0;
+}

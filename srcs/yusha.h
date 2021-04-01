@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 15:47:58 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/01 15:00:53 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,6 @@ typedef struct s_struct_tr
 	char		*e_check;
 }				t_struct_tr;
 
-typedef struct s_struct_e
-{
-	int			begin;
-	int			end;
-	int			single;
-	int			doubble;
-	char		*s_str;
-	char		*s_tmp;
-	char		*s_cache;
-	char		*s_begin;
-	char		*s_end;
-}				t_struct_e;
-
 typedef struct s_struct_rd
 {
 	int			i;
@@ -93,18 +80,6 @@ void	ft_get_variable(t_struct_tr *trim);
 void	ft_split_variable(t_struct_tr *trim);
 void	ft_add_variables_double(t_struct_m *echo);
 
-//redirect
-void	rd_main(char *str);
-void	rd_value_rd(t_struct_rd *rd);
-int		rd_loop(t_struct_rd *rd);
-int		rd_get_nb(t_struct_rd *rd);
-void	rd_open_file_fill(t_struct_rd *rd);
-void	rd_open_file(t_struct_rd *rd);
-
-//rd check
-int		error_check_rd(t_struct_rd *rd);
-void	rd_get_file(t_struct_rd *rd, t_struct_m	*echo);
-
 //functions
 void	ft_trim_single_c(t_struct_m *echo);
 char	*ft_strcpystr(int start, char *str, char c);
@@ -121,4 +96,15 @@ int		rd_syntax_error_right(char *line, int i);
 void	handle_signals(int sign);
 void	ignore_signal(int sign);
 void	ft_signals_control(void);
+
+//rd
+void	rd_main(char *str);
+int		get_check_redirect(t_struct_rd *rd);
+
+int		rd_loop(t_struct_rd *rd);
+int		rd_get_nb(t_struct_rd *rd);
+void	rd_get_file(t_struct_rd *rd);
+void	rd_open_file(t_struct_rd *rd);
+void	rd_open_file_fill(t_struct_rd *rd);
+
 #endif

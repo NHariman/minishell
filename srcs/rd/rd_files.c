@@ -6,23 +6,24 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/25 12:14:19 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/26 16:23:14 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/01 14:42:23 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-static	void	rd_file_free(t_struct_rd *rd, int i, t_struct_m *echo)
+static	void	rd_file_free(t_struct_rd *rd, t_struct_m *echo)
 {
-	rd->cache[i] = '\0';
 	rd->tmp = ft_strtrim(rd->cache, "\n");
 	free(rd->cache);
 	rd->cache = ft_strdup(echo_main(rd->tmp, echo));
+	free(echo->str);
+	if (rd->file)
+		free(rd->file);
 	rd->file = ft_strtrim(rd->cache, "\n");
 	free(rd->cache);
 	free(echo->tmp);
-	free(echo->str);
 }
 
 void	rd_get_file(t_struct_rd *rd, t_struct_m *echo)
@@ -46,33 +47,8 @@ void	rd_get_file(t_struct_rd *rd, t_struct_m *echo)
 		rd->i++;
 		len--;
 	}
-	rd_file_free(rd, i, echo);
+	rd->cache[i] = '\0';
+	rd_file_free(rd, echo);
+	free(echo->cache);
 }
 
-void	rd_open_file(t_struct_rd *rd)
-{
-	errno = 0;
-	if (rd->fd != -1)
-		close(rd->fd);
-	else if (rd->fd_rd != -1 && rd->nb == 3)
-		close(rd->fd_rd);
-	if (ft_strcmp(rd->file, "") == 0)
-	{
-		ft_printf("bash: syntax error near unexpected token `newline'\n");
-		g_shell.exit_code = 258;
-	}
-	else
-	{
-		if (rd->nb == 1)
-			rd->fd = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
-		else if (rd->nb == 2)
-			rd->fd = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
-		else if (rd->nb == 3)
-			rd->fd_rd = open(rd->file, O_RDWR);
-		if (rd->fd < 0 && rd->fd_rd < 0)
-		{
-			ft_printf_err("bash: %s: %s\n", rd->file, strerror(errno));
-			g_shell.exit_code = 1;
-		}
-	}
-}

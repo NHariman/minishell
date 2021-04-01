@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 18:42:42 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 12:30:02 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ static void	ft_check_variable(t_struct_tr *trim)
 		i++;
 	}
 	trim->error = 1;
-	trim->s_variable = ft_strdup("");
+	free(trim->e_check);
+	free(trim->s_variable);
 }
 
 void	ft_get_variable(t_struct_tr *trim)
