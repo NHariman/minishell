@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         ::::::::             #
-#    Makefile copy                                      :+:    :+:             #
+#    MakefileYusha                                      :+:    :+:             #
 #                                                      +:+                     #
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2021/04/01 16:55:30 by ybakker       ########   odam.nl          #
+#    Updated: 2021/04/01 17:00:24 by ybakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,13 +50,13 @@ MINISHELL =     main.c \
 				srcs/export/ft_update_env.c \
 				srcs/unset/ft_unset.c 
 
-ECHO =          srcs/rd_new/check_redirect.c \
-				srcs/rd_new/rd_fill_file.c \
-				srcs/rd_new/rd_get_file_name.c \
-				srcs/rd_new/rd_get_nb.c \
-				srcs/rd_new/rd_loop.c \
-				srcs/rd_new/rd_main.c \
-				srcs/rd_new/rd_open_file.c \
+ECHO =          srcs/rd/check_redirect.c \
+				srcs/rd/rd_fill_file.c \
+				srcs/rd/rd_get_file_name.c \
+				srcs/rd/rd_get_nb.c \
+				srcs/rd/rd_loop.c \
+				srcs/rd/rd_main.c \
+				srcs/rd/rd_open_file.c \
 				srcs/syntax/syntax_check.c\
 				srcs/syntax/check_end.c \
 				srcs/syntax/check_red.c \
