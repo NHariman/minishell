@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   syntax_check.c                                     :+:    :+:            */
+/*   rd_get_nb.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/04 08:12:33 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/01 16:52:56 by ybakker       ########   odam.nl         */
+/*   Created: 2021/04/01 14:44:40 by ybakker       #+#    #+#                 */
+/*   Updated: 2021/04/01 14:45:19 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
-int	check_bs(char *line)
+int	rd_get_nb(t_struct_rd *rd)
 {
-	int	i;
-
-	i = 0;
-	while (line[i])
+	while (rd->str[rd->i] == ' ')
+		rd->i++;
+	if (rd->str[rd->i] != '<' && rd->str[rd->i] != '>')
+		return (1);
+	else if (rd->str[rd->i] == '<')
 	{
-		if (line[i] == '\\')
-		{
-			ft_printf("minishell: syntax error near unexpected token '\'\n");
-			g_shell.exit_code = 1;
-			return (-1);
-		}
-		i++;
+		rd->nb = 3;
+		while (rd->str[rd->i] == '<' || rd->str[rd->i] == ' ')
+			rd->i++;
+		return (rd->error);
 	}
-	return (0);
-}
-
-int	syntax_check(char *line)
-{
-	if (check_end(line))
-		return (g_shell.exit_code);
-	else if (check_red_1(line) || check_red_2(line) || check_bs(line))
-		return (g_shell.exit_code);
+	else
+	{
+		if (rd->str[rd->i] == '>')
+			rd->nb = 1;
+		rd->i++;
+		if (rd->str[rd->i] == '>')
+		{
+			rd->nb = 2;
+			rd->i++;
+		}
+		while (rd->str[rd->i] == ' ')
+			rd->i++;
+	}
 	return (0);
 }

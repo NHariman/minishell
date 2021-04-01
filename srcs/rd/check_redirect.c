@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   rd_check.c                                         :+:    :+:            */
+/*   check_redirect.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/12 15:28:15 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/26 16:22:14 by ybakker       ########   odam.nl         */
+/*   Created: 2021/04/01 14:26:17 by ybakker       #+#    #+#                 */
+/*   Updated: 2021/04/01 14:39:12 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-int	rd_check_error_out(t_struct_rd *rd)
+static int	rd_check_error_out(t_struct_rd *rd)
 {
 	int		len;
 
@@ -28,7 +28,7 @@ int	rd_check_error_out(t_struct_rd *rd)
 	return (1);
 }
 
-int	rd_check_error_in(t_struct_rd *rd)
+static int	rd_check_error_in(t_struct_rd *rd)
 {
 	int		len;
 
@@ -46,7 +46,7 @@ int	rd_check_error_in(t_struct_rd *rd)
 	return (1);
 }
 
-int	error_check_rd(t_struct_rd *rd)
+int	get_check_redirect(t_struct_rd *rd)
 {
 	rd->rdi = rd->i;
 	while (rd->str[rd->rdi] || rd->str[rd->rdi] != '\0')
@@ -69,7 +69,6 @@ int	error_check_rd(t_struct_rd *rd)
 		rd->rdi++;
 		while (rd->str[rd->rdi] == ' ')
 			rd->rdi++;
-		ft_printf("%s\n", ft_no_quotes_str(rd->str, &rd->rdi, "<>"));
 	}
 	return (0);
 }

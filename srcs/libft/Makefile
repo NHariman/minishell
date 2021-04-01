@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-COMPILE = 	gcc
+COMPILE = 	clang
 
-FLAGS = 	-Wall -Werror -Wextra
+# FLAGS = 	-Wall -Werror -Wextra
 
 CFILES = 	ft_atoi.c \
 			ft_bzero.c \

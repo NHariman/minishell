@@ -10,8 +10,27 @@ echo hello >>> file1
 echo hello >> > file1
 echo hello > > file1
 
+echo hello >
+echo hello >;
+//bash: syntax error near unexpected token `;'
+echo hello >     "hello   fello"
 
 echo "update execve function to up the shell level before executing and then lowering it before exiting the parent"
 
 echo "exit code checken"
 
+f1r2s3% make test
+./minishell
+minishell> echo hello <<< <<< file1
+bash: syntax error near unexpected token `<<<'
+minishell> echo hello < file1
+string == [< file1]
+hello
+minishell> echo hello <<<<<< file1
+bash: syntax error near unexpected token `<<<'
+minishell> echo hello >     "hello   fello"
+string == [>     "hello]
+minishell> echo hello >     "hello   fello"
+Error
+Malloc failed. Exiting program.
+make: *** [test] Error 1

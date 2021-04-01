@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   rd_add_variable.c                                  :+:    :+:            */
+/*   rd_main.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/03/25 12:13:18 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Created: 2021/04/01 14:24:14 by ybakker       #+#    #+#                 */
+/*   Updated: 2021/04/01 16:26:30 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-void	ft_add_variables_double(t_struct_m *echo)
+void	rd_main(char *str)
 {
-	t_struct_tr	trim;
+	t_struct_rd	*rd;
 
-	set_value_trim(&trim);
-	trim.flag = 0;
-	trim.s_str = ft_strdup(echo->str);
-	trim.begin = echo->i;
-	free(echo->str);
-	if (trim.s_str[trim.begin - 1] == ' ' && trim.begin != 0)
-		trim.empty = 1;
-	ft_split_variable(&trim);
-	echo->str = ft_strdup(trim.s_str);
-	free(trim.s_str);
+	rd = calloc(1, sizeof(t_struct_rd));
+	rd->fd = -1;
+	rd->fd_rd = -1;
+	rd->i = 0;
+	rd->error = 0;
+	rd->str = ft_strtrim(str, "\n");
+	rd->file = ft_strdup("");
+	printf("string == [%s]\n", rd->str);	
+	if (get_check_redirect(rd) > 0)
+		g_shell.exit_code = -1;
+	else if (rd_loop(rd) > 0)
+		g_shell.exit_code = -1;
+	free(rd->str);
+	free(rd);
 }
