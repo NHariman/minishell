@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/21 18:30:29 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 19:07:03 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 14:48:58 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ char	*gnl_strjoin(char *s1, char *s2)
 		free(s1);
 		return (NULL);
 	}
-	while (s1 && i < ft_strlen(s1))
+	while (s1[i] != '\0' && i < ft_strlen(s1))
 	{
 		strduo[i] = s1[i];
 		i++;
 	}
-	while (s2 && j < ft_strlen(s2))
+	while (s2[j] != '\0' && j < ft_strlen(s2))
 	{
 		strduo[i + j] = s2[j];
 		j++;

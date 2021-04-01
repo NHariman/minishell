@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 11:26:44 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 17:00:29 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static char	*ft_make_export_str(char **env)
 	int		*order;
 	char	*export_str;
 
+	if (!env)
+		return (NULL);
 	order = ft_order_env(env);
 	ft_sort_env(order, env, 1);
 	export_str = ft_parse_env_str(order, env);
@@ -73,8 +75,11 @@ void	ft_export(void)
 	if (ft_arrlen(g_shell.argv) == 1)
 	{
 		tmp = ft_make_export_str(g_shell.env);
-		ft_printf("%s\n", tmp);
-		free(tmp);
+		if (tmp)
+		{	
+			ft_printf("%s\n", tmp);
+			free(tmp);
+		}
 	}
 	else
 		ft_add_to_env();

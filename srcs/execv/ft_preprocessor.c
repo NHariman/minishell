@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/26 17:07:55 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 16:31:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static	int	ft_count_paths(char *str)
 
 	i = 0;
 	count = 0;
+	if (!str)
+		return (-1);
 	while (str[i] != '\0')
 	{
 		if (str[i] == ':')
@@ -74,6 +76,8 @@ char	**ft_path_array(char *str, char *cmd)
 	char	**pathcmd;
 
 	count = ft_count_paths(str);
+	if (count == -1)
+		return (NULL);
 	pathcmd = (char **)malloc(sizeof(char *) * (count + 2));
 	if (!pathcmd)
 		ft_malloc_fail();

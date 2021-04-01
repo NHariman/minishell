@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 13:14:06 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 16:43:00 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int				get_gnl_ret(int newline, char *leftover, int ret);
 char			*get_line_read(char *tmp);
 char			*ft_charjoin(char *str, char c);
 char			*ft_make_single_char_str(char c);
-int				make_argv_rd(char *line);
+void			make_argv_rd(char *line);
 char			**ft_argv(char *str);
 int				ft_count_arr(char *str);
 char			**ft_arrdup(char **arr);
@@ -117,6 +117,7 @@ void			ft_cd(void);
 void			ft_pwd_main(void);
 void			ft_rd_parser(char *str, int *i);
 char			*ft_pwd(void);
+int				get_exit_code(int status);
 void			ft_exit_minishell(char **arr, int len);
 
 /*

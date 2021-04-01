@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 20:18:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 17:14:08 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 17:21:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ void	ft_make_prompts(char *str)
 		if (ft_has_pipe(prompts[i]))
 			ft_pipe_splitter(prompts[i]);
 		else
+		{
 			function_dispatcher(prompts[i]);
-		ft_clear_shell();
+			ft_clear_shell();
+		}
 		i++;
 	}
 	ft_free_array(prompts, ft_arrlen(prompts));

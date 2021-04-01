@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 13:44:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 18:04:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 14:04:40 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,7 @@ char	*ft_no_quotes_str(char *str, int *i, char *stop)
 	ft_tilde_expansion(&trim, i, str);
 	while (!ft_strchr(stop, str[*i]) && str[*i] != '\0')
 	{
-		if (str[*i] == '$' && !ft_strchr(" ;\n", str[*i + 1])
-			&& str[*i + 1] != '\0')
-			ft_parse_dollar(str, i, &trim);
-		else if (ft_strchr("\'\"", str[*i])
+		if (ft_strchr("\'\"", str[*i])
 			&& ft_backslash_check(str, *i) % 2 == 0)
 			check_quotes(str, i, &trim);
 		else if (ft_strchr("><", str[*i])
