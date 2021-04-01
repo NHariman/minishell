@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 11:31:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 17:22:22 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ void	pipe_child(int *p, char **pipes, int i, int fd_in)
 		dup2(p[1], 1);
 	close(p[0]);
 	function_dispatcher(pipes[i]);
+	ft_clear_shell();
 	exit(0);
 }
 
-static int	get_exit_code(int status)
+int	get_exit_code(int status)
 {
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));

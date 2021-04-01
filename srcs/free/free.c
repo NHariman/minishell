@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 21:15:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 18:57:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 17:04:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,16 @@ void	ft_free_array(char **arr, int len)
 	int	i;
 
 	i = 0;
-	if (!arr)
+	if (!arr || arr[0] == (char *) 0)
 		return ;
 	while (i < len)
 	{
-		free(arr[i]);
+		if (arr[i])
+			free(arr[i]);
 		i++;
 	}
-	free(arr);
+	if (arr)
+		free(arr);
 	arr = NULL;
 }
 
