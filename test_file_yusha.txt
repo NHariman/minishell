@@ -19,6 +19,13 @@ echo "update execve function to up the shell level before executing and then low
 
 echo "exit code checken"
 
+f1r2s3% make test
+./minishell
+minishell> echo hello <<< <<< file1
+bash: syntax error near unexpected token `<<<'
+minishell> echo hello < file1
+string == [< file1]
+hello
 minishell> echo hello <<<<<< file1
 bash: syntax error near unexpected token `<<<'
 minishell> echo hello >     "hello   fello"
