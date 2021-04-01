@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 14:33:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 18:41:25 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,7 @@ void	function_dispatcher(char *line)
 
 void	minishell_parser(char *line)
 {
-	t_qts		qts;
-
 	if (line[0] == '\0' || syntax_check(line))
 		return ;
-	ft_set_qts(&qts);
-	ft_qt_start(line, &qts);
-	if (qts.dq % 2 != 0 || qts.sq % 2 != 0)
-		ft_printf_err("Error\nHanging quotes. Parsing failed.\n");
-	else
-		ft_make_prompts(line);
+	ft_make_prompts(line);
 }

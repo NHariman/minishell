@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/29 03:18:41 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 18:14:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	**ft_get_prompts(char *str)
 	len = ft_count_prompts(str);
 	prompts = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!prompts)
-		ft_malloc_fail();
+		ft_malloc_fail("ft_prompts");
 	prompts[len] = (char *) 0;
 	prompts = ft_fill_prompts(prompts, str, len, ';');
 	if (!prompts)

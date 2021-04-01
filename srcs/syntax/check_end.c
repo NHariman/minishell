@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 11:02:15 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 16:52:39 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/01 18:59:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ int	is_token(char c)
 	return (0);
 }
 
+static int	check_front_token(char *line, int i)
+{
+	while(line[i] == ' ' && i != 0)
+		i--;
+	if (is_token(line[i]))
+		return (1);
+	return (0);
+
+}
+
 int	check_end(char *line)
 {
 	int	i;
@@ -37,7 +47,9 @@ int	check_end(char *line)
 	{
 		if (line[i] == ';')
 		{
-			i = i + ft_iswhitespaces(line + i + 1);
+			if (check_front_token(line, i))
+				return (ft_semicol_err());
+			i = i + ft_iswhitespaces(line + i + 1) + 1;
 			if (is_token(line[i]))
 				return (ft_semicol_err());
 		}

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 16:34:25 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 18:14:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	**ft_delete_arr_entry(char **arr, char *var)
 	len = ft_arrlen(arr);
 	newenv = (char **)malloc(sizeof(char *) * len);
 	if (!newenv)
-		ft_malloc_fail();
+		ft_malloc_fail("ft_delete_arr_entry");
 	newenv[len - 1] = (char *) 0;
 	while (arr[i])
 	{

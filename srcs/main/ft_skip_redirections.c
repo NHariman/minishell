@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/28 20:57:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 18:31:24 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 void	ft_skip_rd(char *str, int *i)
 {
-	while (ft_strchr("<>", str[*i]) && ft_backslash_check(str, *i) % 2 == 0)
+	char	*res;
+
+	while (str[*i] == '>')
 		*i = *i + 1;
-	*i = *i + ft_iswhitespaces(str + *i);
-	while (!ft_strchr(" <>", str[*i]) && str[*i] != '\0')
-	{
-		if (str[*i] == '\\' && ft_strchr(" \\\'\"", str[*i + 1]))
-			*i = *i + 1;
+	while (str[*i] == ' ')
 		*i = *i + 1;
-	}
-	*i = *i + ft_iswhitespaces(str + *i);
+	res = ft_no_quotes_str(str, i, " ");
+	*i = *i + 1;
+	free(res);
 }
 
 void	ft_skip_redirections(char *str, int *i, t_trim *trim)
