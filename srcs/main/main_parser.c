@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 17:44:36 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 13:13:02 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 ** unmodified.
 */
 
-static char	*get_cmd(char *str, int *i)
+char	*get_cmd(char *str, int *i)
 {
 	char	*cmd;
 
@@ -79,19 +79,24 @@ void	ft_wordparser(void)
 
 void	function_dispatcher(char *line)
 {
-	int		i;
-	char	*cmd;
-	char	**tmp;
+	int	res;
 
-	i = 0;
-	cmd = get_cmd(line, &i);
-	tmp = ft_argv(line + i
-			+ ft_iswhitespaces(line + i + 1));
-	if (!tmp)
-		g_shell.argv = empty_array(cmd);
-	else
-		g_shell.argv = ft_add_arr_front(tmp, cmd);
-	g_shell.rds = ft_get_rdin(line);
+	res = make_argv_rd(line);
+	if (res == 1)
+		return ;
+	// int		i;
+	// char	*cmd;
+	// char	**tmp;
+
+	// i = 0;
+	// cmd = get_cmd(line, &i);
+	// tmp = ft_argv(line + i
+	// 		+ ft_iswhitespaces(line + i + 1));
+	// if (!tmp)
+	// 	g_shell.argv = empty_array(cmd);
+	// else
+	// 	g_shell.argv = ft_add_arr_front(tmp, cmd);
+	// g_shell.rds = ft_get_rdin(line);
 	if (!g_shell.rds)
 		ft_wordparser();
 	else
