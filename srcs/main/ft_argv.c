@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 12:32:48 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 18:34:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,6 @@ int	ft_count_arr(char *str)
 	return (count);
 }
 
-static void	ft_skip_rds(char *str, int *i)
-{
-	char	*res;
-
-	while (str[*i] == '>')
-		*i = *i + 1;
-	*i = *i + ft_iswhitespaces(str + *i);
-	res = ft_no_quotes_str(str, i, " ");
-	*i = *i + 1;
-	free(res);
-}
-
 static char	**ft_make_array(char **arr, char *str)
 {
 	int	i;
@@ -71,7 +59,9 @@ static char	**ft_make_array(char **arr, char *str)
 		if (str[i] != ' ')
 		{
 			if (str[i] == '<' || str[i] == '>')
-				ft_skip_rds(str, &i);
+				ft_skip_rd(str, &i);
+			if (str[i] == '\0')
+				break ;
 			arr[count] = ft_no_quotes_str(str, &i, " ");
 			if (!arr[count])
 				return (NULL);
@@ -97,9 +87,9 @@ char	**ft_argv(char *s)
 		return (NULL);
 	split = (char **)malloc((g_shell.argc + 2) * sizeof(char *));
 	if (!split)
-		ft_malloc_fail();
+		ft_malloc_fail("ft_argv, split malloc");
 	split = ft_make_array(split, s);
 	if (!split)
-		ft_malloc_fail();
+		ft_malloc_fail("ft_argv, split, ft_make_array");
 	return (split);
 }

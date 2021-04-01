@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/25 21:41:05 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 18:12:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_add_arr_front(char **arr, char *input)
 	i = 0;
 	new_argv = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!new_argv)
-		ft_malloc_fail();
+		ft_malloc_fail("ft_add_arr_front");
 	new_argv[i] = ft_strdup(input);
 	free(input);
 	while (arr[i] != (char *) 0)
@@ -57,7 +57,7 @@ char	**ft_add_arr_back(char **arr, char *input)
 	i = 0;
 	new_argv = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!new_argv)
-		ft_malloc_fail();
+		ft_malloc_fail("ft_add_arr_back()");
 	while (arr[i] != (char *) 0)
 	{
 		new_argv[i] = ft_strdup(arr[i]);

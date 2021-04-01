@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/26 17:07:55 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 16:31:46 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 18:12:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	**ft_path_array(char *str, char *cmd)
 		return (NULL);
 	pathcmd = (char **)malloc(sizeof(char *) * (count + 2));
 	if (!pathcmd)
-		ft_malloc_fail();
+		ft_malloc_fail("ft_path_array");
 	pathcmd[count + 1] = (char *) 0;
 	pathcmd = fill_path(pathcmd, str);
 	free(str);

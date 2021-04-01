@@ -6,15 +6,17 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 21:15:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 17:04:16 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/01 18:15:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_malloc_fail(void)
+void	ft_malloc_fail(char *str)
 {
-	ft_printf_err("Error\nMalloc failed. Exiting program.\n");
+	ft_printf_err("Error\nMalloc failed.\n");
+	ft_printf_err("Error occured in: %s\n", str);
+	ft_printf_err("Exiting program.\n");
 	exit(1);
 }
 

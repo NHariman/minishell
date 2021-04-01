@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 08:12:33 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/01 16:52:56 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/01 18:47:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	check_bs(char *line)
 	{
 		if (line[i] == '\\')
 		{
-			ft_printf("minishell: syntax error near unexpected token '\'\n");
-			g_shell.exit_code = 1;
+			ft_printf("minishell: syntax error near unexpected token '\\\n");
+			g_shell.exit_code = 258;
 			return (-1);
 		}
 		i++;
@@ -30,8 +30,25 @@ int	check_bs(char *line)
 	return (0);
 }
 
+static int	check_qts(char *line)
+{
+	t_qts	qts;
+
+	ft_set_qts(&qts);
+	ft_qt_start(line, &qts);
+	if (qts.dq % 2 != 0 || qts.sq % 2 != 0)
+	{
+		ft_printf_err("Error\nHanging quotes. Parsing failed.\n");
+		g_shell.exit_code = 258;
+		return (1);
+	}
+	return (0);
+}
+
 int	syntax_check(char *line)
 {
+	if (check_qts(line))
+		return (g_shell.exit_code);
 	if (check_end(line))
 		return (g_shell.exit_code);
 	else if (check_red_1(line) || check_red_2(line) || check_bs(line))

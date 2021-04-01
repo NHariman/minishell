@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/29 18:24:20 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 16:24:03 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/01 18:33:45 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static char	*ft_get_rd(char *str, int *i)
 {
 	int		start;
 	char	*rdstr;
+	char	*tmp;
 
 	start = *i;
 	while (str[*i] == '>' || str[*i] == '<')
@@ -63,8 +64,9 @@ static char	*ft_get_rd(char *str, int *i)
 		*i = *i + 1;
 	while (!ft_strchr(" ><", str[*i])
 		|| !(ft_strchr(" ><", str[*i]) && ft_backslash_check(str, *i) % 2 == 0))
-		*i = *i + 1;
+		tmp = ft_no_quotes_str(str, i, " ");
 	rdstr = ft_substr(str, start, *i - start);
+	free(tmp);
 	return (rdstr);
 }
 
@@ -100,8 +102,14 @@ char	*ft_get_rdin(char *str)
 		return (NULL);
 	rdarr = (char **)malloc(sizeof(char *) * (len + 2));
 	if (!rdarr)
-		ft_malloc_fail();
+		ft_malloc_fail("ft_get_rdin");
 	rdarr = ft_fill_rdarr(str, rdarr, len);
+	int i = 0;
+	while (rdarr[i] != (char *) 0)
+	{
+		ft_printf("rdarr[%i]: %s\n", i, rdarr[i]);
+		i++;
+	}
 	rdstr = ft_make_str(rdarr);
 	ft_free_array(rdarr, ft_arrlen(rdarr));
 	return (rdstr);
