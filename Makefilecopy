@@ -6,12 +6,12 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2021/04/01 12:18:36 by nhariman      ########   odam.nl          #
+#    Updated: 2021/04/03 22:24:45 by ybakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-# COMPILE = gcc
-COMPILE = clang
+COMPILE = gcc
+# COMPILE = clang
 FLAGS = -Wall -Werror -Wextra
 MINISHELL =     main.c \
                 srcs/main/gnl_utils.c \
@@ -74,7 +74,7 @@ NAME = minishell
 all: $(NAME)
 
 $(NAME): $(OMINISHELL) $(OECHO) srcs/libft/libft.a
-	@$(COMPILE) $(OMINISHELL) $(OECHO) -g -fsanitize=address srcs/libft/libft.a -o $@
+	@$(COMPILE) $(OMINISHELL) $(OECHO) -g srcs/libft/libft.a -o $@
 	@chmod 311 ./minishell
 
 srcs/libft/libft.a:
