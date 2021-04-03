@@ -21,7 +21,7 @@ int	check_bs(char *line)
 	{
 		if (line[i] == '\\')
 		{
-			ft_printf("minishell: syntax error near unexpected token '\\\n");
+			ft_printf_err("minishell: syntax error near unexpected token '\\\'\n");
 			g_shell.exit_code = 258;
 			return (-1);
 		}
@@ -51,7 +51,7 @@ int	syntax_check(char *line)
 		return (g_shell.exit_code);
 	if (check_end(line))
 		return (g_shell.exit_code);
-	else if (check_red_1(line) || check_red_2(line) || check_bs(line))
+	else if (check_red_one(line) || check_red_two(line) || check_bs(line))
 		return (g_shell.exit_code);
 	return (0);
 }

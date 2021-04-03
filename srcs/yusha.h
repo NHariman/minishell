@@ -32,8 +32,8 @@ typedef struct s_struct_rd
 
 //synax
 int		syntax_check(char *line);
-int		check_red_1(char *line);
-int		check_red_2(char *line);
+int		check_red_one(char *line);
+int		check_red_two(char *line);
 int		rd_syntax_error(char *line, int i, int len);
 int		rd_syntax_error_left(char *line, int i);
 int		rd_syntax_error_right(char *line, int i);

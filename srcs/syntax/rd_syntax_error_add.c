@@ -43,11 +43,11 @@ int	rd_syntax_error_left(char *line, int i)
 	else
 		return (0);
 	if (len == 1)
-		ft_printf("bash: syntax error near unexpected token `<'\n");
+		ft_printf_err("minishell: syntax error near unexpected token `<'\n");
 	if (len == 2)
-		ft_printf("bash: syntax error near unexpected token `<<'\n");
+		ft_printf_err("minishell: syntax error near unexpected token `<<'\n");
 	if (len >= 3)
-		ft_printf("bash: syntax error near unexpected token `<<<'\n");
+		ft_printf_err("minishell: syntax error near unexpected token `<<<'\n");
 	return (-1);
 }
 
@@ -69,8 +69,8 @@ int	rd_syntax_error_right(char *line, int i)
 	else
 		return (0);
 	if (len >= 1 && len <= 2)
-		ft_printf("bash: syntax error near unexpected token `>'\n");
+		ft_printf_err("minishell: syntax error near unexpected token `>'\n");
 	else
-		ft_printf("bash: syntax error near unexpected token `>>'\n");
+		ft_printf_err("minishell: syntax error near unexpected token `>>'\n");
 	return (-1);
 }

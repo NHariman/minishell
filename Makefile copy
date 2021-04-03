@@ -10,13 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-COMPILE = gcc
-# COMPILE = clang
-
-FLAGS = -Wall -Werror -Wextra
-
-COMPILE = gcc
-# COMPILE = clang
+# COMPILE = gcc
+COMPILE = clang
 FLAGS = -Wall -Werror -Wextra
 MINISHELL =     main.c \
                 srcs/main/gnl_utils.c \
@@ -56,18 +51,13 @@ MINISHELL =     main.c \
                 srcs/export/ft_update_env.c \
                 srcs/unset/ft_unset.c 
 
-ECHO =          srcs/rd/rd_add_environment.c \
-                srcs/rd/rd_add_variable.c \
-                srcs/rd/rd_check_nflag.c \
-                srcs/rd/rd_check.c \
-                srcs/rd/rd_clean_echo.c \
-                srcs/rd/rd_echo.c \
-                srcs/rd/rd_files.c \
-                srcs/rd/rd_get_variable.c \
-                srcs/rd/rd_loop.c\
-                srcs/rd/rd_set_value.c\
-                srcs/rd/re_direct.c\
-                srcs/rd/rd_skip_character.c \
+ECHO =          srcs/rd/check_redirect.c \
+                srcs/rd/rd_fill_file.c \
+                srcs/rd/rd_get_file_name.c \
+                srcs/rd/rd_get_nb.c \
+                srcs/rd/rd_loop.c \
+                srcs/rd/rd_main.c \
+                srcs/rd/rd_open_file.c\
                 srcs/syntax/rd_syntax_error_add.c \
                 srcs/syntax/syntax_check.c\
                 srcs/syntax/check_end.c \
