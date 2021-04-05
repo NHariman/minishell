@@ -14,7 +14,7 @@
 
 int	ft_semicol_err(void)
 {
-	ft_printf("minishell: syntax error near unexpected token `;'\n");
+	ft_printf_err("minishell: syntax error near unexpected token `;'\n");
 	g_shell.exit_code = 258;
 	return (1);
 }

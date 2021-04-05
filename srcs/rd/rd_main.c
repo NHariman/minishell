@@ -23,8 +23,7 @@ void	rd_main(char *str)
 	rd->i = 0;
 	rd->error = 0;
 	rd->str = ft_strtrim(str, "\n");
-	rd->file = ft_strdup("");
-	printf("string == [%s]\n", rd->str);	
+	rd->file = ft_strdup("");	
 	if (get_check_redirect(rd) > 0)
 		g_shell.exit_code = -1;
 	else if (rd_loop(rd) > 0)
