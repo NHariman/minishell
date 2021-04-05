@@ -30,7 +30,8 @@ TODO: LEAKS CHECK
 [ ] check for file descriptor leaks in pipes
 [ ] check for leaks in new env expansion code
 [ ] check if redirects dont leak file descriptors
-[ ] fix error message when \ is called. missing a quotation mark at the end (syntax_check.c)
+[X] fix error message when \ is called. missing a quotation mark at the end (syntax_check.c)
 [X] no numbers in function names
 [X] change ft_printf to ft_printf_err for the error message 
-[X] change error message from Bash: to minishell: (edited) 
+[X] change error message from Bash: to minishell: (edited)
+[X] remove printf in ft_get_rdin, lines 107 to 112
