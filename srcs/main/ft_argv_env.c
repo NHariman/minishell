@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 11:34:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 14:59:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/05 14:47:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	make_argv_rd(char *line)
 	tmp = ft_argv(new_line + i
 			+ ft_iswhitespaces(new_line + i + 1));
 	if (!tmp)
-		g_shell.argv = empty_array(cmd);
+		g_shell.argv = ft_empty_array(cmd);
 	else
 		g_shell.argv = ft_add_arr_front(tmp, cmd);
 	g_shell.rds = ft_get_rdin(new_line);

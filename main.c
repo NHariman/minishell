@@ -6,32 +6,12 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/01 18:14:56 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/05 13:55:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "srcs/minishell.h"
 #include <stdio.h>
-
-char	**ft_arrdup(char **arr)
-{
-	int		len;
-	char	**newarr;
-	int		i;
-
-	i = 0;
-	len = ft_arrlen(arr);
-	newarr = (char **)malloc(sizeof(char *) * (len + 1));
-	if (!newarr)
-		ft_malloc_fail("ft_arrdup");
-	while (arr[i] != (char *) 0)
-	{
-		newarr[i] = ft_strdup(arr[i]);
-		i++;
-	}
-	newarr[i] = (char *) 0;
-	return (newarr);
-}
 
 void	prompt(void)
 {
