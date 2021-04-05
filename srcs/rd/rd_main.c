@@ -29,5 +29,6 @@ void	rd_main(char *str)
 	else if (rd_loop(rd) > 0)
 		g_shell.exit_code = -1;
 	free(rd->str);
+	free(rd->file);
 	free(rd);
 }

@@ -28,6 +28,5 @@ int	rd_loop(t_struct_rd *rd)
 		rd_open_file(rd);
 	}
 	rd_open_file_fill(rd);
-	free(rd->file);
 	return (rd->error);
 }
