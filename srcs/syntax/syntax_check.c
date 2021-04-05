@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 08:12:33 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/01 18:47:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/05 22:15:38 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	check_qts(char *line)
 	ft_qt_start(line, &qts);
 	if (qts.dq % 2 != 0 || qts.sq % 2 != 0)
 	{
-		ft_printf_err("Error\nHanging quotes. Parsing failed.\n");
+		ft_printf_err("minishell: syntax error, hanging quotes\n");
 		g_shell.exit_code = 258;
 		return (1);
 	}

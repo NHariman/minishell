@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 11:34:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/05 14:47:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/05 23:21:49 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ static void	make_new_str(char *line, t_trim *trim)
 		if (ft_strchr("\'\"", line[i])
 			&& ft_backslash_check(line, i) % 2 == 0)
 			ft_skip_quotes(line, &i, line[i]);
-		if (line[i] == '$' && !ft_strchr(" ;\n", line[i + 1])
+		else if (line[i] == '$' && !ft_strchr(" ;\n", line[i + 1])
 			&& line[i + 1] != '\0')
 			ft_parse_dollar(line, &i, trim);
-		i++;
+		else
+			i++;
 	}
 }
 
@@ -75,7 +76,10 @@ void	make_argv_rd(char *line)
 	if (!tmp)
 		g_shell.argv = ft_empty_array(cmd);
 	else
+	{
 		g_shell.argv = ft_add_arr_front(tmp, cmd);
+		ft_free_array(tmp, ft_arrlen(tmp));
+	}
 	g_shell.rds = ft_get_rdin(new_line);
 	free(new_line);
 }
