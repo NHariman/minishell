@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/05 15:00:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/05 23:41:31 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ static char	*ft_get_var(char *str, int *i)
 	start = *i;
 	if (!str[start])
 		return (NULL);
-	while ((!ft_isspecial(str[*i]) || str[*i] != '_')
-		&& str[*i] != ' ' && str[*i] != '\0' && str[*i] != '\"')
+	while (ft_isalpha(str[*i]) || str[*i] == '_')
 		*i = *i + 1;
 	var = ft_substr(str, start, *i - start);
 	return (var);
@@ -74,6 +73,8 @@ char	*ft_find_variable(char *str, int *i)
 	output = ft_find_env_variable(var);
 	if (output == NULL)
 		output = ft_strdup("");
+	if (var)
+		free(var);
 	return (output);
 }
 

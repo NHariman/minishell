@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 22:09:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 18:14:14 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/05 23:39:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void	ft_pipe_splitter(char *str)
 	pipes = ft_fill_prompts(pipes, str, len, '|');
 	pipes[len] = (char *) 0;
 	loop_pipe(pipes);
+	free(pipes);
 }

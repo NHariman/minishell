@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 11:02:15 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 18:59:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/05 22:14:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	is_token(char c)
 
 static int	check_front_token(char *line, int i)
 {
+	i--;
 	while(line[i] == ' ' && i != 0)
 		i--;
 	if (is_token(line[i]))
