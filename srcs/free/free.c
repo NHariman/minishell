@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 21:15:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 18:15:44 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/05 13:58:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,6 @@ void	ft_malloc_fail(char *str)
 	ft_printf_err("Error occured in: %s\n", str);
 	ft_printf_err("Exiting program.\n");
 	exit(1);
-}
-
-void	ft_free_array(char **arr, int len)
-{
-	int	i;
-
-	i = 0;
-	if (!arr || arr[0] == (char *) 0)
-		return ;
-	while (i < len)
-	{
-		if (arr[i])
-			free(arr[i]);
-		i++;
-	}
-	if (arr)
-		free(arr);
-	arr = NULL;
 }
 
 void	ft_clear_shell(void)

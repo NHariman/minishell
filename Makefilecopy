@@ -1,12 +1,16 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
+#    Makefile-APR1-NIKS                                 :+:    :+:             #
 #                                                      +:+                     #
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
+<<<<<<< HEAD:Makefilecopy
 #    Updated: 2021/04/03 22:24:45 by ybakker       ########   odam.nl          #
+=======
+#    Updated: 2021/04/05 14:04:28 by nhariman      ########   odam.nl          #
+>>>>>>> main:Makefile-APR1-NIKS
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +33,6 @@ MINISHELL =     main.c \
                 srcs/quotations/quotations_parser.c \
                 srcs/quotations/no_quotations_parser.c \
                 srcs/subparsers/ft_get_rdin.c \
-                srcs/subparsers/ft_invalid_line.c \
                 srcs/subparsers/ft_make_prompts.c \
                 srcs/pipe/ft_pipe_splitter.c \
                 srcs/pipe/parent_and_child.c \
@@ -57,7 +60,11 @@ ECHO =          srcs/rd/check_redirect.c \
                 srcs/rd/rd_get_nb.c \
                 srcs/rd/rd_loop.c \
                 srcs/rd/rd_main.c \
+<<<<<<< HEAD:Makefilecopy
                 srcs/rd/rd_open_file.c\
+=======
+                srcs/rd_open_file.c \
+>>>>>>> main:Makefile-APR1-NIKS
                 srcs/syntax/rd_syntax_error_add.c \
                 srcs/syntax/syntax_check.c\
                 srcs/syntax/check_end.c \
