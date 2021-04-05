@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 18:10:36 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/05 14:00:37 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void			ft_set_qts(t_qts *qts);
 void			ft_qt_line(char *line, t_qts *qts, int *i);
 void			ft_qt_start(char *line, t_qts *qts);
 int				ft_backslash_check(char *line, int i);
-int				ft_invalid_line(char *str, char token);
 int				check_end(char *line);
 char			**ft_fill_prompts(char **prompts, char *str,
 					int len, char token);
@@ -79,12 +78,6 @@ char			*ft_make_single_char_str(char c);
 void			make_argv_rd(char *line);
 char			**ft_argv(char *str);
 int				ft_count_arr(char *str);
-char			**ft_arrdup(char **arr);
-int				ft_arrlen(char **arr);
-char			**ft_add_arr_front(char **arr, char *input);
-char			**ft_add_arr_back(char **arr, char *input);
-void			ft_free_array(char **arr, int len);
-char			**empty_array(char *cmd);
 void			ft_malloc_fail(char *str);
 char			*ft_get_rdin(char *str);
 
