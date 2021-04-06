@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/06 12:32:37 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,21 @@ static char	*ft_get_path(void)
 	if (g_shell.argv[1] == (char *) 0)
 		newdir = ft_find_envvar("HOME");
 	else
-		newdir = g_shell.argv[1];
+		newdir = ft_strdup(g_shell.argv[1]);
 	return (newdir);
 }
 
-static void	ft_update_env_cd(char *olddir, char *newdir)
+static void	ft_update_env_cd(char *olddirpath, char *newdirpath)
 {
-	int		i;
+	char	*olddir;
+	char	*newdir;
 
-	i = 0;
-	while (g_shell.env[i] != (char *) 0)
-	{
-		if (!ft_strncmp(g_shell.env[i], "OLDPWD=", ft_strlen("OLDPWD=")))
-			g_shell.env[i] = ft_strjoin("OLDPWD=", olddir);
-		else if (!ft_strncmp(g_shell.env[i], "PWD=", ft_strlen("PWD=")))
-			g_shell.env[i] = ft_strjoin("PWD=", newdir);
-		i++;
-	}
+	olddir = ft_strjoin("OLDPWD=", olddirpath);
+	newdir = ft_strjoin("PWD=", newdirpath);
+	ft_update_env(olddir);
+	ft_update_env(newdir);
+	free(olddir);
+	free(newdir);
 }
 
 void	ft_cd(void)
@@ -63,6 +61,7 @@ void	ft_cd(void)
 	errno = 0;
 	newdir = ft_get_path();
 	check = chdir(newdir);
+	free(newdir);
 	if (check == -1)
 	{
 		ft_printf_err("minishell: cd: %s: %s\n",

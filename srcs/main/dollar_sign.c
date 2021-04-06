@@ -6,11 +6,20 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/05 23:41:31 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/06 19:26:45 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static char	*return_exitcode(char *var)
+{
+	char	*exit;
+
+	exit = ft_itoa(g_shell.exit_code);
+	free(var);
+	return (exit);
+}
 
 static char	*ft_find_env_variable(char *var)
 {
@@ -22,7 +31,7 @@ static char	*ft_find_env_variable(char *var)
 	if (var == NULL)
 		return (NULL);
 	if (!ft_strncmp(var, "?", ft_strlen(var)))
-		return (ft_itoa(g_shell.exit_code));
+		return (return_exitcode(var));
 	tmp = gnl_strjoin(var, "=");
 	while (g_shell.env[i])
 	{
@@ -73,8 +82,6 @@ char	*ft_find_variable(char *str, int *i)
 	output = ft_find_env_variable(var);
 	if (output == NULL)
 		output = ft_strdup("");
-	if (var)
-		free(var);
 	return (output);
 }
 

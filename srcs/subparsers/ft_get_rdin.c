@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/29 18:24:20 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 18:33:45 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/06 15:20:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,6 @@ char	*ft_get_rdin(char *str)
 	if (!rdarr)
 		ft_malloc_fail("ft_get_rdin");
 	rdarr = ft_fill_rdarr(str, rdarr, len);
-	int i = 0;
-	while (rdarr[i] != (char *) 0)
-	{
-		ft_printf("rdarr[%i]: %s\n", i, rdarr[i]);
-		i++;
-	}
 	rdstr = ft_make_str(rdarr);
 	ft_free_array(rdarr, ft_arrlen(rdarr));
 	return (rdstr);

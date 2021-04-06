@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 13:44:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/05 17:48:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/06 15:30:14 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,6 @@ char	*ft_no_quotes_str(char *str, int *i, char *stop)
 		if (ft_strchr("\'\"", str[*i])
 			&& ft_backslash_check(str, *i) % 2 == 0)
 			check_quotes(str, i, &trim);
-		else if (ft_strchr("><", str[*i])
-			&& ft_backslash_check(str, *i) % 2 == 0)
-			ft_skip_redirections(str, i, &trim);
 		else
 			ft_nqts_nqts_strjoin(str, i, &trim);
 	}

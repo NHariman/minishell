@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/05 14:00:37 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/06 23:00:39 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_shell
 	int			exit_code;
 	int			fd;
 	int			fd_r;
+	char		*home;
 	int			argc;
 	char		**argv;
 	char		*rds;
@@ -97,7 +98,6 @@ char			*ft_doublequotes_str(char *str, int *i);
 char			*ft_no_quotes_str(char *str, int *i, char *stop);
 char			*ft_singlequotes_str(char *str, int *i);
 int				ft_qt_check(char *line, int *i, int type, t_qts *qts);
-void			ft_skip_redirections(char *str, int *i, t_trim *trim);
 void			ft_skip_rd(char *str, int *i);
 
 /*
@@ -149,8 +149,9 @@ char			*ft_find_varname(char *str);
 ** pipes
 */
 
-void			pipe_child(int *p, char **pipes, int i, int fd_in);
-void			pipe_parent(int *fd_in, int *i, int *p, char **pipes);
+void			pipe_child(int **p, char **pipes, int i, int fd_in);
+void			pipe_parent(int *fd_in, int *i, int **p, char **pipes);
+void			free_p(int **p, int len);
 
 /*
 ** unset

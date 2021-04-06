@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/25 18:30:19 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 12:07:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/06 12:33:47 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,13 @@
 
 static void	update_env_shlvl(int level)
 {
-	int		i;
-	char	*name;
 	char	*lvl;
 	char	*new_str;
 
-	i = 0;
 	lvl = ft_itoa(level);
 	new_str = ft_strjointwo("SHLVL=", lvl);
-	while (g_shell.env[i])
-	{
-		name = ft_find_varname(g_shell.env[i]);
-		if (ft_strcmp(name, "SHLVL") == 0)
-		{
-			free(g_shell.env[i]);
-			g_shell.env[i] = ft_strdup(new_str);
-			free(new_str);
-			free(name);
-			return ;
-		}
-		if (name)
-			free(name);
-		i++;
-	}
+	ft_update_env(new_str);
+	free(new_str);
 }
 
 void	increase_shlvl(void)
