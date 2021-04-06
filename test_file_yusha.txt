@@ -9,6 +9,7 @@ echo hello <<< >>> file1
 echo hello >>> file1
 echo hello >> > file1
 echo hello > > file1
+echo hello >> >file1
 
 echo hello > [echo hello >]
 echo hello >;
@@ -16,6 +17,8 @@ echo hello >;;;;;;;;
 //bash: syntax error near unexpected token `;;'
 echo hello >     "hello   fello"
 
+[ ] echo hello ?> "file is ok here"
+[ ] echo hello <<< file1
 echo hello > file1 echo hello > file2
 
 
