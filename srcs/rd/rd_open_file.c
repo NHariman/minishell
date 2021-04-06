@@ -23,7 +23,7 @@ static void	rd_file_error(t_struct_rd *rd)
 	}
 	else if (rd->str[rd->i] && rd->str[rd->i] != '\n' && rd->error == 0)
 	{
-		if (rd->nb == 1 && rd->nb == 2)
+		if (rd->nb == 1 || rd->nb == 2)
 			close(rd->fd);
 		else if (rd->nb == 3)
 			close(rd->fd_rd);
