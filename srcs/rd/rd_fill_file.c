@@ -20,7 +20,6 @@ static void	rd_one(t_struct_rd *rd)
 	int		child_status;
 
 	tpid = 0;
-	g_shell.fd = rd->fd;
 	child_pid = fork();
 	if (child_pid == 0)
 	{
@@ -46,7 +45,6 @@ static void	rd_two(t_struct_rd *rd)
 	int		child_status;
 
 	tpid = 0;
-	g_shell.fd_r = rd->fd_rd;
 	child_pid = fork();
 	if (child_pid == 0)
 	{
@@ -70,9 +68,11 @@ void	rd_open_file_fill(t_struct_rd *rd)
 	if (rd->fd != -1)
 	{
 		rd_one(rd);
+		close(rd->fd);
 	}
 	else if (rd->fd_rd != -1)
 	{
 		rd_two(rd);
+		close(rd->fd_rd);
 	}
 }
