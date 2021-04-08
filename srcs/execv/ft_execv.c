@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 16:42:26 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/08 23:43:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_run_path(char **pathcmd, char **argv)
 		i++;
 	}
 	ft_printf_err("minishell: %s: command not found\n", argv[0]);
-	exit(1);
+	return (1);
 }
 
 static void	ft_execute_path(char **pathcmd, char **argv)
@@ -83,7 +83,7 @@ int	ft_execve(char **argv)
 		execve(argv[0], argv, g_shell.env);
 		ft_printf_err("minishell: %s: %s\n", argv[0],
 			strerror(errno));
-		exit(1);
+		return (1);
 	}
 	else
 	{
