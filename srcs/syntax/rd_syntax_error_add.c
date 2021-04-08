@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/25 15:02:41 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/26 16:26:05 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/08 08:51:09 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	rd_syntax_error(char *line, int i, int len)
 		|| rd_syntax_error_left(line, i) == -1)
 	{
 		g_shell.exit_code = 258;
-		return (-1);		
+		return (-1);
 	}
 	return (0);
 }

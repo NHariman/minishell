@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/01 14:42:32 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/08 08:51:31 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	rd_open_file(t_struct_rd *rd)
 		close(rd->fd_rd);
 	if (ft_strcmp(rd->file, "") == 0)
 	{
-		ft_printf_err("minishell: syntax error near unexpected token `newline'\n");
+		ft_printf_err("minishell: syntax error ");
+		ft_printf_err("near unexpected token `newline'\n");
 		g_shell.exit_code = 258;
 		rd->error = 1;
 	}
@@ -52,5 +53,6 @@ void	rd_open_file(t_struct_rd *rd)
 		else if (rd->nb == 3)
 			rd->fd_rd = open(rd->file, O_RDWR);
 	}
-	rd_file_error(rd);
+	if (rd->error != 1)
+		rd_file_error(rd);
 }
