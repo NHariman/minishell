@@ -39,7 +39,7 @@ static char	*ft_get_path(void)
 		if (!newdir)
 		{
 			g_shell.exit_code = 1;
-			ft_printf("minishell: cd: OLDPWD not set\n");
+			ft_printf_err("minishell: cd: OLDPWD not set\n");
 		}
 		else
 		{
