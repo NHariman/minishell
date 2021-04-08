@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/06 15:29:33 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/08 18:20:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	**ft_make_array(char **arr, char *str)
 				ft_skip_rd(str, &i);
 			if (str[i] == '\0')
 				break ;
-			arr[count] = ft_no_quotes_str(str, &i, " <>|;");
+			arr[count] = ft_no_quotes_str(str, &i, " <>");
 			if (!arr[count])
 				return (NULL);
 			count++;

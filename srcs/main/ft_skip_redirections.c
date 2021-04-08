@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/28 20:57:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/06 15:28:10 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/08 18:18:49 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_skip_rd(char *str, int *i)
 	char	*res;
 
 	while (str[*i] == '>')
+		*i = *i + 1;
+	while (str[*i] == '<')
 		*i = *i + 1;
 	while (str[*i] == ' ')
 		*i = *i + 1;
