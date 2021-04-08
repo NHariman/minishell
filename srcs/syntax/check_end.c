@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 11:02:15 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/08 08:50:56 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/08 15:57:20 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_token(char c)
 	return (0);
 }
 
-static int	check_front_token(char *line, int i)
+int	check_front_token(char *line, int i)
 {
 	i--;
 	while (line[i] == ' ' && i != 0)
@@ -43,8 +43,9 @@ int	check_end(char *line)
 	i = 0;
 	if (line[0] == ';')
 		return (ft_semicol_err());
-	while (line[i] != '\0')
+	while (line[i])
 	{
+		
 		if (line[i] == ';')
 		{
 			if (check_front_token(line, i))

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/08 08:51:31 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/08 16:44:27 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,12 @@ void	rd_open_file(t_struct_rd *rd)
 		close(rd->fd);
 	else if (rd->fd_rd != -1 && rd->nb == 3)
 		close(rd->fd_rd);
-	if (ft_strcmp(rd->file, "") == 0)
-	{
-		ft_printf_err("minishell: syntax error ");
-		ft_printf_err("near unexpected token `newline'\n");
-		g_shell.exit_code = 258;
-		rd->error = 1;
-	}
-	else
-	{
-		if (rd->nb == 1)
-			rd->fd = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
-		else if (rd->nb == 2)
-			rd->fd = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
-		else if (rd->nb == 3)
-			rd->fd_rd = open(rd->file, O_RDWR);
-	}
+	if (rd->nb == 1)
+		rd->fd = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
+	else if (rd->nb == 2)
+		rd->fd = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
+	else if (rd->nb == 3)
+		rd->fd_rd = open(rd->file, O_RDWR);
 	if (rd->error != 1)
 		rd_file_error(rd);
 }

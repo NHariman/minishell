@@ -6,13 +6,13 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/25 12:26:27 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/26 16:24:33 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/08 15:44:38 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static	int	check_red_one_error(int len)
+int	check_red_one_error(int len)
 {
 	if (len == 3)
 	{
@@ -58,7 +58,7 @@ int	check_red_one(char *line)
 	return (0);
 }
 
-static	int	check_red_two_error(int len)
+int	check_red_two_error(int len)
 {
 	if (len == 1 || len == 3)
 		return (0);

@@ -65,7 +65,7 @@ ECHO ' and "
 	output: $PATH
 
 REDIRECTIONS
-[ ] < (REDIRECT INPUT) should work like in bash except for the file descriptor aggregation
+[X] < (REDIRECT INPUT) should work like in bash except for the file descriptor aggregation
 	ie. cat < file.txt
 	output: whatever's in file.txt gets cat'd.
 [Y] > (REDIRECT OUTPUT) should work like in bash except for the file descriptor aggregation
@@ -90,9 +90,9 @@ DOLLAR QUESTION MARK ($?)
 			returns 1 if last executed command is false
 
 THE CONTROLS. (CRTL-*)
-[ ] CTRL-C terminates program, sends a SIGINT signal (kill -INT 888 or forcekill: kill -9 888 with 888 as your process ID)
-[ ] CTRL-D ending a file (EßOF), closes the connection/closes the bash g_shell.
-[ ] CTRL-\ quit command, causes program to terminate and dump core
+[X] CTRL-C terminates program, sends a SIGINT signal (kill -INT 888 or forcekill: kill -9 888 with 888 as your process ID)
+[X] CTRL-D ending a file (EßOF), closes the connection/closes the bash g_shell.
+[X] CTRL-\ quit command, causes program to terminate and dump core
 
 REFERENCES:
 https://flaviocopes.com/linux-command-echo/ 
