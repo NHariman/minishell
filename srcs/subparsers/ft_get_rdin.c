@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/29 18:24:20 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/06 15:20:16 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/08 18:26:53 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ static int	ft_count_rds(char *str)
 	count = 0;
 	while (str[i] != '\0')
 	{
-		if (ft_strchr("><", str[i]) && ft_backslash_check(str, i) % 2 == 0)
+		if (ft_strchr("\'\"", str[i]) && ft_backslash_check(str, i) % 2 == 0)
+			ft_skip_quotes(str, &i, str[i]);
+		else if (ft_strchr("><", str[i]) && ft_backslash_check(str, i) % 2 == 0)
 		{
 			ft_skip_rd(str, &i);
 			count++;
@@ -79,7 +81,9 @@ static char	**ft_fill_rdarr(char *str, char **rdarr, int len)
 	count = 0;
 	while (str[i] != '\0' && count < len)
 	{
-		if (ft_strchr("<>", str[i]) && ft_backslash_check(str, i) % 2 == 0)
+		if (ft_strchr("\'\"", str[i]) && ft_backslash_check(str, i) % 2 == 0)
+			ft_skip_quotes(str, &i, str[i]);
+		else if (ft_strchr("<>", str[i]) && ft_backslash_check(str, i) % 2 == 0)
 		{
 			rdarr[count] = ft_get_rd(str, &i);
 			count++;
