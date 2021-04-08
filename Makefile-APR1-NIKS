@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         ::::::::             #
-#    Makefile-APR1-NIKS                                 :+:    :+:             #
+#    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2021/04/05 14:04:28 by nhariman      ########   odam.nl          #
+#    Updated: 2021/04/08 23:34:17 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ MINISHELL =     main.c \
                 srcs/main/ft_argv.c \
                 srcs/main/ft_prompts.c \
                 srcs/main/dollar_sign.c \
+                srcs/main/trim_rd.c \
                 srcs/main/ft_skip_redirections.c \
                 srcs/quotations/ft_skip_quotes.c \
                 srcs/quotations/quotation_handler.c \
@@ -61,11 +62,14 @@ ECHO =          srcs/rd/check_redirect.c \
                 srcs/rd/rd_get_nb.c \
                 srcs/rd/rd_loop.c \
                 srcs/rd/rd_main.c \
-                srcs/rd_open_file.c \
+                srcs/rd/rd_open_file.c \
                 srcs/syntax/rd_syntax_error_add.c \
                 srcs/syntax/syntax_check.c\
                 srcs/syntax/check_end.c \
                 srcs/syntax/check_red.c \
+                srcs/syntax/syntax_error_check.c \
+                srcs/syntax/syntax_full_check.c \
+                srcs/syntax/syntax_newline.c \
                 srcs/signals/ft_signals.c
 
 

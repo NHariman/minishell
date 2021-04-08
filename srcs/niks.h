@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/06 23:00:39 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/09 00:00:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void			make_argv_rd(char *line);
 char			**ft_argv(char *str);
 int				ft_count_arr(char *str);
 void			ft_malloc_fail(char *str);
+char			*trim_rd(char *line);
 char			*ft_get_rdin(char *str);
 
 /*
@@ -157,6 +158,7 @@ void			free_p(int **p, int len);
 ** unset
 */
 
+void			ft_delete_env(char *input);
 void			ft_unset(void);
 
 /*

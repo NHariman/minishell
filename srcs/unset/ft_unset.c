@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 18:14:41 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/09 00:01:38 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	**ft_delete_arr_entry(char **arr, char *var)
 	return (newenv);
 }
 
-static void	ft_delete_env(char *input)
+void	ft_delete_env(char *input)
 {
 	char	**newenvp;
 

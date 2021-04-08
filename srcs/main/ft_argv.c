@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/08 18:20:26 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/08 23:40:47 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ int	ft_count_arr(char *str)
 	count = 0;
 	while (str[i] != '\0')
 	{
-		if (ft_strchr("<>", str[i]) && ft_backslash_check(str, i) % 2 == 0)
-			ft_skip_rd(str, &i);
-		else if (str[i] != ' ')
+		if (str[i] != ' ')
 		{
 			ft_skip_through(str, &i);
 			count++;
@@ -58,11 +56,7 @@ static char	**ft_make_array(char **arr, char *str)
 	{
 		if (str[i] != ' ')
 		{
-			if (str[i] == '<' || str[i] == '>')
-				ft_skip_rd(str, &i);
-			if (str[i] == '\0')
-				break ;
-			arr[count] = ft_no_quotes_str(str, &i, " <>");
+			arr[count] = ft_no_quotes_str(str, &i, " ");
 			if (!arr[count])
 				return (NULL);
 			count++;

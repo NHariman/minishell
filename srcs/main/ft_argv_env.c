@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 11:34:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/05 23:21:49 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/08 23:44:52 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,20 @@ static char	*expand_envs(char *line)
 {
 	t_trim	trim;
 	char	*output;
+	char	*rdless;
 
 	trim.start = 0;
 	trim.res = (char *) 0;
-	make_new_str(line, &trim);
+	rdless = trim_rd(line);
+	make_new_str(rdless, &trim);
 	if (trim.res)
 	{
-		stitch_end(line, &trim, ft_strlen(line));
+		stitch_end(rdless, &trim, ft_strlen(rdless));
 		output = ft_strdup(trim.res);
 		free(trim.res);
 	}
 	else
-		output = ft_strdup(line);
+		output = ft_strdup(rdless);
 	return (output);
 }
 
@@ -68,6 +70,7 @@ void	make_argv_rd(char *line)
 	char	*cmd;
 	char	**tmp;
 
+	g_shell.rds = ft_get_rdin(line);
 	new_line = expand_envs(line);
 	i = 0;
 	cmd = get_cmd(new_line, &i);
@@ -80,6 +83,5 @@ void	make_argv_rd(char *line)
 		g_shell.argv = ft_add_arr_front(tmp, cmd);
 		ft_free_array(tmp, ft_arrlen(tmp));
 	}
-	g_shell.rds = ft_get_rdin(new_line);
 	free(new_line);
 }

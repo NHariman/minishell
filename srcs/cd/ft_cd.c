@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/06 12:32:37 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/08 23:56:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,20 @@ static char	*ft_get_path(void)
 	newdir = NULL;
 	if (g_shell.argv[1] == (char *) 0)
 		newdir = ft_find_envvar("HOME");
+	if (g_shell.argv[1][0] == '-')
+	{
+		newdir = ft_find_envvar("OLDPWD");
+		if (!newdir)
+		{
+			g_shell.exit_code = 1;
+			ft_printf("minishell: cd: OLDPWD not set\n");
+		}
+		else
+		{
+			write(1, newdir, ft_strlen(newdir));
+			write(1, "\n", 1);
+		}
+	}
 	else
 		newdir = ft_strdup(g_shell.argv[1]);
 	return (newdir);
@@ -57,9 +71,12 @@ void	ft_cd(void)
 	int		check;
 	char	*olddir;
 
+	g_shell.exit_code = 0;
 	olddir = ft_pwd();
 	errno = 0;
 	newdir = ft_get_path();
+	if (!newdir)
+		return ;
 	check = chdir(newdir);
 	free(newdir);
 	if (check == -1)
@@ -72,7 +89,6 @@ void	ft_cd(void)
 	{
 		newdir = ft_pwd();
 		ft_update_env_cd(olddir, newdir);
-		g_shell.exit_code = 0;
 	}
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/05 13:55:44 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/09 00:01:18 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_printf_err("Too many arguments.\n");
 	g_shell.env = ft_arrdup(envp);
 	increase_shlvl();
+	ft_delete_env("OLDPWD");
 	g_shell.exit_code = 0;
 	while (i == 1)
 	{
