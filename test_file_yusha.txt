@@ -17,8 +17,8 @@ echo hello >;;;;;;;;
 //bash: syntax error near unexpected token `;;'
 echo hello >     "hello   fello"
 
-[ ] echo hello ?> "file is ok here"
-[ ] echo hello <<< file1
+[X] echo hello ?> "file is ok here"
+[X] echo hello <<< file1
 echo hello > file1 echo hello > file2
 
 
