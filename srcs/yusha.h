@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/01 16:27:15 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/08 15:58:12 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ int		check_red_two(char *line);
 int		rd_syntax_error(char *line, int i, int len);
 int		rd_syntax_error_left(char *line, int i);
 int		rd_syntax_error_right(char *line, int i);
+
+int		check_red_one_error(int len);
+int		check_red_two_error(int len);
+int		syntax_full_check(char *line);
+int		check_rd_right(char *line, int i);
+int		check_rd_left(char *line, int i);
+
+int		check_end(char *line);
+int		syntax_full_check(char *line);
+int		check_front_token(char *line, int i);
+int		is_token(char c);
+int		ft_semicol_err(void);
 
 //signals
 void	handle_signals(int sign);

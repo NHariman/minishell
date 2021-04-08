@@ -6,29 +6,11 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/04 08:12:33 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/05 22:15:38 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/08 15:59:44 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	check_bs(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '\\')
-		{
-			ft_printf_err("minishell: syntax error near unexpected token '\\\'\n");
-			g_shell.exit_code = 258;
-			return (-1);
-		}
-		i++;
-	}
-	return (0);
-}
 
 static int	check_qts(char *line)
 {
@@ -49,9 +31,7 @@ int	syntax_check(char *line)
 {
 	if (check_qts(line))
 		return (g_shell.exit_code);
-	if (check_end(line))
-		return (g_shell.exit_code);
-	else if (check_red_one(line) || check_red_two(line) || check_bs(line))
+	if (syntax_full_check(line))
 		return (g_shell.exit_code);
 	return (0);
 }
