@@ -24,7 +24,7 @@ static int	is_token_check(char c, char *line, int i)
 	if (c == '|')
 	{
 		if (syntax_pipes(line, i))
-			return (1);
+			return (-1);
 	}
 	else if (c == ';')
 	{
