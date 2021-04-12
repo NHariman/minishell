@@ -33,7 +33,7 @@ static void	rd_file_error(t_struct_rd *rd)
 void	rd_open_file(t_struct_rd *rd)
 {
 	errno = 0;
-	if (rd->fd != -1)
+	if (rd->fd != -1 && (rd->nb == 1 || rd->nb == 2))
 		close(rd->fd);
 	else if (rd->fd_rd != -1 && rd->nb == 3)
 		close(rd->fd_rd);

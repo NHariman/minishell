@@ -12,11 +12,6 @@
 
 COMPILE = gcc
 # COMPILE = clang
-
-FLAGS = -Wall -Werror -Wextra
-
-COMPILE = gcc
-# COMPILE = clang
 FLAGS = -Wall -Werror -Wextra
 MINISHELL =     main.c \
                 srcs/main/gnl_utils.c \
@@ -70,6 +65,7 @@ ECHO =          srcs/rd/check_redirect.c \
                 srcs/syntax/syntax_error_check.c \
                 srcs/syntax/syntax_full_check.c \
                 srcs/syntax/syntax_newline.c \
+                srcs/syntax/syntax_pipes.c \
                 srcs/signals/ft_signals.c
 
 
