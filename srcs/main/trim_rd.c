@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/08 22:48:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/08 23:49:53 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/13 00:07:53 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	trim_rd_str(char *str, int *i, t_trim *trim)
 {
 	char	*oldstr;
 
-	oldstr = ft_substr(str, trim->start, trim->start - *i);
+	oldstr = ft_substr(str, trim->start, *i - trim->start);
 	ft_skip_rd(str, i);
 	trim->start = *i;
 	if (!trim->res)
@@ -35,7 +35,7 @@ static char	*fill_trim_rd_output(t_trim trim, char *str, int i)
 		output = ft_strdup(str);
 	else
 	{
-		endstr = ft_substr(str, trim.start, trim.start - i);
+		endstr = ft_substr(str, trim.start, i - trim.start);
 		if (endstr)
 		{
 			trim.res = gnl_strjoin(trim.res, endstr);

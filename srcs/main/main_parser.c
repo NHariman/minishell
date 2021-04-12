@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 18:41:25 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/12 23:43:40 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ char	*get_cmd(char *str, int *i)
 		while (cmd != NULL && ft_strchr(cmd, '=') != NULL)
 		{
 			free(cmd);
-			ft_printf("Nonexplicit environment variable adding not supported.\n");
+			ft_printf_err(
+				"Nonexplicit environment variable adding not supported.\n");
 			cmd = NULL;
 			while (str[*i] == ' ')
 				*i = *i + 1;
@@ -62,6 +63,8 @@ void	ft_wordparser(void)
 {
 	if (g_shell.argv[0] == NULL)
 		return ;
+	if (g_shell.rds)
+		free(g_shell.rds);
 	if (!ft_strcmp(g_shell.argv[0], "exit"))
 		ft_exit_minishell(g_shell.argv, ft_arrlen(g_shell.argv));
 	else if (!ft_strcmp(g_shell.argv[0], "export"))
@@ -78,14 +81,23 @@ void	ft_wordparser(void)
 
 void	function_dispatcher(char *line)
 {
+	int	og_std[2];
+
 	make_argv_rd(line);
-	if (!g_shell.rds)
-		ft_wordparser();
-	else
-	{	
-		rd_main(g_shell.rds);
-		free(g_shell.rds);
+	save_std(og_std);
+	g_shell.tmp_std[IN] = og_std[IN];
+	int i = 0;
+	while (g_shell.argv[i] != (char *) 0)
+	{
+		ft_printf("g_shell.argv[%i]: %s\n", i, g_shell.argv[i]);
+		i++;
 	}
+	if (g_shell.rds)
+		rd_main(g_shell.rds);
+	ft_wordparser();
+	restore_std(og_std);
+	if (g_shell.child_pid != -2)
+		wait_for_process();
 }
 
 void	minishell_parser(char *line)

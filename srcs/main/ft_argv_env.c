@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 11:34:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/08 23:44:52 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/12 23:49:02 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static char	*expand_envs(char *line)
 	}
 	else
 		output = ft_strdup(rdless);
+	free(rdless);
 	return (output);
 }
 
@@ -72,6 +73,7 @@ void	make_argv_rd(char *line)
 
 	g_shell.rds = ft_get_rdin(line);
 	new_line = expand_envs(line);
+	ft_printf("new_line = %s\n", new_line);
 	i = 0;
 	cmd = get_cmd(new_line, &i);
 	tmp = ft_argv(new_line + i
