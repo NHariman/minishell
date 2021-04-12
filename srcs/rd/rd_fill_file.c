@@ -78,15 +78,15 @@ static void	do_rd(t_struct_rd *rd)
 		if (rd->fd_rd != -1)
 			dup2(rd->fd_rd, 0);
 		ft_wordparser();
-		if (rd->fd_rd != -1)
-		{
-			close(0);
-			close(rd->fd_rd);
-		}
 		if (rd->fd != -1)
 		{
 			close(1);
 			close(rd->fd);
+		}
+		if (rd->fd_rd != -1)
+		{
+			close(0);
+			close(rd->fd_rd);
 		}
 		exit(0);
 	}
