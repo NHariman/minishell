@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 11:34:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/08 23:44:52 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/13 00:34:30 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static char	*expand_envs(char *line)
 	}
 	else
 		output = ft_strdup(rdless);
+	free(rdless);
 	return (output);
 }
 
