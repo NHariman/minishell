@@ -22,6 +22,7 @@ void	rd_main(char *str)
 	rd->fd_rd = -1;
 	rd->i = 0;
 	rd->error = 0;
+	rd->store = -1;
 	rd->str = ft_strtrim(str, "\n");
 	rd->file = ft_strdup("");
 	if (get_check_redirect(rd) == 0)

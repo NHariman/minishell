@@ -19,6 +19,7 @@ typedef struct s_struct_rd
 {
 	int			i;
 	int			error;
+	int			store;
 	int			fd;
 	int			fd_rd;
 	int			nb;

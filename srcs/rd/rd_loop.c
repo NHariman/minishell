@@ -24,6 +24,8 @@ int	rd_loop(t_struct_rd *rd)
 		rd->error = rd_get_nb(rd);
 		if (rd->error > 0)
 			return (rd->error);
+		if (rd->store == -1)
+			rd->store = rd->nb;
 		rd_get_file_name(rd);
 		rd_open_file(rd);
 	}
