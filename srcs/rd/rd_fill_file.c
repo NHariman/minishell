@@ -41,7 +41,7 @@ void	rd_open_file_fill(t_struct_rd *rd)
 	}
 	if (rd->fd != -1)
 	{
-		rd_one(rd);
+		close(1);
 		close(rd->fd);
 	}
 	else if (rd->fd_rd != -1)
