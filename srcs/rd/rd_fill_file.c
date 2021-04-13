@@ -27,29 +27,30 @@ static void	rd_two(t_struct_rd *rd)
 
 void	rd_open_file_fill(t_struct_rd *rd)
 {
+	ft_printf("[%i][%i]\n", rd->fd, rd->fd_rd);
 	if (rd->store == 1 || rd->store == 2)
 	{
 		rd_one(rd);
-		close(1);
 		close(rd->fd);
 		if (rd->fd_rd != -1)
 		{
 			rd_two(rd);
-			close(0);
 			close(rd->fd_rd);
 		}
+		close(1);
+		close(0);
 	}
 	else if (rd->store == 3)
 	{
 		rd_two(rd);
-		close(0);
 		close(rd->fd_rd);
 		if (rd->fd != -1)
 		{
 			rd_one(rd);
-			close(1);
 			close(rd->fd);
 		}
+		close(1);
+		close(0);
 	}
 	// if (rd->fd != -1)
 	// {
