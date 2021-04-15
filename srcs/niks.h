@@ -6,7 +6,11 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2021/04/12 22:58:46 by nhariman      ########   odam.nl         */
+=======
+/*   Updated: 2021/04/15 12:48:01 by nhariman      ########   odam.nl         */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +71,13 @@ char			*get_cmd(char *str, int *i);
 void			function_dispatcher(char *line);
 
 /*
-** general functions
+** prompt functions
 */
-int				ft_isspecial(int c);
-char			*ft_strtrimfree(char *s1, char const *set);
 char			**ft_get_prompts(char *str);
-char			*gnl_strjoin(char *s1, char *s2);
-char			*ft_strjointwo(char *s1, char *s2);
 int				get_next_line_sig(int fd, char **line);
 int				get_fill_line_ret(int newline, size_t remainder);
 int				get_gnl_ret(int newline, char *leftover, int ret);
 char			*get_line_read(char *tmp);
-char			*ft_charjoin(char *str, char c);
-char			*ft_make_single_char_str(char c);
 void			make_argv_rd(char *line);
 char			**ft_argv(char *str);
 int				ft_count_arr(char *str);
@@ -108,7 +106,6 @@ void			ft_skip_rd(char *str, int *i);
 ** parsing functions, command specific functions.
 */
 
-void			minishell_parser(char *line);
 void			ft_echo(void);
 void			ft_cd(void);
 void			ft_pwd_main(void);

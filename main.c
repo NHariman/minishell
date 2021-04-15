@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/12 22:34:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 13:01:30 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ static void	start_minishell(char **envp)
 	increase_shlvl();
 	ft_delete_env("OLDPWD");
 	g_shell.exit_code = 0;
-	g_shell.tmp_std[IN] = 0;
-	g_shell.tmp_std[OUT] = 1;
 }
 
 void	error_exit(char *str, int nb)
@@ -35,24 +33,6 @@ void	error_exit(char *str, int nb)
 	write(2, str, ft_strlen(str));
 	exit(nb);
 }
-
-// static void	reset_fds(void)
-// {
-// 	if (g_shell.std_in != 0)
-// 	{
-// 		if (dup2(g_shell.std_in, 0) == -1)
-// 			error_exit("error: cannot reset stdin\n", -1);
-// 		close(g_shell.std_in);
-// 		g_shell.std_in = 0;
-// 	}
-// 	if (g_shell.std_out != 1)
-// 	{
-// 		if (dup2(g_shell.std_out, 1) == -1)
-// 			error_exit("error: cannot reset stdout\n", -1);
-// 		close(g_shell.std_out);
-// 		g_shell.std_out = 1;		
-// 	}
-// }
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -76,7 +56,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_printf("exit\n");
 			exit(0);
 		}
-		minishell_parser(line);
+		ft_make_prompts(line);
 		free(line);
 	}
 	return (0);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main_parser.c                                      :+:    :+:            */
+/*   wordparser.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/12 23:43:40 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 13:01:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	ft_wordparser(void)
 	else
 		ft_execute(g_shell.argv[0]);
 }
+<<<<<<< HEAD:srcs/main/main_parser.c
 
 void	function_dispatcher(char *line)
 {
@@ -106,3 +107,5 @@ void	minishell_parser(char *line)
 		return ;
 	ft_make_prompts(line);
 }
+=======
+>>>>>>> main:srcs/prompts/wordparser.c

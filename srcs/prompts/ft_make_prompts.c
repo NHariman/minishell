@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 20:18:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 17:21:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 12:46:06 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,26 @@ static char	*ft_rm_spaces(char *str)
 	return (trim);
 }
 
+void	function_dispatcher(char *line)
+{
+	make_argv_rd(line);
+	if (!g_shell.rds)
+		ft_wordparser();
+	else
+	{	
+		rd_main(g_shell.rds);
+		free(g_shell.rds);
+	}
+}
+
 void	ft_make_prompts(char *str)
 {
 	int		i;
 	char	**prompts;
 	char	*newstr;
 
+	if (str[0] == '\0' || syntax_check(str))
+		return ;
 	i = 0;
 	newstr = ft_rm_spaces(str);
 	prompts = ft_get_prompts(newstr);
