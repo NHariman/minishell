@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/08 14:57:02 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/08 19:42:31 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 15:21:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	is_token_check(char c, char *line, int i)
 {
 	if (c == '|')
 	{
-		if (syntax_pipes(line, i))
+		if (syntax_pipes(line, i) == -1)
 			return (-1);
 	}
 	else if (c == ';')
