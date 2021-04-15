@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/25 15:02:41 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/08 08:51:09 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 14:59:22 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	rd_syntax_error_left(char *line, int i)
 		ft_printf_err("minishell: syntax error near unexpected token `<<'\n");
 	if (len >= 3)
 		ft_printf_err("minishell: syntax error near unexpected token `<<<'\n");
+	g_shell.exit_code = 258;
 	return (-1);
 }
 
@@ -72,5 +73,6 @@ int	rd_syntax_error_right(char *line, int i)
 		ft_printf_err("minishell: syntax error near unexpected token `>'\n");
 	else
 		ft_printf_err("minishell: syntax error near unexpected token `>>'\n");
+	g_shell.exit_code = 258;
 	return (-1);
 }
