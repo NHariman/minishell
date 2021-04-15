@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/15 13:01:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 13:05:27 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,34 +78,3 @@ void	ft_wordparser(void)
 	else
 		ft_execute(g_shell.argv[0]);
 }
-<<<<<<< HEAD:srcs/main/main_parser.c
-
-void	function_dispatcher(char *line)
-{
-	int	og_std[2];
-
-	make_argv_rd(line);
-	save_std(og_std);
-	g_shell.tmp_std[IN] = og_std[IN];
-	int i = 0;
-	while (g_shell.argv[i] != (char *) 0)
-	{
-		ft_printf("g_shell.argv[%i]: %s\n", i, g_shell.argv[i]);
-		i++;
-	}
-	if (g_shell.rds)
-		rd_main(g_shell.rds);
-	ft_wordparser();
-	restore_std(og_std);
-	if (g_shell.child_pid != -2)
-		wait_for_process();
-}
-
-void	minishell_parser(char *line)
-{
-	if (line[0] == '\0' || syntax_check(line))
-		return ;
-	ft_make_prompts(line);
-}
-=======
->>>>>>> main:srcs/prompts/wordparser.c
