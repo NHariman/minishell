@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:48 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 12:31:13 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 13:19:55 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static void	rd_in(t_struct_rd *rd)
 
 void	rd_open_file_fill(t_struct_rd *rd)
 {
+	ft_printf("---START---\n");
 	if (rd->store == 1 || rd->store == 2)
 	{
 		rd_out(rd);

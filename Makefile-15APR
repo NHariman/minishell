@@ -6,31 +6,32 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2021/04/08 23:34:17 by nhariman      ########   odam.nl          #
+#    Updated: 2021/04/15 12:53:29 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 COMPILE = gcc
 # COMPILE = clang
+
 FLAGS = -Wall -Werror -Wextra
+
 MINISHELL =     main.c \
-                srcs/main/gnl_utils.c \
-                srcs/main/get_next_line_sig.c \
-                srcs/main/main_parser.c \
-                srcs/main/gen_functions.c \
-                srcs/main/ft_argv_env.c \
-                srcs/main/ft_argv.c \
-                srcs/main/ft_prompts.c \
-                srcs/main/dollar_sign.c \
-                srcs/main/trim_rd.c \
-                srcs/main/ft_skip_redirections.c \
+                srcs/prompts/gnl_utils.c \
+                srcs/prompts/get_next_line_sig.c \
+                srcs/prompts/wordparser.c \
+                srcs/prompts/ft_argv_env.c \
+                srcs/prompts/ft_argv.c \
+                srcs/prompts/ft_prompts.c \
+                srcs/prompts/ft_skip_redirections.c \
+                srcs/prompts/trim_rd.c \
+                srcs/quotations/dollar_sign.c \
                 srcs/quotations/ft_skip_quotes.c \
                 srcs/quotations/quotation_handler.c \
                 srcs/quotations/check_quotes.c \
                 srcs/quotations/quotations_parser.c \
                 srcs/quotations/no_quotations_parser.c \
-                srcs/subparsers/ft_get_rdin.c \
-                srcs/subparsers/ft_make_prompts.c \
+                srcs/prompts/ft_get_rdin.c \
+                srcs/prompts/ft_make_prompts.c \
                 srcs/pipe/ft_pipe_splitter.c \
                 srcs/pipe/parent_and_child.c \
                 srcs/echo/ft_echo.c \
@@ -52,21 +53,21 @@ MINISHELL =     main.c \
                 srcs/unset/ft_unset.c 
 
 ECHO =          srcs/rd/check_redirect.c \
-                srcs/rd/rd_fill_file.c \
-                srcs/rd/rd_get_file_name.c \
-                srcs/rd/rd_get_nb.c \
-                srcs/rd/rd_loop.c \
-                srcs/rd/rd_main.c \
-                srcs/rd/rd_open_file.c \
-                srcs/syntax/rd_syntax_error_add.c \
-                srcs/syntax/syntax_check.c\
-                srcs/syntax/check_end.c \
-                srcs/syntax/check_red.c \
+				srcs/rd/rd_fill_file.c \
+				srcs/rd/rd_get_file_name.c \
+				srcs/rd/rd_get_nb.c \
+				srcs/rd/rd_loop.c \
+				srcs/rd/rd_main.c \
+				srcs/rd/rd_open_file.c \
+				srcs/syntax/syntax_check.c\
+				srcs/syntax/check_end.c \
+				srcs/syntax/check_red.c \
+				srcs/syntax/rd_syntax_error_add.c \
                 srcs/syntax/syntax_error_check.c \
                 srcs/syntax/syntax_full_check.c \
                 srcs/syntax/syntax_newline.c \
                 srcs/syntax/syntax_pipes.c \
-                srcs/signals/ft_signals.c
+				srcs/signals/ft_signals.c
 
 
 OMINISHELL = 	$(MINISHELL:.c=.o)
