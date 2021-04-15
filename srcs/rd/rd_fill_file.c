@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:48 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 13:27:30 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 13:45:59 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,15 @@ void	restore_std(int *og_std)
 static void	rd_out(t_struct_rd *rd)
 {
 	g_shell.tmp_std[OUT] = rd->out;
-	ft_printf("---2---\n");
 	dup2(rd->out, 1);
-	ft_printf("---3---\n");
-	close(rd->out);
-	ft_printf("---4---\n");
+	// close(rd->out);
 }
 
 static void	rd_in(t_struct_rd *rd)
 {
 	g_shell.tmp_std[IN] = rd->in;
 	dup2(rd->in, 0);
-	close(rd->in);
+	// close(rd->in);
 }
 
 void	rd_open_file_fill(t_struct_rd *rd)
@@ -60,10 +57,8 @@ void	rd_open_file_fill(t_struct_rd *rd)
 	{
 		ft_printf("---1---\n");
 		rd_out(rd);
-		ft_printf("---5---\n");
 		if (rd->in != -1)
 			rd_in(rd);
-		ft_printf("---6---\n");
 	}
 	else if (rd->store == 3)
 	{
