@@ -6,11 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2021/04/12 22:58:46 by nhariman      ########   odam.nl         */
-=======
-/*   Updated: 2021/04/15 12:48:01 by nhariman      ########   odam.nl         */
->>>>>>> main
+/*   Updated: 2021/04/15 13:04:03 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
