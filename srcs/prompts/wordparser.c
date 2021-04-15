@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main_parser.c                                      :+:    :+:            */
+/*   wordparser.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 18:41:25 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 12:10:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,4 @@ void	ft_wordparser(void)
 		ft_check_case();
 	else
 		ft_execute(g_shell.argv[0]);
-}
-
-void	function_dispatcher(char *line)
-{
-	make_argv_rd(line);
-	if (!g_shell.rds)
-		ft_wordparser();
-	else
-	{	
-		rd_main(g_shell.rds);
-		free(g_shell.rds);
-	}
-}
-
-void	minishell_parser(char *line)
-{
-	if (line[0] == '\0' || syntax_check(line))
-		return ;
-	ft_make_prompts(line);
 }

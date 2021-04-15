@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/09 00:01:18 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 12:44:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ void	prompt(void)
 	ft_printf("\033[0m");
 }
 
+static void	start_minishell(char **envp)
+{
+	g_shell.env = ft_arrdup(envp);
+	increase_shlvl();
+	ft_delete_env("OLDPWD");
+	g_shell.exit_code = 0;
+}
+
+void	error_exit(char *str, int nb)
+{
+	write(2, str, ft_strlen(str));
+	exit(nb);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	int		i;
@@ -30,10 +44,7 @@ int	main(int argc, char **argv, char **envp)
 	hold = argv;
 	if (argc > 1)
 		ft_printf_err("Too many arguments.\n");
-	g_shell.env = ft_arrdup(envp);
-	increase_shlvl();
-	ft_delete_env("OLDPWD");
-	g_shell.exit_code = 0;
+	start_minishell(envp);
 	while (i == 1)
 	{
 		prompt();
@@ -44,7 +55,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_printf("exit\n");
 			exit(0);
 		}
-		minishell_parser(line);
+		ft_make_prompts(line);
 		free(line);
 	}
 	return (0);
