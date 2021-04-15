@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:48 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 11:04:45 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 12:01:31 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static void	rd_out(t_struct_rd *rd)
 	
 	saved_stdout = dup(1);
 
-	g_shell.tmp_std[OUT] = rd->fd;
-	dup2(rd->fd, 1);
+	g_shell.tmp_std[OUT] = rd->stdout;
+	dup2(rd->stdout, 1);
 	// ft_wordparser();
-	close(rd->fd);
+	close(rd->stdout);
 
 	dup2(saved_stdout, 1);
 	close(saved_stdout);
@@ -58,10 +58,10 @@ static void	rd_in(t_struct_rd *rd)
 	
 	// saved_stdin = dup(0);
 	
-	g_shell.tmp_std[IN] = rd->fd_rd;
-	dup2(rd->fd_rd, 0);
+	g_shell.tmp_std[IN] = rd->stdin;
+	dup2(rd->stdin, 0);
 	// ft_wordparser();
-	close(rd->fd_rd);
+	close(rd->stdin);
 
 	// dup2(saved_stdin, 0);
 	// close(saved_stdin);
@@ -69,21 +69,22 @@ static void	rd_in(t_struct_rd *rd)
 
 void	rd_open_file_fill(t_struct_rd *rd)
 {
-	ft_printf("[%i][%i]\n", rd->fd, rd->fd_rd);
+	ft_printf("4[%i][%i]\n", rd->stdout, rd->stdin);
 	if (rd->store == 1 || rd->store == 2)
 	{
 		rd_out(rd);
-		if (rd->fd_rd != -1)
+		if (rd->stdin != -1)
 			rd_in(rd);
 	}
 	else if (rd->store == 3)
 	{
 		rd_in(rd);
+		if (rd->stdout != -1)
 			rd_out(rd);
 	}
-	if (rd->fd != -1)
-		close(rd->fd);
-	if (rd->fd_rd != -1)
-		close(rd->fd_rd);
+	if (rd->stdout != -1)
+		close(rd->stdout);
+	if (rd->stdin != -1)
+		close(rd->stdin);
 	ft_printf("---DONE---\n");
 }

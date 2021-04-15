@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:24:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 09:00:05 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 12:01:41 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	rd_main(char *str)
 	t_struct_rd	*rd;
 
 	rd = calloc(1, sizeof(t_struct_rd));
-	rd->fd = -1;
-	rd->fd_rd = -1;
+	rd->stdout = -1;
+	rd->stdin = -1;
 	rd->i = 0;
 	rd->error = 0;
 	rd->str = ft_strtrim(str, "\n");
