@@ -6,14 +6,13 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:24:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 12:26:41 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 14:00:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdio.h>
 
-void	rd_main(char *str)
+void	rd_main(char *str, int *new_fds)
 {
 	t_struct_rd	*rd;
 
@@ -26,7 +25,7 @@ void	rd_main(char *str)
 	rd->file = ft_strdup("");
 	rd->store = -1;
 	if (get_check_redirect(rd) == 0)
-		rd_loop(rd);
+		rd_loop(rd, new_fds);
 	free(rd->str);
 	free(rd->file);
 	free(rd);

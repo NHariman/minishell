@@ -6,18 +6,18 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:48:53 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 12:57:28 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 14:01:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-int	rd_loop(t_struct_rd *rd)
+int	rd_loop(t_struct_rd *rd, int *new_fds)
 {
 	rd->i = 0;
 	rd->error = 0;
-	while (rd->str[rd->i] && rd->str[rd->i] != '\n' && rd->error == 0)
+	while (rd->str[rd->i] && rd->str[rd->i] != '\0' && rd->error == 0)
 	{
 		free(rd->file);
 		rd->nb = 0;
@@ -30,6 +30,6 @@ int	rd_loop(t_struct_rd *rd)
 		rd_open_file(rd);
 	}
 	ft_printf("out = [%i] in = [%i]\n", rd->out, rd->in);
-	rd_open_file_fill(rd);
+	rd_open_file_fill(rd, new_fds);
 	return (rd->error);
 }

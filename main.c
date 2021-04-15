@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 13:01:30 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 14:14:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	start_minishell(char **envp)
 	increase_shlvl();
 	ft_delete_env("OLDPWD");
 	g_shell.exit_code = 0;
+	g_shell.child_pid = -2;
+	g_shell.tpid = -2;
 }
 
 void	error_exit(char *str, int nb)
@@ -47,7 +49,6 @@ int	main(int argc, char **argv, char **envp)
 	start_minishell(envp);
 	while (i == 1)
 	{
-		//reset_fds();
 		prompt();
 		ft_signals_control();
 		i = get_next_line_sig(0, &line);

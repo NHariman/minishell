@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 20:18:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/15 12:46:06 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 14:16:09 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,17 @@ static char	*ft_rm_spaces(char *str)
 
 void	function_dispatcher(char *line)
 {
+	int	new_fds[2];
+
 	make_argv_rd(line);
-	if (!g_shell.rds)
-		ft_wordparser();
-	else
-	{	
-		rd_main(g_shell.rds);
+	if (g_shell.rds)
+		rd_main(g_shell.rds, new_fds);
+	ft_wordparser();
+	if (g_shell.tpid != -2)
+		wait_for_process();
+	if (g_shell.rds)
+	{
+		restore_fds(new_fds);
 		free(g_shell.rds);
 	}
 }
