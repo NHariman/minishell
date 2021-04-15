@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/09 00:00:16 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/12 22:58:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define SQ 1
 # define DQ 2
+# define IN 0
+# define OUT 1
 
 typedef struct s_trim
 {
@@ -36,8 +38,10 @@ typedef struct s_qts
 typedef struct s_shell
 {
 	int			exit_code;
-	int			fd;
-	int			fd_r;
+	int			tmp_std[2];
+	pid_t		child_pid;
+	pid_t		tpid;
+	int			child_status;
 	char		*home;
 	int			argc;
 	char		**argv;
@@ -79,7 +83,6 @@ char			*ft_make_single_char_str(char c);
 void			make_argv_rd(char *line);
 char			**ft_argv(char *str);
 int				ft_count_arr(char *str);
-void			ft_malloc_fail(char *str);
 char			*trim_rd(char *line);
 char			*ft_get_rdin(char *str);
 
@@ -164,6 +167,15 @@ void			ft_unset(void);
 /*
 ** clear shell struct
 */
+void			save_std(int *og_std);
+void			restore_std(int *og_std);
+void			wait_for_process(void);
 void			ft_clear_shell(void);
 void			ft_wordparser(void);
+
+/*
+** fatal errors
+*/
+void			ft_malloc_fail(char *str);
+void			error_exit(char *str, int nb);
 #endif

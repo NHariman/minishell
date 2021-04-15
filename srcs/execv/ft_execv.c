@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/08 23:43:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/12 23:11:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,16 @@ static int	ft_run_path(char **pathcmd, char **argv)
 		i++;
 	}
 	ft_printf_err("minishell: %s: command not found\n", argv[0]);
-	return (1);
+	exit (1);
 }
 
 static void	ft_execute_path(char **pathcmd, char **argv)
 {
-	pid_t	child_pid;
-	pid_t	tpid;
-	int		i;
-	int		child_status;
-
-	i = 0;
-	tpid = 0;
-	child_pid = fork();
-	child_status = 0;
-	if (child_pid == 0)
+	g_shell.tpid = 0;
+	g_shell.child_pid = fork();
+	g_shell.child_status = 0;
+	if (g_shell.child_pid == 0)
 		ft_run_path(pathcmd, argv);
-	else
-	{
-		while (tpid != child_pid)
-			tpid = wait(&child_status);
-		g_shell.exit_code = get_exit_code(child_status);
-	}
 }
 
 static int	ft_execve_path(char *cmd, char **argv)
@@ -71,25 +59,15 @@ static int	ft_execve_path(char *cmd, char **argv)
 
 int	ft_execve(char **argv)
 {
-	pid_t	child_pid;
-	pid_t	tpid;
-	int		child_status;
-
 	errno = 0;
-	tpid = 0;
-	child_pid = fork();
-	if (child_pid == 0)
+	g_shell.tpid = 0;
+	g_shell.child_pid = fork();
+	if (g_shell.child_pid == 0)
 	{
 		execve(argv[0], argv, g_shell.env);
 		ft_printf_err("minishell: %s: %s\n", argv[0],
 			strerror(errno));
-		return (1);
-	}
-	else
-	{
-		while (tpid != child_pid)
-			tpid = wait(&child_status);
-		g_shell.exit_code = get_exit_code(child_status);
+		exit (1);
 	}
 	return (0);
 }
