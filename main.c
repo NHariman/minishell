@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 12:44:19 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 13:01:30 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(int argc, char **argv, char **envp)
 	start_minishell(envp);
 	while (i == 1)
 	{
+		//reset_fds();
 		prompt();
 		ft_signals_control();
 		i = get_next_line_sig(0, &line);
