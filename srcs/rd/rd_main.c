@@ -6,15 +6,17 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:24:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 14:00:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 19:52:13 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
-void	rd_main(char *str, int *new_fds)
+int	rd_main(char *str, int *new_fds)
 {
 	t_struct_rd	*rd;
+	int			ret;
 
 	rd = calloc(1, sizeof(t_struct_rd));
 	rd->out = -1;
@@ -26,7 +28,11 @@ void	rd_main(char *str, int *new_fds)
 	rd->store = -1;
 	if (get_check_redirect(rd) == 0)
 		rd_loop(rd, new_fds);
+	ret = rd->error;
 	free(rd->str);
 	free(rd->file);
+	free(str);
 	free(rd);
+	return (ret);
+
 }

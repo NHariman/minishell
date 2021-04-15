@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/15 13:04:03 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 19:30:43 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_shell
 {
 	int			exit_code;
 	int			tmp_std[2];
+	int			new_fds[2];
 	pid_t		child_pid;
 	pid_t		tpid;
 	int			child_status;
@@ -70,6 +71,7 @@ void			function_dispatcher(char *line);
 ** prompt functions
 */
 char			**ft_get_prompts(char *str);
+int				get_file_contents(int fd, char **line);
 int				get_next_line_sig(int fd, char **line);
 int				get_fill_line_ret(int newline, size_t remainder);
 int				get_gnl_ret(int newline, char *leftover, int ret);

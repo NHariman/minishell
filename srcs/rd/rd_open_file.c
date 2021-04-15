@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 14:02:30 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 20:14:03 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,21 @@ void	rd_open_file(t_struct_rd *rd)
 	if (rd->nb == 1)
 	{
 		ft_printf("filename out = [%s]\n", rd->file);
-		rd->out = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
+		rd->out = open(rd->file, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		ft_printf("fd = [%i]\n", rd->out);
 	}
 	else if (rd->nb == 2)
 	{
 		ft_printf("filename out = [%s]\n", rd->file);
-		rd->out = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
+		rd->out = open(rd->file, O_CREAT | O_APPEND | O_WRONLY, 0644);
 		ft_printf("fd = [%i]\n", rd->out);
 	}
 	else if (rd->nb == 3)
 	{
 		ft_printf("filename in = [%s]\n", rd->file);
-		rd->in = open(rd->file, O_RDWR);
+		rd->in = open(rd->file, O_RDONLY);
 		ft_printf("fd_rd = [%i]\n", rd->in);
 	}
 	if (rd->error != 1)
 		rd_file_error(rd);
-	ft_printf("---DONE2---\n");
 }

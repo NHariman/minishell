@@ -6,11 +6,12 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/15 14:09:19 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 19:53:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
 /*
 ** returns several exit, returns 1 if execution failed
@@ -20,10 +21,11 @@
 static int	ft_run_path(char **pathcmd, char **argv)
 {
 	int	i;
-
+	
 	i = 0;
 	while (pathcmd[i] != (char *) 0)
 	{
+		dprintf(2, "pathcmd: %s\n", pathcmd[i]);
 		execve(pathcmd[i], argv, g_shell.env);
 		i++;
 	}
