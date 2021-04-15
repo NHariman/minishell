@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:48:53 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/12 17:51:44 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 09:00:36 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	rd_loop(t_struct_rd *rd)
 		rd->error = rd_get_nb(rd);
 		if (rd->error > 0)
 			return (rd->error);
+		if (rd->store == -1)
+			rd->store = rd->nb;
 		rd_get_file_name(rd);
 		rd_open_file(rd);
 	}

@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/08 19:40:13 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 08:59:48 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_struct_rd
 	int			fd_rd;
 	int			nb;
 	int			rdi;
+	int 		store;
 
 	char		*cache;
 	char		*tmp;
