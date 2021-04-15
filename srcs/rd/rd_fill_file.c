@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:48 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 09:42:45 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 10:51:13 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,3 @@ void	rd_open_file_fill(t_struct_rd *rd)
 		close(rd->fd_rd);
 	ft_printf("---DONE---\n");
 }
-
-
