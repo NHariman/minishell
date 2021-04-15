@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:48 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 12:01:31 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 12:31:13 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ void	restore_std(int *og_std)
 
 static void	rd_out(t_struct_rd *rd)
 {
-	int saved_stdout;
+	// int saved_stdout;
 	
-	saved_stdout = dup(1);
+	// saved_stdout = dup(1);
 
-	g_shell.tmp_std[OUT] = rd->stdout;
-	dup2(rd->stdout, 1);
+	g_shell.tmp_std[OUT] = rd->out;
+	dup2(rd->out, 1);
 	// ft_wordparser();
-	close(rd->stdout);
+	close(rd->out);
 
-	dup2(saved_stdout, 1);
-	close(saved_stdout);
+	// dup2(saved_stdout, 1);
+	// close(saved_stdout);
 }
 
 static void	rd_in(t_struct_rd *rd)
@@ -58,10 +58,10 @@ static void	rd_in(t_struct_rd *rd)
 	
 	// saved_stdin = dup(0);
 	
-	g_shell.tmp_std[IN] = rd->stdin;
-	dup2(rd->stdin, 0);
+	g_shell.tmp_std[IN] = rd->in;
+	dup2(rd->in, 0);
 	// ft_wordparser();
-	close(rd->stdin);
+	close(rd->in);
 
 	// dup2(saved_stdin, 0);
 	// close(saved_stdin);
@@ -69,22 +69,21 @@ static void	rd_in(t_struct_rd *rd)
 
 void	rd_open_file_fill(t_struct_rd *rd)
 {
-	ft_printf("4[%i][%i]\n", rd->stdout, rd->stdin);
 	if (rd->store == 1 || rd->store == 2)
 	{
 		rd_out(rd);
-		if (rd->stdin != -1)
+		if (rd->in != -1)
 			rd_in(rd);
 	}
 	else if (rd->store == 3)
 	{
 		rd_in(rd);
-		if (rd->stdout != -1)
+		if (rd->out != -1)
 			rd_out(rd);
 	}
-	if (rd->stdout != -1)
-		close(rd->stdout);
-	if (rd->stdin != -1)
-		close(rd->stdin);
+	if (rd->out != -1)
+		close(rd->out);
+	if (rd->in != -1)
+		close(rd->in);
 	ft_printf("---DONE---\n");
 }

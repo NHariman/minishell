@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 08:59:48 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 12:24:36 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ typedef struct s_struct_rd
 {
 	int			i;
 	int			error;
-	int			fd;
-	int			fd_rd;
+	int			out;
+	int			in;
 	int			nb;
 	int			rdi;
 	int 		store;
