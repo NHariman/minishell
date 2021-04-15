@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:48 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 13:45:59 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 13:49:29 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	restore_std(int *og_std)
 
 static void	rd_out(t_struct_rd *rd)
 {
-	g_shell.tmp_std[OUT] = rd->out;
+	g_shell.tmp_std[OUT] = dup(OUT);
 	dup2(rd->out, 1);
 	// close(rd->out);
 }
 
 static void	rd_in(t_struct_rd *rd)
 {
-	g_shell.tmp_std[IN] = rd->in;
+	g_shell.tmp_std[IN] = dup(IN);
 	dup2(rd->in, 0);
 	// close(rd->in);
 }
@@ -66,6 +66,10 @@ void	rd_open_file_fill(t_struct_rd *rd)
 		if (rd->out != -1)
 			rd_out(rd);
 	}
+	if (rd->in != STDIN_FILENO)
+		dup2(g_shell.tmp_std[IN], STDIN_FILENO);
+	if (rd->out != STDOUT_FILENO)
+		dup2(g_shell.tmp_std[OUT], STDOUT_FILENO);
 	if (rd->out != -1)
 		close(rd->out);
 	if (rd->in != -1)
