@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/15 13:05:27 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 14:19:35 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ void	ft_wordparser(void)
 {
 	if (g_shell.argv[0] == NULL)
 		return ;
-	if (g_shell.rds)
-		free(g_shell.rds);
 	if (!ft_strcmp(g_shell.argv[0], "exit"))
 		ft_exit_minishell(g_shell.argv, ft_arrlen(g_shell.argv));
 	else if (!ft_strcmp(g_shell.argv[0], "export"))

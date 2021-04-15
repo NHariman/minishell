@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 12:24:36 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 14:17:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,14 @@ void	ignore_signal(int sign);
 void	ft_signals_control(void);
 
 //rd
-void	rd_main(char *str);
+void	rd_main(char *str, int *new_fds);
 int		get_check_redirect(t_struct_rd *rd);
 
-int		rd_loop(t_struct_rd *rd);
+int		rd_loop(t_struct_rd *rd, int *new_fds);
 int		rd_get_nb(t_struct_rd *rd);
 void	rd_get_file_name(t_struct_rd *rd);
 void	rd_open_file(t_struct_rd *rd);
-void	rd_open_file_fill(t_struct_rd *rd);
+void	rd_open_file_fill(t_struct_rd *rd, int *new_fds);
+void	restore_fds(int *new_fds);
 
 #endif

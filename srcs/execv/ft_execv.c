@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/12 23:11:26 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 14:09:19 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int	ft_execve_path(char *cmd, char **argv)
 		ft_execute_path(argv, argv);
 	else
 		ft_execute_path(pathcmd, argv);
-	
 	if (pathcmd)
 		ft_free_array(pathcmd, ft_arrlen(pathcmd));
 	return (0);

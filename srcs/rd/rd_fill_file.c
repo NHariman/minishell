@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:48 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 12:31:13 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 14:17:03 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,72 +18,51 @@ void	wait_for_process(void)
 	while (g_shell.tpid != g_shell.child_pid)
 		g_shell.tpid = wait(&g_shell.child_status);
 	g_shell.exit_code = get_exit_code(g_shell.child_status);
+	g_shell.child_pid = -2;
+	g_shell.tpid = -2;
 }
 
-void	save_std(int *og_std)
+void	restore_fds(int *new_fds)
 {
-	og_std[IN] = dup(STDIN_FILENO);
-	og_std[OUT] = dup(STDOUT_FILENO);
-	if (og_std[IN] == - 1|| og_std[OUT] == -1)
-		error_exit("Error: Unable to reset stds\n", -1);
+	if (new_fds[IN] != STDIN_FILENO)
+		dup2(g_shell.tmp_std[IN], STDIN_FILENO);
+	if (new_fds[OUT] != STDOUT_FILENO)
+		dup2(g_shell.tmp_std[OUT], STDOUT_FILENO);
+	if (new_fds[IN] != -1)
+		close(new_fds[IN]);
+	if (new_fds[OUT] != -1)
+		close(new_fds[OUT]);
 }
 
-void	restore_std(int *og_std)
+static void	rd_out(t_struct_rd *rd, int *new_fds)
 {
-	if (dup2(og_std[IN], STDIN_FILENO) == -1
-		|| dup2(og_std[OUT], STDOUT_FILENO) == -1)
-		error_exit("Error: Unable to reset stds\n", -1);
-	if (close(og_std[IN]) == - 1 || close(og_std[OUT]) == -1)
-		error_exit("Error: Unable to close std\n", -1);
-}
-
-static void	rd_out(t_struct_rd *rd)
-{
-	// int saved_stdout;
-	
-	// saved_stdout = dup(1);
-
-	g_shell.tmp_std[OUT] = rd->out;
+	g_shell.tmp_std[OUT] = dup(OUT);
+	new_fds[OUT] = rd->out;
 	dup2(rd->out, 1);
-	// ft_wordparser();
-	close(rd->out);
-
-	// dup2(saved_stdout, 1);
-	// close(saved_stdout);
+	//close(rd->out);
 }
 
-static void	rd_in(t_struct_rd *rd)
+static void	rd_in(t_struct_rd *rd, int *new_fds)
 {
-	// int saved_stdin;
-	
-	// saved_stdin = dup(0);
-	
-	g_shell.tmp_std[IN] = rd->in;
+	g_shell.tmp_std[IN] = dup(IN);
+	new_fds[IN] = rd->in;
 	dup2(rd->in, 0);
-	// ft_wordparser();
-	close(rd->in);
-
-	// dup2(saved_stdin, 0);
-	// close(saved_stdin);
+	//close(rd->in);
 }
 
-void	rd_open_file_fill(t_struct_rd *rd)
+void	rd_open_file_fill(t_struct_rd *rd, int *new_fds)
 {
 	if (rd->store == 1 || rd->store == 2)
 	{
-		rd_out(rd);
+		rd_out(rd, new_fds);
 		if (rd->in != -1)
-			rd_in(rd);
+			rd_in(rd, new_fds);
 	}
 	else if (rd->store == 3)
 	{
-		rd_in(rd);
+		rd_in(rd, new_fds);
 		if (rd->out != -1)
-			rd_out(rd);
+			rd_out(rd, new_fds);
 	}
-	if (rd->out != -1)
-		close(rd->out);
-	if (rd->in != -1)
-		close(rd->in);
-	ft_printf("---DONE---\n");
+	ft_printf("---DONE1---\n");
 }
