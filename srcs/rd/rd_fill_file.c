@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:48 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 09:01:01 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/15 09:42:45 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,62 @@ void	restore_std(int *og_std)
 		error_exit("Error: Unable to close std\n", -1);
 }
 
-static void	do_rd(t_struct_rd *rd)
+static void	rd_out(t_struct_rd *rd)
 {
+	int saved_stdout;
+	
+	saved_stdout = dup(1);
 
-	if (rd->fd != -1)
-	{
-		g_shell.tmp_std[OUT] = rd->fd;
-		dup2(rd->fd, 1);
-		close(rd->fd);
-	}
-	if (rd->fd_rd != -1)
-	{
-		g_shell.tmp_std[IN] = rd->fd_rd;
-		dup2(rd->fd_rd, 0);
-		close(rd->fd_rd);
-	}
+	g_shell.tmp_std[OUT] = rd->fd;
+	dup2(rd->fd, 1);
+	close(rd->fd);
+
+	dup2(saved_stdout, 1);
+	close(saved_stdout);
+}
+
+static void	rd_in(t_struct_rd *rd)
+{
+	// int saved_stdin;
+	
+	// saved_stdin = dup(0);
+	
+	g_shell.tmp_std[IN] = rd->fd_rd;
+	dup2(rd->fd_rd, 0);
+	close(rd->fd_rd);
+
+	// dup2(saved_stdin, 0);
+	// close(saved_stdin);
 }
 
 void	rd_open_file_fill(t_struct_rd *rd)
 {
-	if (rd->fd != -1 || rd->fd_rd != -1)
+	ft_printf("[%i][%i]\n", rd->fd, rd->fd_rd);
+	if (rd->store == 1 || rd->store == 2)
 	{
-		do_rd(rd);
-		if (rd->fd != -1)
-			close(rd->fd);
+		ft_printf("OUT\n");
+		rd_out(rd);
 		if (rd->fd_rd != -1)
-			close(rd->fd_rd);
+		{
+			ft_printf("IN\n");
+			rd_in(rd);
+		}
 	}
+	else if (rd->store == 3)
+	{
+		ft_printf("OUT\n");
+		rd_in(rd);
+		if (rd->fd != -1)
+		{
+			ft_printf("IN\n");
+			rd_out(rd);
+		}
+	}
+	if (rd->fd != -1)
+		close(rd->fd);
+	if (rd->fd_rd != -1)
+		close(rd->fd_rd);
+	ft_printf("---DONE---\n");
 }
+
+
