@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:48:53 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 14:01:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 15:49:29 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	rd_loop(t_struct_rd *rd, int *new_fds)
 		rd_get_file_name(rd);
 		rd_open_file(rd);
 	}
+	if (rd->error != 0)
+		return (rd->error);
 	ft_printf("out = [%i] in = [%i]\n", rd->out, rd->in);
 	rd_open_file_fill(rd, new_fds);
 	return (rd->error);
