@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/16 13:11:27 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/16 13:20:39 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,14 @@ void	rd_open_file(t_struct_rd *rd)
 		close(rd->in);
 	}
 	if (rd->nb == 1)
-	{
-		ft_printf("filename out = [%s]\n", rd->file);
 		rd->out = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
-		ft_printf("fd = [%i]\n", rd->out);
-	}
 	else if (rd->nb == 2)
-	{
-		ft_printf("filename out = [%s]\n", rd->file);
 		rd->out = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
-		ft_printf("fd = [%i]\n", rd->out);
-	}
 	else if (rd->nb == 3)
-	{
-		ft_printf("filename in = [%s]\n", rd->file);
 		rd->in = open(rd->file, O_RDWR);
-		ft_printf("fd_rd = [%i]\n", rd->in);
-	}
 	if (rd->error != 1)
 		rd_file_error(rd);
+	ft_printf("IN = [%i] OUT = [%i]\n", rd->in, rd->out);
+	ft_printf("IN = [%i] OUT = [%i]\n", read(rd->in, NULL, 0), read(rd->out, NULL, 0));
 	ft_printf("---DONE2---\n");
 }
