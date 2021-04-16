@@ -6,65 +6,49 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 14:02:30 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/16 13:41:16 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-static void	rd_file_error(t_struct_rd *rd)
+static void	rd_open_out(t_struct_rd *rd, int flag)
 {
-	if (rd->out < 0 && rd->in < 0)
+	if (rd->out != -1)
+		close(rd->out);
+	rd->out = open(rd->file, O_CREAT | flag | O_WRONLY, 0644);
+	if (rd->out == -1)
 	{
 		ft_printf_err("minishell: %s: %s\n", rd->file, strerror(errno));
 		g_shell.exit_code = 1;
 		rd->error = 1;
 	}
-	else if (rd->str[rd->i] && rd->str[rd->i] != '\n' && rd->error == 0)
+}
+
+static void	rd_open_in(t_struct_rd *rd)
+{
+	if (rd->in != -1)
+		close(rd->in);
+	rd->in = open(rd->file, O_RDWR, 0644);
+	if (rd->in == -1)
 	{
-		if (rd->nb == 1 || rd->nb == 2)
-			close(rd->out);
-		else if (rd->nb == 3)
-			close(rd->in);
+		ft_printf_err("minishell: %s: %s\n", rd->file, strerror(errno));
+		g_shell.exit_code = 1;
+		rd->error = 1;
 	}
 }
 
 void	rd_open_file(t_struct_rd *rd)
 {
 	errno = 0;
-	int		fd;
-	
-	fd = -1;
-	if (rd->out != -1 && (rd->nb == 1 || rd->nb == 2))
-	{
-		ft_printf("close fd\n");
-		close(rd->out);
-	}
-	else if (rd->in != -1 && rd->nb == 3)
-	{
-		ft_printf("close fd_rd\n");
-		close(rd->in);
-	}
 	if (rd->nb == 1)
-	{
-		ft_printf("filename out = [%s]\n", rd->file);
-		rd->out = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
-		ft_printf("fd = [%i]\n", rd->out);
-	}
+		rd_open_out(rd, O_TRUNC);
 	else if (rd->nb == 2)
-	{
-		ft_printf("filename out = [%s]\n", rd->file);
-		rd->out = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
-		ft_printf("fd = [%i]\n", rd->out);
-	}
+		rd_open_out(rd, O_APPEND);
 	else if (rd->nb == 3)
-	{
-		ft_printf("filename in = [%s]\n", rd->file);
-		rd->in = open(rd->file, O_RDWR);
-		ft_printf("fd_rd = [%i]\n", rd->in);
-	}
-	if (rd->error != 1)
-		rd_file_error(rd);
+		rd_open_in(rd);
+	ft_printf("open IN = [%i] OUT = [%i]\n", rd->in, rd->out);
+	ft_printf("open IN = [%i] OUT = [%i]\n", read(rd->in, NULL, 0), read(rd->out, NULL, 0));
 	ft_printf("---DONE2---\n");
 }
