@@ -42,7 +42,6 @@ static void	rd_open_in(t_struct_rd *rd)
 void	rd_open_file(t_struct_rd *rd)
 {
 	errno = 0;
-	open_check();
 	if (rd->nb == 1)
 		rd_open_out(rd, O_TRUNC);
 	else if (rd->nb == 2)
