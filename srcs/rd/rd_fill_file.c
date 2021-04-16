@@ -34,7 +34,7 @@ void	restore_fds(int *new_fds)
 		close(new_fds[OUT]);
 }
 
-static void	rd_in(int signal, int fd, int *new_fds)
+static void	rd_dup(int signal, int fd, int *new_fds)
 {
 	g_shell.tmp_std[signal] = dup(signal);
 	new_fds[signal] = fd;
@@ -44,7 +44,7 @@ static void	rd_in(int signal, int fd, int *new_fds)
 void	rd_open_file_fill(t_struct_rd *rd, int *new_fds)
 {
 	if (rd->out != -1)
-		rd_out(OUT, rd->out, new_fds);
+		rd_dup(OUT, rd->out, new_fds);
 	if (rd->in != -1)
-		rd_in(IN, rd->in, new_fds);
+		rd_dup(IN, rd->in, new_fds);
 }
