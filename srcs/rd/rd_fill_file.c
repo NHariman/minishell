@@ -34,17 +34,35 @@ void	restore_fds(int *new_fds)
 		close(new_fds[OUT]);
 }
 
-static void	rd_dup(int signal, int fd, int *new_fds)
+static void	rd_out(t_struct_rd *rd, int *new_fds)
 {
-	g_shell.tmp_std[signal] = dup(signal);
-	new_fds[signal] = fd;
-	dup2(fd, 0);
+	g_shell.tmp_std[OUT] = dup(OUT);
+	new_fds[OUT] = rd->out;
+	dup2(rd->out, 1);
+	//close(rd->out);
+}
+
+static void	rd_in(t_struct_rd *rd, int *new_fds)
+{
+	g_shell.tmp_std[IN] = dup(IN);
+	new_fds[IN] = rd->in;
+	dup2(rd->in, 0);
+	//close(rd->in);
 }
 
 void	rd_open_file_fill(t_struct_rd *rd, int *new_fds)
 {
-	if (rd->out != -1)
-		rd_dup(OUT, rd->out, new_fds);
-	if (rd->in != -1)
-		rd_dup(IN, rd->in, new_fds);
+	if (rd->store == 1 || rd->store == 2)
+	{
+		rd_out(rd, new_fds);
+		if (rd->in != -1)
+			rd_in(rd, new_fds);
+	}
+	else if (rd->store == 3)
+	{
+		rd_in(rd, new_fds);
+		if (rd->out != -1)
+			rd_out(rd, new_fds);
+	}
+	ft_printf("---DONE1---\n");
 }
