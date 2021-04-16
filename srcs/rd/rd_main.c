@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:24:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 14:00:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/16 12:45:15 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	rd_main(char *str, int *new_fds)
 	rd->str = ft_strtrim(str, "\n");
 	rd->file = ft_strdup("");
 	rd->store = -1;
+	open_check();
 	if (get_check_redirect(rd) == 0)
 		rd_loop(rd, new_fds);
 	free(rd->str);
