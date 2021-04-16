@@ -6,11 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-<<<<<<< HEAD:Makefilecopy
-#    Updated: 2021/04/03 22:24:45 by ybakker       ########   odam.nl          #
-=======
 #    Updated: 2021/04/05 14:04:28 by nhariman      ########   odam.nl          #
->>>>>>> main:Makefile-APR1-NIKS
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,16 +56,13 @@ ECHO =          srcs/rd/check_redirect.c \
                 srcs/rd/rd_get_nb.c \
                 srcs/rd/rd_loop.c \
                 srcs/rd/rd_main.c \
-<<<<<<< HEAD:Makefilecopy
-                srcs/rd/rd_open_file.c\
-=======
                 srcs/rd_open_file.c \
->>>>>>> main:Makefile-APR1-NIKS
                 srcs/syntax/rd_syntax_error_add.c \
                 srcs/syntax/syntax_check.c\
                 srcs/syntax/check_end.c \
                 srcs/syntax/check_red.c \
-                srcs/signals/ft_signals.c
+                srcs/signals/ft_signals.c \
+                open_check.c \
 
 
 OMINISHELL = 	$(MINISHELL:.c=.o)
