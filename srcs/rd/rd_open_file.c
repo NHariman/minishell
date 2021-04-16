@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/16 13:20:39 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/16 13:41:16 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	rd_open_out(t_struct_rd *rd, int flag)
 	}
 }
 
-tatic void	rd_open_in(t_struct_rd *rd)
+static void	rd_open_in(t_struct_rd *rd)
 {
 	if (rd->in != -1)
 		close(rd->in);
@@ -49,7 +49,7 @@ void	rd_open_file(t_struct_rd *rd)
 		rd_open_out(rd, O_APPEND);
 	else if (rd->nb == 3)
 		rd_open_in(rd);
-	ft_printf("IN = [%i] OUT = [%i]\n", rd->in, rd->out);
-	ft_printf("IN = [%i] OUT = [%i]\n", read(rd->in, NULL, 0), read(rd->out, NULL, 0));
+	ft_printf("open IN = [%i] OUT = [%i]\n", rd->in, rd->out);
+	ft_printf("open IN = [%i] OUT = [%i]\n", read(rd->in, NULL, 0), read(rd->out, NULL, 0));
 	ft_printf("---DONE2---\n");
 }
