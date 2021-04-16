@@ -64,5 +64,4 @@ void	rd_open_file_fill(t_struct_rd *rd, int *new_fds)
 		if (rd->out != -1)
 			rd_out(rd, new_fds);
 	}
-	ft_printf("---DONE1---\n");
 }

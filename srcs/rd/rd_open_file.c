@@ -48,7 +48,4 @@ void	rd_open_file(t_struct_rd *rd)
 		rd_open_out(rd, O_APPEND);
 	else if (rd->nb == 3)
 		rd_open_in(rd);
-	ft_printf("open IN = [%i] OUT = [%i]\n", rd->in, rd->out);
-	ft_printf("open IN = [%i] OUT = [%i]\n", read(rd->in, NULL, 0), read(rd->out, NULL, 0));
-	ft_printf("---DONE2---\n");
 }
