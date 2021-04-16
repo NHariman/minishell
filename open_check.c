@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/16 12:47:18 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/16 12:59:00 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void    open_check(void)
 {
-    int inn = 0;
-    int out = 0;
+    int inn = -1;
+    int out = -1;
     
     ft_printf("---START---\n");
     inn = open("filecheck2", O_RDONLY);
@@ -27,5 +27,5 @@ void    open_check(void)
     ft_printf("IN = [%i] OUT = [%i]\n", read(inn, NULL, 0), read(out, NULL, 0));
     close(inn);
     close(out);
-    ft_printf("---START---\n");
+    ft_printf("---END---\n");
 }
