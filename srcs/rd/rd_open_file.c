@@ -45,11 +45,11 @@ void	rd_open_file(t_struct_rd *rd)
 		close(rd->in);
 	}
 	if (rd->nb == 1)
-		rd->out = open(rd->file, O_RDWR | O_TRUNC | O_CREAT, 0666);
+		rd->out = open(rd->file, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	else if (rd->nb == 2)
-		rd->out = open(rd->file, O_RDWR | O_APPEND | O_CREAT, 0666);
+		rd->out = open(rd->file, O_CREAT | O_APPEND | O_WRONLY, 0644);
 	else if (rd->nb == 3)
-		rd->in = open(rd->file, O_RDWR);
+		rd->in = open(rd->file, O_RDWR, 0644);
 	if (rd->error != 1)
 		rd_file_error(rd);
 	ft_printf("IN = [%i] OUT = [%i]\n", rd->in, rd->out);
