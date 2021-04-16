@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:48:53 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/16 13:05:24 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/16 13:08:28 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	rd_loop(t_struct_rd *rd, int *new_fds)
 {
 	rd->i = 0;
 	rd->error = 0;
-	open_check();
 	while (rd->str[rd->i] && rd->str[rd->i] != '\0' && rd->error == 0)
 	{
 		free(rd->file);

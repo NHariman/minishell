@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 14:02:30 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/16 13:11:27 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ static void	rd_file_error(t_struct_rd *rd)
 void	rd_open_file(t_struct_rd *rd)
 {
 	errno = 0;
-	int		fd;
-	
-	fd = -1;
+	open_check();
 	if (rd->out != -1 && (rd->nb == 1 || rd->nb == 2))
 	{
 		ft_printf("close fd\n");
