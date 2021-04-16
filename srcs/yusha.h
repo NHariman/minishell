@@ -67,6 +67,4 @@ void	rd_get_file_name(t_struct_rd *rd);
 void	rd_open_file(t_struct_rd *rd);
 void	rd_open_file_fill(t_struct_rd *rd, int *new_fds);
 void	restore_fds(int *new_fds);
-
-void    open_check(void);
 #endif
