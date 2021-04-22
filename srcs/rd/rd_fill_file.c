@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:48 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 19:57:28 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 07:37:33 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	rd_out(t_struct_rd *rd, int *new_fds)
 	g_shell.tmp_std[OUT] = dup(OUT);
 	new_fds[OUT] = rd->out;
 	dup2(rd->out, 1);
-	//close(rd->out);
 }
 
 static void	rd_in(t_struct_rd *rd, int *new_fds)
@@ -51,7 +50,6 @@ static void	rd_in(t_struct_rd *rd, int *new_fds)
 	g_shell.tmp_std[IN] = dup(IN);
 	new_fds[IN] = rd->in;
 	dup2(rd->in, 0);
-	//close(rd->out);
 }
 
 void	rd_open_file_fill(t_struct_rd *rd, int *new_fds)

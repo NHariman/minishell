@@ -27,7 +27,7 @@ getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
 tgetnum, tgetstr, tgoto, tputs
 
 TODO: LEAKS CHECK
-[ ] check for file descriptor leaks in pipes
+[ ] check for file descriptor leaks in pipes || lsof 
 [ ] check for leaks in new env expansion code
 [ ] check if redirects dont leak file descriptors
 [X] fix error message when \ is called. missing a quotation mark at the end (syntax_check.c)
@@ -35,3 +35,4 @@ TODO: LEAKS CHECK
 [X] change ft_printf to ft_printf_err for the error message 
 [X] change error message from Bash: to minishell: (edited)
 [X] remove printf in ft_get_rdin, lines 107 to 112
+[ ] check double ;; and || check symbols we don't check

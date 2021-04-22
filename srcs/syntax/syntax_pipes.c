@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/08 19:28:56 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 15:28:06 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 11:26:33 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,27 @@ static int syntax_pipe_error(void)
     return (-1);
 }
 
+static int syntax_multiline_error(void)
+{
+    ft_putstr_fd(
+                "minishell: error: multiline pipes not supported\n", 2);
+    g_shell.exit_code = 258;
+    return (-1);
+}
+
 int syntax_pipes(char *line, int i)
 {
-	if (check_front_token(line, i))
-		return (syntax_pipe_error());
-	i = i + ft_iswhitespaces(line + i + 1) + 1;
-	if (is_token(line[i]) || line[i] == '\0')
-	{
-        if (line[i] == '\0')
-            ft_putstr_fd(
-                "minishell: error: multiline pipes not supported\n", 2);
+    int start;
+
+    start = i;
+    start++;
+    if (line[start] == '\0')
+        return (syntax_multiline_error());
+    else if (line[start] == '|')
         return (syntax_pipe_error());
-    }
+    while (line[start] == ' ' || line[start] == '<' || line[start] == '>')
+        start++;
+    if (line[start] == '|')
+        return (syntax_pipe_error());
     return (0);
 }
