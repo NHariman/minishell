@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 14:32:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	handle_signals(int sign)
 	}
 	else if (sign == 3)
 		write(1, "\b\b", 2);
+	return ;
 }
 
 void	ignore_signal(int sign)

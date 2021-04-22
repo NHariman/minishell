@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 11:34:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 13:17:38 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 16:27:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,19 @@ static char	*expand_envs(char *line)
 	return (output);
 }
 
-void	make_argv_rd(char *line)
+static int	get_argv(char *new_line)
 {
-	char	*new_line;
-	int		i;
 	char	*cmd;
 	char	**tmp;
+	int		i;
 
-	g_shell.rds = ft_get_rdin(line);
-	new_line = expand_envs(line);
 	i = 0;
 	cmd = get_cmd(new_line, &i);
+	if (ft_strchr(cmd, '=') != NULL)
+	{
+		free(new_line);
+		return (free_and_return(cmd, 1));
+	}
 	tmp = ft_argv(new_line + i
 			+ ft_iswhitespaces(new_line + i + 1));
 	if (!tmp)
@@ -84,5 +86,19 @@ void	make_argv_rd(char *line)
 		g_shell.argv = ft_add_arr_front(tmp, cmd);
 		ft_free_array(tmp, ft_arrlen(tmp));
 	}
+	return (0);
+}
+
+int	make_argv_rd(char *line)
+{
+	char	*new_line;
+
+	g_shell.rds = ft_get_rdin(line);
+	new_line = expand_envs(line);
+	if (new_line[0] == '\0')
+		return (free_and_return(new_line, 1));
+	if (get_argv(new_line))
+		return (free_and_return(new_line, 1));
 	free(new_line);
+	return (0);
 }

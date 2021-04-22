@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/22 09:19:45 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/22 16:30:54 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_struct_rd
 	int			in;
 	int			nb;
 	int			rdi;
-	int 		store;
+	int			store;
 
 	char		*cache;
 	char		*tmp;
@@ -31,7 +31,6 @@ typedef struct s_struct_rd
 	char		*str;
 }				t_struct_rd;
 
-//synax
 int		syntax_check(char *line);
 int		check_red_one(char *line);
 int		check_red_two(char *line);
@@ -50,14 +49,12 @@ int		syntax_full_check(char *line);
 int		check_front_token(char *line, int i);
 int		is_token(char c);
 int		ft_semicol_err(void);
-int 	syntax_pipes(char *line, int i);
+int		syntax_pipes(char *line, int i);
 
-//signals
 void	handle_signals(int sign);
 void	ignore_signal(int sign);
 void	ft_signals_control(void);
 
-//rd
 int		rd_main(char *str, int *new_fds);
 int		get_check_redirect(t_struct_rd *rd);
 

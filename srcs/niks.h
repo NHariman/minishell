@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/15 19:30:43 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 16:11:36 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int				get_next_line_sig(int fd, char **line);
 int				get_fill_line_ret(int newline, size_t remainder);
 int				get_gnl_ret(int newline, char *leftover, int ret);
 char			*get_line_read(char *tmp);
-void			make_argv_rd(char *line);
+int				make_argv_rd(char *line);
 char			**ft_argv(char *str);
 int				ft_count_arr(char *str);
 char			*trim_rd(char *line);
@@ -167,6 +167,7 @@ void			restore_std(int *og_std);
 void			wait_for_process(void);
 void			ft_clear_shell(void);
 void			ft_wordparser(void);
+int				free_and_return(char *str, int ret);
 
 /*
 ** fatal errors

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/07 16:08:40 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/15 18:29:25 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 16:22:38 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,20 @@ char	*get_cmd(char *str, int *i)
 	else
 	{
 		cmd = ft_no_quotes_str(str, i, " ");
-		while (cmd != NULL && ft_strchr(cmd, '=') != NULL)
+		if (ft_strchr(cmd, '=') != NULL)
 		{
-			free(cmd);
 			ft_printf_err(
 				"Nonexplicit environment variable adding not supported.\n");
-			cmd = NULL;
-			while (str[*i] == ' ')
-				*i = *i + 1;
-			if (str[*i] != '\0')
-				cmd = ft_no_quotes_str(str, i, " ");
+			while (str[*i] != '\0')
+			{
+				free(cmd);
+				while (str[*i] == ' ')
+					*i = *i + 1;
+				if (str[*i] != '\0')
+					cmd = ft_no_quotes_str(str, i, " ");
+				if (!ft_strchr(cmd, '='))
+					break ;
+			}
 		}
 	}
 	return (cmd);

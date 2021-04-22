@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 20:18:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 13:24:09 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 15:20:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	function_dispatcher(char *line)
 {
 	int	new_fds[2];
 
-	make_argv_rd(line);
+	if (make_argv_rd(line))
+		return ;
 	if (g_shell.rds)
 	{
 		if (rd_main(g_shell.rds, new_fds))
