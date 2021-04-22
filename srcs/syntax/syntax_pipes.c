@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/08 19:28:56 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/22 11:01:58 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/22 11:19:51 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,13 @@ int syntax_pipes(char *line, int i)
     start++;
     if (line[start] == '|' || line[start] == '\0')
         return (syntax_multiline_error());
-    while (line[start] == ' '  || line[start] == '<' || line[start] == '>')
+    // ft_printf("i == [%i] c == [%c]\n", start, line[start]);
+    while (line[start] == ' ' || line[start] == '<' || line[start] == '>')
     {
-        if (line[start] == '\'' || line[start] == '\"')
-            ft_skip_quotes(line, &start, line[start]);
-        else
-            start++;
+        start++;
     }
+    // ft_printf("i == [%i] c == [%c]\n", start, line[start]);
     if (line[start] == '|')
         return (syntax_pipe_error());
-    else if (line[start] == ';')
-        return(ft_semicol_err());
     return (0);
 }
