@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/08 23:56:46 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 19:21:23 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static char	*ft_get_path(void)
 	char	*newdir;
 
 	newdir = NULL;
-	if (g_shell.argv[1] == (char *) 0)
+	if (ft_arrlen(g_shell.argv) == 1)
 		newdir = ft_find_envvar("HOME");
-	if (g_shell.argv[1][0] == '-')
+	else if (g_shell.argv[1][0] == '-')
 	{
 		newdir = ft_find_envvar("OLDPWD");
 		if (!newdir)
@@ -61,26 +61,20 @@ static void	ft_update_env_cd(char *olddirpath, char *newdirpath)
 	newdir = ft_strjoin("PWD=", newdirpath);
 	ft_update_env(olddir);
 	ft_update_env(newdir);
+	free(olddirpath);
 	free(olddir);
 	free(newdir);
 }
 
-void	ft_cd(void)
+static void	change_dir(char *newdir, char *olddir)
 {
-	char	*newdir;
-	int		check;
-	char	*olddir;
+	int	check;
 
-	g_shell.exit_code = 0;
-	olddir = ft_pwd();
-	errno = 0;
-	newdir = ft_get_path();
-	if (!newdir)
-		return ;
 	check = chdir(newdir);
 	free(newdir);
 	if (check == -1)
 	{
+		free(olddir);
 		ft_printf_err("minishell: cd: %s: %s\n",
 			newdir, strerror(errno));
 		g_shell.exit_code = 1;
@@ -90,5 +84,19 @@ void	ft_cd(void)
 		newdir = ft_pwd();
 		ft_update_env_cd(olddir, newdir);
 	}
+}
+
+void	ft_cd(void)
+{
+	char	*newdir;
+	char	*olddir;
+
+	g_shell.exit_code = 0;
+	olddir = ft_strdup(ft_pwd());
+	errno = 0;
+	newdir = ft_get_path();
+	if (!newdir)
+		return ;
+	change_dir(newdir, olddir);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 16:11:36 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 18:19:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_shell
 	int			exit_code;
 	int			tmp_std[2];
 	int			new_fds[2];
+	int			is_pipe;
 	pid_t		child_pid;
 	pid_t		tpid;
 	int			child_status;
@@ -148,8 +149,8 @@ char			*ft_find_varname(char *str);
 ** pipes
 */
 
-void			pipe_child(int **p, char **pipes, int i, int fd_in);
-void			pipe_parent(int *fd_in, int *i, int **p, char **pipes);
+void			pipe_child(int **p, char **pipes, int i);
+void			pipe_parent(int *i, int **p, char **pipes, pid_t pid);
 void			free_p(int **p, int len);
 
 /*

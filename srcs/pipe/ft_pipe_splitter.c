@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 22:09:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/06 23:08:09 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 18:15:06 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,9 @@ static int	ft_count_pipes(char *str)
 static void	loop_pipe(char **pipes, int **p)
 {
 	pid_t	pid;
-	int		fd_in;
 	int		i;
 
 	i = 0;
-	fd_in = 0;
 	while (pipes[i] != (char *) 0)
 	{
 		pipe(p[i]);
@@ -51,9 +49,9 @@ static void	loop_pipe(char **pipes, int **p)
 		if (pid == -1)
 			exit(1);
 		else if (pid == 0)
-			pipe_child(p, pipes, i, fd_in);
+			pipe_child(p, pipes, i);
 		else
-			pipe_parent(&fd_in, &i, p, pipes);
+			pipe_parent(&i, p, pipes, pid);
 	}
 }
 
@@ -94,4 +92,5 @@ void	ft_pipe_splitter(char *str)
 	loop_pipe(pipes, p);
 	free(pipes);
 	free_p(p, len);
+	g_shell.is_pipe = 0;
 }
