@@ -6,11 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:24:14 by ybakker       #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2021/04/15 19:52:13 by nhariman      ########   odam.nl         */
-=======
-/*   Updated: 2021/04/16 13:05:00 by ybakker       ########   odam.nl         */
->>>>>>> 06b726ef015b187d248b356a0e1ec19d99f6b74d
+/*   Updated: 2021/04/22 13:06:54 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +34,4 @@ int	rd_main(char *str, int *new_fds)
 	free(str);
 	free(rd);
 	return (ret);
-
 }

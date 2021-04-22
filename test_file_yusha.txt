@@ -33,13 +33,13 @@ echo hello " " " " "d"
 bash: hello: command not found
 [X] echo hello | "hello" |
 bash: end of line syntax //error needs to occur
-[X] echo hello | > |
+[L]] echo hello | > |
 bash: syntax error near unexpected token `|'  
 [X] echo hello | > | hello
 bash: syntax error near unexpected token `|'
 [X] echo hello |
 minishell: error: multiline pipes not supported  
-[X] echo hello |   ; echo hello
+[L]] echo hello |   ; echo hello
 bash: syntax error near unexpected token `;' //double?
 [X] echo hello | hello  ; echo hello
 bash: hello: command not found
@@ -54,3 +54,7 @@ bash: syntax error near unexpected token `|'
 bash: syntax error near unexpected token `newline'
 [X] echo hello | echo bye | >
 bash: syntax error near unexpected token `newline'
+[X] bash-3.2$ echo hello | hello  ; echo helloecho hello | hello  ; echo hello
+bash: hello: command not found
+bash: hello: command not found
+hello
