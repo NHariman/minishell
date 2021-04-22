@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 11:34:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 16:27:04 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 23:50:49 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,21 @@ static int	get_argv(char *new_line)
 	return (0);
 }
 
-int	make_argv_rd(char *line)
+int	make_argv_rd(char *line, int *new_fds)
 {
 	char	*new_line;
 
 	g_shell.rds = ft_get_rdin(line);
+	if (g_shell.rds)
+	{
+		if (rd_main(g_shell.rds, new_fds))
+		{
+			g_shell.argv = NULL;
+			return (1);
+		}
+		g_shell.new_fds[IN] = new_fds[IN];
+		g_shell.new_fds[OUT] = new_fds[OUT];
+	}
 	new_line = expand_envs(line);
 	if (new_line[0] == '\0')
 		return (free_and_return(new_line, 1));
