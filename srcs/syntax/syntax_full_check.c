@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/08 14:57:02 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/22 11:10:13 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/22 13:06:37 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ static int	syntax_backslash(void)
 	return (-1);
 }
 
+int	semicolin_check(char *line, int i)
+{
+	if (check_front_token(line, i))
+		return (ft_semicol_err());
+	i = i + ft_iswhitespaces(line + i + 1) + 1;
+	if (is_token(line[i]))
+		return (ft_semicol_err());
+	return (i);
+}
+
 static int	is_token_check(char c, char *line, int i)
 {
 	if (c == '|')
@@ -28,11 +38,9 @@ static int	is_token_check(char c, char *line, int i)
 	}
 	else if (c == ';')
 	{
-		if (check_front_token(line, i))
-			return (ft_semicol_err());
-		i = i + ft_iswhitespaces(line + i + 1) + 1;
-		if (is_token(line[i]))
-			return (ft_semicol_err());
+		i = semicolin_check(line, i);
+		if (i == 1)
+			return (-1);
 	}
 	else if (c == '>')
 	{
@@ -52,13 +60,18 @@ static int	is_token_check(char c, char *line, int i)
 int	syntax_full_check(char *line)
 {
 	int	i;
+	int	y;
 
 	i = 0;
+	y = i + ft_iswhitespaces(line + i + 1) + 1;
 	if (line[0] == ';')
 		return (ft_semicol_err());
-	if (syntax_pipes(line, i) == -1)
-		return (-1);
-	while (line[i] && g_shell.exit_code == 0)
+	else if (line[y] == '|')
+	{
+		if (syntax_pipes(line, i) == -1)
+			return (-1);
+	}
+	while (line[i])
 	{
 		if (ft_strchr("\'\"", line[i]) && ft_backslash_check(line, i) % 2 == 0)
 			ft_skip_quotes(line, &i, line[i]);
