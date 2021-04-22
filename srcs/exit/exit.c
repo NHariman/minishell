@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 18:29:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 14:19:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 23:59:09 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,11 @@ static int	ft_read_array_input(char *str)
 {
 	int	check;
 	int	i;
-	int	len;
 
 	check = -1;
 	i = 0;
 	if (!str)
 		return (0);
-	len = ft_strlen(str);
 	while (!ft_isdigit(str[i]) && str[i] != '\0'
 		&& str[i] != '-' && str[i] != '+')
 		i++;

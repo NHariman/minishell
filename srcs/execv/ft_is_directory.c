@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/20 21:54:48 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 18:19:06 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/23 00:04:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ int	ft_is_directory(char *cmd)
 	int			check;
 
 	check = lstat(cmd, &statbuf);
-	if (S_ISDIR(statbuf.st_mode))
+	if (check == -1)
+		return (0);
+	else if (S_ISDIR(statbuf.st_mode))
 	{
 		g_shell.exit_code = 126;
 		return (ft_printf_err("minishell: %s: is a directory\n",
