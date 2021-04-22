@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:18:06 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/15 19:48:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <dirent.h>
 # include <string.h>
 # include <errno.h>
+# include <stdio.h>
 
 # include "yusha.h"
 # include "niks.h"

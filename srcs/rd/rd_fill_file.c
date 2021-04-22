@@ -16,7 +16,9 @@
 void	wait_for_process(void)
 {
 	while (g_shell.tpid != g_shell.child_pid)
+	{
 		g_shell.tpid = wait(&g_shell.child_status);
+	}
 	g_shell.exit_code = get_exit_code(g_shell.child_status);
 	g_shell.child_pid = -2;
 	g_shell.tpid = -2;
@@ -24,14 +26,16 @@ void	wait_for_process(void)
 
 void	restore_fds(int *new_fds)
 {
-	if (new_fds[IN] != STDIN_FILENO)
-		dup2(g_shell.tmp_std[IN], STDIN_FILENO);
-	if (new_fds[OUT] != STDOUT_FILENO)
-		dup2(g_shell.tmp_std[OUT], STDOUT_FILENO);
-	if (new_fds[IN] != -1)
-		close(new_fds[IN]);
+	if (dup2(g_shell.tmp_std[IN], STDIN_FILENO) == -1)
+		error_exit("unable to reset STDIN\n", -1);
+	if (dup2(g_shell.tmp_std[OUT], STDOUT_FILENO) == -1)
+		error_exit("unable to reset STDOUT\n", -1);
 	if (new_fds[OUT] != -1)
 		close(new_fds[OUT]);
+	if (new_fds[IN] != -1)
+		close(new_fds[IN]);
+	g_shell.new_fds[OUT] = g_shell.tmp_std[OUT];
+	g_shell.new_fds[IN] = g_shell.tmp_std[IN];
 }
 
 static void	rd_out(t_struct_rd *rd, int *new_fds)

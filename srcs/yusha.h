@@ -58,7 +58,7 @@ void	ignore_signal(int sign);
 void	ft_signals_control(void);
 
 //rd
-void	rd_main(char *str, int *new_fds);
+int		rd_main(char *str, int *new_fds);
 int		get_check_redirect(t_struct_rd *rd);
 
 int		rd_loop(t_struct_rd *rd, int *new_fds);
