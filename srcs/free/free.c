@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 21:15:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 16:28:16 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 23:52:10 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_clear_shell(void)
 	g_shell.child_pid = -2;
 	g_shell.tpid = 0;
 	g_shell.child_status = 0;
-	if (g_shell.argv != NULL)
+	if (g_shell.argv != (char **) 0)
 		ft_free_array(g_shell.argv, ft_arrlen(g_shell.argv));
 }
 

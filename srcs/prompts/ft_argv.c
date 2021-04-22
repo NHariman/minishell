@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 19:01:09 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/08 23:40:47 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 23:57:59 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ static char	**ft_make_array(char **arr, char *str)
 char	**ft_argv(char *s)
 {
 	char	**split;
-	int		i;
 
-	i = 0;
 	if (!s)
 		return (NULL);
 	g_shell.argc = ft_count_arr(s);

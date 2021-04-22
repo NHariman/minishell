@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/22 19:39:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 23:50:15 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	start_minishell(char **envp)
 	g_shell.exit_code = 0;
 	g_shell.child_pid = -2;
 	g_shell.tpid = -2;
+	g_shell.argv = NULL;
 }
 
 void	error_exit(char *str, int nb)
@@ -40,7 +41,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		i;
 	char	*line;
-	char	**hold;
 
 	(void)argv;
 	i = argc;

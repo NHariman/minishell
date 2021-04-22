@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 18:19:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 23:35:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int				get_next_line_sig(int fd, char **line);
 int				get_fill_line_ret(int newline, size_t remainder);
 int				get_gnl_ret(int newline, char *leftover, int ret);
 char			*get_line_read(char *tmp);
-int				make_argv_rd(char *line);
+int				make_argv_rd(char *line, int *new_fds);
 char			**ft_argv(char *str);
 int				ft_count_arr(char *str);
 char			*trim_rd(char *line);

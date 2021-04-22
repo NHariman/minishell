@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 20:18:42 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 15:20:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 23:42:47 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,15 @@ void	function_dispatcher(char *line)
 {
 	int	new_fds[2];
 
-	if (make_argv_rd(line))
-		return ;
-	if (g_shell.rds)
+	if (make_argv_rd(line, new_fds))
 	{
-		if (rd_main(g_shell.rds, new_fds))
-			return ;
-		g_shell.new_fds[IN] = new_fds[IN];
-		g_shell.new_fds[OUT] = new_fds[OUT];
+		restore_fds(new_fds);
+		return ;
 	}
 	ft_wordparser();
 	if (g_shell.child_pid != -2)
 		wait_for_process();
-	if (g_shell.rds)
-		restore_fds(new_fds);
+	restore_fds(new_fds);
 }
 
 void	ft_make_prompts(char *str)

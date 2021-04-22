@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/06 19:26:45 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 23:58:39 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,9 @@ static char	*ft_get_var(char *str, int *i)
 
 char	*ft_find_variable(char *str, int *i)
 {
-	int		start;
 	char	*var;
 	char	*output;
 
-	start = *i + 1;
 	*i = *i + 1;
 	var = NULL;
 	if (ft_isdigit(str[*i])

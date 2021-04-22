@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 20:52:54 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 14:46:47 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/23 01:09:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ char	*ft_doublequotes_str(char *str, int *i)
 	output = NULL;
 	while ((str[*i] != '\"' && str[*i] != '\n' && str[*i] != '\0'))
 	{
-		if (str[*i] == '$' && !ft_strchr("\\\"", str[*i + 1]))
+		if (str[*i] == '$' && !ft_strchr("\\\"", str[*i + 1])
+			&& !ft_isspecial(str[*i + 1]))
 			ft_parse_dollar(str, i, &trim);
 		else if (str[*i] == '\\' && ft_strchr("\\$\"", str[*i + 1]))
 			ft_strspecial(str, &trim, i, str[*i + 1]);
