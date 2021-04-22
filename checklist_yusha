@@ -27,7 +27,7 @@ getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
 tgetnum, tgetstr, tgoto, tputs
 
 TODO: LEAKS CHECK
-[ ] check for file descriptor leaks in pipes
+[ ] check for file descriptor leaks in pipes || lsof 
 [ ] check for leaks in new env expansion code
 [ ] check if redirects dont leak file descriptors
 [X] fix error message when \ is called. missing a quotation mark at the end (syntax_check.c)

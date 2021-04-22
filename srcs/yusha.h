@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 14:17:42 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 07:22:28 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		check_front_token(char *line, int i);
 int		is_token(char c);
 int		ft_semicol_err(void);
 int 	syntax_pipes(char *line, int i);
+int 	syntax_pipes_y(char *line, int i);
 
 //signals
 void	handle_signals(int sign);
