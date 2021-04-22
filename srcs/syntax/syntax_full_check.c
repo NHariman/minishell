@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/08 14:57:02 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/22 13:06:37 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/22 13:54:57 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	syntax_full_check(char *line)
 		return (ft_semicol_err());
 	else if (line[y] == '|')
 	{
-		if (syntax_pipes(line, i) == -1)
+		if (syntax_pipes(line, i - 1) == -1)
 			return (-1);
 	}
 	while (line[i])
