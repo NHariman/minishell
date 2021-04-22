@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/08 14:57:02 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/22 07:32:31 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/22 11:10:13 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	is_token_check(char c, char *line, int i)
 {
 	if (c == '|')
 	{
-		if (syntax_pipes(line, i) == -1 || syntax_pipes_y(line, i) == -1)
+		if (syntax_pipes(line, i) == -1)
 			return (-1);
 	}
 	else if (c == ';')
@@ -56,7 +56,9 @@ int	syntax_full_check(char *line)
 	i = 0;
 	if (line[0] == ';')
 		return (ft_semicol_err());
-	while (line[i])
+	if (syntax_pipes(line, i) == -1)
+		return (-1);
+	while (line[i] && g_shell.exit_code == 0)
 	{
 		if (ft_strchr("\'\"", line[i]) && ft_backslash_check(line, i) % 2 == 0)
 			ft_skip_quotes(line, &i, line[i]);

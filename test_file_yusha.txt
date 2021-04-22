@@ -32,25 +32,25 @@ echo hello " " " " "d"
 [X] echo hello | "hello"
 bash: hello: command not found
 [X] echo hello | "hello" |
-bash: end of line syntax
-[X] echo hello | > |
+bash: end of line syntax //error needs to occur
+[0] echo hello | > |
 bash: syntax error near unexpected token `|'  
 [X] echo hello | > | hello
 bash: syntax error near unexpected token `|'
-[ ] echo hello |
+[X] echo hello |
 minishell: error: multiline pipes not supported  
-[ ] echo hello |   ; echo hello
-bash: syntax error near unexpected token `;'
+[0] echo hello |   ; echo hello
+bash: syntax error near unexpected token `;' //double?
 [X] echo hello | hello  ; echo hello
 bash: hello: command not found
 hello
 [ ] echo hello ; //stuck
 hello
-[ ] echo hello | ;
+[0] echo hello | ;
 bash: syntax error near unexpected token `;'
 [X] echo hello | |;
 bash: syntax error near unexpected token `|'
-[ ] echo hello | >
+[X] echo hello | >
 bash: syntax error near unexpected token `newline'
-[ ] echo hello | echo bye | >
+[X] echo hello | echo bye | >
 bash: syntax error near unexpected token `newline'

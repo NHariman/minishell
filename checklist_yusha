@@ -35,3 +35,4 @@ TODO: LEAKS CHECK
 [X] change ft_printf to ft_printf_err for the error message 
 [X] change error message from Bash: to minishell: (edited)
 [X] remove printf in ft_get_rdin, lines 107 to 112
+[ ] check double ;; and || check symbols we don't check

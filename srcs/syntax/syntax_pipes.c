@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/08 19:28:56 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/22 07:21:33 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/22 11:01:58 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,38 +19,32 @@ static int syntax_pipe_error(void)
     return (-1);
 }
 
-int syntax_pipes(char *line, int i)
+static int syntax_multiline_error(void)
 {
-	if (check_front_token(line, i))
-		return (syntax_pipe_error());
-	i = i + ft_iswhitespaces(line + i + 1) + 1;
-	if (is_token(line[i]) || line[i] == '\0')
-	{
-        if (line[i] == '\0')
-            ft_putstr_fd(
+    ft_putstr_fd(
                 "minishell: error: multiline pipes not supported\n", 2);
-        return (syntax_pipe_error());
-    }
-    return (0);
+    g_shell.exit_code = 258;
+    return (-1);
 }
 
-int syntax_pipes_y(char *line, int i)
+int syntax_pipes(char *line, int i)
 {
     int start;
 
     start = i;
     start++;
-    while (line[start] != '|' && line[start])
-        start++;
+    if (line[start] == '|' || line[start] == '\0')
+        return (syntax_multiline_error());
+    while (line[start] == ' '  || line[start] == '<' || line[start] == '>')
+    {
+        if (line[start] == '\'' || line[start] == '\"')
+            ft_skip_quotes(line, &start, line[start]);
+        else
+            start++;
+    }
     if (line[start] == '|')
-	    return (syntax_pipe_error());
-    start = i;
-    start++;
-    while (line[i] == ' ')
-        start++;
-    if (line[i] == ';')
-        return(ft_semicol_err());
-    else if (line[i] == '\0')
         return (syntax_pipe_error());
+    else if (line[start] == ';')
+        return(ft_semicol_err());
     return (0);
 }
