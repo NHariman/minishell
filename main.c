@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 14:14:01 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/22 19:39:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	main(int argc, char **argv, char **envp)
 	char	*line;
 	char	**hold;
 
+	(void)argv;
 	i = argc;
-	hold = argv;
 	if (argc > 1)
 		ft_printf_err("Too many arguments.\n");
 	start_minishell(envp);
