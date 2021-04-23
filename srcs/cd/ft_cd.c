@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 19:21:23 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/23 23:16:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,17 @@ static void	change_dir(char *newdir, char *olddir)
 	int	check;
 
 	check = chdir(newdir);
-	free(newdir);
 	if (check == -1)
 	{
 		free(olddir);
 		ft_printf_err("minishell: cd: %s: %s\n",
 			newdir, strerror(errno));
+		free(newdir);
 		g_shell.exit_code = 1;
 	}
 	else
 	{
+		free(newdir);
 		newdir = ft_pwd();
 		ft_update_env_cd(olddir, newdir);
 	}
