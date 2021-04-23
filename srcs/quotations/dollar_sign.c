@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 23:58:39 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/23 23:08:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*ft_find_env_variable(char *var)
 	if (!ft_strncmp(var, "?", ft_strlen(var)))
 		return (return_exitcode(var));
 	tmp = gnl_strjoin(var, "=");
-	while (g_shell.env[i])
+	while (g_shell.env[i] != NULL)
 	{
 		if (!ft_strncmp(g_shell.env[i], tmp, ft_strlen(tmp)))
 		{
@@ -70,10 +70,16 @@ char	*ft_find_variable(char *str, int *i)
 	*i = *i + 1;
 	var = NULL;
 	if (ft_isdigit(str[*i])
-		|| (ft_isspecial(str[*i]) && !ft_strchr("\\\'\"", str[*i])))
+		|| (ft_isspecial(str[*i]) && !ft_strchr("\\\'\"!*#-0", str[*i])))
 	{
 		var = ft_make_single_char_str(str[*i]);
 		*i = *i + 1;
+	}
+	else if (ft_strchr("!*#-0", str[*i]))
+	{
+		var = NULL;
+		ft_printf_err("Minishell does not support");
+		ft_printf_err(" special parameters */@/#/-/$/0, undefined behaviour may occur.\n");
 	}
 	else if (ft_isalpha(str[*i]))
 		var = ft_get_var(str, i);
