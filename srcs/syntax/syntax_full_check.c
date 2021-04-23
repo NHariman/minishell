@@ -32,7 +32,7 @@ int	semicolin_check(char *line, int i)
 
 	start = i;
 	start++;
-	else if (line[start] == ';')
+	if (line[start] == ';')
 		return (ft_semicol_error());
 	while (line[start] == ' ' || line[start] == '<' || line[start] == '>')
 		start++;
