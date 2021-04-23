@@ -19,14 +19,26 @@ static int	syntax_backslash(void)
 	return (-1);
 }
 
+int	ft_semicol_error(void)
+{
+	ft_printf_err("minishell: syntax error near unexpected token `;'\n");
+	g_shell.exit_code = 258;
+	return (-1);
+}
+
 int	semicolin_check(char *line, int i)
 {
-	if (check_front_token(line, i))
-		return (ft_semicol_err());
-	i = i + ft_iswhitespaces(line + i + 1) + 1;
-	if (is_token(line[i]))
-		return (ft_semicol_err());
-	return (i);
+	int	start;
+
+	start = i;
+	start++;
+	else if (line[start] == ';')
+		return (ft_semicol_error());
+	while (line[start] == ' ' || line[start] == '<' || line[start] == '>')
+		start++;
+	if (line[start] == ';')
+		return (ft_semicol_error());
+	return (0);
 }
 
 static int	is_token_check(char c, char *line, int i)
@@ -38,8 +50,7 @@ static int	is_token_check(char c, char *line, int i)
 	}
 	else if (c == ';')
 	{
-		i = semicolin_check(line, i);
-		if (i == 1)
+		if (semicolin_check(line, i) == -1)
 			return (-1);
 	}
 	else if (c == '>')
