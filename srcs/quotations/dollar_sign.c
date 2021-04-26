@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/26 12:34:12 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/26 12:59:42 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	*ft_get_var(char *str, int *i)
 	start = *i;
 	if (!str[start])
 		return (NULL);
-	while (ft_isalpha(str[*i]) || str[*i] == '_')
+	while (ft_isalnum(str[*i]) || str[*i] == '_')
 		*i = *i + 1;
 	var = ft_substr(str, start, *i - start);
 	return (var);
