@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 11:31:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 18:18:52 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/26 12:49:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	pipe_child(int **p, char **pipes, int i)
 	}
 	function_dispatcher(pipes[i]);
 	ft_clear_shell();
-	exit(0);
+	exit(g_shell.exit_code);
 }
 
 int	get_exit_code(int status)
