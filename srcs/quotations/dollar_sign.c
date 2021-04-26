@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/12 19:40:08 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/23 23:08:46 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/26 12:34:12 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ char	*ft_find_variable(char *str, int *i)
 	{
 		var = NULL;
 		ft_printf_err("Minishell does not support");
-		ft_printf_err(" special parameters */@/#/-/$/0, undefined behaviour may occur.\n");
+		ft_printf_err(" special parameters such as */@/#/-/$/0/&, ");
+		ft_printf_err("undefined behaviour may occur.\n");
 	}
 	else if (ft_isalpha(str[*i]))
 		var = ft_get_var(str, i);
