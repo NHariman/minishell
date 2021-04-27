@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 13:44:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/23 01:20:13 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/27 16:15:53 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ char	*ft_no_quotes_str(char *str, int *i, char *stop)
 		if (ft_strchr("\'\"", str[*i])
 			&& ft_backslash_check(str, *i) % 2 == 0)
 			check_quotes(str, i, &trim);
+		else if (str[*i] == '$' && !ft_strchr(" ;\n", str[*i + 1])
+			&& ft_backslash_check(str, *i) % 2 == 0)
+			ft_parse_dollar(str, i, &trim);
 		else
 			ft_nqts_nqts_strjoin(str, i, &trim);
 	}
