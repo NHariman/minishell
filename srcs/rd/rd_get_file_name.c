@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:52:00 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/27 16:47:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/27 16:51:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	rd_get_file_name(t_struct_rd *rd)
 	j = 0;
 	if (rd->str[rd->i] == '$')
 	{
-		while (ft_isalnum(rd->str[rd->i + j + 1]) || rd->str[rd->i + j + 1] == '_')
+		while (ft_isalnum(rd->str[rd->i + j + 1])
+			|| rd->str[rd->i + j + 1] == '_')
 			j++;
 		name = ft_substr(rd->str, rd->i, j + 1);
 	}
@@ -30,6 +31,10 @@ void	rd_get_file_name(t_struct_rd *rd)
 	{
 		ft_printf_err("minishell: %s: ambiguous redirect\n", name);
 		free(name);
+		if (rd->in != -1)
+			close(rd->in);
+		if (rd->out != -1)
+			close(rd->out);
 		rd->error = 1;
 		return ;
 	}
