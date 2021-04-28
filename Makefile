@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2021/04/28 17:09:48 by nhariman      ########   odam.nl          #
+#    Updated: 2021/04/28 18:06:21 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ NAME = minishell
 all: $(NAME)
 
 $(NAME): $(OMINISHELL) $(OECHO) srcs/libft/libft.a
-	@$(COMPILE) $(OMINISHELL) $(OECHO) srcs/libft/libft.a -o $@
+	@$(COMPILE) $(OMINISHELL) $(OECHO) srcs/libft/libft.a -g -fsanitize=address -o $@
 	@chmod 311 ./minishell
 
 srcs/libft/libft.a:
