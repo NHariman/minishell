@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/26 12:46:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 19:22:00 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	ft_execve(char **argv)
 void	ft_execute(char *cmd)
 {
 	g_shell.exit_code = 0;
-	signal(SIGINT, ignore_signal);
-	signal(SIGQUIT, ignore_signal);
+	signal(SIGINT, handle_exec_signals);
+	signal(SIGQUIT, handle_exec_signals);
 	if (ft_ispath(cmd))
 	{
 		if (ft_is_directory(cmd))
@@ -87,6 +87,5 @@ void	ft_execute(char *cmd)
 	}
 	else
 		ft_execve_path(cmd, g_shell.argv);
-	ft_signals_control();
 	return ;
 }

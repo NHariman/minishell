@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 18:29:49 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 19:17:35 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,11 @@ void			wait_for_process(void);
 void			ft_clear_shell(void);
 void			ft_wordparser(void);
 int				free_and_return(char *str, int ret);
+
+/*
+** signals
+*/
+void			handle_exec_signals(int sign);
 
 /*
 ** fatal errors
