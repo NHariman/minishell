@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/29 16:45:38 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 19:09:51 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 22:32:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,11 @@ void				ft_dwidth(const char *format, int *i,
 						va_list argp, t_dflag *flags);
 void				ft_dprecision(const char *format, int *i,
 						va_list argp, t_dflag *flag);
+void				ft_eflags(const char *format, int *i, t_flag *flags);
+void				ft_ewidth(const char *format, int *i,
+						va_list argp, t_flag *flags);
+void				ft_eprecision(const char *format, int *i,
+						va_list argp, t_flag *flag);
 
 /*
 ** second layer, comes from ft_format, which checks for pdiuxX%
@@ -215,6 +220,11 @@ void				ft_dhex(const char c, unsigned long n, int *count,
 void				ft_dptr(unsigned long n, int *count, t_dflag *flags);
 void				ft_dsigned(long n, int *count, t_dflag *flags);
 void				ft_dunsigned(unsigned long n, int *count, t_dflag *flags);
+void				ft_ehex(const char c, unsigned long n, int *count,
+						t_flag *flags);
+void				ft_eptr(unsigned long n, int *count, t_flag *flags);
+void				ft_esigned(long n, int *count, t_flag *flags);
+void				ft_eunsigned(unsigned long n, int *count, t_flag *flags);
 
 /*
 ** these functions handle the padding AND
@@ -226,6 +236,8 @@ void				ft_print_char(const char c, int *count, t_flag *flags);
 void				ft_print_str(const char *str, int *count, t_flag *flags);
 void				ft_dprint_char(const char c, int *count, t_dflag *flags);
 void				ft_dprint_str(const char *str, int *count, t_dflag *flags);
+void				ft_eprint_char(const char c, int *count, t_flag *flags);
+void				ft_eprint_str(const char *str, int *count, t_flag *flags);
 
 /*
 ** these functions handle the printing of numeric values
@@ -237,6 +249,10 @@ void				ft_dprint_hex(const char c, unsigned long nb, int *count,
 						t_dflag *flags);
 void				ft_dprint_decimal(
 						unsigned long n, int *count, t_dflag *flags);
+void				ft_eprint_hex(const char c, unsigned long nb, int *count,
+						t_flag *flags);
+void				ft_eprint_decimal(
+						unsigned long n, int *count, t_flag *flags);
 
 /*
 ** these functions handle the 0 padding or ' ' padding if needed
@@ -246,6 +262,8 @@ void				ft_pad(int n, int *count);
 void				ft_padzero(int n, int *count);
 void				ft_dpad(int n, int *count, t_dflag *flags);
 void				ft_dpadzero(int n, int *count, t_dflag *flags);
+void				ft_epad(int n, int *count, t_flag *flags);
+void				ft_epadzero(int n, int *count, t_flag *flags);
 
 /*
 ** printf's putchar & putstr
@@ -255,6 +273,8 @@ void				ft_dpadzero(int n, int *count, t_dflag *flags);
 
 void				pft_putchar_fd(char c, int fd, int *count);
 void				pft_putstr_fd(char *s, int fd, int *count);
+void				pft_eputchar_fd(char c, int fd, int *count);
+void				pft_eputstr_fd(char *s, int fd, int *count);
 
 int					ft_printf(const char *format, ...);
 int					ft_dprintf(int fd, const char *format, ...);

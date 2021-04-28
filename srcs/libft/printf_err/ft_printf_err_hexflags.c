@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/02 18:38:45 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 18:53:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 22:36:09 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	ft_hexpadlen(unsigned long n, long *padlen, t_flag *flags)
 		*padlen = flags->pad - ft_hexlen(n);
 }
 
-void	ft_hex(char c, unsigned long n, int *count, t_flag *flags)
+void	ft_ehex(char c, unsigned long n, int *count, t_flag *flags)
 {
 	long	padlen;
 
@@ -73,7 +73,7 @@ void	ft_hex(char c, unsigned long n, int *count, t_flag *flags)
 		ft_pad(padlen, count);
 }
 
-void	ft_ptr(unsigned long n, int *count, t_flag *flags)
+void	ft_eptr(unsigned long n, int *count, t_flag *flags)
 {
 	long	padlen;
 
@@ -84,7 +84,7 @@ void	ft_ptr(unsigned long n, int *count, t_flag *flags)
 		ft_pad(padlen - 2, count);
 	if (flags->zero && !flags->dash && flags->pre == -1)
 		ft_padzero(padlen, count);
-	pft_putstr_fd("0x", 2, count);
+	pft_eputstr_fd("0x", 2, count);
 	if (*count < 0)
 		return ;
 	*count = *count + ft_strlen("0x");

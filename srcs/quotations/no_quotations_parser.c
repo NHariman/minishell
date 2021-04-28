@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 13:44:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 20:30:30 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 20:33:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	ft_nqts_nqts_strjoin(char *str, int *i, t_trim *trim)
 				&& str[*i] != '\0')
 		*i = *i + 1;
 	new_str = ft_substr(str, start, *i - start);
-	ft_printf("new_str: %s\n", new_str);
 	trim->res = gnl_strjoin(trim->res, new_str);
 	free(new_str);
 	trim->start = *i;

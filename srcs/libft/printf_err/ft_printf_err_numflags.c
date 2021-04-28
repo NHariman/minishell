@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 17:34:50 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 18:54:36 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 22:37:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static	void	ft_print_negative(long *n, int *count)
 {
 	if (*n < 0)
 	{
-		pft_putchar_fd('-', 2, count);
+		pft_eputchar_fd('-', 2, count);
 		*n = *n * -1;
 		if (*count >= 0)
 			*count = *count + 1;

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 19:38:02 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 21:52:44 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ char			*ft_find_varname(char *str);
 */
 
 void			pipe_child(int **p, char **pipes, int i);
-void			pipe_parent(int *i, int **p, char **pipes, pid_t pid);
+void			pipe_parent(int *i, int **p, char **pipes, pid_t *pid);
 void			free_p(int **p, int len);
 
 /*

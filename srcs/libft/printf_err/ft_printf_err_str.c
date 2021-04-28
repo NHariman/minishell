@@ -6,13 +6,13 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:04 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/18 18:54:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 22:37:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	pft_putchar_fd(char c, int fd, int *count)
+void	pft_eputchar_fd(char c, int fd, int *count)
 {
 	ssize_t	output;
 
@@ -24,7 +24,7 @@ void	pft_putchar_fd(char c, int fd, int *count)
 		*count = -1;
 }
 
-void	pft_putstr_fd(char *s, int fd, int *count)
+void	pft_eputstr_fd(char *s, int fd, int *count)
 {
 	int		length;
 	ssize_t	output;
@@ -41,13 +41,13 @@ void	pft_putstr_fd(char *s, int fd, int *count)
 	}
 }
 
-void	ft_print_char(const char c, int *count, t_flag *flags)
+void	ft_eprint_char(const char c, int *count, t_flag *flags)
 {
 	if (!flags->dash && !flags->zero)
 		ft_pad(flags->pad - 1, count);
 	if (flags->zero && !flags->dash)
 		ft_padzero(flags->pad - 1, count);
-	pft_putchar_fd(c, 2, count);
+	pft_eputchar_fd(c, 2, count);
 	if (*count < 0)
 		return ;
 	*count = *count + 1;
@@ -69,7 +69,7 @@ static size_t	set_strlen(t_flag *flags, const char *str)
 		return (ft_strlen(str));
 }
 
-void	ft_print_str(const char *str, int *count, t_flag *flags)
+void	ft_eprint_str(const char *str, int *count, t_flag *flags)
 {
 	size_t		i;
 	size_t		strlen;
@@ -84,7 +84,7 @@ void	ft_print_str(const char *str, int *count, t_flag *flags)
 		ft_padzero(flags->pad - strlen, count);
 	while (i < strlen)
 	{
-		pft_putchar_fd(str[i], 2, count);
+		pft_eputchar_fd(str[i], 2, count);
 		if (*count < 0)
 			return ;
 		i++;
