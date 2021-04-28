@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/08 14:41:40 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/15 14:59:29 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/28 19:26:31 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ int	check_rd_left(char *line, int i)
 		if (syntax_left_double(line, i) || syntax_right_double(line, i))
 			return (-1);
 	}
+	while (line[i] == ' ')
+		i++;
+	if (line[i] == '|')
+		return (syntax_pipe_error());
 	return (0);
 }
 
@@ -101,5 +105,9 @@ int	check_rd_right(char *line, int i)
 		if (syntax_left_double(line, i) || syntax_right_double(line, i))
 			return (-1);
 	}
+	while (line[i] == ' ')
+		i++;
+	if (line[i] == '|')
+		return (syntax_pipe_error());
 	return (0);
 }

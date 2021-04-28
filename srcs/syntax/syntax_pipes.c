@@ -6,13 +6,13 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/08 19:28:56 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/22 12:50:57 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/28 19:28:03 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	syntax_pipe_error(void)
+int	syntax_pipe_error(void)
 {
 	ft_printf_err("minishell: syntax error near unexpected token `|'\n");
 	g_shell.exit_code = 258;

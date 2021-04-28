@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:35:31 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/22 16:30:54 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 19:18:05 by ybakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		check_red_two(char *line);
 int		rd_syntax_error(char *line, int i, int len);
 int		rd_syntax_error_left(char *line, int i);
 int		rd_syntax_error_right(char *line, int i);
+int		syntax_pipe_error(void);
 
 int		check_red_one_error(int len);
 int		check_red_two_error(int len);
