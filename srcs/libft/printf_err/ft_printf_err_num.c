@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 22:37:18 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 23:44:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_print_x(int nb, const char c, int *count)
 		pft_eputchar_fd(nb + 87, 2, count);
 }
 
-void	ft_print_hex(const char c, unsigned long nb, int *count)
+void	ft_eprint_hex(const char c, unsigned long nb, int *count)
 {
 	if (*count < 0)
 		return ;
@@ -33,8 +33,8 @@ void	ft_print_hex(const char c, unsigned long nb, int *count)
 	}
 	else if (nb >= 16)
 	{
-		ft_print_hex(c, nb / 16, count);
-		ft_print_hex(c, nb % 16, count);
+		ft_eprint_hex(c, nb / 16, count);
+		ft_eprint_hex(c, nb % 16, count);
 	}
 	else
 	{
@@ -45,7 +45,7 @@ void	ft_print_hex(const char c, unsigned long nb, int *count)
 	}
 }
 
-void	ft_print_decimal(unsigned long n, int *count)
+void	ft_eprint_decimal(unsigned long n, int *count)
 {
 	if (*count < 0)
 		return ;
@@ -63,7 +63,7 @@ void	ft_print_decimal(unsigned long n, int *count)
 	}
 }
 
-void	ft_pad(int n, int *count)
+void	ft_epad(int n, int *count)
 {
 	int		i;
 
@@ -80,7 +80,7 @@ void	ft_pad(int n, int *count)
 	*count = *count + n;
 }
 
-void	ft_padzero(int n, int *count)
+void	ft_epadzero(int n, int *count)
 {
 	int		i;
 

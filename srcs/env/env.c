@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/18 17:45:23 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 16:54:06 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 23:55:53 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ static char	*ft_make_env_str(void)
 	i = 1;
 	while (g_shell.env[i] != (char *) 0)
 	{
-		output = ft_charjoin(g_shell.env[i], '\n');
-		tmp = gnl_strjoin(new_str, output);
-		free(output);
-		new_str = tmp;
+		if (ft_strchr(g_shell.env[i], '='))
+		{
+			output = ft_charjoin(g_shell.env[i], '\n');
+			tmp = gnl_strjoin(new_str, output);
+			free(output);
+			new_str = tmp;
+		}
 		i++;
 	}
 	return (new_str);

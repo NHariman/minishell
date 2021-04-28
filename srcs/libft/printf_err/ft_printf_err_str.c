@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:31:04 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 22:37:34 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 23:40:56 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ void	pft_eputstr_fd(char *s, int fd, int *count)
 void	ft_eprint_char(const char c, int *count, t_flag *flags)
 {
 	if (!flags->dash && !flags->zero)
-		ft_pad(flags->pad - 1, count);
+		ft_epad(flags->pad - 1, count);
 	if (flags->zero && !flags->dash)
-		ft_padzero(flags->pad - 1, count);
+		ft_epadzero(flags->pad - 1, count);
 	pft_eputchar_fd(c, 2, count);
 	if (*count < 0)
 		return ;
 	*count = *count + 1;
 	if (flags->dash)
-		ft_pad(flags->pad - 1, count);
+		ft_epad(flags->pad - 1, count);
 }
 
 /*
@@ -79,9 +79,9 @@ void	ft_eprint_str(const char *str, int *count, t_flag *flags)
 	i = 0;
 	strlen = set_strlen(flags, str);
 	if (!flags->dash && !flags->zero && flags->pad > 0)
-		ft_pad(flags->pad - strlen, count);
+		ft_epad(flags->pad - strlen, count);
 	if (flags->zero && !flags->dash)
-		ft_padzero(flags->pad - strlen, count);
+		ft_epadzero(flags->pad - strlen, count);
 	while (i < strlen)
 	{
 		pft_eputchar_fd(str[i], 2, count);
@@ -91,5 +91,5 @@ void	ft_eprint_str(const char *str, int *count, t_flag *flags)
 	}
 	*count = *count + strlen;
 	if (flags->dash)
-		ft_pad(flags->pad - strlen, count);
+		ft_epad(flags->pad - strlen, count);
 }

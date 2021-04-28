@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 01:10:02 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 23:48:55 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ int	*ft_order_env(char **env)
 
 void	ft_sort_env(int *order, char **env, int start)
 {
-	int	len;
 	int	i;
 	int	tmp;
 
-	len = ft_arrlen(env);
 	i = 0;
 	tmp = 0;
 	if (start == 3)

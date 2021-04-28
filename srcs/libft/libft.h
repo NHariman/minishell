@@ -6,7 +6,7 @@
 /*   By: nhariman <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/29 16:45:38 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 22:32:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 23:38:48 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,10 +249,9 @@ void				ft_dprint_hex(const char c, unsigned long nb, int *count,
 						t_dflag *flags);
 void				ft_dprint_decimal(
 						unsigned long n, int *count, t_dflag *flags);
-void				ft_eprint_hex(const char c, unsigned long nb, int *count,
-						t_flag *flags);
+void				ft_eprint_hex(const char c, unsigned long nb, int *count);
 void				ft_eprint_decimal(
-						unsigned long n, int *count, t_flag *flags);
+						unsigned long n, int *count);
 
 /*
 ** these functions handle the 0 padding or ' ' padding if needed
@@ -262,8 +261,8 @@ void				ft_pad(int n, int *count);
 void				ft_padzero(int n, int *count);
 void				ft_dpad(int n, int *count, t_dflag *flags);
 void				ft_dpadzero(int n, int *count, t_dflag *flags);
-void				ft_epad(int n, int *count, t_flag *flags);
-void				ft_epadzero(int n, int *count, t_flag *flags);
+void				ft_epad(int n, int *count);
+void				ft_epadzero(int n, int *count);
 
 /*
 ** printf's putchar & putstr

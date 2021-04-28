@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 22:09:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 22:04:00 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 23:45:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ static void	loop_pipe(char **pipes, int **p, pid_t *pids)
 		if (pids[i] == -1)
 			exit(1);
 		else if (pids[i] == 0)
-		{
-			ft_printf_err("here\n");
 			pipe_child(p, pipes, i);
-		}
 		else
 			pipe_parent(&i, p, pipes, pids);
 	}

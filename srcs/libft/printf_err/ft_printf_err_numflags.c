@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 17:34:50 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 22:37:26 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 23:42:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	void	ft_print_negative(long *n, int *count)
 	}
 }
 
-void	ft_signed(long n, int *count, t_flag *flags)
+void	ft_esigned(long n, int *count, t_flag *flags)
 {
 	long	padlen;
 
@@ -76,21 +76,21 @@ void	ft_signed(long n, int *count, t_flag *flags)
 	ft_padlen(n, &padlen, flags);
 	if ((!flags->dash && !flags->zero)
 		|| (!flags->dash && flags->zero && flags->dot))
-		ft_pad(padlen, count);
+		ft_epad(padlen, count);
 	ft_print_negative(&n, count);
 	if (flags->zero && !flags->dash && flags->pre == -1)
-		ft_padzero(padlen, count);
+		ft_epadzero(padlen, count);
 	if (flags->dot)
-		ft_padzero(flags->pre - ft_numlen(n), count);
+		ft_epadzero(flags->pre - ft_numlen(n), count);
 	if (flags->pre != 0 || (flags->pre == 0 && n != 0))
-		ft_print_decimal(n, count);
+		ft_eprint_decimal(n, count);
 	if (*count < 0)
 		return ;
 	if (flags->dash)
-		ft_pad(padlen, count);
+		ft_epad(padlen, count);
 }
 
-void	ft_unsigned(unsigned long n, int *count, t_flag *flags)
+void	ft_eunsigned(unsigned long n, int *count, t_flag *flags)
 {
 	long	padlen;
 
@@ -100,15 +100,15 @@ void	ft_unsigned(unsigned long n, int *count, t_flag *flags)
 	ft_padlen(n, &padlen, flags);
 	if ((!flags->dash && !flags->zero)
 		|| (!flags->dash && flags->zero && flags->dot))
-		ft_pad(padlen, count);
+		ft_epad(padlen, count);
 	if (flags->zero && !flags->dash && flags->pre == -1)
-		ft_padzero(padlen, count);
+		ft_epadzero(padlen, count);
 	if (flags->dot)
-		ft_padzero(flags->pre - ft_numlen(n), count);
+		ft_epadzero(flags->pre - ft_numlen(n), count);
 	if (flags->pre != 0 || (flags->pre == 0 && n != 0))
-		ft_print_decimal((unsigned long)n, count);
+		ft_eprint_decimal((unsigned long)n, count);
 	if (*count < 0)
 		return ;
 	if (flags->dash)
-		ft_pad(padlen, count);
+		ft_epad(padlen, count);
 }

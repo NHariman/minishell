@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 11:31:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 22:33:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 23:46:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	pipe_child(int **p, char **pipes, int i)
 		dup2(p[i][1], STDOUT_FILENO);
 		close(p[i][1]);
 	}
-	ft_putstr_fd("there\n", 2);
 	if (i != 0)
 	{
 		dup2(p[i - 1][0], STDIN_FILENO);
