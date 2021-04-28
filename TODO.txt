@@ -1,0 +1,6 @@
+[ ] echo hi > ""
+[ ] echo >>|me
+[ ] cat >file1
+[ ] exit 99 | exit 88
+[ ] echo "////"|
+[ ] ie. ls | exit 1 | echo $?
