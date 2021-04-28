@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/28 18:37:37 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 18:44:01 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	handle_signals(int sign)
 {
-	//write(1, "\b\b  ", 4);
 	if (sign == 2)
 	{
 		write(1, "\n", 1);
