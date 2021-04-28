@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/14 13:44:13 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/27 16:15:53 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 20:30:30 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,11 @@ void	ft_nqts_nqts_strjoin(char *str, int *i, t_trim *trim)
 		trim->res = ft_substr(str, trim->start, *i - trim->start);
 	start = *i;
 	while ((!ft_strchr("\\$\"\'>< ", str[*i])
-			|| (str[*i] == '$' && ft_strchr(" =", str[*i + 1]))) && str[*i] != '\0')
+			|| (str[*i] == '$' && ft_strchr(" =", str[*i + 1])))
+				&& str[*i] != '\0')
 		*i = *i + 1;
 	new_str = ft_substr(str, start, *i - start);
+	ft_printf("new_str: %s\n", new_str);
 	trim->res = gnl_strjoin(trim->res, new_str);
 	free(new_str);
 	trim->start = *i;
@@ -91,7 +93,7 @@ char	*ft_no_quotes_str(char *str, int *i, char *stop)
 		if (ft_strchr("\'\"", str[*i])
 			&& ft_backslash_check(str, *i) % 2 == 0)
 			check_quotes(str, i, &trim);
-		else if (str[*i] == '$' && !ft_strchr(" ;\n", str[*i + 1])
+		else if (str[*i] == '$' && !ft_strchr(" =;\n", str[*i + 1])
 			&& ft_backslash_check(str, *i) % 2 == 0)
 			ft_parse_dollar(str, i, &trim);
 		else

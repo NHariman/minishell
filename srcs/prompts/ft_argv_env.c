@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 11:34:47 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/27 16:17:11 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 20:20:21 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ static void	make_new_str(char *line, t_trim *trim)
 		if (ft_strchr("\'\"", line[i])
 			&& ft_backslash_check(line, i) % 2 == 0)
 			ft_skip_quotes(line, &i, line[i]);
-		else if (line[i] == '$' && !ft_strchr("=", line[i + 1])
+		else if (line[i] == '$' && !ft_strchr(" =", line[i + 1])
 			&& line[i + 1] != '\0')
 			ft_parse_dollar(line, &i, trim);
+		else if (line[i] == '$' && !ft_strchr(" ", line[i + 1])
+			&& line[i + 1] != '\0')
+			i = i + 2;
 		else
 			i++;
 	}
