@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:24:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/22 13:06:54 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/28 17:59:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	rd_main(char *str, int *new_fds)
 		rd_loop(rd, new_fds);
 	ret = rd->error;
 	free(rd->str);
-	free(rd->file);
+	if (rd->file != NULL)
+		free(rd->file);
 	free(str);
 	free(rd);
 	return (ret);
