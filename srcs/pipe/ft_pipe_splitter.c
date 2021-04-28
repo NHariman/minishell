@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 22:09:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 18:08:59 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 19:40:58 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	loop_pipe(char **pipes, int **p)
 	while (pipes[i] != (char *) 0)
 	{
 		pipe(p[i]);
+		g_shell.is_pipe = 1;
 		pid = fork();
 		if (pid == -1)
 			exit(1);
@@ -93,4 +94,5 @@ void	ft_pipe_splitter(char *str)
 	loop_pipe(pipes, p);
 	free(pipes);
 	free_p(p, len);
+	g_shell.is_pipe = 0;
 }

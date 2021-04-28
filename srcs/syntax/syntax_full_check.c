@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/08 14:57:02 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/22 13:54:57 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/28 19:45:08 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ int	syntax_full_check(char *line)
 			ft_skip_quotes(line, &i, line[i]);
 		else if (is_token_check(line[i], line, i))
 			return (-1);
-		i++;
+		else
+			i++;
 	}
 	return (0);
 }

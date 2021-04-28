@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/22 18:29:25 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/22 23:59:09 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 19:42:04 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	ft_exit_minishell(char **arr, int len)
 {
 	int	check;
 
-	ft_printf("exit\n");
+	if (!g_shell.is_pipe)
+		ft_printf("exit\n");
 	check = ft_read_array_input(arr[1]);
 	if (check >= 0)
 	{

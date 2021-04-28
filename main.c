@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/22 23:50:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 19:38:37 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	start_minishell(char **envp)
 	g_shell.child_pid = -2;
 	g_shell.tpid = -2;
 	g_shell.argv = NULL;
+	g_shell.is_pipe = 0;
 }
 
 void	error_exit(char *str, int nb)

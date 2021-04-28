@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 19:17:35 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/28 19:38:02 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_shell
 	pid_t		child_pid;
 	pid_t		tpid;
 	int			child_status;
+	int			is_pipe;
 	int			argc;
 	char		**argv;
 	char		*rds;
