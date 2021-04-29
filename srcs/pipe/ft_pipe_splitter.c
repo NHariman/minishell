@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 22:09:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 23:45:46 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/29 20:18:58 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ static int	ft_count_pipes(char *str)
 	return (count);
 }
 
-static void	loop_pipe(char **pipes, int **p, pid_t *pids)
+static void	loop_pipe(char **pipes, int **p)
 {
 	int		i;
+	pid_t	pid;
 
 	i = 0;
 	while (pipes[i] != (char *) 0)
@@ -46,13 +47,13 @@ static void	loop_pipe(char **pipes, int **p, pid_t *pids)
 		if (pipe(p[i]) < 0)
 			error_exit("Pipe failure.", 1);
 		g_shell.is_pipe = 1;
-		pids[i] = fork();
-		if (pids[i] == -1)
+		pid = fork();
+		if (pid == -1)
 			exit(1);
-		else if (pids[i] == 0)
+		else if (pid == 0)
 			pipe_child(p, pipes, i);
 		else
-			pipe_parent(&i, p, pipes, pids);
+			pipe_parent(&i, p, pipes, pid);
 	}
 }
 
@@ -80,11 +81,9 @@ void	ft_pipe_splitter(char *str)
 	char	**pipes;
 	int		len;
 	int		**p;
-	pid_t	*pids;
 
 	len = ft_count_pipes(str);
 	p = make_p_array(len);
-	pids = (pid_t *)malloc(len * sizeof(pid_t));
 	if (!p)
 		ft_malloc_fail("ft_pipe_splitter, p maker");
 	pipes = (char **)malloc(sizeof(char *) * (len + 1));
@@ -93,10 +92,8 @@ void	ft_pipe_splitter(char *str)
 	pipes = ft_fill_prompts(pipes, str, len, '|');
 	pipes[len] = (char *) 0;
 	g_shell.exit_code = 0;
-	loop_pipe(pipes, p, pids);
+	loop_pipe(pipes, p);
 	ft_free_array(pipes, len);
 	free_p(p, len);
-	free(pids);
-	pids = NULL;
 	g_shell.is_pipe = 0;
 }

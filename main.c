@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/28 19:38:37 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/29 19:15:56 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 void	prompt(void)
 {
-	ft_printf("\033[1;36m");
-	ft_printf("minishell> ");
-	ft_printf("\033[0m");
+	char	fd;
+
+	fd = open("/dev/tty", O_RDWR);
+	ft_putstr_fd("\033[1;36mminishell$ \033[0m", fd);
+	close(fd);
 }
 
 static void	start_minishell(char **envp)

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 16:24:35 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 21:52:44 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/29 20:19:46 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int				ft_execve(char **argv);
 void			ft_export(void);
 int				*ft_order_env(char **env);
 void			ft_sort_env(int *order, char **env, int start);
-char			*ft_parse_env_str(int *order, char **env);
+void			ft_parse_env_str(int *order, char **env);
 char			*ft_add_quotations(char *str, int start);
 void			ft_update_env(char *str);
 int				ft_valid_envvar(char *str);
@@ -149,7 +149,7 @@ char			*ft_find_varname(char *str);
 */
 
 void			pipe_child(int **p, char **pipes, int i);
-void			pipe_parent(int *i, int **p, char **pipes, pid_t *pid);
+void			pipe_parent(int *i, int **p, char **pipes, pid_t pid);
 void			free_p(int **p, int len);
 
 /*

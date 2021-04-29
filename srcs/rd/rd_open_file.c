@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/01 14:42:14 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/04/16 13:41:16 by ybakker       ########   odam.nl         */
+/*   Updated: 2021/04/29 15:12:09 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	rd_open_in(t_struct_rd *rd)
 {
 	if (rd->in != -1)
 		close(rd->in);
-	rd->in = open(rd->file, O_RDWR, 0644);
+	rd->in = open(rd->file, O_RDONLY, 0644);
 	if (rd->in == -1)
 	{
 		ft_printf_err("minishell: %s: %s\n", rd->file, strerror(errno));

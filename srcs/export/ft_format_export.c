@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 01:46:55 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/01 18:13:14 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/29 19:58:32 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,37 +50,31 @@ static char	*ft_format_export(char *str)
 	return (newstr);
 }
 
-static char	*join_export_str(char **arr)
+static void join_export_str(char **arr)
 {
-	char	*res;
 	char	*tmp;
-	char	*output;
 	int		i;
 
-	res = ft_charjoin(arr[0], '\n');
-	i = 1;
-	while (arr[i + 1] != (char *) 0)
+	i = 0;
+	while (arr[i] != (char *) 0)
 	{
 		if (ft_strncmp("declare -x _=", arr[i],
 				ft_strlen("declare -x _=")) != 0)
 		{
 			tmp = ft_charjoin(arr[i], '\n');
-			output = gnl_strjoin(res, tmp);
-			res = output;
+			ft_putstr_fd(tmp, 1);
 			free(tmp);
 		}
 		i++;
 	}
-	output = gnl_strjoin(res, arr[i]);
 	ft_free_array(arr, ft_arrlen(arr));
-	return (output);
+	return ;
 }
 
-char	*ft_parse_env_str(int *order, char **env)
+void	ft_parse_env_str(int *order, char **env)
 {
 	int		len;
 	int		i;
-	char	*ret;
 	char	**new_env;
 
 	len = ft_arrlen(env);
@@ -94,6 +88,5 @@ char	*ft_parse_env_str(int *order, char **env)
 		i++;
 	}
 	new_env[i] = (char *) 0;
-	ret = join_export_str(new_env);
-	return (ret);
+	join_export_str(new_env);
 }

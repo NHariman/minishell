@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 01:10:02 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 23:48:55 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/29 14:28:29 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ void	ft_sort_env(int *order, char **env, int start)
 	tmp = 0;
 	if (start == 3)
 		return ;
-	while (env[i + 1] != (char *) 0 && order[i] < 127)
+	while (env[i] != (char *) 0 && order[i] != 128)
 	{
-		if (ft_strcmp(env[order[i + 1]], env[order[i]]) < 0)
+		if (env[order[i + 1]] != (char *) 0
+			&& ft_strcmp(env[order[i + 1]], env[order[i]]) < 0)
 		{
 			tmp = order[i];
 			order[i] = order[i + 1];

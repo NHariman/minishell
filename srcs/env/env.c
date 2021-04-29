@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/18 17:45:23 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 23:55:53 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/29 12:48:25 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,43 +28,32 @@
 ** the redirection or pipe.
 */
 
-static char	*ft_make_env_str(void)
+static void	print_env(void)
 {
 	int		i;
-	char	*new_str;
-	char	*tmp;
 	char	*output;
 
 	if (!g_shell.env)
-		return (NULL);
-	new_str = ft_charjoin(g_shell.env[0], '\n');
-	i = 1;
+		return ;
+	i = 0;
 	while (g_shell.env[i] != (char *) 0)
 	{
 		if (ft_strchr(g_shell.env[i], '='))
 		{
 			output = ft_charjoin(g_shell.env[i], '\n');
-			tmp = gnl_strjoin(new_str, output);
+			ft_putstr_fd(output, 1);
 			free(output);
-			new_str = tmp;
 		}
 		i++;
 	}
-	return (new_str);
+	return ;
 }
 
 void	ft_env(void)
 {
-	char	*tmp;
-
 	if (ft_arrlen(g_shell.argv) == 1)
 	{
-		tmp = ft_make_env_str();
-		if (tmp)
-		{
-			ft_printf("%s", tmp);
-			free(tmp);
-		}
+		print_env();
 		g_shell.exit_code = 0;
 	}
 	else

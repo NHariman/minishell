@@ -6,24 +6,22 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/27 16:11:15 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/29 14:28:41 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	*ft_make_export_str(char **env)
+static void	ft_make_export_str(char **env)
 {
 	int		*order;
-	char	*export_str;
 
 	if (!env)
-		return (NULL);
+		return ;
 	order = ft_order_env(env);
 	ft_sort_env(order, env, 1);
-	export_str = ft_parse_env_str(order, env);
+	ft_parse_env_str(order, env);
 	free(order);
-	return (export_str);
 }
 
 int	ft_valid_envvar(char *str)
@@ -69,18 +67,9 @@ static void	ft_add_to_env(void)
 
 void	ft_export(void)
 {
-	char	*tmp;
-
 	g_shell.exit_code = 0;
 	if (ft_arrlen(g_shell.argv) == 1)
-	{
-		tmp = ft_make_export_str(g_shell.env);
-		if (tmp)
-		{	
-			ft_printf("%s\n", tmp);
-			free(tmp);
-		}
-	}
+		ft_make_export_str(g_shell.env);
 	else
 		ft_add_to_env();
 }
