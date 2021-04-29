@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 01:46:55 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/29 19:58:32 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/29 20:43:20 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*ft_format_export(char *str)
 	return (newstr);
 }
 
-static void join_export_str(char **arr)
+static void	join_export_str(char **arr)
 {
 	char	*tmp;
 	int		i;
