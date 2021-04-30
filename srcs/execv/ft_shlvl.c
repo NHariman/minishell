@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/25 18:30:19 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/30 19:08:08 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/30 19:58:35 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	increase_shlvl(void)
 {
 	int		level;
 	char	*shlvl;
+
 	shlvl = ft_find_envvar("SHLVL");
 	if (!shlvl)
 	{
