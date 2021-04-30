@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/12/05 22:09:14 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/29 20:18:58 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/30 19:47:34 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,20 @@ static int	ft_count_pipes(char *str)
 static void	loop_pipe(char **pipes, int **p)
 {
 	int		i;
-	pid_t	pid;
 
 	i = 0;
 	while (pipes[i] != (char *) 0)
 	{
 		if (pipe(p[i]) < 0)
-			error_exit("Pipe failure.", 1);
+			error_exit("Pipe failure.", -2);
 		g_shell.is_pipe = 1;
-		pid = fork();
-		if (pid == -1)
-			exit(1);
-		else if (pid == 0)
+		p[i][3] = fork();
+		if (p[i][3] == -1)
+			exit(-1);
+		else if (p[i][3] == 0)
 			pipe_child(p, pipes, i);
 		else
-			pipe_parent(&i, p, pipes, pid);
+			pipe_parent(&i, p, pipes, p[i][3]);
 	}
 }
 
@@ -68,7 +67,7 @@ static int	**make_p_array(int len)
 	i = 0;
 	while (i < len)
 	{
-		p[i] = (int *)malloc(sizeof(int) * 2);
+		p[i] = (int *)malloc(sizeof(int) * 3);
 		if (!p[i])
 			ft_malloc_fail("make_p_array, p[i] maker");
 		i++;

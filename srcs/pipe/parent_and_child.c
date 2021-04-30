@@ -6,11 +6,26 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 11:31:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/29 20:18:03 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/30 19:48:50 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	wait_for_children(int **p, char **pipes)
+{
+	int	i;
+	int	len;
+	int	status;
+
+	len = ft_arrlen(pipes);
+	i = 0;
+	while (i < len - 1)
+	{
+		waitpid(p[i][3], &status, 0);
+		i++;
+	}
+}
 
 void	pipe_child(int **p, char **pipes, int i)
 {
@@ -62,8 +77,9 @@ void	pipe_parent(int *i, int **p, char **pipes, pid_t pid)
 		close(p[*i - 1][0]);
 	if (pipes[*i + 1] == (char *) 0)
 	{
-		waitpid(pid, &status, 0);
 		close(p[*i][0]);
+		waitpid(pid, &status, 0);
+		wait_for_children(p, pipes);
 		g_shell.exit_code = get_exit_code(status);
 	}
 	*i = *i + 1;

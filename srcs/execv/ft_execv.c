@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/28 21:08:11 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/04/30 19:36:31 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	ft_execute_path(char **pathcmd, char **argv)
 {
 	g_shell.tpid = 0;
 	g_shell.child_pid = fork();
+	if (g_shell.child_pid < 0)
+		error_exit("fork error execute_path.", -1);
 	g_shell.child_status = 0;
 	if (g_shell.child_pid == 0)
 		ft_run_path(pathcmd, argv);
@@ -62,6 +64,8 @@ int	ft_execve(char **argv)
 	errno = 0;
 	g_shell.tpid = 0;
 	g_shell.child_pid = fork();
+	if (g_shell.child_pid < 0)
+		error_exit("fork error ft_execve.", -1);
 	if (g_shell.child_pid == 0)
 	{
 		execve(argv[0], argv, g_shell.env);
