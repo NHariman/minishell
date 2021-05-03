@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/23 23:27:59 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/30 19:36:31 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/05/03 11:32:51 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_execve(char **argv)
 		execve(argv[0], argv, g_shell.env);
 		ft_printf_err("minishell: %s: %s\n", argv[0],
 			strerror(errno));
-		exit (126);
+		exit (127);
 	}
 	return (0);
 }

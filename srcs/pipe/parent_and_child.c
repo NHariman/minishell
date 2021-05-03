@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 11:31:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/30 19:48:50 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/05/03 11:22:09 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	pipe_parent(int *i, int **p, char **pipes, pid_t pid)
 	if (pipes[*i + 1] == (char *) 0)
 	{
 		close(p[*i][0]);
-		waitpid(pid, &status, 0);
 		wait_for_children(p, pipes);
+		waitpid(pid, &status, 0);
 		g_shell.exit_code = get_exit_code(status);
 	}
 	*i = *i + 1;

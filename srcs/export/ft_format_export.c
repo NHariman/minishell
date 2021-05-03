@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 01:46:55 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/29 20:43:20 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/05/01 17:11:57 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ void	ft_parse_env_str(int *order, char **env)
 	new_env = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!new_env)
 		ft_malloc_fail("ft_parse_env_str");
-	while (i < len)
+	while (i < len && order[i] != -1)
 	{
 		new_env[i] = ft_format_export(env[order[i]]);
 		i++;
 	}
-	new_env[i] = (char *) 0;
+	new_env[len] = (char *) 0;
 	join_export_str(new_env);
 }

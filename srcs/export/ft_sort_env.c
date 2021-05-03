@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 01:10:02 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/29 14:28:29 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/05/01 17:15:16 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	*ft_order_env(char **env)
 
 	len = ft_arrlen(env);
 	order = (int *)ft_calloc(len + 1, sizeof(int));
-	order[len] = (int) 128;
+	order[len] = (int) 127;
 	i = 0;
 	while (i < len)
 	{
@@ -32,17 +32,18 @@ int	*ft_order_env(char **env)
 
 void	ft_sort_env(int *order, char **env, int start)
 {
+	int	len;
 	int	i;
 	int	tmp;
 
+	len = ft_arrlen(env);
 	i = 0;
 	tmp = 0;
 	if (start == 3)
 		return ;
-	while (env[i] != (char *) 0 && order[i] != 128)
+	while (env[i + 1] != (char *) 0 && order[i] < 127)
 	{
-		if (env[order[i + 1]] != (char *) 0
-			&& ft_strcmp(env[order[i + 1]], env[order[i]]) < 0)
+		if (ft_strcmp(env[order[i + 1]], env[order[i]]) < 0)
 		{
 			tmp = order[i];
 			order[i] = order[i + 1];
