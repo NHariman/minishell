@@ -6,7 +6,7 @@
 /*   By: ybakker <ybakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 15:07:26 by ybakker       #+#    #+#                 */
-/*   Updated: 2021/05/03 11:21:39 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/05/03 12:19:38 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	prompt(void)
 {
-	char	fd;
+	int	fd;
 
 	fd = open("/dev/tty", O_WRONLY);
 	ft_putstr_fd("\033[1;36mminishell$ \033[0m", fd);

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/27 04:53:31 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/03/25 13:27:07 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/05/03 15:17:07 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ft_update_shell(char *str, char *var)
 	while (g_shell.env[i])
 	{
 		name = ft_find_varname(g_shell.env[i]);
-		if (ft_strcmp(name, var) == 0)
+		if (ft_strcmp(name, var) == 0 && ft_strchr(str, '='))
 		{
 			free(g_shell.env[i]);
 			g_shell.env[i] = ft_strdup(str);

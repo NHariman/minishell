@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 11:31:27 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/05/03 11:22:09 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/05/03 14:47:26 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,19 @@ void	free_p(int **p, int len)
 	}
 	free(p);
 }
+
+/*
+** Because the pipes work simultaneously,
+** error messages of faulty pipes may get jumbled
+** because there is no way of waiting in between pipes
+** bash runs all pipes simultaneously
+** source:
+** https://unix.stackexchange.com/
+** questions/79501/executing-piped-commands-in-parallel
+** therefore we prioritise 
+** the parallel piping over readable "command not found"
+** error messages.
+*/
 
 void	pipe_parent(int *i, int **p, char **pipes, pid_t pid)
 {

@@ -6,7 +6,7 @@
 /*   By: nhariman <nhariman@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/05 14:38:53 by nhariman      #+#    #+#                 */
-/*   Updated: 2021/04/30 19:14:31 by nhariman      ########   odam.nl         */
+/*   Updated: 2021/05/03 14:08:17 by nhariman      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,13 @@ void	ft_cd(void)
 	char	*olddir;
 
 	g_shell.exit_code = 0;
-	olddir = ft_strdup(ft_pwd());
+	olddir = ft_strdup_p(ft_pwd());
+	if (olddir == NULL)
+	{
+		olddir = ft_find_envvar("PWD");
+		if (olddir == NULL)
+			olddir = ft_strdup("");
+	}
 	errno = 0;
 	newdir = ft_get_path();
 	if (!newdir)

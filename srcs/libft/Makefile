@@ -6,7 +6,7 @@
 #    By: nhariman <nhariman@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/31 23:42:48 by nhariman      #+#    #+#                  #
-#    Updated: 2021/03/04 11:10:20 by ybakker       ########   odam.nl          #
+#    Updated: 2021/05/03 14:09:03 by nhariman      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ CFILES = 	ft_atoi.c \
 			ft_toupper.c \
 			ft_memcmp.c \
 			ft_strdup.c \
+			ft_strdup_p.c \
 			ft_make_single_char_str.c \
 			ft_calloc.c \
 			ft_strchr.c \
