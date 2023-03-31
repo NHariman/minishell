@@ -1,7 +1,7 @@
 <h1>Codam Coding College Project: minishell</h1>
-<p>minishell in collaboration with YUSHUA@github</p>
 <p><b>Project description:</b><br>
 A simplified shell program that follows the rules of bash.</p>
+<p>In collaboration with YUSHUA@github</p>
 <p><b>Functionalities</b>:<br>
 - Shows a prompt when waiting for a new command<br>
 - Search and launch the right executable (based on the PATH variable or the relative or absolute path), like in bash.<br>
